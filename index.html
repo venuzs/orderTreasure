@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>订货宝 让生意更美好！</title>
+	<script src="js/vue221.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="css/element.css">
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/myelement.css" />
+	<!-- 引入组件库 -->
+	<script src="js/element.js"></script>
+</head>
+	<body>
+		<div id="app">
+			<div class="main-content" style="box-shadow: none;">
+				<div class="indexbox" style="background-color: #F6F6F6;">
+					<!-- 面包屑导航 -->
+					<div class="clearfix">
+						<div class="breadcrumb">首页<span>&gt;</span>首页</div>
+						<div class="timeout">
+							你的系统使用期限已经到期，请尽快续费购买，以免影响你的正常使用！
+							<el-button type="primary">续费购买</el-button>
+						</div>
+					</div><!-- 面包屑导航 end -->
+			
+					<el-row :gutter="20">
+					  <el-col :span="15">
+					  	<!-- 待处理事项 -->
+					  	<div class="box">
+					  		<div class="box-title"><h2>待处理</h2></div>
+					  		<div class="box-content no-padding">
+					  			<ul class="ix-pengdlist1">
+					  				<li><a href="##"><strong>1</strong> 待审核订单</a></li>
+					  				<li><a href="##"><strong>5</strong> 待出库</a></li>
+					  				<li><a href="##"><strong>2</strong> 待发货</a></li>
+					  				<li><a href="##"><strong>18</strong> 待确认收款</a></li>
+					  			</ul>
+					  			<ol class="ix-pengdlist2">
+					  				<li><a href="##">退货待审核 <strong>2</strong></a></li>
+					  				<li><a href="##">待确认退款 <strong>1</strong></a></li>
+					  			</ol>
+					  		</div>
+					  	</div><!-- 待处理事项 end -->
+					  </el-col>
+					  <el-col :span="9">
+					  	<!-- 公司信息 -->
+					  	<div class="box">
+					  		<div class="box-title"><h2>北京全网数商科技股份有限公司</h2></div>
+					  		<div class="box-content">
+					  			<div class="in-companyleft">
+					  				<ul class="cominfo-list">
+					  					<li><span class="title">当前版本：</span>订货宝-试用版 V3.1.1 </li>
+					  					<li><span class="title">开通时间：</span>2017-11-30</li>
+					  					<li><span class="title">到期时间：</span>2017-12-08</li>
+					  					<li><span class="title">剩余短信：</span>11条 <a href="#" class="fz_c">充值</a></li>
+					  				</ul>
+					  				<el-button>产品特性</el-button>
+					  				<el-button type="primary">立即升级</el-button>
+					  			</div>
+					  			<div class="in-companyright">
+					  				<a href="comview-btn"><s></s> 预览电脑订货</a>
+					  				<a href="comview-btn"><s class="phone"></s> 预览电脑订货</a>
+					  			</div>
+					  		</div>
+					  	</div><!-- 公司信息 end -->
+					  </el-col>
+					</el-row>
+			
+					<el-row :gutter="20">
+						<el-col :span="15">
+							<!-- 业绩环比 -->
+						  	<div class="box">
+						  		<div class="box-title"><h2>业绩环比</h2></div>
+						  		<div class="box-content no-padding">
+						  			<ul class="in-momchart">
+						  				<li>
+						  					<strong class="length">1</strong>
+						  					<p class="y_price">¥5435.00</p>
+						  					今日 8 单
+						  				</li>
+						  				<li>
+						  					<strong class="length green">5</strong>
+						  					<p class="y_price">¥10345.50</p>
+						  					昨日 17 单
+						  				</li>
+						  				<li>
+						  					<strong class="length purple">2</strong>
+						  					<p class="y_price">¥355349.00</p>
+						  					本月 502 单
+						  				</li>
+						  				<li>
+						  					<strong class="length">18</strong>
+						  					<p class="y_price">¥75730.00</p>
+						  					上月 483 单
+						  				</li>
+						  			</ul>
+						  		</div>
+						  	</div><!-- 业绩环比 end -->
+						</el-col>
+						<el-col :span="9">
+							<!-- 官方通知 -->
+						  	<div class="box">
+						  		<div class="box-title"><h2>官方通知</h2><a class="title-more" href="##">更多</a></div>
+						  		<div class="box-content">
+						  			<ul class="in-noticelist">
+						  				<li>
+						  					<h3><a href="##">升级通知  2018-03-01 产品升级公告</a></h3>
+						  					<p>2018-03-03 08:24</p>
+						  				</li>
+						  				<li>
+						  					<h3><a href="##">2018-03-01 产品升级公告 升级通知</a></h3>
+						  					<p>2018-03-03 08:24</p>
+						  				</li>
+						  				<li>
+						  					<h3><a href="##">2018-03-01 产品升级公告</a></h3>
+						  					<p>2018-03-03 08:24</p>
+						  				</li>
+						  				<li>
+						  					<h3><a href="##">升级通知  2018-03-01 产品升级公告</a></h3>
+						  					<p>2018-03-03 08:24</p>
+						  				</li>
+						  			</ul>
+						  		</div>
+						  	</div><!-- 官方通知 end -->
+						</el-col>
+					</el-row>
+			
+					<el-row :gutter="20">
+						<el-col :span="15">
+							<!-- 业绩简报 -->
+						  	<div class="box">
+						  		<div class="box-title"><h2>业绩简报</h2></div>
+						  		<div class="box-content">
+						  			<div id="chart" style="height:265px;width:100%;overflow:hidden"></div>
+						  		</div>
+						  	</div><!-- 业绩简报 end -->
+						</el-col>
+						<el-col :span="9">
+							<!-- 下载客户端 -->
+							<el-row :gutter="20">
+								<el-col :span="12">
+									<div class="box">
+										<dl class="in-clientview">
+											<dt><img src="img/erweima.png"></dt>
+											<dd>
+												<p>下载APP客户端 </p>
+												体验手机端订货
+											</dd>
+										</dl>
+									</div>
+								</el-col>
+								<el-col :span="12">
+									<div class="box">
+										<dl class="in-clientview">
+											<dt><img src="img/erweima.png"></dt>
+											<dd>
+												<p>关注公众号 </p>
+												体验微信订货
+											</dd>
+										</dl>
+									</div>
+								</el-col>
+							</el-row><!-- 下载客户端 end -->
+							<!-- 邀请客户注册 -->
+						  	<div class="box">
+						  		<div class="box-title"><h2>邀请客户注册</h2></div>
+						  		<div class="box-content">
+						  			<div class="in-formgroup">
+						  				<div class="form-group">
+						  					电脑访问
+						  					<input type="text" name="" class="el-input__inner" value="https://manager.dhb168.co">
+						  					<el-button size="mini">复制</el-button>
+						  				</div>
+						  				<div class="form-group">
+						  					手机访问
+						  					<input type="text" name="" class="el-input__inner" value="https://manager.dhb168.co">
+						  					<el-button size="mini">复制</el-button>
+						  				</div>
+						  			</div>
+						  			<span class="in-qrcodeshare">
+						  				<img src="img/erweima.png">
+						  				二维码分享
+						  			</span>
+						  		</div>
+						  	</div><!-- 邀请客户注册 end -->
+						</el-col>
+					</el-row>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	<script src="js/jquery.min.js"></script>	
+	<script src="js/echarts.min.js"></script>
+	<script>
+	
+	
+	new Vue({
+		el: "#app",
+		mounted: function () {
+			this.drawLine();  //echart
+		},
+		methods: {
+			drawLine: function (){
+			      var myChart = echarts.init(document.getElementById('chart')),
+				    option = {
+				        legend: {
+				            top: '26',
+				            left: 'center',
+				            textStyle: {
+				                color: '#222',
+				                fontSize: "14"
+				            },
+				            data: ['订单金额', '订单数']
+				        },
+		
+				        xAxis: [
+				            {
+				                boundaryGap: false,
+				                axisLabel: {
+				                    margin: '15'
+				                },
+				                axisLine: {
+				                    lineStyle: {
+				                        color: '#8CA0B3',
+				                        width: 1
+				                    }
+				                },
+				                data: ['01/02', '01/04', '01/06', '01/08', '01/10', '01/12', '01/14']
+				            }
+				        ],
+		
+				        tooltip: {
+				            textStyle: {
+				                fontSize: "14",
+				            },
+				            padding: 14,
+				            trigger: 'axis',
+				            formatter: function (datas) {
+				                var date = new Date;
+				                var year = date.getFullYear();
+				                var res = year + '/' + datas[0].name + '<br/>',
+				                    val;
+				                for (var i = 0,
+				                         length = datas.length; i < length; i++) {
+				                    val = (datas[i].value);
+				                    res += datas[i].seriesName + '：' + val + '<br/>';
+				                }
+				                return res;
+				            }
+				        },
+		
+				        yAxis: [
+				        	{
+					            type: 'value',
+					            name: '订单金额',
+					            nameTextStyle: {
+					                color: '#222',
+					                fontSize: "14"
+					            },
+					            position: 'left',
+					            axisLine: {
+					                lineStyle: {
+					                    color: '#8CA0B3'
+					                }
+					            },
+		
+					            axisLabel: {
+					                textStyle: {
+					                    color: '#697B8C'
+					                }
+					            },
+					            splitLine: {
+					                lineStyle: {
+					                    color: ['#eee']
+					                }
+					            }
+				        	},
+				            {
+				                type: 'value',
+				                name: '订单数',
+				                nameTextStyle: {
+				                    color: '#222',
+				                    fontSize: "14"
+				                },
+				                position: 'right',
+				                 axisLine: {
+					                lineStyle: {
+					                    color: '#8CA0B3'
+					                }
+					            },
+		
+					            axisLabel: {
+					                textStyle: {
+					                    color: '#697B8C'
+					                }
+					            },
+					            splitLine: {
+					                lineStyle: {
+					                    color: ['#eee']
+					                }
+					            }
+				            }
+		
+				        ],
+		
+				        series: [
+				            {
+				                name: '订单金额',
+				                type: 'line',
+				                smooth: true,
+				                textStyle: {
+				                    color: '#222',
+				                    fontSize: "14"
+				                },
+				                itemStyle: {
+				                    normal: {
+				                        color: '#3366CC'
+				                    }
+				                },
+		
+				                data: [1022.00, 1212.12, 2178.50, 2223.87, 3067.54, 4034.12, 5045.00]
+		
+				            },
+		
+				            {
+				                name: '订单数',
+				                type: 'line',
+				                yAxisIndex: 1,
+				                smooth: true,
+				                itemStyle: {
+				                    normal: {
+				                        color: '#222'
+		
+				                    }
+				                },
+				                data: [30, 42, 30, 50, 90, 30, 10]
+		
+				            },
+		
+				        ]
+		
+				    };
+		    		// 使用刚指定的配置项和数据显示图表。
+		    		myChart.setOption(option, true);
+			    }
+		}
+	});
+</script>	
+</html>

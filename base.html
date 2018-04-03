@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+	</head>
+	<link rel="stylesheet" href="css/element.css">
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/myelement.css" />
+	
+	<!-- 引入组件库 -->
+	<script src="js/vue221.js"></script>
+	<script src="js/element.js"></script>
+	<body>
+		<!--左侧-->
+		<div class="leftBar">
+			<div class="logo">
+				<img src="img/logo.png" alt="" />
+			</div>
+			<div class="aside-wrap">
+				<ul>
+					<li class="navi-item">
+						<a title="订单">
+	                        <i><img src="img/order.png" alt="" /></i>
+	                        <span class="nav-item-title">订单</span>
+	                    </a>
+	                    <ol class="secend-item">
+	                    	<li class="pop-item">
+	                    		<a href="javascript:;">订货单</a>
+	                    	</li>
+	                    	<li class="pop-item">
+	                    		<a href="javascript:;">出库/发货单</a>
+	                    	</li>
+	                    	<li class="pop-item">
+	                    		<a href="javascript:;">退货单</a>
+	                    	</li>
+	                    	<li class="pop-item">
+	                    		<a href="javascript:;">订单商品明细</a>
+	                    		<a href="javascript:;">待出商品明细</a>
+	                    		<a href="javascript:;">出库商品明细</a>
+	                    		<a href="javascript:;">退货商品明细</a>
+	                    	</li>
+	                    </ol>
+					</li>
+					<li class="navi-item">
+						<a title="商品">
+	                        <i><img src="img/good.png" alt="" /></i>
+	                        <span class="nav-item-title">商品</span>
+	                    </a>
+	                    <ol class="secend-item">
+	                    	<li class="pop-item">
+	                    		<a href="javascript:;">商品列表</a>
+	                    		<a href="javascript:;">商品图片</a>
+	                    		<a href="javascript:;">商品价格</a>
+	                    		<a href="javascript:;">商品回收站</a>
+	                    	</li>
+	                    	<li class="pop-item">
+	                    		<a href="javascript:;">商品经营范围屏蔽 </a>
+	                    	</li>
+	                    	<li class="pop-item">
+	                    		<a href="javascript:;">商品分类</a>
+	                    		<a href="javascript:;">商品品牌</a>
+	                    		<a href="javascript:;">商品单位</a>
+	                    		<a href="javascript:;">商品多规格</a>
+	                    	</li>
+	                    </ol>
+					</li>
+					<li class="navi-item">
+						<a title="营销">
+	                        <i><img src="img/saler.png" alt="" /></i>
+	                        <span class="nav-item-title">营销</span>
+	                    </a>
+					</li>
+					<li class="navi-item">
+						<a title="库存">
+	                        <i><img src="img/store.png" alt="" /></i>
+	                        <span class="nav-item-title">库存</span>
+	                    </a>
+					</li>
+					<li class="navi-item">
+						<a title="客户">
+	                        <i><img src="img/god.png" alt="" /></i>
+	                        <span class="nav-item-title">客户</span>
+	                    </a>
+					</li>
+					<li class="navi-item">
+						<a title="资金">
+	                        <i><img src="img/cash.png" alt="" /></i>
+	                        <span class="nav-item-title">资金</span>
+	                    </a>
+					</li>
+					<li class="navi-item">
+						<a title="报表">
+	                         <i><img src="img/table.png" alt="" /></i>
+	                        <span class="nav-item-title">报表</span>
+	                    </a>
+					</li>
+				</ul>
+			</div>
+			<div class="bottom-menu">
+				<ul>
+					<li class="bottom-item"><i class="z-ying"><img src="img/ying.png" alt="" /></i></li>
+					<li class="bottom-item"><i class="z-ying"><img src="img/setting.png" alt="" /></i></li>
+					<li class="bottom-item"><i class="z-ying"><img src="img/kefu.png" alt="" /></i></li>
+				</ul>
+			</div>
+		</div>
+		<!--头部-->
+		<div id="app">
+		<div class="topBar">
+			<div class="nav-tab">
+				<ul class="clearfix">
+					<li>
+						<a href="javascript:;" _url="kefu.html">公司资料</a>
+						<i class="el-icon-close"></i>
+					</li>
+					<li>
+						<a href="javascript:;" _url="personnel.html">订货单</a>
+						<i class="el-icon-close"></i>
+					</li>
+					<li>
+						<a href="javascript:;">商品图片</a>
+						<i class="el-icon-close"></i>
+					</li>
+					<li>
+						<a href="javascript:;">库存状况</a>
+						<i class="el-icon-close"></i>
+					</li>
+					<li>
+						<a href="javascript:;">订单应付</a>
+						<i class="el-icon-close"></i>
+					</li>
+					<li>
+						<a href="javascript:;">商品销售</a>
+						<i class="el-icon-close"></i>
+					</li>
+					<li>
+						<a href="javascript:;">资金报表</a>
+						<i class="el-icon-close"></i>
+					</li>
+					<li>
+						<a href="javascript:;">订单数据</a>
+						<i class="el-icon-close"></i>
+					</li>
+				</ul>
+			</div>
+			<div class="wrap-header-right-menu">
+				
+				<el-popover ref="popover1" placement="top-start" width="120" trigger="hover" > <!--放在调用前面-->
+					<ol class="z-pop-top">
+						<li><a href="javascript:;">新手须知</a></li>
+						<li><a href="javascript:;">新手引导</a></li>
+						<li><a href="javascript:;">帮助中心</a></li>
+					</ol>
+				</el-popover>
+				<a href="javascript:;" v-popover:popover1><img src="img/help.png" alt="" /></a>
+	
+				<el-popover ref="popover2" placement="top-start" width="120" trigger="hover" >
+					<ol class="z-pop-top">
+						<li><a href="javascript:;">刷新当前页面</a></li>
+						<li><a href="javascript:;">关闭当前页面</a></li>
+						<li><a href="javascript:;">关闭全部页面</a></li>
+					</ol>
+				</el-popover>
+				<a href="javascript:;"  v-popover:popover2 ><img src="img/reflesh.png" alt="" /></i></a>
+				
+				<el-popover ref="popover3" placement="top-start" width="120" trigger="hover" >
+					<ol class="z-pop-top">
+						<li><a href="javascript:;">订单留言 (<span>0</span>)</a></li>
+						<li><a href="javascript:;">留言咨询 (<span>0</span>)</a></li>
+						<li><a href="javascript:;">站内信</a></li>
+					</ol>
+				</el-popover>
+				<a href="javascript:;" v-popover:popover3 ><img src="img/megs.png" alt="" /></a>
+				
+				<el-popover ref="popover4" placement="top-start" width="120" trigger="hover" >
+					<ol class="z-pop-top">
+						<li><a href="javascript:;">我的账号</a></li>
+						<li><a href="javascript:;">修改密码</a></li>
+						<li><a href="javascript:;">退出</a></li>
+					</ol>
+				</el-popover>
+				<a href="javascript:;" class="z-wo" v-popover:popover4 ><img src="img/mine.png" alt="" /><span>1580857</span></a>			
+				
+			</div>
+		</div>
+		</div>
+			
+		<!--主体-->
+		<iframe src="index.html" width="100%" frameborder='0' name="_blank" id="iframe"></iframe>
+	</body>
+	<script src="js/jquery.min.js"></script>	
+	<script>
+		var windowH = $(window).height();
+		window.onresize = function () {
+			windowH = document.documentElement.clientHeight;
+			setIframeHeight(document.getElementById('iframe'));
+		}
+		function setIframeHeight(iframe) {
+			if (iframe) {
+				var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+				if (iframeWin.document.body) {
+					iframe.height = windowH;
+				}
+			}
+		};
+			
+		window.onload = function () {
+			setIframeHeight(document.getElementById('iframe'));
+		};
+		
+		$('.navi-item').hover(function () {
+			$(this).addClass('active');
+		},function () {
+			$(this).removeClass('active');
+		});
+		
+		$('.bottom-item').hover(function () {
+			$(this).addClass('active');
+		},function () {
+			$(this).removeClass('active');
+		});
+		
+		$(document).on('click','.nav-tab a', function () {
+			var thisUrl = $(this).attr('_url');
+			document.getElementById('iframe').src = thisUrl;
+		});
+		new Vue({
+		el: "#app",
+		})
+	</script>
+</html>

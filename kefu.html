@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<script src="js/vue-router231.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--主体-->
+			<div class="main-content">
+				<div class="z-tabs">
+					<div class="z-tabs_header">
+			 			<router-link class="z-tabs_item" to="/company"><span>公司资料</span></router-link>
+			 			<router-link class="z-tabs_item" to="/band"><span>品牌设置</span></router-link>
+			 			<router-link class="z-tabs_item" to="/realname"><span>实名认证</span></router-link>
+			 			<router-link class="z-tabs_item" v-bind:class="{'router-link-active': isInit}" to="/kefu"><span>客服设置</span></router-link>
+			 			<div class="z-pop_question" v-if="showTip">
+			  	 			<el-popover
+								  ref="popoverq"
+								  placement="bottom-start"
+								  width="440"
+								  trigger="hover">
+								  <p class="z-jiao" v-text="tipmegs"></p>
+								</el-popover>
+								
+								<i v-popover:popoverq class="el-icon-question"></i>
+			  	 		</div>
+			 		</div>
+				</div>
+				
+				<router-view></router-view>
+				
+			</div>
+		</div>
+		
+		
+    <!--实名认证-->
+    <template id="realname">
+    	<div class="realname">
+			<div class="real-title">
+				<span>证件</span>
+				<s class="no-upload"><i class="el-icon-warning"></i>实名认证待上传</s>
+			</div>
+			<div class="upload-content clearfix">
+				<div class="up-license fl">
+					<el-upload
+					  class="avatar-uploader"
+					  action="https://jsonplaceholder.typicode.com/posts/"
+					  :show-file-list="false"
+					  :on-success="handleAvatarSuccess"
+					  :before-upload="beforeAvatarUpload">
+					  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+					  <div v-else class="avatar-uploader-icon">
+					  	<img src="img/upload.png" alt="" />
+					  	<p>上传营业执照</p>
+					  </div>
+					</el-upload>
+					<div class="up-ipt">
+						<input type="text" placeholder="请输入统一社会信用代码"/>
+					</div>
+				</div>
+				<div class="id-cart fl">
+					<el-upload
+					  class="avatar-uploader"
+					  action="http://58.49.17.106:17081/api/app/upload"
+					  :show-file-list="false"
+					  :on-success="handleIdSuccess"
+					  :before-upload="beforeAvatarUpload">
+					  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+					  <div v-else class="avatar-uploader-icon">
+					  <img src="img/upload.png" alt="" />
+					  <p>上传法人/经办人身份证</p>
+					  </div>
+					</el-upload>
+					<div class="up-ipt">
+						<input type="text" placeholder="请输入法人/经办人身份证号码"/>
+					</div>
+				</div>
+				<div class="z-tip fl">
+					<el-popover
+					  ref="popoverup"
+					  placement="right"
+					  width="400"
+					  trigger="hover">
+					  <div class="up-popoer">
+					  	<p>LOGO会展示到您的订货端，影响您的订货客户<br/> 请按照以下建议上传LOGO以达到最佳展示效果： </p>
+					  	<p>1、图片宽高：120px-520px，大小不超过6MB</p> 
+					  	<p>2、 支持JPG、PNG、JPEG </p> 
+					  	<p>3、裁剪时LOGO左右不留间隙</p>
+					  </div>
+					</el-popover>
+					
+					<i v-popover:popoverup class="el-icon-question tipicon"></i>
+				</div>
+			</div>
+			<div class="bottom-butn">
+				 <el-button type="primary">保存</el-button>
+				  <el-button>取消</el-button>
+			</div>
+		</div>
+    </template>
+	
+	<!--客服设置-->
+	<template id="setkf">
+		<div class="content_item active">
+			<div class="content_item_filter clearfix">
+				<div class="filter-btn fr">
+					<el-button type="primary">新增客服/联系方式</el-button>
+				</div>
+			</div>
+			<div class="z-tables has_option">
+				<table border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<th class="text-c" width="5%"></th>
+						<th width="17%">类型</th>
+						<th width="19%">名称</th>
+						<th width="24%">号码</th>
+						<th width="23.8%">排序值</th>
+						<th class="text-c">操作</th>
+					</tr>
+					<tbody>
+					<tr v-for="(item,index) in itemes" :key="index">
+						<td class="text-c">{{item.no}}</td>
+						<td>{{item.type}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.number}}</td>
+						<td>{{item.sort}}</td>
+						<td class="text-c">
+							<a href="javascript:;" class="revise" title="修改">修改</a>
+							<span>|</span>
+							<a href="javascript:;" class="delete" title="删除">删除</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</template>
+	
+	<!--品牌设置-->
+	<template id="band">
+		<div class="setband">
+			<div class="setband-content">
+				<div class="form-grom">
+					<label class="bandlabel">*订货平台名称</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入内容" v-model="input3"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">*专属访问网址</label>
+					<div class="band-ipt">
+						<el-input placeholder="请输入内容" v-model="input4">
+						    <template slot="prepend">Http://</template>
+						    <template slot="append">.dhb168.com</template>
+						</el-input>
+					</div>
+					<a href="javascript:;" class="visits">访问订货平台</a>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">广告语</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="最多20字" v-model="input5"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">订货平台logo</label>
+					<div class="band-ipt logoup">
+						<el-upload
+						  class="avatar-uploader"
+						  action="https://jsonplaceholder.typicode.com/posts/"
+						  :show-file-list="false"
+						  :on-success="handleLogoSuccess"
+						  :before-upload="beforeAvatarUpload">
+						  <img v-if="logoUrl" :src="logoUrl" class="avatar">
+						  <i v-else class="avatar-uploader-icon">
+						  	LOGO
+						  </i>
+						</el-upload>
+					</div>
+					<div class="z-tip logoup-tip">
+						<el-popover
+						  ref="popoverup"
+						  placement="right"
+						  width="400"
+						  trigger="hover">
+						  <div class="up-popoer">
+						  	<p>LOGO会展示到您的订货端，影响您的订货客户<br/> 请按照以下建议上传LOGO以达到最佳展示效果： </p>
+						  	<p>1、图片宽高：120px-520px，大小不超过6MB</p> 
+						  	<p>2、 支持JPG、PNG、JPEG </p> 
+						  	<p>3、裁剪时LOGO左右不留间隙</p>
+						  </div>
+						</el-popover>
+						
+						<i v-popover:popoverup class="el-icon-question tipicon"></i>
+					</div>
+				</div>
+			</div>
+			<div class="bottom-butn">
+				 <el-button type="primary">保存</el-button>
+				  <el-button>取消</el-button>
+			</div>
+		</div>
+	</template>
+	
+	<!--公司资料-->
+	<template id="company">
+		<div class="company">
+			<div class="company-content">
+				<h3>公司信息</h3>
+				<div class="form-grom">
+					<label class="bandlabel">公司名称</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司名称" v-model="inputC"></input>
+					</div>
+					<div class="realTip">
+						<i></i>实名认证未上传
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">所属行业</label>
+					<div class="band-ipt">
+						<el-select v-model="trade" placeholder="请选择">
+						    <el-option
+						      v-for="item in options"
+						      :key="item"
+						      :label="item"
+						      :value="item">
+						    </el-option>
+						  </el-select>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">公司地址</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司地址"></input>
+					</div>
+					<div class="band-ipt" style="margin-top: 10px;">
+						<input class="myipt" placeholder="详细地址：如：四川省成都市武侯区天府三街888号"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">邮箱</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司邮箱"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">传真</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司传真"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">联系人</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司联系人"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">联系电话</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司联系电话"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">公司介绍</label>
+					<div class="band-ipt">
+						<textarea class="myipt" placeholder="关于公司基本信息的介绍"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			<div class="company-content" style="border-bottom: 1px solid #DCDCDC;">
+				<h3>财务信息</h3>
+				<div class="form-grom">
+					<label class="bandlabel">开户名称</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入开户名称"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">开户银行</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司开户银行"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">银行账号</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入公司银行账号"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">开票抬头</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="详细地址：如：四川省成都市武侯区天府三街888号"></input>
+					</div>
+				</div>
+				<div class="form-grom">
+					<label class="bandlabel">纳税人识别号</label>
+					<div class="band-ipt">
+						<input class="myipt" placeholder="请输入纳税人识别号"></input>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="bottom-butn">
+				 <el-button type="primary">保存</el-button>
+				  <el-button>取消</el-button>
+			</div>
+		</div>
+	</template>
+	
+	</body>
+<script src="js/jquery.min.js"></script>
+<script>
+	
+	
+//	实名认证
+	var realname = Vue.component('realname',{
+		template: "#realname",
+		data: function () {
+			return {
+				imageUrl: '',
+				imgIdUrl: '',
+			}
+		},
+		 methods: {
+	      handleAvatarSuccess(res, file) {
+	        this.imageUrl = URL.createObjectURL(file.raw);
+	      },
+	      handleIdSuccess(res, file) {
+	        this.imgIdUrl = URL.createObjectURL(file.raw);
+	      },
+	      beforeAvatarUpload(file) {
+	        var isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
+	        var isLt2M = file.size / 1024 / 1024 < 6;
+	        console.log(file);
+	
+	        if (!isJPG) {
+	          this.$message.error('上传头像图片只能是 JPG、PNG 格式!');
+	        }
+	        if (!isLt2M) {
+	          this.$message.error('上传头像图片大小不能超过 6MB!');
+	        }
+	        return isJPG && isLt2M;
+	      }
+	    }  
+	});
+	
+	//客服设置
+	var setkf = Vue.component('setkf',{
+		template: "#setkf",
+		data: function () {
+			return {
+				itemes: [
+				{no: 1, type: '个人QQ',name: '店小二',number: '546344534',sort: '1'},
+				{no: 2, type: '微信群',name: '店小二',number: '546344534',sort: '2'},
+				{no: 3, type: '个人QQ',name: '店小二',number: '546344534',sort: '3'},
+				{no: 4, type: '微信群',name: '店小二',number: '54634',sort: '4'},
+				]
+			}
+		}
+	});
+	
+	//品牌设置
+	var band = Vue.component('band',{
+		template: "#band",
+		data: function () {
+			return {
+				input3: '北京全网数商科技股份有限公司',
+				input4: '',
+				input5: '',
+				logoUrl: '',
+			}
+		},
+		methods: {
+			handleLogoSuccess(res, file) {
+	        this.imgIdUrl = URL.createObjectURL(file.raw);
+	      },
+	      beforeAvatarUpload(file) {
+	        var isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
+	        var isLt2M = file.size / 1024 / 1024 < 6;
+	        console.log(file);
+	
+	        if (!isJPG) {
+	          this.$message.error('上传头像图片只能是 JPG、PNG 格式!');
+	        }
+	        if (!isLt2M) {
+	          this.$message.error('上传头像图片大小不能超过 6MB!');
+	        }
+	        return isJPG && isLt2M;
+	      }
+		}
+	});
+	
+	//公司资料
+	var company = Vue.component('company',{
+		template: "#company",
+		data: function () {
+			return {
+				inputC: '北京全网数商科技股份有限公司',
+				trade: '其他',
+				options: ['建筑业','教育','培训','计算机'],
+			}
+		}
+	});
+	
+	var router = new VueRouter({
+		routes: [
+			{path: '/',component: setkf},
+			{path: '/kefu',component: setkf},
+			{path: '/realname',component: realname},
+			{path: '/band',component: band},
+			{path: '/company',component: company}
+		]
+	});
+	
+	//编辑页面
+	var cityOption1 = ['查看订单', '代客户下单', '审核订单', '撤销订单审核通过','修改订单','订单核准(发货后仍可修改订单)','查看出库/发货单','确认审核收货/发货',
+						 '确认审核收货','查看订单付款','确认付款到账','添加收款记录','查看退货单','代客户下退货单','审核退货单','退货单收货与退款','订单商品明细',
+						 '出库商品明细','退货商品明细','强制完成','修改订单商品价格','订单核价'];
+	
+	var goodsOption2 = ['查看全部商品','管理与编辑商品','经营范围屏蔽','管理商品分组'];
+	
+	var saleres = ['首页广告位及商品','公告管理','查看促销','新增与编辑促销','订单红包','红包充值','优惠券','微信'];
+	
+	new Vue({
+		el: "#app",
+		router: router,
+		data: {
+			tipmegs: '',
+			showTip: false,
+			isInit: true,
+		},
+		watch: {
+			"$route": function (news, old) {
+				if(news.fullPath == '/realname') {
+					this.showTip = true;
+					this.tipmegs = '实名认证：需上传完整证件，审核通过后才能开启全部功能限制';
+				}else if (news.fullPath == '/band') {
+					this.showTip = true;
+					this.tipmegs = '品牌设置：让你自己的订货平台更符合你们公司的品牌需要';
+				}else {
+					this.showTip = false;
+					this.tipmegs = '';
+				}
+				
+				if(news.fullPath != '/kefu') {
+					this.isInit = false;
+				}else {
+					this.isInit = true;
+				}
+			}
+		},
+		mounted: function () {
+			$('.navi-item').hover(function () {
+				$(this).addClass('active');
+			},function () {
+				$(this).removeClass('active');
+			});
+			
+			$('.bottom-item').hover(function () {
+				$(this).addClass('active');
+			},function () {
+				$(this).removeClass('active');
+			});
+		},
+	});
+</script>	
+</html>

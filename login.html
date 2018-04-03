@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<script src="js/vue-router231.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<div class="m-login" :model="ruleForm2" :rules="rules2" ref="ruleForm2">
+		  	  <div class="m-width clearfix">
+		  	  	 <div class="fl"><img src="img/insetpic.png"></div>
+		  	  	 <div class="login-form fr">
+		  	  	 	<div class="form-item">
+		  	  	 		<label class="form_label">用户名</label>
+		  	  	 		<div class="form_input">
+		  	  	 			<input type="text"  v-model="ruleForm2.account" placeholder="请输入账号"  class="form_control">
+		  	  	 		</div>
+		  	  	 	</div>
+		  	  	 	<div class="form-item">
+		  	  	 		<label class="form_label">密&nbsp&nbsp&nbsp码</label>
+		  	  	 		<div class="form_input">
+		  	  	 			<input type="password" v-model="ruleForm2.checkPass" placeholder="请输入密码"  class="form_control">
+		  	  	 		</div>
+		  	  	 	</div>
+		  	  	 	<div class="form-item m-yzm">
+		  	  	 		<label class="form_label">验证码</label>
+		  	  	 		<div class="form_input">
+		  	  	 			<input type="text" placeholder="请输入验证码"  class="form_control">
+		  	  	 			<a href="##"><img src="img/yanzm.png"></a>
+		  	  	 		</div>
+		  	  	 	</div>
+		  	  	 	<div class="m-remind" >
+		  	  	 		<div class="m-prompt" v-show="logining">
+							<span><s></s>{{rules2.message}}</span>
+					    </div>
+		  	  	 		<a href="##">忘记密码</a>
+		  	  	 	</div>
+		  	  	 	<div class="m-btn">
+		  	  	 		<a href="javascript:;" @click="handleSubmit2" :loading="logining">登录</a>
+		  	  	 		
+		  	  	 	</div>
+		  	  	 </div>
+		  	  </div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		
+		new Vue({
+			el: "#app",
+			data: {
+		        logining: false,
+		        ruleForm2: {
+		          account: 'admin',
+		          checkPass: '123456'
+		        },
+		        rules2: {
+		         message: '请输入账号',
+		        },
+		        checked: true
+		    },
+		    methods: {
+		      handleReset2: function () {
+		        this.$refs.ruleForm2.resetFields();
+		      },
+		      handleSubmit2: function (ev) {
+	        	var _this = this;
+	            if(this.ruleForm2.account == ""){
+	            	this.logining = true;
+	            	this.rules2.message = "用户名不能为空"
+	            }else if(this.ruleForm2.checkPass == ""){
+	            	this.logining = true;
+	            	this.rules2.message = "密码不能为空"
+	            }else{
+		            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+		            var data ={
+		            	msg:123,
+		            	code:200,
+		            	user:"mmm",
+		            }
+		              this.logining = false;
+		              //NProgress.done();
+//		              let { msg, code, user } = data;
+						var code = data.code, msg = data.msg, user = data.user;
+		              if (code !== 200) {
+		                this.$message({
+		                  message: msg,
+		                  type: 'error'
+		                });
+		              } else {
+		                sessionStorage.setItem('user', JSON.stringify(user));
+		                window.location.href="index.html";
+		              }
+	              }
+		        }
+		    }
+		});
+	</script>
+</html>

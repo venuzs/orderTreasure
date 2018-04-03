@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--主体-->
+			<div class="main-content">
+				<div class="edit">
+					<transition name="fade"
+					            mode="out-in">
+					<section>           
+						<el-breadcrumb separator-class="el-icon-arrow-right">
+						  <el-breadcrumb-item :to="{ path: '/personnel' }">角色权限</el-breadcrumb-item>
+						  <el-breadcrumb-item >编辑权限组</el-breadcrumb-item>
+						</el-breadcrumb>
+						<div class="edit-warp">
+							<div class="edit-input">
+								<label>角色名称</label>
+								<el-input v-model="inputs" clearable placeholder="业务员"></el-input>
+							</div>
+							<div class="edit-content">
+								<h2>权限明细</h2>
+								<div class="edit-itemes">
+									<div class="edit-limit">
+										 <el-checkbox :indeterminate="isIndeterminate" v-model="checked1" @change="handleCheckAllChange">订单</el-checkbox>
+									</div>
+									<div class="edit-limit-info">
+										<el-checkbox-group v-model="checkedCities1" text-color="#222222" @change="handleCheckedCitiesChange">
+										    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+										</el-checkbox-group>
+									</div>
+								</div>
+								<div class="edit-itemes">
+									<div class="edit-limit">
+										 <el-checkbox v-model="checked2">商品</el-checkbox>
+									</div>
+									<div class="edit-limit-info">
+										<el-checkbox-group v-model="checkedCities2" text-color="#222222" >
+										    <el-checkbox v-for="city in cities2" :label="city" :key="city">{{city}}</el-checkbox>
+										</el-checkbox-group>
+									</div>
+								</div>
+								<div class="edit-itemes">
+									<div class="edit-limit">
+										 <el-checkbox v-model="checked3">营销</el-checkbox>
+									</div>
+									<div class="edit-limit-info">
+										<el-checkbox-group v-model="checkedCities3" text-color="#222222" >
+										    <el-checkbox v-for="city in cities3" :label="city" :key="city">{{city}}</el-checkbox>
+										</el-checkbox-group>
+									</div>
+								</div>
+							</div>
+							<div class="edit-button">
+								<el-button type="primary" :plain="true" @click="open2">保存权限设置</el-button>
+								<el-button>取消</el-button>
+							</div>
+						</div>
+					</section> 
+					</transition>
+				</div>
+			</div>
+		</div>
+	
+	</body>
+<script src="js/jquery.min.js"></script>	
+<script>
+	
+	//编辑页面
+	var cityOption1 = ['查看订单', '代客户下单', '审核订单', '撤销订单审核通过','修改订单','订单核准(发货后仍可修改订单)','查看出库/发货单','确认审核收货/发货',
+						 '确认审核收货','查看订单付款','确认付款到账','添加收款记录','查看退货单','代客户下退货单','审核退货单','退货单收货与退款','订单商品明细',
+						 '出库商品明细','退货商品明细','强制完成','修改订单商品价格','订单核价'];
+	
+	var goodsOption2 = ['查看全部商品','管理与编辑商品','经营范围屏蔽','管理商品分组'];
+	
+	var saleres = ['首页广告位及商品','公告管理','查看促销','新增与编辑促销','订单红包','红包充值','优惠券','微信'];
+	
+	new Vue({
+		el: "#app",
+		data: {
+			inputs: '',
+	         checkedCities1: ['撤销订单审核通过', '添加收款记录'], //选中项
+	         cities: cityOption1,
+	         checked1: true,
+	         isIndeterminate: false, //确定状态	
+	         checkedCities2: [],  //商品选项
+	         cities2: goodsOption2,
+	         checked2: false,
+	         checkedCities3: ['新增与编辑促销'],  //营销选项
+	         cities3: saleres,
+	         checked3: true,
+		},
+		methods: {
+	    	handleCheckedCitiesChange: function (val) {
+	    		this.checked1 = val.length > 0;
+	    	},
+	    	handleCheckAllChange: function (val) {
+		        this.checkedCities = val ? cityOptions : [];
+		        this.isIndeterminate = false;
+		    },
+	    	open2: function () {
+	    		this.$message({
+		          message: '保持权限设置成功',
+		          type: 'success',
+		          duration: 1000,
+		        });
+		        var _this = this;
+		       setTimeout(function() {
+		       	window.location.href = 'index.html';
+		       },1000);
+	    	},
+	    },
+	    mounted: function () {
+			$('.navi-item').hover(function () {
+				$(this).addClass('active');
+			},function () {
+				$(this).removeClass('active');
+			});
+			
+			$('.bottom-item').hover(function () {
+				$(this).addClass('active');
+			},function () {
+				$(this).removeClass('active');
+			});
+		},
+	});
+</script>	
+</html>

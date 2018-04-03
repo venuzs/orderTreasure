@@ -1,0 +1,170 @@
+
+*{box-sizing: border-box;}
+body{font:12px/1.5 "microsoft yahei",Arial, sans-serif;color:#697B8C;background-color:#f6f6f6;margin:0;padding:0;overflow-x: hidden;}
+a{color:#666;text-decoration:none;}
+a:active,a:focus {text-decoration:none;color:#3366CC;}
+a:hover{text-decoration:none;color:#3366CC;}
+a:active,a:focus,input,select,textarea {outline:none;}
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{line-height:1;color:#444645;font-family:"microsoft YaHei";font-weight: normal;}
+ul,ol {list-style-type:none}
+li{*vertical-align:top;}
+div,a,p,b,em,i,strong,span,img,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,input,form{margin:0;padding:0;}
+img{border:none;vertical-align:top;}
+s,i,em{font-style: normal;text-decoration: none;}
+input,select,textarea{outline: none;font-family:"microsoft YaHei" !important;}
+
+.fl{float:left;text-align: left;}
+.fr{float:right;}
+.clearfix {zoom:1;clear:both;}
+.clearfix:after {content:".";display:block;height:0;visibility:hidden;clear:both;}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary{display:block; }
+
+/*主色调*/
+.bg_c { 
+	background-color: #36C8E6 !important;  /*主背景颜色*/
+}
+.fz_c {
+	color: #3366CC; /*字体颜色*/
+}
+/*多选框覆盖*/
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+	background-color: #fff;
+    border-color: #3366cc !important;
+}
+
+#mian{
+	margin-left: 220px;
+}
+
+
+
+/*弹出框*/
+.v-modal{
+	position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    background: #000;
+    z-index: 1999;
+}
+.m_seniorscreen{
+	z-index: 2000;
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.m_seniorscreen .el-message-box{
+	width: 620px;
+}
+
+.m_seniorscreen .resize-triggers{
+	z-index: 9999 !important;
+}
+
+.el-message-box__wrapper.m_seniorscreen:after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+}
+.m_seniorscreen .el-form-item{
+	float: left;
+	width: 49%;
+}
+.m_seniorscreen .el-form-item:nth-child(2n){
+	margin-left: 2%;
+}
+
+.m_seniorscreen .el-form-item__label{
+	text-align: left;
+	padding: 0px;
+}
+.m_seniorscreen .el-message-box__btns{
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 7px;  
+    height: 7px;  
+    background-color: #fff;  
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    border-radius: 10px;  
+    background-color: #fff;  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+    border-radius: 10px;  
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.1);  
+    background-color: #f6f6f6;  
+}  
+
+/*面包屑样式*/
+.breadcrumb {
+    float: left;
+    font-size: 14px;
+    line-height: 22px;
+    padding-bottom: 8px;
+}
+.breadcrumb span {
+    padding: 0 5px;
+}
+
+/*盒子模型样式*/
+.box {
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(165,167,168,.3);
+    margin-bottom: 20px;
+}
+.box .box-title {
+    line-height: 40px;
+    height: 40px;
+    margin: 0 20px;
+    border-bottom: 1px solid #EFEFEF;
+}
+.box .box-title h2 {
+    float: left;
+    line-height: 40px;
+    font-size: 16px;
+    color: #666;
+}
+.box .box-content {
+    padding: 0 20px 15px;
+    zoom: 1;
+    clear: both;
+}
+.box .box-content:after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.box .box-content.no-padding {
+    padding: 0;
+}
+.box .title-more {
+    float: right;
+    font-size: 14px;
+    color: #666;
+}
+
+
