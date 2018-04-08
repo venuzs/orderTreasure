@@ -935,3 +935,105 @@
 .minW40 .el-input-group__append button{
 	min-width: 40px;
 }
+
+.fixed-table {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	box-sizing: content-box;
+}
+.fixed-table,
+.fixed-table table {
+	color: #222;
+}
+
+.fixed-table td {
+	padding: 12px 0;
+	 line-height: 24px;
+	 background-color: #fff;
+	 font-size: 14px;
+	 border-bottom: 1px solid #DBDBDB;
+	 height: 48px;
+}
+.fixed-table tbody tr.on td {
+	background-color: #ECF5FF;
+}
+.fixed-table td.text-c {
+	text-align: center;
+}
+.fixed-table td label {
+	display: inline-block;
+	line-height: 20px;
+	padding: 0 10px;
+	border-radius: 12px;
+	border: 1px solid #3366CC;
+	color: #3366CC;
+	font-size: 12px;
+	margin-left: 10px;
+}
+.z-option a, .z-option span {
+	color: #3366CC;
+}
+.fixed-table th {
+	height: 48px;
+	padding: 12px 0;
+	white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+    text-align: left;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    background-color: #FAFCFC;
+    color: #666;
+    border-bottom: 1px solid #DBDBDB;
+}
+.fixed-table .th1 {
+	min-width: 60px;
+	text-align: center;
+}
+.fixed-table .th2 {
+	min-width: 220px;
+}
+.fixed-table .th3 {
+	min-width: 480px;
+}
+.fixed-table .th4 {
+	min-width: 200px;
+}
+.fixed-table .th5 {
+	min-width: 120px;
+	text-align: center;
+}
+.fixed-table .th6 {
+	min-width: 120px;
+	text-align: center;
+}
+.fixed-table .normal_table {
+	width: 100%;
+	overflow-x: auto;
+	position: relative;
+}
+
+.fixed-table .left_table {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+.fixed-table .right_table {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 3;
+	overflow: hidden;
+}
+.fixed-table  .right_pos {
+	position: absolute;
+	top: 0;
+	right: 0;
+	
+}
+.fixed-table .shadow {
+	box-shadow: 0 0 10px rgba(0,0,0,.2);
+}

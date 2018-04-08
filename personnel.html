@@ -39,7 +39,7 @@
 		 		</div>
 		 		
 		 		<div class="z-tabs_content">
-		 			<div class="content_item" :class="{active:act == 0}"> <!--员工管理-->
+		 			<div class="content_item active"> <!--员工管理-->
 	 				<!--条件筛选-->
 	 					<div class="content_item_filter clearfix">
 		  	 				<div class="input-select fl">
@@ -114,14 +114,14 @@
 		 				</div>
 	 				</div>
 	 				
-	 				<div class="content_item" :class="{active:act == 1}"> <!--角色权限-->
+	 				<div class="content_item"> <!--角色权限-->
 	 					<div class="content_item_filter clearfix">
 		  	 				<div class="filter-btn fr">
 		  	 					<el-button type="primary">新增权限</el-button>
 		  	 				</div>
 		 				</div>
-		 				<div class="z-tables">
-		 					<el-table :data="tableData" style="width: 100%"  @current-change="handleCurrentTable">
+		 				<div class="z-tables fixed-table">
+		 					<!--<el-table :data="tableData" style="width: 100%"  @current-change="handleCurrentTable">
 		 						
 		 						<el-table-column fixed prop="no" label="" min-width="60"></el-table-column>
 		 						
@@ -132,7 +132,45 @@
 		    					<el-table-column prop="reget" label="更新时间" min-width="200"></el-table-column>
 		    
 		    					<el-table-column fixed="right" prop="op" label="操作" min-width="120"></el-table-column>
-							</el-table>
+							</el-table>-->
+							
+							<div class="normal_table">
+								<table border="0" cellspacing="0" cellpadding="0" class="tableClone">
+									<thead>
+										<tr>
+											<th class="th1" min-width="60"></th>
+											<th class="th2" min-width="220">名称</th>
+											<th class="th3" min-width="480">权限</th>
+											<th class="th4" min-width="200">更新时间</th>
+											<th class="th5" min-width="120">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="(item, index) in tableData" :key="index">
+											<td class="text-c">{{item.no}}</td>
+											<td>{{item.name}} <label v-if="item.no == 1">创建者</label></td>
+											<td>{{item.limit}}</td>
+											<td>{{item.reget}}</td>
+											<td class="text-c">
+												<div class="z-option" v-if="item.options">
+													<a href="edit.html" title="编辑">编辑</a>
+													<span> | </span>
+													<a href="javascript:;" title="删除">删除</a>
+												</div>
+												<p v-if="item.super" style="color: #999;">内置</p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						<div class="left_table" :class="{'shadow': isLeft}">
+							
+						</div>
+						<div class="right_table" :class="{'shadow': isRight}">
+							<div class="right_pos">
+								
+							</div>
+						</div>
 		 				</div>	
 	 				</div>	
 	 				
@@ -141,12 +179,6 @@
 		</div>
 	</div>
 	
-	
-
-	<!--员工组件-->
-	<template id="personnel">
-		
-	</template>
 </body>
 	
 <script src="js/jquery.min.js"></script>	
@@ -191,6 +223,9 @@
 	        
 	        act: 0, //tab选项
 	        
+	        isLeft: false, //左右阴影
+	        isRight: false,
+	        
 	        tableData: [{
 	      	  no: '1',
 	          name: '业务员',
@@ -198,7 +233,7 @@
 	          reget: '2017-12-12 12:00:00',
 	          options: true,
 	          super: false,
-	          op: "编辑"
+	          op: "编辑233"
 	        }, {
 	        	no: '2',
 	          name: '仓库管理员',
@@ -206,7 +241,7 @@
 	          reget: '2017-12-12 12:00:00',
 	          options: true,
 	          super: false,
-	          op: "编辑"
+	          op: "编辑233"
 	        }, {
 	        	no: '3',
 	          name: '超级管理员',
@@ -214,7 +249,7 @@
 	          reget: '2017-12-12 12:00:00',
 	          options: false,
 	          super: true,
-	          op: "编辑"
+	          op: "编辑233"
 	        }],  
 		},
 		methods: {
@@ -237,9 +272,100 @@
 			var _this = this;
 		  	$('.z-tabs_item').click(function () {
 		  		$(this).addClass('is_active').siblings().removeClass('is_active');
-		  		_this.act = $(this).index();
+		  		var inx = $(this).index();
+		  		
+		  		$('.content_item').eq(inx).addClass('active').siblings().removeClass('active');
+		  		
+		  		if($('.content_item.active .right_pos table').length > 0) {
+	  			var tableH = $('.right_pos').height();
+	  			$('.right_table').height(tableH);
+	  		}
 		  	});
-		}
+		  	
+		  	
+		  	//复制
+		  	var tabC = $('.tableClone').clone(true);
+		  	$('.left_table').append(tabC);
+		  	
+		  	var tabC1 = $('.tableClone').eq(0).clone(true);
+		  	$('.right_pos').append(tabC1);
+		  	
+		  	//高亮
+		  	$('.fixed-table tr').hover(function () {
+		  		var index = $(this).index();
+		  		var nextInd = index + 1;
+		  		$('.normal_table tr').eq(nextInd).addClass('on');
+		  		$('.left_table tr').eq(nextInd).addClass('on');
+		  		$('.right_pos tr').eq(nextInd).addClass('on');
+		  	}, function () {
+		  		$('.normal_table tr').removeClass('on');
+		  		$('.right_pos tr').removeClass('on');
+		  		$('.left_table tr').removeClass('on');
+		  	});
+		  	
+		  	$('.fixed-table thead').hover(function () {
+		  		$('.normal_table tr').removeClass('on');
+		  		$('.right_pos tr').removeClass('on');
+		  		$('.left_table tr').removeClass('on');
+		  	});
+		  	
+		  	
+			//表格
+            var allW = $('.content_item.active').width();
+
+			var totW = 0;
+			$('.normal_table th').each(function (i,v) {
+				totW += parseFloat($(v).attr('min-width'));
+			});
+			//console.log(totW);
+			var lRate =( parseFloat($('.th1').attr('min-width')) + parseFloat($('.th2').attr('min-width')) ) / totW;
+			var rRate = parseFloat($('.th6').attr('min-width')) / totW;
+			
+			window.onresize = function () {
+				var scollW = $('.content_item.active').width();
+				computW(scollW);
+			}
+			
+			var computW = function (allW) {
+				if(allW >= totW) {
+					totW = allW;
+					_this.isRight = false;
+				}else {
+					var Long = totW - allW;
+					_this.isRight = true;
+				}
+				
+				$('.normal_table table').width(totW);
+				$('.right_table table').width(totW);
+				$('.left_table table').width(totW);
+				
+				
+				var rW = totW * rRate + 2;
+			  	$('.right_table').width(rW);
+			  	var lW = totW * lRate - 2;
+			  	$('.left_table').width(lW);
+				
+				var sL;
+				$('.normal_table').scroll(function (e) {
+					sL = Math.ceil(e.target.scrollLeft);
+//					console.log(sL +"___"+Long);
+					if(sL > 0) {
+						_this.isRight = true;
+						_this.isLeft = true;
+					}
+					if(sL == 0) {
+						_this.isLeft = false;
+					}
+					if((sL+2) >= Long) {
+						_this.isRight = false;
+						_this.isLeft = true;	
+					}
+				});
+			}
+			
+			computW(allW);
+			
+		},
 	});
 </script>
 </html>

@@ -20,6 +20,10 @@ input,select,textarea{outline: none;font-family:"microsoft YaHei" !important;}
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary{display:block; }
 
+.height_100 {
+	height: 100%;
+	overflow: hidden;
+}
 /*主色调*/
 .bg_c { 
 	background-color: #36C8E6 !important;  /*主背景颜色*/

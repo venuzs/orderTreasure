@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="height_100">
 	<head>
 		<meta charset="UTF-8">
 		<title>订货宝 让生意更美好！</title>
@@ -12,7 +12,7 @@
 	<!-- 引入组件库 -->
 	<script src="js/vue221.js"></script>
 	<script src="js/element.js"></script>
-	<body>
+	<body class="height_100">
 		<!--左侧-->
 		<div class="leftBar">
 			<div class="logo">
@@ -188,27 +188,10 @@
 		</div>
 			
 		<!--主体-->
-		<iframe src="index.html" width="100%" frameborder='0' name="_blank" id="iframe"></iframe>
+		<iframe src="index.html" width="100%" height="100%" frameborder='0' name="_blank" id="iframe"></iframe>
 	</body>
 	<script src="js/jquery.min.js"></script>	
 	<script>
-		var windowH = $(window).height();
-		window.onresize = function () {
-			windowH = document.documentElement.clientHeight;
-			setIframeHeight(document.getElementById('iframe'));
-		}
-		function setIframeHeight(iframe) {
-			if (iframe) {
-				var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-				if (iframeWin.document.body) {
-					iframe.height = windowH;
-				}
-			}
-		};
-			
-		window.onload = function () {
-			setIframeHeight(document.getElementById('iframe'));
-		};
 		
 		$('.navi-item').hover(function () {
 			$(this).addClass('active');
