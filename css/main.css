@@ -194,7 +194,7 @@
 /*主体*/
 .main-content {
 	min-width: 1100px;
-	margin: 70px 20px 0 120px;
+	margin: 70px 20px 20px 120px;
 	background: #FFFFFF;
 	box-shadow: 0 1px 2px 0 rgba(165,167,168,0.30);
 }
@@ -207,14 +207,30 @@
 }
 .z-tabs_item {
 	float: left;
-	padding: 20px 0;
+	padding: 10px 0;
 	font-size: 14px;
 	color: #666;
 	cursor: pointer;
+	position: relative;
 }
-.z-tabs_item span {
+.z-tabs_item .z-pop_question{
+	position: absolute;
+	top: 10px;
+	right: 8px;
+	width: 18px;
+	height: 18px;
+	font-size: 14px;
+	color: #ddd;
+	display: none;
+}
+.z-tabs .z-tabs_item.router-link-active .z-pop_question,
+.z-tabs_item.is_active .z-pop_question{
+	display: block;
+}
+.z-tabs_item .item_span {
 	display: inline-block;
-	padding: 0 20px;
+	width: 120px;
+	text-align: center;
 	border-right: 1px solid #EFEFEF;
 }
 .z-tabs_item.is_active {
@@ -226,15 +242,6 @@
 	color: #3366CC;
 }
 
-.z-pop_question {
-	float: left;
-}
-
-.z-pop_question i {
-	padding: 20px 20px 18px;
-	font-size: 20px;
-	color: #999;
-}
 .z-jiao {
 	padding: 10px 20px;
 	line-height: 26px;
@@ -260,6 +267,7 @@
 	margin-top: 20px;
 	border: 1px solid #dbdbdb;
 	border-bottom: none;
+	border-radius: 4px 4px 0 0;
 }
 
 /*分页*/
@@ -298,6 +306,7 @@
 	font-size: 16px;
 	color: #666;
 	padding: 20px 0;
+	font-weight: 600;
 }
 .edit-limit {
 	float: left;
@@ -317,12 +326,25 @@
 
 
 /*登录*/
+
+ .m-login input::-webkit-input-placeholder{
+        color:#CCCCCC;
+    }
+   .m-login input::-moz-placeholder{   
+        color:#CCCCCC;
+    }
+   .m-login input:-moz-placeholder{   
+        color:#CCCCCC;
+    }
+    .m-login input:-ms-input-placeholder{ 
+        color:#CCCCCC;
+    }
 .m-login{
 		position: absolute;
 		top:0px;
 		bottom: 0;
 		width: 100%;
-		background: #3366CC;
+		background:linear-gradient(135deg,rgba(97,145,242,1),rgba(51,102,204,1));
 	}
 	.m-width{
 		width: 1010px;
@@ -347,7 +369,7 @@
 		width: 500px;
 		height: 400px;
 		background: #fff;
-		border-radius:10px ;
+		border-radius:4px ;
 	}
 	
 	.form-item{
@@ -359,12 +381,12 @@
 		float: left;
 		width: 320px;
 	}
-	.form_input .form_control{
+	.login-form .form_input .form_control{
 		width: 100%;
 		height: 50px;
 		font-size: 18px;
 		padding: 0 12px;
-		border-radius: 4px;
+	
 		border: 1px solid #ccc;
 	}
 	.form_label{
@@ -379,11 +401,12 @@
 	.login-form .m-yzm .form_control{
 		width: 220px;
 		float: left;
+		
 	}
 	.login-form .m-yzm a{
+		margin: 8px 0 0;
 		float: right;
 		width: 86px;
-		height: 50px;
 		overflow: hidden;
 	}
 	.login-form .m-yzm a img{
@@ -401,9 +424,24 @@
 		width: 16px;
 		height: 16px;
 		vertical-align: middle;
-		margin:0 10px 3px;
+		margin:0 10px 3px 0px;
 		background: url(../img/remind.png) no-repeat;
 		
+	}
+	.login-form .user .form_input{
+		position: relative;
+	}
+	.login-form .user .form_input .form_control{
+		padding-right: 15%;
+	}
+	.login-form .user .form_input s{
+		cursor: pointer; 
+		position: absolute;
+		right: 20px;
+		width: 16px;
+		height: 16px;
+		top: 17px;
+		background: url(../img/clear.png) no-repeat;
 	}
 	
 	.m-remind{
@@ -428,9 +466,10 @@
 		line-height: 50px;
 		font-size: 20px;
 		color: #fff;
-		background: #5F50E6;
 		text-align: center;
-		border-radius:6px ;
+		background:linear-gradient(135deg,rgba(51,102,204,1),rgba(95,80,230,1));
+		box-shadow: 0px 4px 16px 0px rgba(51,102,204,0.4);
+		border-radius: 4px ; 
 	}
 
 
@@ -448,7 +487,7 @@
 	height:50px; 
 	background:rgba(250,252,252,1);
 	line-height: 50px;
-	font-weight: normal;
+	font-weight: 600;
 }
 .has_option table th.text-c,
 .has_option table td.text-c {
@@ -465,6 +504,9 @@
 .has_option table td span {
 	color: #3366CC;
 }
+.has_option table td span {
+	padding: 0 4px;
+}
 .has_option table tbody tr:hover {
 	background-color: #ecf5ff;
 }
@@ -476,9 +518,12 @@
 .real-title {
 	height: 24px;
 	line-height: 24px;
-	font-size: #666;
+	color: #666;
 	font-size: 14px;
 	margin-bottom: 15px;
+}
+.real-title span {
+	font-weight: 600;
 }
 .real-title .no-upload {
 	color: #F5655C;
@@ -486,6 +531,10 @@
 }
 .real-title .no-upload i {
 	margin-right: 6px;
+}
+.z-pop_p {
+	line-height: 26px;
+	color: #999;
 }
 
 /*上传样式*/
@@ -525,7 +574,7 @@
 }
 .z-tip .tipicon {
 	font-size: 20px;
-	color: #999;
+	color: #ddd;
 	margin-top: 118px;
 }
 .up-popoer {
@@ -584,7 +633,7 @@
 	    -webkit-appearance: none;
     background-color: #fff;
     background-image: none;
-    border-radius: 4px;
+    border-radius: 2px;
     border: 1px solid #dcdfe6;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -638,6 +687,10 @@
 	top: 50%;
 	margin-top: -10px;
 	left: 640px;
+}
+.templ-border .el-input__inner{
+	border-left: none;
+	border-right: none; 
 }
 /*公司资料*/
 .company {
@@ -1016,7 +1069,7 @@
     overflow: hidden;
     user-select: none;
     text-align: left;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 14px;
     line-height: 24px;
     background-color: #FAFCFC;
@@ -1071,4 +1124,8 @@
 }
 .fixed-table .shadow {
 	box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+.z-option span {
+	padding: 0 4px;
 }

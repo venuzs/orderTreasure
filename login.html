@@ -20,10 +20,11 @@
 		  	  <div class="m-width clearfix">
 		  	  	 <div class="fl"><img src="img/insetpic.png"></div>
 		  	  	 <div class="login-form fr">
-		  	  	 	<div class="form-item">
+		  	  	 	<div class="form-item user">
 		  	  	 		<label class="form_label">用户名</label>
 		  	  	 		<div class="form_input">
 		  	  	 			<input type="text"  v-model="ruleForm2.account" placeholder="请输入账号"  class="form_control">
+		  	  	 			<s v-show="clear"></s>
 		  	  	 		</div>
 		  	  	 	</div>
 		  	  	 	<div class="form-item">
@@ -43,7 +44,7 @@
 		  	  	 		<div class="m-prompt" v-show="logining">
 							<span><s></s>{{rules2.message}}</span>
 					    </div>
-		  	  	 		<a href="##">忘记密码</a>
+		  	  	 		<a href="##">忘记密码?</a>
 		  	  	 	</div>
 		  	  	 	<div class="m-btn">
 		  	  	 		<a href="javascript:;" @click="handleSubmit2" :loading="logining">登录</a>
@@ -60,16 +61,21 @@
 		new Vue({
 			el: "#app",
 			data: {
-		        logining: false,
+		        logining: true,
+		        clear:true,
 		        ruleForm2: {
 		          account: 'admin',
 		          checkPass: '123456'
 		        },
 		        rules2: {
-		         message: '请输入账号',
+		         message: '验证码不能为空',
 		        },
 		        checked: true
 		    },
+		    created () {
+		  	
+		  
+		   },
 		    methods: {
 		      handleReset2: function () {
 		        this.$refs.ruleForm2.resetFields();
@@ -100,7 +106,7 @@
 		                });
 		              } else {
 		                sessionStorage.setItem('user', JSON.stringify(user));
-		                window.location.href="index.html";
+		                window.location.href="base.html";
 		              }
 	              }
 		        }

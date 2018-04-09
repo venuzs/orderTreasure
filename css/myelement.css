@@ -9,9 +9,11 @@
 .content_item .input-select .el-input.el-input-group {
     width: 360px;
     vertical-align: middle;
+    box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
   }
 .content_item .el-input-group__append, .el-input-group__prepend {
 	width: 40px;
+	border-radius: 2px;
 }
 .content_item .el-input-group__append .el-button.el-button--default {
 	background-color: #fff;
@@ -34,6 +36,7 @@
 	padding: 10px 18px;
 	min-width: 100px;
 	color: #222;
+	border-radius: 2px;
 }
 .el-button+.el-button {
 	margin-left: 15px;
@@ -79,6 +82,7 @@
 }
 .z-tables .el-table th>.cell {
 	color: #666;
+	font-weight: 600;
 }
 .z-tables .el-button {
 	padding: 3px 18px;
@@ -170,6 +174,7 @@ td.el-table_2_column_15 .cell {
 
 .edit-input .el-input {
 	width: 360px;
+	box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
 }
 
 /*多选框*/
@@ -191,3 +196,31 @@ td.el-table_2_column_15 .cell {
 	color: #fff;
 }
 
+.el-input-group__append, .el-input-group__prepend {
+	border-radius: 2px;
+}
+
+.el-input__inner {
+	border-radius: 2px;
+}
+
+.btn-radid_none .el-input-group__append {
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.btn-radid_none .el-input--suffix {
+	box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
+}
+.edit-limit-info .el-checkbox__inner,
+.edit-limit .el-checkbox__inner{
+	width: 20px;
+	height: 20px;
+	border-color: #D7DADB;
+}
+.edit-limit-info .el-checkbox__inner::after,
+.edit-limit .el-checkbox__inner::after{
+	height: 10px;
+	left: 7px;
+	width: 5px;
+}
