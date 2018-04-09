@@ -17,32 +17,34 @@
 		<div class="main-content">
 			<div class="z-tabs">
 		 		<div class="z-tabs_header">
-		 			<div class="z-tabs_item is_active"><span>员工资料</span></div>
-		 			<div class="z-tabs_item"><span>角色权限</span></div>
-		 			<div class="z-tabs_item"><span>部门管理</span></div>
-		 			<div class="z-tabs_item"><span>登录日志</span></div>
-		 			<div class="z-pop_question">
-		  	 			<el-popover
-							  ref="popoverq"
-							  placement="bottom-start"
-							  width="400"
-							  trigger="hover">
-							  <p class="z-jiao">角色权限：每个角色可以设置不同的后台功能权限，比如：
-									业务员角色，仓库管理员角色，财务角色。然后账号关联
-									某个角色，就拥有该角色下的所有功能权限。
-									<a href="javascript:;">查看更多帮助</a>
-							  </p>
-							</el-popover>
-							
-							<i v-popover:popoverq class="el-icon-question"></i>
-		  	 		</div>
+		 			<div class="z-tabs_item is_active"><span class="item_span">员工资料</span></div>
+		 			<div class="z-tabs_item">
+		 				<span class="item_span">角色权限</span>
+		 				<div class="z-pop_question">
+			  	 			<el-popover
+								  ref="popoverq"
+								  placement="bottom-start"
+								  width="400"
+								  trigger="hover">
+								  <p class="z-jiao">角色权限：每个角色可以设置不同的后台功能权限，比如：
+										业务员角色，仓库管理员角色，财务角色。然后账号关联
+										某个角色，就拥有该角色下的所有功能权限。
+										<a href="javascript:;">查看更多帮助</a>
+								  </p>
+								</el-popover>
+								
+								<i v-popover:popoverq class="el-icon-question"></i>
+			  	 		</div>
+		 			</div>
+		 			<div class="z-tabs_item"><span class="item_span">部门管理</span></div>
+		 			<div class="z-tabs_item"><span class="item_span">登录日志</span></div>
 		 		</div>
 		 		
 		 		<div class="z-tabs_content">
 		 			<div class="content_item active"> <!--员工管理-->
 	 				<!--条件筛选-->
 	 					<div class="content_item_filter clearfix">
-		  	 				<div class="input-select fl">
+		  	 				<div class="input-select fl btn-radid_none">
 		  	 					<el-input placeholder="请输入内容" v-model="input4" class="minW40">
 								   <el-button slot="append" icon="el-icon-search"></el-button>
 								  </el-input>

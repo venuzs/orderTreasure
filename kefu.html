@@ -19,21 +19,40 @@
 			<div class="main-content">
 				<div class="z-tabs">
 					<div class="z-tabs_header">
-			 			<router-link class="z-tabs_item" to="/company"><span>公司资料</span></router-link>
-			 			<router-link class="z-tabs_item" to="/band"><span>品牌设置</span></router-link>
-			 			<router-link class="z-tabs_item" to="/realname"><span>实名认证</span></router-link>
-			 			<router-link class="z-tabs_item" v-bind:class="{'router-link-active': isInit}" to="/kefu"><span>客服设置</span></router-link>
-			 			<div class="z-pop_question" v-if="showTip">
-			  	 			<el-popover
-								  ref="popoverq"
-								  placement="bottom-start"
-								  width="440"
-								  trigger="hover">
-								  <p class="z-jiao" v-text="tipmegs"></p>
-								</el-popover>
-								
-								<i v-popover:popoverq class="el-icon-question"></i>
-			  	 		</div>
+			 			<router-link class="z-tabs_item" to="/company">
+			 				<span class="item_span">公司资料</span>
+			 			</router-link>
+			 			<router-link class="z-tabs_item" to="/band">
+			 				<span class="item_span">品牌设置</span>
+			 				<div class="z-pop_question">
+				  	 			<el-popover
+									  ref="popoverq"
+									  placement="bottom-start"
+									  width="440"
+									  trigger="hover">
+									  <p class="z-jiao">品牌设置：让你自己的订货平台更符合你们公司的品牌需要</p>
+									</el-popover>
+									
+									<i v-popover:popoverq class="el-icon-question"></i>
+				  	 		</div>
+			 			</router-link>
+			 			<router-link class="z-tabs_item" to="/realname">
+			 				<span class="item_span">实名认证</span>
+			 				<div class="z-pop_question">
+				  	 			<el-popover
+									  ref="popoverqs"
+									  placement="bottom-start"
+									  width="440"
+									  trigger="hover">
+									  <p class="z-jiao">实名认证：需上传完整证件，审核通过后才能开启全部功能限制</p>
+									</el-popover>
+									
+									<i v-popover:popoverqs class="el-icon-question"></i>
+				  	 		</div>
+			 			</router-link>
+			 			<router-link class="z-tabs_item" v-bind:class="{'router-link-active': isInit}" to="/kefu">
+			 				<span class="item_span">客服设置</span>
+			 			</router-link>
 			 		</div>
 				</div>
 				
@@ -91,7 +110,7 @@
 					  placement="right"
 					  width="400"
 					  trigger="hover">
-					  <div class="up-popoer">
+					  <div class="up-popoer z-pop_p">
 					  	<p>LOGO会展示到您的订货端，影响您的订货客户<br/> 请按照以下建议上传LOGO以达到最佳展示效果： </p>
 					  	<p>1、图片宽高：120px-520px，大小不超过6MB</p> 
 					  	<p>2、 支持JPG、PNG、JPEG </p> 
@@ -158,7 +177,7 @@
 				</div>
 				<div class="form-grom">
 					<label class="bandlabel">*专属访问网址</label>
-					<div class="band-ipt">
+					<div class="band-ipt templ-border">
 						<el-input placeholder="请输入内容" v-model="input4">
 						    <template slot="prepend">Http://</template>
 						    <template slot="append">.dhb168.com</template>
@@ -193,7 +212,7 @@
 						  placement="right"
 						  width="400"
 						  trigger="hover">
-						  <div class="up-popoer">
+						  <div class="up-popoer z-pop_p">
 						  	<p>LOGO会展示到您的订货端，影响您的订货客户<br/> 请按照以下建议上传LOGO以达到最佳展示效果： </p>
 						  	<p>1、图片宽高：120px-520px，大小不超过6MB</p> 
 						  	<p>2、 支持JPG、PNG、JPEG </p> 
@@ -445,16 +464,6 @@
 		},
 		watch: {
 			"$route": function (news, old) {
-				if(news.fullPath == '/realname') {
-					this.showTip = true;
-					this.tipmegs = '实名认证：需上传完整证件，审核通过后才能开启全部功能限制';
-				}else if (news.fullPath == '/band') {
-					this.showTip = true;
-					this.tipmegs = '品牌设置：让你自己的订货平台更符合你们公司的品牌需要';
-				}else {
-					this.showTip = false;
-					this.tipmegs = '';
-				}
 				
 				if(news.fullPath != '/kefu') {
 					this.isInit = false;
