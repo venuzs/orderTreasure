@@ -1,6 +1,6 @@
 
 *{box-sizing: border-box;}
-body{font:12px/1.5 "microsoft yahei",Arial, sans-serif;color:#697B8C;background-color:#f6f6f6;margin:0;padding:0;overflow-x: hidden;}
+body{font:12px/1.5 "microsoft yahei",Arial, sans-serif;color:#697B8C;background-color:#f6f6f6;margin:0;padding:0;/*overflow-x: hidden;*/}
 a{color:#666;text-decoration:none;}
 a:active,a:focus {text-decoration:none;color:#3366CC;}
 a:hover{text-decoration:none;color:#3366CC;}
@@ -125,8 +125,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .breadcrumb {
     float: left;
     font-size: 14px;
-    line-height: 22px;
-    padding-bottom: 8px;
+    margin-top: -10px;
+    line-height: 30px;
+    padding-bottom: 10px;
 }
 .breadcrumb span {
     padding: 0 5px;
@@ -148,6 +149,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     float: left;
     line-height: 40px;
     font-size: 16px;
+    font-weight: bold;
     color: #666;
 }
 .box .box-content {

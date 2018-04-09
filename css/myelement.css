@@ -33,6 +33,7 @@
 .el-button {
 	padding: 10px 18px;
 	min-width: 100px;
+	color: #222;
 }
 .el-button+.el-button {
 	margin-left: 15px;

@@ -193,7 +193,7 @@
 
 /*主体*/
 .main-content {
-	min-width: 1000px;
+	min-width: 1100px;
 	margin: 70px 20px 0 120px;
 	background: #FFFFFF;
 	box-shadow: 0 1px 2px 0 rgba(165,167,168,0.30);
@@ -681,6 +681,12 @@
 
 
 /*首页页面样式*/
+.indexbox .el-col-15 {
+	width: 62%;
+}
+.indexbox .el-col-9 {
+	width: 38%;
+}
 .timeout {
 	float: right;
 	line-height: 30px;
@@ -692,9 +698,10 @@
 	margin-top: -10px;
 }
 .timeout .el-button {
-	margin-left: 20px;
+	margin-left: 15px;
 	border-radius: 0;
 	padding: 7px 12px;
+	min-width: auto;
 }
 .ix-pengdlist1 li {
 	float: left;
@@ -706,7 +713,7 @@
 }
 .ix-pengdlist1 li strong {
 	display: block;
-	font-size: 40px;
+	font-size: 38px;
 	font-weight: normal;
 	color: #666;
 	line-height: 50px;
@@ -759,11 +766,13 @@
 	color: #999;
 }
 .in-companyleft .el-button {
-	margin-right: 20px;
 	padding: 7px 12px;
-	margin-left: 0;
 	border-radius: 2px;
 	min-width: auto;
+}
+.in-companyleft .el-button--default {
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.1);
+	box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.1);
 }
 .in-companyright {
 	float: right;
@@ -806,7 +815,7 @@
 }
 .in-momchart li .length {
 	display: block;
-	margin: 28px auto 17px;
+	margin: 25px auto 17px;
 	width: 100px;
 	height: 100px;
 	line-height: 76px;
@@ -864,11 +873,18 @@
 	border-radius: 50%;
 }
 .in-noticelist li h3 {
+	font-size: 13px;
 	line-height: 24px;
 	height: 24px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+.in-noticelist li h3 a {
+	color: #222;
+}
+.in-noticelist li h3 a:hover {
+	color: #36c;
 }
 .in-noticelist li p {
 	font-size: 12px;
@@ -894,29 +910,47 @@
 	line-height: 30px;
 	color: #999;
 }
+@media screen and (max-width: 1280px) {
+	.in-clientview dd {
+		font-size: 12px;
+	}
+}
 .in-clientview dd p {
 	color: #222;
 }
 .in-formgroup {
-	float: left;
-	width: 70%;
+	padding-right: 125px;
 	padding-top: 20px;
 	font-size: 14px;
 	color: #222;
 }
 .in-formgroup .form-group {
 	margin-bottom: 10px;
+	overflow: hidden;
+	padding: 0 47px 0 67px;
+}
+.in-formgroup .y_tit {
+	float: left;
+	width: 60px;
+	line-height: 40px;
+	margin-left: -100%;
+	position: relative;
+	left: -67px;
 }
 .in-formgroup .el-input__inner {
-	width: 50%;
+	float: left;
+	width: 100%;
 	border-radius: 0;
-	margin-left: 7px;
 }
 .in-formgroup .el-button {
+	float: left;
 	min-width: 40px;
 	padding: 5px 7px;
 	color: #222;
-	margin-left: 7px;
+	margin-top: 8px;
+	margin-left: -40px;
+	position: relative;
+	right: -47px;
 }
 .in-qrcodeshare {
 	float: right;
@@ -931,6 +965,7 @@
 	display: block;
 	width: 88px;
 	height: 88px;
+	margin: 0 auto;
 }
 .minW40 .el-input-group__append button{
 	min-width: 40px;

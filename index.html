@@ -18,7 +18,7 @@
 				<div class="indexbox" style="background-color: #F6F6F6;">
 					<!-- 面包屑导航 -->
 					<div class="clearfix">
-						<div class="breadcrumb">首页<span>&gt;</span>首页</div>
+						<div class="breadcrumb">首页<!-- <span>&gt;</span>首页 --></div>
 						<div class="timeout">
 							你的系统使用期限已经到期，请尽快续费购买，以免影响你的正常使用！
 							<el-button type="primary">续费购买</el-button>
@@ -106,19 +106,19 @@
 						  		<div class="box-content">
 						  			<ul class="in-noticelist">
 						  				<li>
-						  					<h3><a href="##">升级通知  2018-03-01 产品升级公告</a></h3>
+						  					<h3><a href="##">【升级通知】  2018-03-01 产品升级公告</a></h3>
 						  					<p>2018-03-03 08:24</p>
 						  				</li>
 						  				<li>
-						  					<h3><a href="##">2018-03-01 产品升级公告 升级通知</a></h3>
+						  					<h3><a href="##">【2018-03-01】 产品升级公告 升级通知，系统正式上线</a></h3>
 						  					<p>2018-03-03 08:24</p>
 						  				</li>
 						  				<li>
-						  					<h3><a href="##">2018-03-01 产品升级公告</a></h3>
+						  					<h3><a href="##">【2018-03-01】 产品升级公告，全网数商订货宝系统正式上线</a></h3>
 						  					<p>2018-03-03 08:24</p>
 						  				</li>
 						  				<li>
-						  					<h3><a href="##">升级通知  2018-03-01 产品升级公告</a></h3>
+						  					<h3><a href="##">【升级通知】  2018-03-01 产品升级公告</a></h3>
 						  					<p>2018-03-03 08:24</p>
 						  				</li>
 						  			</ul>
@@ -132,8 +132,8 @@
 							<!-- 业绩简报 -->
 						  	<div class="box">
 						  		<div class="box-title"><h2>业绩简报</h2></div>
-						  		<div class="box-content">
-						  			<div id="chart" style="height:265px;width:100%;overflow:hidden"></div>
+						  		<div class="box-content no-padding">
+						  			<div id="chart" style="height:280px;width:100%;overflow:hidden"></div>
 						  		</div>
 						  	</div><!-- 业绩简报 end -->
 						</el-col>
@@ -167,22 +167,22 @@
 						  	<div class="box">
 						  		<div class="box-title"><h2>邀请客户注册</h2></div>
 						  		<div class="box-content">
-						  			<div class="in-formgroup">
-						  				<div class="form-group">
-						  					电脑访问
-						  					<input type="text" name="" class="el-input__inner" value="https://manager.dhb168.co">
-						  					<el-button size="mini">复制</el-button>
-						  				</div>
-						  				<div class="form-group">
-						  					手机访问
-						  					<input type="text" name="" class="el-input__inner" value="https://manager.dhb168.co">
-						  					<el-button size="mini">复制</el-button>
-						  				</div>
-						  			</div>
 						  			<span class="in-qrcodeshare">
 						  				<img src="img/erweima.png">
 						  				二维码分享
 						  			</span>
+						  			<div class="in-formgroup">
+						  				<div class="form-group">
+						  					<input type="text" name="" class="el-input__inner" value="https://manager.dhb168.co">
+						  					<span class="y_tit">电脑访问</span>
+						  					<el-button size="mini">复制</el-button>
+						  				</div>
+						  				<div class="form-group">
+						  					<input type="text" name="" class="el-input__inner" value="https://manager.dhb168.co">
+						  					<span class="y_tit">手机访问</span>
+						  					<el-button size="mini">复制</el-button>
+						  				</div>
+						  			</div>
 						  		</div>
 						  	</div><!-- 邀请客户注册 end -->
 						</el-col>
@@ -207,7 +207,7 @@
 			      var myChart = echarts.init(document.getElementById('chart')),
 				    option = {
 				        legend: {
-				            top: '26',
+				            top: '16',
 				            left: 'center',
 				            textStyle: {
 				                color: '#222',
@@ -260,13 +260,13 @@
 					                color: '#222',
 					                fontSize: "14"
 					            },
+					            nameGap: 25,
 					            position: 'left',
 					            axisLine: {
 					                lineStyle: {
 					                    color: '#8CA0B3'
 					                }
 					            },
-		
 					            axisLabel: {
 					                textStyle: {
 					                    color: '#697B8C'
@@ -285,13 +285,13 @@
 				                    color: '#222',
 				                    fontSize: "14"
 				                },
+				                nameGap: 25,
 				                position: 'right',
-				                 axisLine: {
+				                axisLine: {
 					                lineStyle: {
 					                    color: '#8CA0B3'
 					                }
 					            },
-		
 					            axisLabel: {
 					                textStyle: {
 					                    color: '#697B8C'
