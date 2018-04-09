@@ -225,3 +225,10 @@ td.el-table_2_column_15 .cell {
 	left: 7px;
 	width: 5px;
 }
+.z-tables .z-opt_btn .el-button {
+	min-width: auto;
+	font-size: 14px;
+}
+.z-opt_btn {
+	text-align: center !important;
+}

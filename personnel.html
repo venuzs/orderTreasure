@@ -45,11 +45,11 @@
 	 				<!--条件筛选-->
 	 					<div class="content_item_filter clearfix">
 		  	 				<div class="input-select fl btn-radid_none">
-		  	 					<el-input placeholder="请输入内容" v-model="input4" class="minW40" >
+		  	 					<el-input placeholder="请输入内容" v-model="input4" class="minW40 z_input-holder" >
 								   <el-button slot="append" icon="el-icon-search"></el-button>
 								  </el-input>
 								  
-								  <el-select v-model="valueId" clearable placeholder="身份">
+								  <el-select v-model="valueId" clearable placeholder="身份" class="z_select-holder">
 								    <el-option
 								      v-for="(item,index) in optionsId"
 								      :key="index"
@@ -58,7 +58,7 @@
 								    </el-option>
 								  </el-select>
 								  
-								  <el-select v-model="valueState" clearable placeholder="状态" @change="change">
+								  <el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
 								    <el-option
 								      v-for="(item,index) in optionsState"
 								      :key="index"
@@ -75,9 +75,14 @@
 		 				<!--主体表格-->
 		 				<div class="z-tables">
 			 				<el-table :data="tableData3" style="width: 100%;">
-			 					<el-table-column fixed  prop="no" label="" min-width="60"></el-table-column>
+			 					<el-table-column fixed  prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
 			 					
-							    <el-table-column fixed  prop="login" label="登录账号" min-width="140"></el-table-column>
+							    <el-table-column fixed  label="登录账号" min-width="140">
+							    	<template scope="scope">
+								       <span>{{scope.row.login}}</span>
+								       <label class="z-creater" v-if="scope.row.isCreater">创建者</label>
+							      	</template>
+							    </el-table-column>
 							    
 							    <el-table-column prop="uid" label="身份" min-width="130"></el-table-column>
 							    
@@ -93,7 +98,7 @@
 							    
 							    <el-table-column prop="jion" label="邀请码" min-width="140"> </el-table-column>
 							    
-							    <el-table-column fixed="right" prop="remarks" label="备注" min-width="110"> </el-table-column>
+							    <el-table-column fixed="right" prop="remarks" label="备注" min-width="110" class-name="z-opt_btn"> </el-table-column>
 							    
 							    
 							</el-table>
@@ -122,57 +127,36 @@
 		  	 					<el-button type="primary">新增权限</el-button>
 		  	 				</div>
 		 				</div>
-		 				<div class="z-tables fixed-table">
-		 					<!--<el-table :data="tableData" style="width: 100%"  @current-change="handleCurrentTable">
+		 				<div class="z-tables">
+		 					<el-table :data="tableData" style="width: 100%"  @current-change="handleCurrentTable">
 		 						
-		 						<el-table-column fixed prop="no" label="" min-width="60"></el-table-column>
+		 						<el-table-column fixed prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
 		 						
-		    					<el-table-column fixed prop="name" label="名称" min-width="220"></el-table-column>
+		    					<el-table-column fixed label="名称" min-width="220">
+		    						<template scope="scope">
+								       <span>{{scope.row.name}}</span>
+								       <label class="z-creater" v-if="scope.row.isCreater">创建者</label>
+							      	</template>
+		    					</el-table-column>
 		    					
 		    					<el-table-column prop="limit" label="权限" min-width="480"></el-table-column>
 		    					
 		    					<el-table-column prop="reget" label="更新时间" min-width="200"></el-table-column>
 		    
-		    					<el-table-column fixed="right" prop="op" label="操作" min-width="120"></el-table-column>
-							</el-table>-->
+		    					<el-table-column fixed="right" label="操作" min-width="120" class-name='z-opt_btn'>
+		    						<template scope="scope">
+								      	<div v-if="scope.row.options">
+									        <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small" title="编辑">编辑</el-button>
+									        <span class="fz_c optionline"> | </span>
+									         <el-button @click.native.prevent="handleDelete(scope.$index, scope.row)" type="text" size="small" title="删除">删除</el-button>
+								         </div>
+								         <div v-if="scope.row.super1">
+								         	<span class="fc_999">内置</span>
+								         </div>	
+								      </template>
+		    					</el-table-column>
+							</el-table>
 							
-							<div class="normal_table">
-								<table border="0" cellspacing="0" cellpadding="0" class="tableClone">
-									<thead>
-										<tr>
-											<th class="th1" min-width="60"></th>
-											<th class="th2" min-width="220">名称</th>
-											<th class="th3" min-width="480">权限</th>
-											<th class="th4" min-width="200">更新时间</th>
-											<th class="th5" min-width="120">操作</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="(item, index) in tableData" :key="index">
-											<td class="text-c">{{item.no}}</td>
-											<td>{{item.name}} <label v-if="item.no == 1">创建者</label></td>
-											<td>{{item.limit}}</td>
-											<td>{{item.reget}}</td>
-											<td class="text-c">
-												<div class="z-option" v-if="item.options">
-													<a href="edit.html" title="编辑">编辑</a>
-													<span> | </span>
-													<a href="javascript:;" title="删除">删除</a>
-												</div>
-												<p v-if="item.super" style="color: #999;">内置</p>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						<div class="left_table" :class="{'shadow': isLeft}">
-							
-						</div>
-						<div class="right_table" :class="{'shadow': isRight}">
-							<div class="right_pos">
-								
-							</div>
-						</div>
 		 				</div>	
 	 				</div>	
 	 				
@@ -186,10 +170,26 @@
 <script src="js/jquery.min.js"></script>	
 <script>
 	
+	//输入框 placeholder
+  	var zPlaceholder = {
+  		selects: function (ele) {
+  			var selects = document.querySelectorAll(ele); 
+		  	for(var i = 0, len = selects.length; i < len; i++ ) {
+		  		selects[i].children[0].children[0].placeholder = selects[i].__vue__.placeholder;
+		  	}
+  		},
+  		inputs: function (ele) {
+  			var inputs = document.querySelectorAll(ele); 
+		  	for(var j = 0, leng = inputs.length; j < leng; j++ ) {
+		  		inputs[j].children[0].placeholder = inputs[j].attributes.placeholder.value;
+		  	}
+  		}
+  	}
+	
 	new Vue({
 		el: "#app",
 		data: {
-			input4: '请输入内容',
+			input4: '',
 		    optionsId: ['普通员工','管理人员'], //select下拉选项
 		    optionsState: ['启用','激活'],
 		    valueId: '',
@@ -205,7 +205,8 @@
 	         	 zip: 200333,
 	          	part:'研发人员',
 	          	jion: 'YQM2453',
-	          	remarks: '—'
+	          	remarks: '—',
+	          	isCreater: true
 	          
 	        	}, {
 	        	no: '2',
@@ -218,15 +219,13 @@
 	          	zip: 200333,
 	          	part:'研发人员',
 	          	jion: 'YQM2453',
-	          	remarks: '—'
+	          	remarks: '—',
+	          	isCreater: false
 	        }],
 	        
 	        currentPage4: 4, //当前页码数
 	        
 	        act: 0, //tab选项
-	        
-	        isLeft: false, //左右阴影
-	        isRight: false,
 	        
 	        tableData: [{
 	      	  no: '1',
@@ -234,24 +233,24 @@
 	          limit: '订单、商品、客户、资金、报表',
 	          reget: '2017-12-12 12:00:00',
 	          options: true,
-	          super: false,
-	          op: "编辑233"
+	          super1: false,
+	          isCreater: true
 	        }, {
 	        	no: '2',
 	          name: '仓库管理员',
 	          limit: '客户、资金、报表',
 	          reget: '2017-12-12 12:00:00',
 	          options: true,
-	          super: false,
-	          op: "编辑233"
+	          super1: false,
+	          isCreater: false
 	        }, {
 	        	no: '3',
 	          name: '超级管理员',
 	          limit: '客户',
 	          reget: '2017-12-12 12:00:00',
 	          options: false,
-	          super: true,
-	          op: "编辑233"
+	          super1: true,
+	          isCreater: false
 	        }],  
 		},
 		methods: {
@@ -267,8 +266,15 @@
 		        console.log("当前页: "+ val);
 		    },
 		    handleCurrentTable: function (val) {
-		    	window.location.href = 'edit.html?no='+val.no;
-		    }
+		    	//window.location.href = 'edit.html?no='+val.no;
+		    },
+		    //编辑、删除
+		    handleEdit: function (index, row) {
+		        console.log(index, row);
+		    },
+	     	handleDelete: function (index, row) {
+	       	 	console.log(index, row);
+	      	}
 		},
 		mounted: function () {
 			var _this = this;
@@ -284,92 +290,9 @@
 	  		}
 		  	});
 		  	
-		  	//输入框playhold
-//		  	console.log(this.$refs.inputbox.);
-		  	
-		  	
-		  	//复制
-		  	var tabC = $('.tableClone').clone(true);
-		  	$('.left_table').append(tabC);
-		  	
-		  	var tabC1 = $('.tableClone').eq(0).clone(true);
-		  	$('.right_pos').append(tabC1);
-		  	
-		  	//高亮
-		  	$('.fixed-table tr').hover(function () {
-		  		var index = $(this).index();
-		  		var nextInd = index + 1;
-		  		$('.normal_table tr').eq(nextInd).addClass('on');
-		  		$('.left_table tr').eq(nextInd).addClass('on');
-		  		$('.right_pos tr').eq(nextInd).addClass('on');
-		  	}, function () {
-		  		$('.normal_table tr').removeClass('on');
-		  		$('.right_pos tr').removeClass('on');
-		  		$('.left_table tr').removeClass('on');
-		  	});
-		  	
-		  	$('.fixed-table thead').hover(function () {
-		  		$('.normal_table tr').removeClass('on');
-		  		$('.right_pos tr').removeClass('on');
-		  		$('.left_table tr').removeClass('on');
-		  	});
-		  	
-		  	
-			//表格
-            var allW = $('.content_item.active').width();
-
-			var totW = 0;
-			$('.normal_table th').each(function (i,v) {
-				totW += parseFloat($(v).attr('min-width'));
-			});
-			//console.log(totW);
-			var lRate =( parseFloat($('.th1').attr('min-width')) + parseFloat($('.th2').attr('min-width')) ) / totW;
-			var rRate = parseFloat($('.th6').attr('min-width')) / totW;
-			
-			window.onresize = function () {
-				var scollW = $('.content_item.active').width();
-				computW(scollW);
-			}
-			
-			var computW = function (allW) {
-				if(allW >= totW) {
-					totW = allW;
-					_this.isRight = false;
-				}else {
-					var Long = totW - allW;
-					_this.isRight = true;
-				}
-				
-				$('.normal_table table').width(totW);
-				$('.right_table table').width(totW);
-				$('.left_table table').width(totW);
-				
-				
-				var rW = totW * rRate + 2;
-			  	$('.right_table').width(rW);
-			  	var lW = totW * lRate - 2;
-			  	$('.left_table').width(lW);
-				
-				var sL;
-				$('.normal_table').scroll(function (e) {
-					sL = Math.ceil(e.target.scrollLeft);
-//					console.log(sL +"___"+Long);
-					if(sL > 0) {
-						_this.isRight = true;
-						_this.isLeft = true;
-					}
-					if(sL == 0) {
-						_this.isLeft = false;
-					}
-					if((sL+2) >= Long) {
-						_this.isRight = false;
-						_this.isLeft = true;	
-					}
-				});
-			}
-			
-			computW(allW);
-			
+		  	//placeholder
+		  	zPlaceholder.selects('.z_select-holder');
+		  	zPlaceholder.inputs('.z_input-holder');
 		},
 	});
 </script>

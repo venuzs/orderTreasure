@@ -136,31 +136,33 @@
 					<el-button type="primary">新增客服/联系方式</el-button>
 				</div>
 			</div>
-			<div class="z-tables has_option">
-				<table border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<th class="text-c" width="5%"></th>
-						<th width="17%">类型</th>
-						<th width="19%">名称</th>
-						<th width="24%">号码</th>
-						<th width="23.8%">排序值</th>
-						<th class="text-c">操作</th>
-					</tr>
-					<tbody>
-					<tr v-for="(item,index) in itemes" :key="index">
-						<td class="text-c">{{item.no}}</td>
-						<td>{{item.type}}</td>
-						<td>{{item.name}}</td>
-						<td>{{item.number}}</td>
-						<td>{{item.sort}}</td>
-						<td class="text-c">
-							<a href="javascript:;" class="revise" title="修改">修改</a>
-							<span>|</span>
-							<a href="javascript:;" class="delete" title="删除">删除</a>
-						</td>
-					</tr>
-					</tbody>
-				</table>
+			<div class="z-tables">
+		
+				<el-table :data="itemes" style="width: 100%"  @current-change="handleCurrentTable">
+		 						
+					<el-table-column fixed prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
+					
+					<el-table-column fixed label="类型" min-width="200">
+						<template scope="scope">
+					       <span>{{scope.row.type}}</span>
+					       <label class="z-creater" v-if="scope.row.isCreater">创建者</label>
+				      	</template>
+					</el-table-column>
+					
+					<el-table-column prop="name" label="名称" min-width="300"></el-table-column>
+					
+					<el-table-column prop="number" label="号码" min-width="200"></el-table-column>
+					
+					<el-table-column prop="sort" label="排序值" min-width="200"></el-table-column>
+
+					<el-table-column fixed="right" label="操作" min-width="120" class-name='z-opt_btn'>
+						<template scope="scope">
+					        <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small" title="修改">修改</el-button>
+					        <span class="fz_c optionline"> | </span>
+					        <el-button @click.native.prevent="handleDelete(scope.$index, scope.row)" type="text" size="small" title="删除">删除</el-button>
+				      	</template>
+					</el-table-column>
+				</el-table>
 			</div>
 		</div>
 	</template>
@@ -355,25 +357,25 @@
 			}
 		},
 		 methods: {
-	      handleAvatarSuccess(res, file) {
-	        this.imageUrl = URL.createObjectURL(file.raw);
-	      },
-	      handleIdSuccess(res, file) {
-	        this.imgIdUrl = URL.createObjectURL(file.raw);
-	      },
-	      beforeAvatarUpload(file) {
-	        var isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
-	        var isLt2M = file.size / 1024 / 1024 < 6;
-	        console.log(file);
-	
-	        if (!isJPG) {
-	          this.$message.error('上传头像图片只能是 JPG、PNG 格式!');
-	        }
-	        if (!isLt2M) {
-	          this.$message.error('上传头像图片大小不能超过 6MB!');
-	        }
-	        return isJPG && isLt2M;
-	      }
+		    handleAvatarSuccess: function(res, file) {
+		        this.imageUrl = URL.createObjectURL(file.raw);
+		   	},
+		    handleIdSuccess: function (res, file) {
+		        this.imgIdUrl = URL.createObjectURL(file.raw);
+		    },
+		    beforeAvatarUpload: function (file) {
+		        var isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
+		        var isLt2M = file.size / 1024 / 1024 < 6;
+		        console.log(file);
+		
+		        if (!isJPG) {
+		          this.$message.error('上传头像图片只能是 JPG、PNG 格式!');
+		        }
+		        if (!isLt2M) {
+		          this.$message.error('上传头像图片大小不能超过 6MB!');
+		        }
+		        return isJPG && isLt2M;
+		    }
 	    }  
 	});
 	
@@ -383,13 +385,26 @@
 		data: function () {
 			return {
 				itemes: [
-				{no: 1, type: '个人QQ',name: '店小二',number: '546344534',sort: '1'},
-				{no: 2, type: '微信群',name: '店小二',number: '546344534',sort: '2'},
-				{no: 3, type: '个人QQ',name: '店小二',number: '546344534',sort: '3'},
-				{no: 4, type: '微信群',name: '店小二',number: '54634',sort: '4'},
+				{no: 1, type: '个人QQ',name: '店小二',number: '546344534',sort: '1',isCreater: true},
+				{no: 2, type: '微信群',name: '店小二',number: '546344534',sort: '2',isCreater: false},
+				{no: 3, type: '个人QQ',name: '店小二',number: '546344534',sort: '3',isCreater: false},
+				{no: 4, type: '微信群',name: '店小二',number: '54634',sort: '4',isCreater: false},
 				]
 			}
-		}
+		},
+		methods: {
+			handleCurrentTable: function (val) {
+		    	//window.location.href = 'edit.html?no='+val.no;
+		    },
+		    //编辑、删除
+		    handleEdit: function (index, row) {
+		        console.log(index, row);
+		    },
+		 	handleDelete: function (index, row) {
+		   	 	console.log(index, row);
+		  	},
+		  	
+		},
 	});
 	
 	//品牌设置
@@ -404,10 +419,10 @@
 			}
 		},
 		methods: {
-			handleLogoSuccess(res, file) {
+			handleLogoSuccess: function (res, file) {
 	        this.imgIdUrl = URL.createObjectURL(file.raw);
 	      },
-	      beforeAvatarUpload(file) {
+	      beforeAvatarUpload: function (file) {
 	        var isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
 	        var isLt2M = file.size / 1024 / 1024 < 6;
 	        console.log(file);

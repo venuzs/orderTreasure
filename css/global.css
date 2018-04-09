@@ -31,6 +31,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .fz_c {
 	color: #3366CC; /*字体颜色*/
 }
+.fc_999 {
+	color: #999;
+}
 /*多选框覆盖*/
 .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
 	background-color: #fff;

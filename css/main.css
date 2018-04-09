@@ -473,45 +473,6 @@
 		border-radius: 4px ; 
 	}
 
-
-/*客服设置表格*/
-.has_option {
-	border-bottom: 1px solid #DBDBDB;
-}
-.has_option table {
-	width: 100%;
-	font-size: 14px;
-	color: #666;
-}
-.has_option table th {
-	text-align: left;
-	height:50px; 
-	background:rgba(250,252,252,1);
-	line-height: 50px;
-	font-weight: 600;
-}
-.has_option table th.text-c,
-.has_option table td.text-c {
-	text-align: center;
-}
-.has_option table td {
-	height: 49px;
-	padding: 13px 0;
-	border-top: 1px solid #DBDBDB;
-	line-height: 24px;
-	font-size: 14px;
-}
-.has_option table td a,
-.has_option table td span {
-	color: #3366CC;
-}
-.has_option table td span {
-	padding: 0 4px;
-}
-.has_option table tbody tr:hover {
-	background-color: #ecf5ff;
-}
-
 /*实名上传*/
 .realname {
 	padding: 15px 20px;
@@ -1025,108 +986,25 @@
 	min-width: 40px;
 }
 
-.fixed-table {
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-	box-sizing: content-box;
-}
-.fixed-table,
-.fixed-table table {
-	color: #222;
-}
-
-.fixed-table td {
-	padding: 12px 0;
-	 line-height: 24px;
-	 background-color: #fff;
-	 font-size: 14px;
-	 border-bottom: 1px solid #DBDBDB;
-	 height: 48px;
-}
-.fixed-table tbody tr.on td {
-	background-color: #ECF5FF;
-}
-.fixed-table td.text-c {
-	text-align: center;
-}
-.fixed-table td label {
-	display: inline-block;
-	line-height: 20px;
-	padding: 0 10px;
-	border-radius: 12px;
-	border: 1px solid #3366CC;
-	color: #3366CC;
-	font-size: 12px;
-	margin-left: 10px;
-}
 .z-option a, .z-option span {
 	color: #3366CC;
-}
-.fixed-table th {
-	height: 48px;
-	padding: 12px 0;
-	white-space: nowrap;
-    overflow: hidden;
-    user-select: none;
-    text-align: left;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
-    background-color: #FAFCFC;
-    color: #666;
-    border-bottom: 1px solid #DBDBDB;
-}
-.fixed-table .th1 {
-	min-width: 60px;
-	text-align: center;
-}
-.fixed-table .th2 {
-	min-width: 220px;
-}
-.fixed-table .th3 {
-	min-width: 480px;
-}
-.fixed-table .th4 {
-	min-width: 200px;
-}
-.fixed-table .th5 {
-	min-width: 120px;
-	text-align: center;
-}
-.fixed-table .th6 {
-	min-width: 120px;
-	text-align: center;
-}
-.fixed-table .normal_table {
-	width: 100%;
-	overflow-x: auto;
-	position: relative;
-}
-
-.fixed-table .left_table {
-	position: absolute;
-	top: 0;
-	left: 0;
-	overflow: hidden;
-}
-.fixed-table .right_table {
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 3;
-	overflow: hidden;
-}
-.fixed-table  .right_pos {
-	position: absolute;
-	top: 0;
-	right: 0;
-	
-}
-.fixed-table .shadow {
-	box-shadow: 0 0 10px rgba(0,0,0,.2);
 }
 
 .z-option span {
 	padding: 0 4px;
+}
+.optionline {
+	padding: 0 4px;
+}
+
+.z-creater {
+	display: inline-block;
+	height: 22px;
+	line-height: 20px;
+	font-size: 14px;
+	color: #3366CC;
+	padding: 0 10px;
+	border: 1px solid #3366CC;
+	border-radius: 11px;
+	margin-left: 6px;
 }
