@@ -15,15 +15,15 @@
 	<body>
 		<div id="app">
 			<!--主体-->
-			<div class="main-content">
+			<div class="main-content" style="box-shadow: none;">
 				<div class="edit">
 					<transition name="fade"
 					            mode="out-in">
 					<section>           
-						<el-breadcrumb separator-class="el-icon-arrow-right">
-						  <el-breadcrumb-item :to="{ path: '/personnel' }">角色权限</el-breadcrumb-item>
-						  <el-breadcrumb-item >编辑权限组</el-breadcrumb-item>
-						</el-breadcrumb>
+						<!-- 面包屑导航 -->
+						<div class="clearfix">
+							<div class="breadcrumb">角色权限<span>&gt;</span>编辑权限组</div>
+						</div><!-- 面包屑导航 end -->
 						<div class="edit-warp">
 							<div class="edit-input">
 								<label>角色名称</label>

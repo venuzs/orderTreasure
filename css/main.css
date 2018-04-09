@@ -287,8 +287,9 @@
 }
 .edit-warp {
 	background-color: #fff;
-	margin-top: 8px;
+	/*margin-top: 8px;*/
 	padding: 20px;
+	box-shadow: 0 1px 2px 0 rgba(165,167,168,0.30);
 }
 .edit-input {
 	padding-bottom: 20px;
