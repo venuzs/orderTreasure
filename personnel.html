@@ -45,7 +45,7 @@
 	 				<!--条件筛选-->
 	 					<div class="content_item_filter clearfix">
 		  	 				<div class="input-select fl btn-radid_none">
-		  	 					<el-input placeholder="请输入内容" v-model="input4" class="minW40">
+		  	 					<el-input placeholder="请输入内容" v-model="input4" class="minW40" >
 								   <el-button slot="append" icon="el-icon-search"></el-button>
 								  </el-input>
 								  
@@ -189,7 +189,7 @@
 	new Vue({
 		el: "#app",
 		data: {
-			input4: '',
+			input4: '请输入内容',
 		    optionsId: ['普通员工','管理人员'], //select下拉选项
 		    optionsState: ['启用','激活'],
 		    valueId: '',
@@ -283,6 +283,9 @@
 	  			$('.right_table').height(tableH);
 	  		}
 		  	});
+		  	
+		  	//输入框playhold
+//		  	console.log(this.$refs.inputbox.);
 		  	
 		  	
 		  	//复制
