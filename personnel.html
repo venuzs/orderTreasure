@@ -17,7 +17,7 @@
 		<div class="main-content">
 			<div class="z-tabs">
 		 		<div class="z-tabs_header">
-		 			<div class="z-tabs_item is_active"><span class="item_span">员工资料</span></div>
+		 			<div class="z-tabs_item "><span class="item_span">员工资料</span></div>
 		 			<div class="z-tabs_item">
 		 				<span class="item_span">角色权限</span>
 		 				<div class="z-pop_question">
@@ -36,12 +36,25 @@
 								<i v-popover:popoverq class="el-icon-question"></i>
 			  	 		</div>
 		 			</div>
-		 			<div class="z-tabs_item"><span class="item_span">部门管理</span></div>
-		 			<div class="z-tabs_item"><span class="item_span">登录日志</span></div>
+		 			<div class="z-tabs_item">
+		 				<span class="item_span">部门管理</span>
+		 				<div class="z-pop_question">
+			  	 			<el-popover
+								  ref="popoverb"
+								  placement="bottom-start"
+								  width="400"
+								  trigger="hover">
+								  <p class="z-jiao">设置公司部门划分，比如：销售1部 销售2部 仓管部 </br>1、可以拖动某条内容上下移动修改顺序；</br> 2、修改请勿忘保存</p>
+								</el-popover>
+								
+								<i v-popover:popoverb class="el-icon-question"></i>
+			  	 		</div>
+		 			</div>
+		 			<div class="z-tabs_item is_active"><span class="item_span">登录日志</span></div>
 		 		</div>
 		 		
 		 		<div class="z-tabs_content">
-		 			<div class="content_item active"> <!--员工管理-->
+		 			<div class="content_item"> <!--员工管理-->
 	 				<!--条件筛选-->
 	 					<div class="content_item_filter clearfix">
 		  	 				<div class="input-select fl btn-radid_none">
@@ -160,9 +173,234 @@
 		 				</div>	
 	 				</div>	
 	 				
+	 				<div class="content_item"> <!--部门管理-->
+	 					
+	 					<div class="main_cont" v-show="!showChoice">
+		 					<div class="content_item_filter clearfix">
+		 						<div class="department clearfix fl">
+		 						 <h2>武汉分公司</h2>
+		 						 <a href="javascript:;" @click="changePart">切换 > </a>
+		 						</div>
+			  	 				<div class="filter-btn fr">
+			  	 					<el-button type="primary" @click="showDailog">新增部门</el-button>
+			  	 				</div>
+			 				</div>
+			 				<div class="drag_tree" >
+			 					<div class="drag_dd">
+			 						<ol class="dd_list">
+			 							<li>
+				 							<a href="javascript:;" class="open" data-flag='true'> + </a>
+				 							<div class="dd_cont clearfix">
+				 								<p class="fl">产品部</p>
+				 								<div class="dd_option fr"> 
+				 									<button>新建子部门</button>
+				 									<span>|</span>
+				 									<button>编辑</button>
+				 									<span>|</span>
+				 									<button>删除</button>
+				 								</div>
+				 							</div>
+				 							<ol class="dd_list">
+				 								<li>
+				 									<a href="javascript:;" class="open" data-flag='true'> + </a>
+						 							<div class="dd_cont clearfix">
+						 								<p class="fl">产品部</p>
+						 								<div class="dd_option fr"> 
+						 									<button>新建子部门</button>
+						 									<span>|</span>
+						 									<button>编辑</button>
+						 									<span>|</span>
+						 									<button>删除</button>
+						 								</div>
+						 							</div>
+						 							<ol class="dd_list">
+						 								<li>
+						 									<a href="javascript:;" class="nomore"></a>
+								 							<div class="dd_cont clearfix">
+								 								<p class="fl">产品部</p>
+								 								<div class="dd_option fr"> 
+								 									<button>新建子部门</button>
+								 									<span>|</span>
+								 									<button>编辑</button>
+								 									<span>|</span>
+								 									<button>删除</button>
+								 								</div>
+								 							</div>
+						 								</li>
+						 								<li>
+						 									<a href="javascript:;" class="nomore"></a>
+								 							<div class="dd_cont clearfix">
+								 								<p class="fl">产品部</p>
+								 								<div class="dd_option fr"> 
+								 									<button>新建子部门</button>
+								 									<span>|</span>
+								 									<button>编辑</button>
+								 									<span>|</span>
+								 									<button>删除</button>
+								 								</div>
+								 							</div>
+						 								</li>
+						 								<div class="leftLine"></div>
+						 							</ol>
+				 								</li>
+				 								<li>
+				 									<a href="javascript:;" class="nomore"></a>
+						 							<div class="dd_cont clearfix">
+						 								<p class="fl">产品部</p>
+						 								<div class="dd_option fr"> 
+						 									<button>新建子部门</button>
+						 									<span>|</span>
+						 									<button>编辑</button>
+						 									<span>|</span>
+						 									<button>删除</button>
+						 								</div>
+						 							</div>
+				 								</li>
+				 								<div class="leftLine"></div>
+				 							</ol>
+			 							</li>
+			 							<li>
+				 							<a href="javascript:;"> + </a>
+				 							<div class="dd_cont clearfix">
+				 								<p class="fl">产品部</p>
+				 								<div class="dd_option fr"> 
+				 									<button>新建子部门</button>
+				 									<span>|</span>
+				 									<button>编辑</button>
+				 									<span>|</span>
+				 									<button>删除</button>
+				 								</div>
+				 							</div>
+			 							</li>
+			 							<div class="leftLine"></div>
+			 						</ol>
+			 					</div>
+			 				</div>
+		 					<div class="bottom-butn">
+								 <el-button type="primary">保存部门设置</el-button>
+								  <el-button>取消</el-button>
+							</div>
+						</div>
+						<div class="depart_check" v-show="showChoice">
+							<div class="departes">
+								<a href="javascript:;">武汉分公司</a>
+								<a href="javascript:;">合肥分公司</a>
+								<a href="javascript:;">厦门分公司</a>
+								<a href="javascript:;">南京分公司</a>
+								<a href="javascript:;">郑州分公司</a>
+								<a href="javascript:;">北京分公司</a>
+								<a href="javascript:;">雄安分公司</a>
+								<a href="javascript:;">深圳分公司</a>
+								<span>新增组织 <i> + </i></span>
+							</div>
+							<div class="bottom-butn">
+								 <el-button type="primary">确定</el-button>
+								  <el-button @click="hideChoice">取消</el-button>
+							</div>
+						</div>
+	 						
+	 				</div>
+	 				
+	 				<div class="content_item active"> <!--登录日志-->
+	 					<!--条件筛选-->
+	 					<div class="content_item_filter clearfix">
+		  	 				<div class="input-select fl btn-radid_none">
+		  	 					<el-input placeholder="账号搜索" v-model="input4" class="minW40 z_input-holder" >
+								   <el-button slot="append" icon="el-icon-search"></el-button>
+								  </el-input>
+								<div class="data-picker clearfix">  
+								<el-date-picker
+								    v-model="bValue"
+								    type="date"
+								    placeholder="开始日期" class="z_input-holder">
+								</el-date-picker>
+								<div class="center-line"></div>
+								<el-date-picker
+								    v-model="eValue"
+								    type="date"
+								    placeholder="截至日期" class="z_input-holder">
+								</el-date-picker>
+								</div>  
+								  <el-select v-model="valueState" clearable placeholder="管理端用户" @change="change" class="z_select-holder">
+								    <el-option
+								      v-for="(item,index) in optionsState"
+								      :key="index"
+								      :label="item"
+								      :value="item">
+								    </el-option>
+								  </el-select>
+		  	 				</div>
+		 				</div>
+		 				
+		 				<!--主体表格-->
+		 				<div class="z-tables">
+			 				<el-table :data="tableData4" style="width: 100%;">
+			 					<el-table-column fixed  prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
+			 					
+							    <el-table-column fixed prop="timer" label="时间" min-width="140"></el-table-column>
+							    
+							    <el-table-column prop="login" label="登录账号" min-width="130"></el-table-column>
+							    
+							    <el-table-column prop="name" label="姓名" min-width="110"></el-table-column> 
+							    
+							    <el-table-column prop="area" label="地区" min-width="150" class-name="z-opt_btn"> </el-table-column>
+							    
+							    <el-table-column prop="ip" label="IP" min-width="130" class-name="z-opt_btn"> </el-table-column>
+							    
+							    <el-table-column prop="devic" label="设备" min-width="140" class-name="z-opt_btn"> </el-table-column>
+							    
+							</el-table>
+							  
+			 			</div>
+			 			
+			 			<!--分页-->
+			 			<div class="grid-content">
+		  	 				<div class="bg-purple-light">
+							    <el-pagination
+							    	@size-change="handleSizeChange"
+		     						 @current-change="handleCurrentChange"
+		     						 :current-page="currentPage4"
+							      :page-sizes="[5, 10, 20, 30]"
+							      :page-size="5"
+							       layout="total, sizes, prev, pager, next"
+							      :total="100">
+							    </el-pagination>
+						  	</div>
+		 				</div>
+	 				</div>
 		 		</div>	
 		  	 </div>
 		</div>
+		
+		<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
+        <div class="el-message-box__wrapper m_seniorscreen" v-show="dialogFormVisible" style="display: none;">
+        	<div class="el-message-box">
+        		<div class="el-message-box__header">
+           	      <div class="el-message-box__title"><span>新增部门</span></div>
+           	      <button type="button" @click="dislogHide" class="el-message-box__headerbtn"><i class="el-message-box__close el-icon-close"></i></button>
+                </div>
+                <div class="el-message-box__content">
+            		<div class="v-form">
+						<label>上级部门</label>
+					    <el-select v-model="selectValue" placeholder="请选择">
+					      <el-option  v-for="item in partOptions" :key="item.label" :label="item.label" :value="item.value"></el-option>
+					    </el-select>
+					</div>    
+					<div class="v-form">   
+						<label><s>*</s>部门名称</label>
+					    <el-input ></el-input>
+					</div> 	
+            		<div class="v-form">   
+						<label><s>*</s>部门编号</label>
+					    <el-input ></el-input>
+					</div> 
+                </div>
+                <div class="el-message-box__btns">
+                	 <el-button @click="dislogHide" type="primary">确定</el-button>
+                	 <el-button @click="dislogHide">取消</el-button>
+                </div>
+        	</div>
+        </div>
 	</div>
 	
 </body>
@@ -175,7 +413,12 @@
   		selects: function (ele) {
   			var selects = document.querySelectorAll(ele); 
 		  	for(var i = 0, len = selects.length; i < len; i++ ) {
-		  		selects[i].children[0].children[0].placeholder = selects[i].__vue__.placeholder;
+		  		if(selects[i].__vue__.placeholder) {
+		  			selects[i].children[0].children[0].placeholder = selects[i].__vue__.placeholder;
+		  		}else {
+		  			selects[i].children[0].children[0].placeholder = selects[i].children[0].attributes.placeholder.value;
+		  		}
+
 		  	}
   		},
   		inputs: function (ele) {
@@ -185,7 +428,8 @@
 		  	}
   		}
   	}
-	
+  	
+
 	new Vue({
 		el: "#app",
 		data: {
@@ -227,6 +471,9 @@
 	        
 	        act: 0, //tab选项
 	        
+	        bValue: '', //开始、结束日期
+	        eValue: '',
+	        
 	        tableData: [{
 	      	  no: '1',
 	          name: '业务员',
@@ -251,7 +498,58 @@
 	          options: false,
 	          super1: true,
 	          isCreater: false
-	        }],  
+	        }], 
+	        tableData4: [{
+	        	no: 1,
+	        	timer: '2018-04-04 09:27',
+	        	login: '13437104934',
+	        	name: '黄箫蔓',
+	        	area: '湖北省武汉市 电信',
+	        	ip: '119.96.2.200',
+	        	devic: 'Mac OS X'
+	        },{
+	        	no: 2,
+	        	timer: '2018-04-04 09:27',
+	        	login: '13437104934',
+	        	name: '黄箫蔓',
+	        	area: '湖北省武汉市 电信',
+	        	ip: '119.96.2.200',
+	        	devic: 'Mac OS X'
+	        },{
+	        	no: 3,
+	        	timer: '2018-04-04 09:27',
+	        	login: '13437104934',
+	        	name: '黄箫蔓',
+	        	area: '湖北省武汉市 电信',
+	        	ip: '119.96.2.200',
+	        	devic: 'Mac OS X'
+	        },{
+	        	no: 4,
+	        	timer: '2018-04-04 09:27',
+	        	login: '13437104934',
+	        	name: '黄箫蔓',
+	        	area: '湖北省武汉市 电信',
+	        	ip: '119.96.2.200',
+	        	devic: 'Mac OS X'
+	        },{
+	        	no: 5,
+	        	timer: '2018-04-04 09:27',
+	        	login: '13437104934',
+	        	name: '黄箫蔓',
+	        	area: '湖北省武汉市 电信',
+	        	ip: '119.96.2.200',
+	        	devic: 'Mac OS X'
+	        }],
+	        partOptions: [{
+	        	value: '选项1',
+          		label: '产品部'
+	        },{
+	        	value: '选项2',
+          		label: '研发部'
+	        }],
+	        dialogFormVisible: false,
+	        selectValue: '',
+	        showChoice: false,
 		},
 		methods: {
 			change: function (ele) {
@@ -274,7 +572,19 @@
 		    },
 	     	handleDelete: function (index, row) {
 	       	 	console.log(index, row);
-	      	}
+	      },
+	      dislogHide: function () {
+	      	this.dialogFormVisible = false;
+	      },
+	      showDailog: function () {
+	      	this.dialogFormVisible = true;
+	      },
+	      changePart: function () { //部门切换
+	      	this.showChoice = true;
+	      },
+	      hideChoice: function () {
+	      	this.showChoice = false;
+	      }
 		},
 		mounted: function () {
 			var _this = this;
@@ -293,6 +603,30 @@
 		  	//placeholder
 		  	zPlaceholder.selects('.z_select-holder');
 		  	zPlaceholder.inputs('.z_input-holder');
+		  	
+		  	//	拖拽点击展开 / 收起
+			$('.open').click(function () {
+				var dragFlag = $(this).attr('data-flag');
+				if(dragFlag == "true") {
+					$(this).text('-').siblings('.dd_list').show();
+					var leng = $(this).siblings('.dd_list').children('li').length;
+					if(leng == 1) {
+						$(this).siblings('.dd_list').addClass('noline');
+					}
+					if($(this).siblings('.dd_list').has('.dd_list').length == 0) {
+						$(this).siblings('.dd_list').children('.leftLine').hide();
+					}
+					$(this).attr('data-flag','false');
+				}else {
+					$(this).text('+').siblings('.dd_list').hide();
+					$(this).attr('data-flag','true');
+				}
+				
+			});
+			
+		},
+		updated: function () {
+			
 		},
 	});
 </script>

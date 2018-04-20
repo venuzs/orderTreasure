@@ -232,3 +232,7 @@ td.el-table_2_column_15 .cell {
 .z-opt_btn {
 	text-align: center !important;
 }
+
+.content_item .el-date-editor {
+	width: 160px;
+}

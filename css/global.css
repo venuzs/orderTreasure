@@ -60,21 +60,36 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .m_seniorscreen{
 	z-index: 2000;
 	position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+	width: 600px;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    transform: translateY(-60%);
     text-align: center;
 }
 
 .m_seniorscreen .el-message-box{
-	width: 620px;
+	width: 600px;
+	border-radius: 0;
 }
 
 .m_seniorscreen .resize-triggers{
 	z-index: 9999 !important;
 }
 
+.m_seniorscreen .el-message-box__title {
+	color: #666;
+	font-weight: 600;
+	border-bottom: 1px solid #eee;
+	line-height: 24px;
+	padding-bottom: 15px;
+}
+.m_seniorscreen .el-message-box__header {
+	padding: 23px 20px 0;
+}
+.m_seniorscreen .el-message-box__content {
+	padding: 20px 20px 30px;
+}
 .el-message-box__wrapper.m_seniorscreen:after {
     content: "";
     display: inline-block;
@@ -82,24 +97,36 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     width: 0;
     vertical-align: middle;
 }
-.m_seniorscreen .el-form-item{
-	float: left;
-	width: 49%;
-}
-.m_seniorscreen .el-form-item:nth-child(2n){
-	margin-left: 2%;
-}
-
-.m_seniorscreen .el-form-item__label{
-	text-align: left;
-	padding: 0px;
-}
 .m_seniorscreen .el-message-box__btns{
 	text-align: center;
 	margin-bottom: 10px;
 }
-
-
+.m_seniorscreen .el-input{
+	padding-left: 86px;
+	display: block;
+}
+.m_seniorscreen .el-select {
+	margin-left: 86px;
+	display: block;
+}
+.m_seniorscreen .el-select .el-input {
+	padding-left: 0;
+}
+.v-form {
+	margin-bottom: 10px;
+}
+.v-form label {
+	float: left;
+	font-size: 14px;
+	color: #222;
+	line-height: 40px;
+}
+.v-form label s {
+	color: #f51919;
+}
+.el-select-dropdown {
+	
+}
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
 ::-webkit-scrollbar  
