@@ -11,6 +11,51 @@
 	<link rel="stylesheet" href="css/myelement.css" />
 	<!-- 引入组件库 -->
 	<script src="js/element.js"></script>
+	
+<style type="text/css">
+.cf:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+* html .cf { zoom: 1; }
+*:first-child+html .cf { zoom: 1; }
+.dd { position: relative; display: block; margin: 0; padding: 0; width: 100%; list-style: none; font-size: 14px; line-height: 20px; }
+.dd-list { display: block; position: relative; margin: 0; padding: 0; list-style: none; }
+.dd-list .dd-list { padding-left: 30px; }
+.dd-collapsed .dd-list { display: none; }
+.dd-item,
+.dd-empty,
+.dd-placeholder { display: block; position: relative; margin: 0; padding: 0; min-height: 20px; font-size: 14px; line-height: 48px; }
+.dd-handle { display: block; height: 50px; line-height: 48px; margin-bottom: 10px; padding: 0 20px; color: #222; text-decoration: none; font-weight:normal; border: 1px solid #ddd;
+    background: #fff;
+    -webkit-border-radius: 4px;
+   border-radius: 4px;
+    box-sizing: border-box; -moz-box-sizing: border-box;
+}
+.dd-handle:hover,.dd-handle.active { background: #E1E8F5; }
+.dd-handle::before {content: '';position: absolute;width: 8px;height: 8px;top: 20px;left: -21px;border-radius: 4px;font-size: 14px;
+    text-align: center;
+    line-height: 10px;
+    background-color: #fff;
+    padding: 0;
+    color: #666;
+    border: 1px solid #D7DADB;
+    z-index: 90;
+}
+.dd_option {display: none;}
+.dd-handle:hover > .dd_option {display: block;}
+.dd_option > button {color: #3366CC;border: none;background-color: transparent;outline: transparent;cursor: pointer;}
+.dd_option span {color: #3366CC;}
+.drag_tree {padding-left: 20px;border: 0; border-top: 1px solid #eee;border-bottom: 1px solid #eee;margin-top: 22px;}
+.dd-item > .dragbtn { position: absolute; color: #666; left:-24px; top: 18px; width: 14px; height: 14px; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 1px solid #D7DADB; background: #FFF; line-height: 10px; text-align: center; font-weight: normal; z-index: 99;}
+.dd-item > .dragbtn:before { display: block; content: '+'; position: absolute; width: 100%; font-size: 14px; text-align: center; text-indent: 0; }
+.dd-item > .dragbtn[data-action="collapse"]:before { content: '-'; font-size: 14px; }
+.dd-placeholder,
+.dd-empty { margin-bottom: 10px; padding: 0; min-height: 30px; background: #FCFAFC; border: 1px dashed #DDDDDD; box-sizing: border-box; -moz-box-sizing: border-box; }
+.dd-dragel { position: absolute; pointer-events: none; z-index: 9999; }
+.dd-dragel > .dd-item .dd-handle { margin-top: 0; }
+.dd-dragel .dd-handle {-webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);}
+.nestable-lists { display: block; clear: both; padding: 20px 0; width: 100%;}
+.dd-item.on::before {content: '';position: absolute;top: 45px;bottom: -15px;left: -17px;width: 1px;border-left: 1px solid #ddd;}
+.dd-list .dd-item.on:last-of-type::before {display: none;} 
+</style>
 </head>
 <body>
 	<div id="app">
@@ -186,96 +231,53 @@
 			  	 				</div>
 			 				</div>
 			 				<div class="drag_tree" >
-			 					<div class="drag_dd">
-			 						<ol class="dd_list">
-			 							<li>
-				 							<a href="javascript:;" class="open" data-flag='true'> + </a>
-				 							<div class="dd_cont clearfix">
-				 								<p class="fl">产品部</p>
-				 								<div class="dd_option fr"> 
-				 									<button>新建子部门</button>
-				 									<span>|</span>
-				 									<button>编辑</button>
-				 									<span>|</span>
-				 									<button>删除</button>
-				 								</div>
-				 							</div>
-				 							<ol class="dd_list">
-				 								<li>
-				 									<a href="javascript:;" class="open" data-flag='true'> + </a>
-						 							<div class="dd_cont clearfix">
-						 								<p class="fl">产品部</p>
-						 								<div class="dd_option fr"> 
-						 									<button>新建子部门</button>
-						 									<span>|</span>
-						 									<button>编辑</button>
-						 									<span>|</span>
-						 									<button>删除</button>
-						 								</div>
-						 							</div>
-						 							<ol class="dd_list">
-						 								<li>
-						 									<a href="javascript:;" class="nomore"></a>
-								 							<div class="dd_cont clearfix">
-								 								<p class="fl">产品部</p>
-								 								<div class="dd_option fr"> 
-								 									<button>新建子部门</button>
-								 									<span>|</span>
-								 									<button>编辑</button>
-								 									<span>|</span>
-								 									<button>删除</button>
-								 								</div>
-								 							</div>
-						 								</li>
-						 								<li>
-						 									<a href="javascript:;" class="nomore"></a>
-								 							<div class="dd_cont clearfix">
-								 								<p class="fl">产品部</p>
-								 								<div class="dd_option fr"> 
-								 									<button>新建子部门</button>
-								 									<span>|</span>
-								 									<button>编辑</button>
-								 									<span>|</span>
-								 									<button>删除</button>
-								 								</div>
-								 							</div>
-						 								</li>
-						 								<div class="leftLine"></div>
-						 							</ol>
-				 								</li>
-				 								<li>
-				 									<a href="javascript:;" class="nomore"></a>
-						 							<div class="dd_cont clearfix">
-						 								<p class="fl">产品部</p>
-						 								<div class="dd_option fr"> 
-						 									<button>新建子部门</button>
-						 									<span>|</span>
-						 									<button>编辑</button>
-						 									<span>|</span>
-						 									<button>删除</button>
-						 								</div>
-						 							</div>
-				 								</li>
-				 								<div class="leftLine"></div>
-				 							</ol>
-			 							</li>
-			 							<li>
-				 							<a href="javascript:;"> + </a>
-				 							<div class="dd_cont clearfix">
-				 								<p class="fl">产品部</p>
-				 								<div class="dd_option fr"> 
-				 									<button>新建子部门</button>
-				 									<span>|</span>
-				 									<button>编辑</button>
-				 									<span>|</span>
-				 									<button>删除</button>
-				 								</div>
-				 							</div>
-			 							</li>
-			 							<div class="leftLine"></div>
-			 						</ol>
-			 					</div>
-			 				</div>
+			 					
+							    <div class="cf nestable-lists">
+							        <div class="dd" id="nestable">
+							            <ol class="dd-list">
+							                <li class="dd-item" data-id="2">
+							                    <div class="dd-handle">
+							                    	<p class="fl">产品部</p>
+							                    	<div class="dd_option fr"><button>新建子部门</button> <span>|</span> <button>编辑</button> <span>|</span> <button>删除</button></div>
+							                    </div>
+							                    <ol class="dd-list">
+							                        <li class="dd-item" data-id="5">
+							                            <div class="dd-handle">
+							                            	<p class="fl">开发部</p>
+							                    			<div class="dd_option fr"><button>新建子部门</button> <span>|</span> <button>编辑</button> <span>|</span> <button>删除</button></div>
+							                            </div>
+							                            <ol class="dd-list">
+							                                <li class="dd-item" data-id="6">
+							                                	<div class="dd-handle">
+							                                		<p class="fl">开发一部</p>
+							                    					<div class="dd_option fr"><button>新建子部门</button> <span>|</span> <button>编辑</button> <span>|</span> <button>删除</button></div>
+							                                	</div>
+							                                </li>
+							                                <li class="dd-item" data-id="7">
+							                                	<div class="dd-handle">
+							                                		<p class="fl">开发一部</p>
+							                    					<div class="dd_option fr"><button>新建子部门</button> <span>|</span> <button>编辑</button> <span>|</span> <button>删除</button></div>
+							                                	</div>
+							                                </li>
+							                                <li class="dd-item" data-id="8">
+							                                	<div class="dd-handle">
+							                                		<p class="fl">设计制作部</p>
+							                    					<div class="dd_option fr"><button>新建子部门</button> <span>|</span> <button>编辑</button> <span>|</span> <button>删除</button></div>
+							                                	</div>
+							                                </li>
+							                            </ol>
+							                        </li>
+							                        <li class="dd-item" data-id="9"><div class="dd-handle">质检提升部</div></li>
+							                    </ol>
+							                </li>
+							                <li class="dd-item" data-id="11">
+							                    <div class="dd-handle">商务部</div>
+							                </li>
+							            </ol>
+							        </div>
+							    </div>
+							    <input type="hidden" id="nestable-output" />
+							</div>
 		 					<div class="bottom-butn">
 								 <el-button type="primary">保存部门设置</el-button>
 								  <el-button>取消</el-button>
@@ -373,7 +375,7 @@
 		</div>
 		
 		<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
-        <div class="el-message-box__wrapper m_seniorscreen" v-show="dialogFormVisible" style="display: none;">
+        <div class="el-message-box__wrapper m_seniorscreen" :class="{show: dialogFormVisible}" v-show="dialogFormVisible" style="display: none;">
         	<div class="el-message-box">
         		<div class="el-message-box__header">
            	      <div class="el-message-box__title"><span>新增部门</span></div>
@@ -405,7 +407,8 @@
 	
 </body>
 	
-<script src="js/jquery.min.js"></script>	
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.nestable.js"></script>
 <script>
 	
 	//输入框 placeholder
@@ -604,26 +607,33 @@
 		  	zPlaceholder.selects('.z_select-holder');
 		  	zPlaceholder.inputs('.z_input-holder');
 		  	
-		  	//	拖拽点击展开 / 收起
-			$('.open').click(function () {
-				var dragFlag = $(this).attr('data-flag');
-				if(dragFlag == "true") {
-					$(this).text('-').siblings('.dd_list').show();
-					var leng = $(this).siblings('.dd_list').children('li').length;
-					if(leng == 1) {
-						$(this).siblings('.dd_list').addClass('noline');
-					}
-					if($(this).siblings('.dd_list').has('.dd_list').length == 0) {
-						$(this).siblings('.dd_list').children('.leftLine').hide();
-					}
-					$(this).attr('data-flag','false');
-				}else {
-					$(this).text('+').siblings('.dd_list').hide();
-					$(this).attr('data-flag','true');
-				}
-				
-			});
-			
+		  	//	拖拽
+
+		 	var updateOutput = function(e){
+		        var list   = e.length ? e : $(e.target),
+		            output = list.data('output');
+		        if (window.JSON) {
+		            output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+		        } else {
+		            output.val('JSON browser support required for this demo.');
+		        }
+		        $('.dragbtn').parent('li').addClass("on");
+		       	$('.dd-item.on').each(function (i,v) {
+		       		if($(v).children('a').hasClass('dragbtn')) {
+		       		}else {
+		       			$(v).removeClass('on');
+		       		}
+		       	});
+		       	//拖拽返回值
+		       	console.log($('#nestable-output').val());
+		    };
+		
+		    $('#nestable').nestable({
+		        group: 1
+		    }).on('change', updateOutput);
+		    
+		    updateOutput($('#nestable').data('output', $('#nestable-output')));
+	
 		},
 		updated: function () {
 			
