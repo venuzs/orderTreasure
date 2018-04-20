@@ -325,6 +325,9 @@
 	text-align: center;
 	border-right: 1px solid #EFEFEF;
 }
+.item_span:hover {
+	color: #3366CC;
+}
 .z-tabs_item.is_active {
 	position: relative;
 	border-bottom: 1px solid #3366CC;
@@ -1215,6 +1218,9 @@
 	border-radius: 2px;
 	margin-right: 16px;
 	vertical-align: middle;
+}
+.departes a:hover {
+	border-color: #3366CC;
 }
 .departes span {
 	color: #999;
