@@ -1107,6 +1107,7 @@
 /*部门管理*/
 .department {
 	margin-top: 6px;
+	padding-left: 12px;
 }
 .department h2 {
 	float: left;
@@ -1122,6 +1123,12 @@
 	border: 1px solid #eee;
 	border-radius: 2px;
 	margin-left: 12px;
+}
+.department a span {
+	font-family: simsun;
+	font-weight: 600;
+	font-size: 12px;
+	vertical-align: top;
 }
 
 .departes {
@@ -1143,21 +1150,33 @@
 	margin-right: 16px;
 	vertical-align: middle;
 }
+.departes a.active{
+	border-color: #3366CC;
+}
 .departes a:hover {
 	border-color: #3366CC;
 }
+
 .departes span {
 	color: #999;
 	border: none;
 	border-bottom: 1px solid #eee;
 	padding: 0 5px;
-	cursor: pointer;
+	line-height: 40px;
+}
+.departes span input {
+	border: none;
+    font-size: 24px;
+    width: 120px;
 }
 .departes span i {
 	color: #666;
-	margin-left: 36px;
+	margin-left: 16px;
 	font-size: 40px;
 	font-weight: 300;
+	cursor: pointer;
+	position: relative;
+	top: 3px;
 }
 
 /*登录日志*/

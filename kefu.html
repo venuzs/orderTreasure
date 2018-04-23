@@ -130,41 +130,77 @@
 	
 	<!--客服设置-->
 	<template id="setkf">
-		<div class="content_item active">
-			<div class="content_item_filter clearfix">
-				<div class="filter-btn fr">
-					<el-button type="primary">新增客服/联系方式</el-button>
+		<div>
+			<div class="content_item active">
+				<div class="content_item_filter clearfix">
+					<div class="filter-btn fr">
+						<el-button type="primary" @click="showDailog">新增客服/联系方式</el-button>
+					</div>
+				</div>
+				<div class="z-tables">
+			
+					<el-table :data="itemes" style="width: 100%"  @current-change="handleCurrentTable">
+			 						
+						<el-table-column fixed prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
+						
+						<el-table-column fixed label="类型" min-width="200">
+							<template scope="scope">
+						       <span>{{scope.row.type}}</span>
+						       <label class="z-creater" v-if="scope.row.isCreater">创建者</label>
+					      	</template>
+						</el-table-column>
+						
+						<el-table-column prop="name" label="名称" min-width="300"></el-table-column>
+						
+						<el-table-column prop="number" label="号码" min-width="200"></el-table-column>
+						
+						<el-table-column prop="sort" label="排序值" min-width="200"></el-table-column>
+	
+						<el-table-column fixed="right" label="操作" min-width="120" class-name='z-opt_btn'>
+							<template scope="scope">
+						        <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small" title="修改">修改</el-button>
+						        <span class="fz_c optionline"> | </span>
+						        <el-button @click.native.prevent="handleDelete(scope.$index, scope.row)" type="text" size="small" title="删除">删除</el-button>
+					      	</template>
+						</el-table-column>
+					</el-table>
 				</div>
 			</div>
-			<div class="z-tables">
-		
-				<el-table :data="itemes" style="width: 100%"  @current-change="handleCurrentTable">
-		 						
-					<el-table-column fixed prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
-					
-					<el-table-column fixed label="类型" min-width="200">
-						<template scope="scope">
-					       <span>{{scope.row.type}}</span>
-					       <label class="z-creater" v-if="scope.row.isCreater">创建者</label>
-				      	</template>
-					</el-table-column>
-					
-					<el-table-column prop="name" label="名称" min-width="300"></el-table-column>
-					
-					<el-table-column prop="number" label="号码" min-width="200"></el-table-column>
-					
-					<el-table-column prop="sort" label="排序值" min-width="200"></el-table-column>
-
-					<el-table-column fixed="right" label="操作" min-width="120" class-name='z-opt_btn'>
-						<template scope="scope">
-					        <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small" title="修改">修改</el-button>
-					        <span class="fz_c optionline"> | </span>
-					        <el-button @click.native.prevent="handleDelete(scope.$index, scope.row)" type="text" size="small" title="删除">删除</el-button>
-				      	</template>
-					</el-table-column>
-				</el-table>
-			</div>
-		</div>
+			<!--新增客服-->
+			<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
+	        <div class="el-message-box__wrapper m_seniorscreen" :class="{show: dialogFormVisible}" v-show="dialogFormVisible" style="display: none;">
+	        	<div class="el-message-box">
+	        		<div class="el-message-box__header">
+	           	      <div class="el-message-box__title"><span>新增客服联系方式</span></div>
+	           	      <button type="button" @click="dislogHide" class="el-message-box__headerbtn"><i class="el-message-box__close el-icon-close"></i></button>
+	                </div>
+	                <div class="el-message-box__content">
+	            		<div class="v-form">
+							<label>类型</label>
+						    <el-select v-model="selectValue" placeholder="请选择" class="z_select-holder">
+						      <el-option  v-for="item in partOptions" :key="item.label" :label="item.label" :value="item.value"></el-option>
+						    </el-select>
+						</div>    
+						<div class="v-form">   
+							<label><s>*</s>名称</label>
+						    <el-input ></el-input>
+						</div> 	
+	            		<div class="v-form">   
+							<label><s>*</s>号码</label>
+						    <el-input ></el-input>
+						</div> 
+						<div class="v-form">   
+							<label><s>*</s>排序值</label>
+						    <el-input v-model="soltValue"></el-input>
+						</div>
+	                </div>
+	                <div class="el-message-box__btns">
+	                	 <el-button @click="dislogHide" type="primary">确定</el-button>
+	                	 <el-button @click="dislogHide">取消</el-button>
+	                </div>
+	        	</div>
+	        </div>
+        </div>
 	</template>
 	
 	<!--品牌设置-->
@@ -346,6 +382,26 @@
 <script src="js/jquery.min.js"></script>
 <script>
 	
+	//输入框 placeholder
+  	var zPlaceholder = {
+  		selects: function (ele) {
+  			var selects = document.querySelectorAll(ele); 
+		  	for(var i = 0, len = selects.length; i < len; i++ ) {
+		  		if(selects[i].__vue__.placeholder) {
+		  			selects[i].children[0].children[0].placeholder = selects[i].__vue__.placeholder;
+		  		}else {
+		  			selects[i].children[0].children[0].placeholder = selects[i].children[0].attributes.placeholder.value;
+		  		}
+
+		  	}
+  		},
+  		inputs: function (ele) {
+  			var inputs = document.querySelectorAll(ele); 
+		  	for(var j = 0, leng = inputs.length; j < leng; j++ ) {
+		  		inputs[j].children[0].placeholder = inputs[j].attributes.placeholder.value;
+		  	}
+  		}
+  	}
 	
 //	实名认证
 	var realname = Vue.component('realname',{
@@ -389,7 +445,20 @@
 				{no: 2, type: '微信群',name: '店小二',number: '546344534',sort: '2',isCreater: false},
 				{no: 3, type: '个人QQ',name: '店小二',number: '546344534',sort: '3',isCreater: false},
 				{no: 4, type: '微信群',name: '店小二',number: '54634',sort: '4',isCreater: false},
-				]
+				],
+				dialogFormVisible: false, //新增客服
+				partOptions: [{
+		        	value: '选项1',
+	          		label: '个人	QQ'
+		        },{
+		        	value: '选项2',
+	          		label: '微信'
+		        },{
+		        	value: '选项3',
+	          		label: '电话'
+		        }],
+		         selectValue: '',
+		         soltValue: 500,
 			}
 		},
 		methods: {
@@ -404,7 +473,17 @@
 		   	 	console.log(index, row);
 		  	},
 		  	
+		  	dislogHide: function () {
+		      	this.dialogFormVisible = false;
+		    },
+		    showDailog: function () {
+		      	this.dialogFormVisible = true;
+		    },
 		},
+		mounted: function () {
+			//placeholder
+		  	zPlaceholder.selects('.z_select-holder');
+		}
 	});
 	
 	//品牌设置

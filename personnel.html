@@ -29,7 +29,7 @@
    border-radius: 4px;
     box-sizing: border-box; -moz-box-sizing: border-box;
 }
-.dd-handle:hover,.dd-handle.active { background: #E1E8F5; }
+.dd-handle:hover,.dd-handle.active { background: #E1E8F5; cursor: move;}
 .dd-handle::before {content: '';position: absolute;width: 8px;height: 8px;top: 20px;left: -21px;border-radius: 4px;font-size: 14px;
     text-align: center;
     line-height: 10px;
@@ -43,7 +43,7 @@
 .dd-handle:hover > .dd_option {display: block;}
 .dd_option > button {color: #3366CC;border: none;background-color: transparent;outline: transparent;cursor: pointer;}
 .dd_option span {color: #3366CC;}
-.drag_tree {padding-left: 20px;border: 0; border-top: 1px solid #eee;border-bottom: 1px solid #eee;margin-top: 22px;}
+.drag_tree {padding-left: 25px;border: 0; border-top: 1px solid #eee;border-bottom: 1px solid #eee;margin-top: 22px;}
 .dd-item > .dragbtn { position: absolute; color: #666; left:-24px; top: 18px; width: 14px; height: 14px; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 1px solid #D7DADB; background: #FFF; line-height: 10px; text-align: center; font-weight: normal; z-index: 99;}
 .dd-item > .dragbtn:before { display: block; content: '+'; position: absolute; width: 100%; font-size: 14px; text-align: center; text-indent: 0; }
 .dd-item > .dragbtn[data-action="collapse"]:before { content: '-'; font-size: 14px; }
@@ -224,7 +224,7 @@
 		 					<div class="content_item_filter clearfix">
 		 						<div class="department clearfix fl">
 		 						 <h2>武汉分公司</h2>
-		 						 <a href="javascript:;" @click="changePart">切换 > </a>
+		 						 <a href="javascript:;" @click="changePart">切换 <span>></span></a>
 		 						</div>
 			  	 				<div class="filter-btn fr">
 			  	 					<el-button type="primary" @click="showDailog">新增部门</el-button>
@@ -285,7 +285,7 @@
 						</div>
 						<div class="depart_check" v-show="showChoice">
 							<div class="departes">
-								<a href="javascript:;">武汉分公司</a>
+								<a href="javascript:;" class="active">武汉分公司</a>
 								<a href="javascript:;">合肥分公司</a>
 								<a href="javascript:;">厦门分公司</a>
 								<a href="javascript:;">南京分公司</a>
@@ -293,7 +293,7 @@
 								<a href="javascript:;">北京分公司</a>
 								<a href="javascript:;">雄安分公司</a>
 								<a href="javascript:;">深圳分公司</a>
-								<span>新增组织 <i> + </i></span>
+								<span><input type="text" placeholder="新增组织"/> <i> + </i></span>
 							</div>
 							<div class="bottom-butn">
 								 <el-button type="primary">确定</el-button>
@@ -374,6 +374,7 @@
 		  	 </div>
 		</div>
 		
+		<!--新增部门-->
 		<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
         <div class="el-message-box__wrapper m_seniorscreen" :class="{show: dialogFormVisible}" v-show="dialogFormVisible" style="display: none;">
         	<div class="el-message-box">
@@ -384,7 +385,7 @@
                 <div class="el-message-box__content">
             		<div class="v-form">
 						<label>上级部门</label>
-					    <el-select v-model="selectValue" placeholder="请选择">
+					    <el-select v-model="selectValue" placeholder="请选择" class="z_select-holder">
 					      <el-option  v-for="item in partOptions" :key="item.label" :label="item.label" :value="item.value"></el-option>
 					    </el-select>
 					</div>    
@@ -633,6 +634,11 @@
 		    }).on('change', updateOutput);
 		    
 		    updateOutput($('#nestable').data('output', $('#nestable-output')));
+		    
+		    //部门切换
+		    $('.departes').on('click', 'a', function (){
+		    	$(this).addClass('active').siblings('a').removeClass('active');
+		    }); 
 	
 		},
 		updated: function () {

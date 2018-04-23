@@ -67,7 +67,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     transform: translateY(-60%);
     text-align: center;
 }
-
+.m_seniorscreen .el-message-box__headerbtn {
+	top: 25px;
+	right: 20px;
+	font-size: 20px;
+}
 .m_seniorscreen .el-message-box{
 	width: 600px;
 	border-radius: 0;
@@ -111,6 +115,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 }
 .m_seniorscreen .el-select .el-input {
 	padding-left: 0;
+}
+.m_seniorscreen .el-input__inner {
+	color: #222;
 }
 .v-form {
 	margin-bottom: 10px;
