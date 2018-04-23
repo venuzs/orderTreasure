@@ -639,6 +639,8 @@
 		    $('.departes').on('click', 'a', function (){
 		    	$(this).addClass('active').siblings('a').removeClass('active');
 		    }); 
+		    
+		    $('.el-pagination__sizes').find('input').attr('readonly','readonly');
 	
 		},
 		updated: function () {

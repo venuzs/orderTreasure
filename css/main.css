@@ -38,6 +38,9 @@
     overflow: hidden;
     transition: background-color .2s ease-in-out 0s;
 }
+.aside-wrap .navi-item.active > a {
+	color: #fff;
+}
 .aside-wrap .navi-item > a i {
 	position: absolute;
 	top: 50%;
@@ -144,7 +147,7 @@
 	line-height: 26px;
 	font-size: 14px;
 	padding-left: 10px;
-	color: #CFD6E6;
+	color: #fff;
 	overflow: hidden;
 	text-align: left;
 }
