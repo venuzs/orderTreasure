@@ -25,7 +25,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	overflow: hidden;
 }
 /*主色调*/
-.bg_c { 
+.bg_c {
 	background-color: #36C8E6 !important;  /*主背景颜色*/
 }
 .fz_c {
@@ -132,31 +132,31 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	color: #f51919;
 }
 .el-select-dropdown {
-	
+
 }
 
-/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
-::-webkit-scrollbar  
-{  
-    width: 7px;  
-    height: 7px;  
-    background-color: #fff;  
-}  
-  
-/*定义滚动条轨道 内阴影+圆角*/  
-::-webkit-scrollbar-track  
-{  
-    border-radius: 10px;  
-    background-color: #fff;  
-}  
-  
-/*定义滑块 内阴影+圆角*/  
-::-webkit-scrollbar-thumb  
-{  
-    border-radius: 10px;  
-    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.1);  
-    background-color: #f6f6f6;  
-}  
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+    width: 7px;
+    height: 7px;
+    background-color: #fff;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.1);
+    background-color: #f6f6f6;
+}
 
 /*面包屑样式*/
 .breadcrumb {
@@ -209,5 +209,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     font-size: 14px;
     color: #666;
 }
-
-
+.message-center {
+    position: fixed;
+    top: 45%;
+}
+[v-cloak] {
+    display: none;
+}
