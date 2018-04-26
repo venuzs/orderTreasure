@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<script src="js/vue-router231.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="main-content" style="box-shadow: none;">
+				<div class="modify">
+					<!-- 面包屑导航 -->
+					<div class="clearfix">
+						<div class="breadcrumb">员工资料<span>&gt;</span>修改账号</div>
+					</div><!-- 面包屑导航 end -->
+				</div>
+				<div class="edit-warp">
+					<div class="company-content">
+						<h3>账号信息</h3>
+						<div class="form-grom">
+							<label class="bandlabel"><s>*</s>登录账号</label>
+							<div class="band-ipt">
+								<input class="myipt" v-model="inputC"></input>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel"><s>*</s>密码</label>
+							<div class="band-ipt">
+								<input class="myipt" placeholder="请输入密码" v-model="inputPSW"></input>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel">身份</label>
+							<div class="band-ipt">
+								<p class="ipt_p">司机</p>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel"><s>*</s>姓名</label>
+							<div class="band-ipt">
+								<input class="myipt" placeholder="请输入姓名" v-model="inputName"></input>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel">职位</label>
+							<div class="band-ipt">
+								<input class="myipt" placeholder="请输入职位"></input>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel">部门</label>
+							<div class="band-ipt">
+								<el-select v-model="trade" placeholder="请选择">
+								    <el-option
+								      v-for="item in options"
+								      :key="item"
+								      :label="item"
+								      :value="item">
+								    </el-option>
+								</el-select>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel">备注</label>
+							<div class="band-ipt">
+								<textarea class="myipt" placeholder="填写相关备注信息"></textarea>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel"><s>*</s>手机号</label>
+							<div class="band-ipt">
+								<input class="myipt" v-model="inputPhone" placeholder="请输入手机号码"></input>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel">邮箱</label>
+							<div class="band-ipt">
+								<input class="myipt" placeholder="请输入邮箱号"></input>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel">QQ</label>
+							<div class="band-ipt">
+								<input class="myipt" placeholder="请输入QQ号码"></input>
+							</div>
+						</div>
+					</div>
+					<div class="company-content">
+						<h3>权限范围</h3>
+						<div class="form-grom">
+							<el-popover
+							  ref="popoverqsu"
+							  placement="bottom-start"
+							  width="440"
+							  trigger="hover">
+							  <p class="z-jiao">数据权限：此账号可以看到那些客户的订单销售数据，资金数据，报表数据；比如：某个业务员人员，只能看到他负责地区的客户订单</p>
+							</el-popover>
+							
+							<label class="bandlabel has-pop"><i v-popover:popoverqsu class="el-icon-question"></i>数据权限</label>
+							<div class="band-ipt z_rodio">
+								<template>
+								  <el-radio v-model="radio" label="1">全部区域</el-radio>
+								  <el-radio v-model="radio" label="2">部分区域</el-radio>
+								</template>
+								<a href="javascript:;" class="z-customerArea" :class="{show: showChioceArea}" @click="showDailog">+选择客户区域范围</a>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel">角色权限</label>
+							<div class="band-ipt z-form-checkbox">
+								<div class="form-checkbox">
+									<el-checkbox-group v-model="checkList">
+									    <el-checkbox label="业务员"></el-checkbox>
+									    <el-checkbox label="仓库管理员"></el-checkbox>
+									    <el-checkbox label="财务管理员"></el-checkbox>
+									   	<el-checkbox label="订单管理员"></el-checkbox>
+									    <el-checkbox label="系统管理员"></el-checkbox>
+									</el-checkbox-group>
+								</div>
+								<div class="z-box-info">
+									<p>注意请勾选此账号属于的【角色权限】，对应的【权限明显】即可选中；</p>
+									<p>如果您还未设置过【角色权限】，请先 <a href="javascript:;">设置角色</a>，比如：仓库管理员、财务管理员、业务管理员</p>
+								</div>
+							</div>
+						</div>
+						<div class="form-grom">
+							<label class="bandlabel mtop8">权限明细</label>
+							<div class="band-ipt z-power-list">
+								<div class="z-yuan-item" v-for="(item,index) in list" :key="index">
+									<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{item.title}}</span>
+									<div class="z-yuan-content">
+										<ol>
+											<li v-for="(v,i) in item.subList" :key="i"><i class="el-icon-check" :class="{on: v.checked}"></i>{{v.value}}</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
+						
+						<!--区域选择-->
+				        <div class="el-message-box__wrapper m_seniorscreen" :class="{show: dialogFormVisible}" v-show="dialogFormVisible" style="display: none;">
+				        	<div class="el-message-box">
+				        		<div class="el-message-box__header">
+				           	      <div class="el-message-box__title"><span>选择客户区域范围</span></div>
+				           	      <button type="button" @click="dislogHide" class="el-message-box__headerbtn"><i class="el-message-box__close el-icon-close"></i></button>
+				                </div>
+				                <div class="el-message-box__content">
+				            		<div class="v-form">
+										<el-checkbox-group v-model="areacheckList">
+										    <el-checkbox label="默认地区"></el-checkbox>
+										</el-checkbox-group>
+									</div>    
+				                </div>
+				                <div class="el-message-box__btns">
+				                	 <el-button @click="dislogHide" type="primary">确定</el-button>
+				                	 <el-button @click="dislogHide">取消</el-button>
+				                </div>
+				        	</div>
+				        </div>
+					</div>
+					<div class="edit-button z-yuan-butn">
+						<el-button type="primary">确定</el-button>
+						<el-button>取消</el-button>
+					</div>
+					
+				</div>	
+			</div>	
+		</div>	
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				inputC: 'Mrx', //默认账号
+				inputPSW: '', //密码
+				inputName: '刘师傅', //用户
+				trade: '产品部',
+				options: ['商务部','设计部','三级部','二级部'],
+				inputPhone: '13437104934',
+				radio: '1', // 区域
+				showChioceArea: false, //部分区域显示
+				checkList: ['业务员'], //复选框
+				list: [{
+					'checked': true,
+					'title': '订单',
+					'subList': [{'checked': true,'value':'查看订单'},{'checked': true,'value':'代客户下单'},{'checked': false,'value':'审核订单'},{'checked': true,'value':'撤销订单审核通过'},{'checked': true,'value':'修改订单'},
+								{'checked': true,'value':'订单核准（发货后仍可修改订单）'},{'checked': true,'value':'查看出库/发货单'},{'checked': false,'value':'确认审核出库/发货'},{'checked': false,'value':'确认审核收货'},{'checked': false,'value':'查看订单付款'}]
+				},
+				{
+					'checked': true,
+					'title': '商品',
+					'subList': [{'checked': true,'value':'查看全部商品'},{'checked': true,'value':'管理与编辑商品'},{'checked': false,'value':'经营范围屏蔽'},{'checked': true,'value':'管理商品分组'}]
+				},
+				{
+					'checked': true,
+					'title': '营销',
+					'subList': [{'checked': true,'value':'首页广告位与商品'},{'checked': true,'value':'公告管理'},{'checked': false,'value':'查看促销'},{'checked': true,'value':'新增与编辑促销'},{'checked': true,'value':'订单红包'},{'checked': false,'value':'红包充值'},{'checked': true,'value':'优惠券'},{'checked': true,'value':'微信'}]
+				},
+				{
+					'checked': true,
+					'title': '报表',
+					'subList': [{'checked': true,'value':'运营分析'},{'checked': true,'value':'商品运营报表'},{'checked': false,'value':'订单报表'},{'checked': true,'value':'地区订单报表'},{'checked': true,'value':'客户订单报表'},{'checked': false,'value':'业务员订单报表'},{'checked': true,'value':'商品销售报表'},{'checked': true,'value':'客户商品报表'},{'checked': true,'value':'资金报表'},{'checked': true,'value':'商品销售毛利统计表'}]
+				},
+				],
+				areacheckList: ['默认地区'], //区域选择
+				dialogFormVisible: false, //弹框
+			},
+			watch: {
+				'radio': function () {
+					this.showChioceArea = this.radio == 2 ? true : false;
+				}
+			},
+			methods: {
+				dislogHide: function () {
+			      	this.dialogFormVisible = false;
+			    },
+			    showDailog: function () {
+			      	this.dialogFormVisible = true;
+			    },
+			}
+		});
+	</script>
+</html>

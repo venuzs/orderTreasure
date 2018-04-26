@@ -264,3 +264,12 @@ td.el-table_2_column_15 .cell {
 .el-pagination__sizes .el-input .el-icon-arrow-up:before {
 	border-bottom-color: #3366CC;
 }
+/*单选*/
+.el-radio__input.is-checked+.el-radio__label {
+	color: #3366CC;
+}
+.el-radio__input.is-checked .el-radio__inner {
+	border-color: #3366CC;
+	background: #3366CC;
+}
+
