@@ -26,15 +26,15 @@
 	                        <span class="nav-item-title">订单</span>
 	                    </a>
 	                    <ol class="secend-item">
-	                    	<li class="pop-item"><a href="javascript:;">订货单</a></li>
-	                    	<li class="pop-item"><a href="javascript:;">出库发货单</a></li>
-	                    	<li class="pop-item"><a href="javascript:;">退货单</a></li>
+	                    	<li class="pop-item"><a href="edit.html">订货单</a></li>
+	                    	<li class="pop-item"><a href="kefu.html">出库发货单</a></li>
+	                    	<li class="pop-item"><a href="modify.html">退货单</a></li>
 	                    	<li class="pop-item pop-item-child">
 	                    		<h4>商品明细记录</h4>
-	                    		<a href="javascript:;">订单商品明细</a>
-	                    		<a href="javascript:;">待出商品明细</a>
-	                    		<a href="javascript:;">出库商品明细</a>
-	                    		<a href="javascript:;">退货商品明细</a>
+	                    		<a href="personnel.html">订单商品明细</a>
+	                    		<a href="edit.html">待出商品明细</a>
+	                    		<a href="kefu.html">出库商品明细</a>
+	                    		<a href="modify.html">退货商品明细</a>
 	                    	</li>
 	                    </ol>
 					</li>
@@ -251,89 +251,99 @@
 		</div>
 		<!--头部-->
 		<div id="app">
-		<div class="topBar">
-			<div class="nav-tab">
-				<ul class="clearfix">
-					<li>
-						<a href="javascript:;">公司资料</a>
-						<i class="el-icon-close"></i>
-					</li>
-					<li>
-						<a href="javascript:;">订货单</a>
-						<i class="el-icon-close"></i>
-					</li>
-					<li>
-						<a href="javascript:;">商品图片</a>
-						<i class="el-icon-close"></i>
-					</li>
-					<li>
-						<a href="javascript:;">库存状况</a>
-						<i class="el-icon-close"></i>
-					</li>
-					<li>
-						<a href="javascript:;">订单应付</a>
-						<i class="el-icon-close"></i>
-					</li>
-					<li>
-						<a href="javascript:;">商品销售</a>
-						<i class="el-icon-close"></i>
-					</li>
-					<li>
-						<a href="javascript:;">资金报表</a>
-						<i class="el-icon-close"></i>
-					</li>
-					<li>
-						<a href="javascript:;">订单数据</a>
-						<i class="el-icon-close"></i>
-					</li>
-				</ul>
-			</div>
-			<div class="wrap-header-right-menu">
-				
-				<el-popover ref="popover1" placement="top-start" width="120" trigger="hover" > <!--放在调用前面-->
-					<ol class="z-pop-top">
-						<li><a href="javascript:;">新手须知</a></li>
-						<li><a href="javascript:;">新手引导</a></li>
-						<li><a href="javascript:;">帮助中心</a></li>
-					</ol>
-				</el-popover>
-				<a href="javascript:;" v-popover:popover1><img src="img/help.png" alt="" /></a>
-	
-				<el-popover ref="popover2" placement="top-start" width="120" trigger="hover" >
-					<ol class="z-pop-top">
-						<li><a href="javascript:;">刷新当前页面</a></li>
-						<li><a href="javascript:;">关闭当前页面</a></li>
-						<li><a href="javascript:;">关闭全部页面</a></li>
-					</ol>
-				</el-popover>
-				<a href="javascript:;"  v-popover:popover2 ><img src="img/reflesh.png" alt="" /></i></a>
-				
-				<el-popover ref="popover3" placement="top-start" width="120" trigger="hover" >
-					<ol class="z-pop-top">
-						<li><a href="javascript:;">订单留言 (<span>0</span>)</a></li>
-						<li><a href="javascript:;">留言咨询 (<span>0</span>)</a></li>
-						<li><a href="javascript:;">站内信</a></li>
-					</ol>
-				</el-popover>
-				<a href="javascript:;" v-popover:popover3 ><img src="img/megs.png" alt="" /></a>
-				
-				<el-popover ref="popover4" placement="top-start" width="120" trigger="hover" >
-					<ol class="z-pop-top">
-						<li><a href="javascript:;">我的账号</a></li>
-						<li><a href="javascript:;">修改密码</a></li>
-						<li><a href="javascript:;">退出</a></li>
-					</ol>
-				</el-popover>
-				<a href="javascript:;" class="z-wo" v-popover:popover4 ><img src="img/mine.png" alt="" /><span>1580857</span></a>			
-				
+			<div class="topBar">
+				<div class="nav-tab" id="main_menu">
+					<ul class="clearfix">
+						<!-- <li>
+							公司资料
+							<i class="el-icon-close"></i>
+						</li>
+						<li>
+							订货单
+							<i class="el-icon-close"></i>
+						</li>
+						<li>
+							商品图片
+							<i class="el-icon-close"></i>
+						</li>
+						<li>
+							库存状况
+							<i class="el-icon-close"></i>
+						</li>
+						<li>
+							订单应付
+							<i class="el-icon-close"></i>
+						</li>
+						<li>
+							商品销售
+							<i class="el-icon-close"></i>
+						</li>
+						<li>
+							资金报表
+							<i class="el-icon-close"></i>
+						</li>
+						<li class="dropdown_box">
+							订单数据
+							<i class="el-icon-arrow-down"></i>
+							<ul class="menu_dropdown">
+								<li class="active">库存状况<i class="el-icon-close"></i></li>
+								<li>订单应付<i class="el-icon-close"></i></li>
+								<li>商品销售<i class="el-icon-close"></i></li>
+								<li>资金报表<i class="el-icon-close"></i></li>
+							</ul>
+						</li> -->
+					</ul>
+				</div>
+				<div class="wrap-header-right-menu">
+					
+					<el-popover ref="popover1" placement="top-start" width="120" trigger="hover" > <!--放在调用前面-->
+						<ol class="z-pop-top">
+							<li><a href="javascript:;">新手须知</a></li>
+							<li><a href="javascript:;">新手引导</a></li>
+							<li><a href="javascript:;">帮助中心</a></li>
+						</ol>
+					</el-popover>
+					<a href="javascript:;" v-popover:popover1><img src="img/help.png" alt="" /></a>
+		
+					<el-popover ref="popover2" placement="top-start" width="120" trigger="hover" >
+						<ol class="z-pop-top">
+							<li><a href="javascript:;">刷新当前页面</a></li>
+							<li><a href="javascript:;">关闭当前页面</a></li>
+							<li><a href="javascript:;">关闭全部页面</a></li>
+						</ol>
+					</el-popover>
+					<a href="javascript:;"  v-popover:popover2 ><img src="img/reflesh.png" alt="" /></i></a>
+					
+					<el-popover ref="popover3" placement="top-start" width="120" trigger="hover" >
+						<ol class="z-pop-top">
+							<li><a href="javascript:;">订单留言 (<span>0</span>)</a></li>
+							<li><a href="javascript:;">留言咨询 (<span>0</span>)</a></li>
+							<li><a href="javascript:;">站内信</a></li>
+						</ol>
+					</el-popover>
+					<a href="javascript:;" v-popover:popover3 ><img src="img/megs.png" alt="" /></a>
+					
+					<el-popover ref="popover4" placement="top-start" width="120" trigger="hover" >
+						<ol class="z-pop-top">
+							<li><a href="javascript:;">我的账号</a></li>
+							<li><a href="javascript:;">修改密码</a></li>
+							<li><a href="javascript:;">退出</a></li>
+						</ol>
+					</el-popover>
+					<a href="javascript:;" class="z-wo" v-popover:popover4 ><img src="img/mine.png" alt="" /><span>1580857</span></a>			
+					
+				</div>
 			</div>
 		</div>
-		</div>
-			
+		
 		<!--主体-->
-		<iframe src="index.html" width="100%" height="100%" frameborder='0' name="_blank" id="iframe"></iframe>
+		<div id="main_iframe">
+			<div class="tab-pane active" data-id="menu_0" id="defaultFrame"><iframe src="index.html" width="100%" height="100%" frameborder='0' name="_blank" id="iframe"></iframe></div>
+		</div>
+		
 	</body>
-	<script src="js/jquery.min.js"></script>	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/mainframe.js"></script>
 	<script>
 		
 		$('.navi-item').hover(function () {

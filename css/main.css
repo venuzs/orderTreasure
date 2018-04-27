@@ -219,26 +219,30 @@
     left: 100px;
     right: 0;
     top: 0;
+    height: 50px;
     min-width: 1100px;
    background: #FFFFFF;
    box-shadow: 0 2px 2px 0 rgba(165,167,168,0.30);
 }
-.nav-tab li {
+.nav-tab > ul > li {
 	float: left;
 	width: 100px;
 	height: 50px;
-	line-height: 50px;
+	line-height: 46px;
 	text-align: center;
 	position: relative;
+	border-top: 2px solid transparent;
 	border-right: 1px solid #efefef;
 	padding: 0 5px;
-	overflow: hidden;
+	font-size: 14px;
+	color: #666;
+	cursor: pointer;
 }
-.nav-tab li > a {
+.nav-tab > ul > li > a {
 	font-size: 14px;
 	color: #666;
 }
-.nav-tab li i {
+.nav-tab > ul > li > i {
 	position: absolute;
 	top: 5px;
 	right: 3px;
@@ -246,10 +250,71 @@
 	cursor: pointer;
 	display: none;
 }
-.nav-tab li:hover {
+.nav-tab > ul > li:hover {
 	background-color: #f7f7f7;
 }
-.nav-tab li:hover i {
+.nav-tab > ul > li.active {
+	background-color: #f9f9f9;
+	border-top: 2px solid #3366CC;
+}
+.nav-tab > ul > li:hover > i {
+	display: block;
+}
+.nav-tab > ul > li > i.el-icon-arrow-down {
+	display: block;
+	top: 19px;
+}
+.nav-tab > ul > li .menu_dropdown {
+	position: absolute;
+	left: 0;
+	top: 100%;
+	/*margin-top: 6px;*/
+	z-index: 999;
+	min-width: 100%;
+	background: #fff;
+	border: 1px solid #ebeef5;
+	border-radius: 4px;
+	box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+	display: none;
+}
+/*.nav-tab > ul > li .menu_dropdown:before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: -12px;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 6px;
+	border-bottom: 6px solid #fff;
+}*/
+.nav-tab > ul > li .menu_dropdown li {
+	position: relative;
+	line-height: 22px;
+	padding: 9px 22px 9px 14px;
+	font-size: 14px;
+	color: #666;
+	cursor: pointer;
+	text-align: left;
+	border-left: 2px solid transparent;
+	white-space: nowrap;
+}
+.nav-tab > ul > li .menu_dropdown li:hover {
+	background: #f7f7f7;
+}
+.nav-tab > ul > li .menu_dropdown li.active {
+	background-color: #f9f9f9;
+	border-left: 2px solid #3366CC;
+}
+.nav-tab > ul > li .menu_dropdown li i {
+	position: absolute;
+	top: 14px;
+	right: 3px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.nav-tab li.dropdown_box:hover .menu_dropdown {
 	display: block;
 }
 .wrap-header-right-menu {
@@ -293,6 +358,16 @@
 }
 
 /*主体*/
+#main_iframe {
+	height: 100%;
+}
+#main_iframe .tab-pane {
+	height: 100%;
+	display: none;
+}
+#main_iframe .tab-pane.active {
+	display: block;
+}
 .main-content {
 	min-width: 1100px;
 	margin: 70px 20px 20px 120px;
