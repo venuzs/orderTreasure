@@ -124,20 +124,26 @@
 	top: 0;
 	left: 100px;
 	width: 300px;
+	padding: 7px 0;
 	background-color: #283859;
 	display: none;
 }
 .secend-item .pop-item {
+	float: left;
 	overflow: hidden;
 	zoom: 1;
-	padding-bottom: 10px;
 }
-.secend-item .pop-item:first-of-type {
-	padding: 7px 0;
+.secend-item .pop-item-child {
+	float: none;
+	clear: both;
+	padding-top: 7px;
 }
-.secend-item .pop-item:first-of-type h4 {
+.secend-item .pop-item-child:first-of-type {
 	padding-top: 0;
+}
+.secend-item .pop-item-child:first-of-type h4 {
 	border: none;
+	padding-top: 3px;
 }
 
 .secend-item .pop-item > a {
