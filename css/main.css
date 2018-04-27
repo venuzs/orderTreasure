@@ -1143,8 +1143,8 @@
     border: 1px solid #D7DADB;
     z-index: 90;
 }
-.dd_option {display: none;}
-.dd-handle:hover > .dd_option {display: block;}
+.dd_option {display: none;position: absolute;top: 0;right: 20px;}
+.dd-item:hover > .dd_option {display: block;}
 .dd_option > button {color: #3366CC;border: none;background-color: transparent;outline: transparent;cursor: pointer;}
 .dd_option span {color: #3366CC;}
 .drag_tree {padding-left: 25px;border: 0; border-top: 1px solid #eee;border-bottom: 1px solid #eee;margin-top: 22px;}
