@@ -264,6 +264,9 @@
 	display: block;
 	top: 19px;
 }
+.nav-tab > ul > li.dropdown_box #menu_name {
+	display: block;
+}
 .nav-tab > ul > li .menu_dropdown {
 	position: absolute;
 	left: 0;
