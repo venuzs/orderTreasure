@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+.el-input {
+	font-size: 12px;
+}
+.el-input--suffix .el-input__inner {
+	padding-right: 25px;
+}
+.el-input__icon {
+	line-height: 30px;
+}
+.el-select-dropdown__item {
+	font-size: 12px;
+}
 /*popover样式*/
 .el-popover {
 	padding: 0;
@@ -7,35 +19,35 @@
 }
 
 .content_item .input-select .el-input.el-input-group {
-    width: 360px;
+    width: 250px;
     vertical-align: middle;
     box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
   }
 .content_item .el-input-group__append, .el-input-group__prepend {
-	width: 40px;
 	border-radius: 2px;
 }
 .content_item .el-input-group__append .el-button.el-button--default {
 	background-color: #fff;
 	padding: 0;
 	text-align: center;
-	line-height: 38px;
-	width: 40px;
-	height: 38px;
+	line-height: 28px;
+	height: 28px;
+	margin: -10px -15px;
 }
 .content_item .el-input-group__append i {
-	font-size: 20px;
+	font-size: 14px;
+	font-weight: bold;
 }
 .content_item .el-select {
-	width: 160px;
-	margin-left: 20px;
+	width: 120px;
+	margin-left: 7px;
 	vertical-align: middle;
 }
 
 /*按钮*/
 .el-button {
-	padding: 10px 18px;
-	min-width: 100px;
+	font-size: 12px;
+	padding: 8px 7px;
 	color: #222;
 	border-radius: 2px;
 }
@@ -61,6 +73,15 @@
 }
 
 /*tabs表格*/
+.el-table {
+	font-size: 13px;
+}
+.el-table td, .el-table th {
+	padding: 8px 0;
+}
+.el-table .cell {
+	line-height: 1.42857143;
+}
 .z-tables .el-table td, .el-table th.is-leaf {
 	border-bottom-color: #DBDBDB;
 }
@@ -78,7 +99,6 @@
 }
 .z-tables .el-table .cell {
 	font-weight: normal;
-	font-size: 14px;
 	color: #222;
 }
 .z-tables .el-table th>.cell {
@@ -103,13 +123,16 @@ td.el-table_2_column_15 .cell {
 /*分页*/
 .grid-content .el-pagination {
 	padding: 0;	
-	height: 40px;
 }
 .grid-content .el-pagination button, .el-pagination span:not([class*=suffix]) {
-	font-size: 14px;
+	font-size: 12px;
 	color: #666;
-	height: 40px;
-	line-height: 40px;
+	height: 30px;
+	line-height: 30px;
+	min-width: 30px;
+}
+.grid-content .el-pagination button {
+	padding: 0 5px;
 }
 .grid-content .el-pagination button.btn-prev {
 	border-right: 1px solid #E1E4E6;
@@ -117,7 +140,7 @@ td.el-table_2_column_15 .cell {
 }
 .grid-content .el-pagination button.btn-prev i,
 .grid-content .el-pagination button.btn-next i {
-	font-size: 20px;
+	font-size: 14px;
 	color: #3366CC;
 	font-weight: bolder;
 }
@@ -125,28 +148,30 @@ td.el-table_2_column_15 .cell {
 	border-left: 1px solid #E1E4E6;
 }
 .grid-content .el-pagination__total {
-	width: 80px;
 	text-align: center;
 	margin-right: 0;
+	padding: 0 10px;
 }
 .grid-content .el-pager li {
-	height: 40px;
-	line-height: 40px;
+	height: 30px;
+	line-height: 30px;
 	font-weight: normal;
+	min-width: 30px;
+	font-size: 12px;
 }
 .grid-content .el-pager li.active {
 	color: #3366CC;
 	font-weight: bold;
 }
 .grid-content .el-pager li.btn-quicknext, .el-pager li.btn-quickprev {
-	line-height: 40px;
+	line-height: 30px;
 	font-weight: normal;
 }
 .grid-content .el-pager li:hover {
 	color: #3366CC;
 }
 .content_item  .grid-content .el-select {
-	width: 110px;
+	width: 80px;
 	margin-left: 0;
 	border: 1px solid #E1E4E6;
 	border-top: none;
@@ -156,16 +181,12 @@ td.el-table_2_column_15 .cell {
 .el-pagination .el-select .el-input {
 	width: auto;
 	margin: 0;
-	
 }
 .el-pagination .el-select .el-input .el-input__inner {
 	border: none;
-	font-size: 14px;
+	font-size: 12px;
 	color: #3366CC;
-	padding-right: 7px;
-}
-.el-pagination .el-input__suffix {
-	right: 6px;
+	padding-right: 20px;
 }
 
 
@@ -205,10 +226,15 @@ td.el-table_2_column_15 .cell {
 
 .el-input-group__append, .el-input-group__prepend {
 	border-radius: 2px;
+	padding: 0 15px;
+	overflow: hidden;
 }
 
 .el-input__inner {
 	border-radius: 2px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 7px;
 }
 
 .btn-radid_none .el-input-group__append {
@@ -260,6 +286,9 @@ td.el-table_2_column_15 .cell {
 	border-top: none;
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
+}
+.el-pagination__sizes {
+	margin-right: 0;
 }
 .el-pagination__sizes .el-input .el-icon-arrow-up:before {
 	border-bottom-color: #3366CC;

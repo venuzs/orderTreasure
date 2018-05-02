@@ -426,8 +426,8 @@
 
 .z-jiao {
 	padding: 10px 20px;
-	line-height: 26px;
-	font-size: 14px;
+	line-height: 18px;
+	font-size: 12px;
 	color: #999;
 }
 .z-jiao a {
@@ -435,18 +435,15 @@
 	display: block;
 }
 .content_item {
-	padding: 20px;
+	padding: 12px 20px 15px;
 	display: none;
 }
 .content_item.active {
 	display: block;
 }
-.filter-btn {
-	margin-top: 2px;
-}
 
 .z-tables {
-	margin-top: 20px;
+	margin-top: 12px;
 	border: 1px solid #dbdbdb;
 	border-bottom: none;
 	border-radius: 4px 4px 0 0;
@@ -454,8 +451,8 @@
 
 /*分页*/
 .grid-content {
-	height: 40px;
-	margin: 40px 0 28px;
+	height: 30px;
+	margin: 15px 0 0;
 }
 .bg-purple-light {
 	float: right;
@@ -846,7 +843,7 @@
 .company-content h3 {
 	width: 100px;
 	text-align: right;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 20px;
 	color: #666;
 	font-weight: 600;
@@ -1165,7 +1162,7 @@
 	margin: 0 auto;
 }
 .minW40 .el-input-group__append button{
-	min-width: 40px;
+	min-width: 30px;
 }
 
 .z-option a, .z-option span {
@@ -1314,7 +1311,7 @@
 /*登录日志*/
 .data-picker {
 	display: inline-block;
-	margin-left: 20px;
+	margin-left: 7px;
 	vertical-align: middle;
 	position: relative;
 }

@@ -59,26 +59,26 @@
 	 					<div class="content_item_filter clearfix">
 		  	 				<div class="input-select fl btn-radid_none">
 		  	 					<el-input placeholder="请输入内容" v-model="input4" class="minW40 z_input-holder" >
-								   <el-button slot="append" icon="el-icon-search"></el-button>
-								  </el-input>
-								  
-								  <el-select v-model="valueId" clearable placeholder="身份" class="z_select-holder">
-								    <el-option
-								      v-for="(item,index) in optionsId"
-								      :key="index"
-								      :label="item"
-								      :value="item">
-								    </el-option>
-								  </el-select>
-								  
-								  <el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
-								    <el-option
-								      v-for="(item,index) in optionsState"
-								      :key="index"
-								      :label="item"
-								      :value="item">
-								    </el-option>
-								  </el-select>
+									<el-button slot="append" icon="el-icon-search"></el-button>
+								</el-input>
+
+								<el-select v-model="valueId" clearable placeholder="身份" class="z_select-holder">
+									<el-option
+									  v-for="(item,index) in optionsId"
+									  :key="index"
+									  :label="item"
+									  :value="item">
+									</el-option>
+								</el-select>
+
+								<el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
+									<el-option
+									  v-for="(item,index) in optionsState"
+									  :key="index"
+									  :label="item"
+									  :value="item">
+									</el-option>
+								</el-select>
 		  	 				</div>
 		  	 				<div class="filter-btn fr">
 		  	 					<el-button type="primary">新增员工账号</el-button>
@@ -366,29 +366,6 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.nestable.js"></script>
 <script>
-	
-	//输入框 placeholder
-  	var zPlaceholder = {
-  		selects: function (ele) {
-  			var selects = document.querySelectorAll(ele); 
-		  	for(var i = 0, len = selects.length; i < len; i++ ) {
-		  		if(selects[i].__vue__.placeholder) {
-		  			selects[i].children[0].children[0].placeholder = selects[i].__vue__.placeholder;
-		  		}else {
-		  			selects[i].children[0].children[0].placeholder = selects[i].children[0].attributes.placeholder.value;
-		  		}
-
-		  	}
-  		},
-  		inputs: function (ele) {
-  			var inputs = document.querySelectorAll(ele); 
-		  	for(var j = 0, leng = inputs.length; j < leng; j++ ) {
-		  		inputs[j].children[0].placeholder = inputs[j].attributes.placeholder.value;
-		  	}
-  		}
-  	}
-  	
-
 	new Vue({
 		el: "#app",
 		data: {
@@ -410,7 +387,6 @@
 	          	jion: 'YQM2453',
 	          	remarks: '—',
 	          	isCreater: true
-	          
 	        	}, {
 	        	no: '2',
 	          	login: 'LYS',
@@ -424,7 +400,112 @@
 	          	jion: 'YQM2453',
 	          	remarks: '—',
 	          	isCreater: false
-	        }],
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}
+	        ],
 	        
 	        currentPage4: 4, //当前页码数
 	        
@@ -559,9 +640,6 @@
 	  		}
 		  	});
 		  	
-		  	//placeholder
-		  	zPlaceholder.selects('.z_select-holder');
-		  	zPlaceholder.inputs('.z_input-holder');
 		  	
 		  	//	拖拽
 
