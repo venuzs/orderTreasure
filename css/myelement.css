@@ -147,6 +147,7 @@ td.el-table_2_column_15 .cell {
 	/*列表单列浮出操作*/
 .table-operate {
 	position: absolute;
+	white-space: nowrap;
 	right: 15px;
 	top: 50%;
 	margin-top: -13px;
