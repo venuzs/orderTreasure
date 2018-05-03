@@ -158,18 +158,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     background-color: #f6f6f6;
 }
 
-/*面包屑样式*/
-.breadcrumb {
-    float: left;
-    font-size: 14px;
-    margin-top: -10px;
-    line-height: 30px;
-    padding-bottom: 10px;
-}
-.breadcrumb span {
-    padding: 0 5px;
-}
-
 /*盒子模型样式*/
 .box {
     background: #fff;
@@ -214,5 +202,64 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     top: 45%;
 }
 [v-cloak] {
+    display: none;
+}
+
+
+/*页面标题样式*/
+.page-header {
+    font-size: 14px;
+    height: 65px;
+    background-color: #fff;
+    line-height: 50px;
+    position: relative;
+    border-bottom: 1px solid #EFEFEF;
+    padding: 10px 20px 14px;
+}
+.page-header .page-title {
+    float: left;
+    font-size: 24px;
+    line-height: 50px;
+    color: #000;
+}
+.page-header .breadcrumb {
+    margin-left: 20px;
+    float: left;
+}
+.page-header .breadcrumb span {
+    padding: 0 5px;
+}
+.page-header .z-pop_question {
+    float: left;
+    margin-left: 5px;
+}
+
+    /*面包屑样式*/
+/*.breadcrumb {
+    float: left;
+    font-size: 14px;
+    margin-top: -10px;
+    line-height: 30px;
+    padding-bottom: 10px;
+}
+*/
+
+/*文本超出显示...样式*/
+.over-omitted {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*列表页tooltip提示样式*/
+.table-tooltip.is-dark {
+    border: 1px solid #cdcdcd;
+    background: #fff;
+    box-shadow: 2px 2px 5px rgba(172,173,173,0.3);
+    min-height: 30px;
+    max-width: 450px;
+    color: #666;
+}
+.table-tooltip.is-dark .popper__arrow {
     display: none;
 }

@@ -448,11 +448,25 @@
 	border-bottom: none;
 	border-radius: 4px 4px 0 0;
 }
+.list-content {
+	padding: 12px 20px 15px;
+}
 
 /*分页*/
 .grid-content {
 	height: 30px;
 	margin: 15px 0 0;
+}
+.bg-purple-left {
+	float: left;
+}
+.bg-purple-left .el-checkbox {
+	margin: 0 15px;
+}
+.bg-purple-left .el-dropdown {
+	width: 110px;
+	box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
+	margin-right: 15px;
 }
 .bg-purple-light {
 	float: right;
