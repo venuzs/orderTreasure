@@ -121,7 +121,7 @@ function iframeTapShow(tabHhow_id,reload){
     // 当前选中项为更多下拉项
     set_dropattr();
     // if (reload == true) {
-    //     $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]").find("iframe").reload();
+    //     $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]").find("iframe").location.reload();
     // }
 }
 

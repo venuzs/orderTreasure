@@ -73,7 +73,7 @@
 					
 				<!--主体表格-->
 				<div class="z-tables">
-	 				<el-table :data="tableData3" style="width: 100%;" tooltip-placement="bottom-start" tooltip-popper-class="table-tooltip" tooltip-effect="light">
+	 				<el-table ref="multipleTable" :data="tableData3" style="width: 100%;">
 	 					<el-table-column type="selection" width="55"></el-table-column>
 	 					<el-table-column fixed  prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
 	 					
@@ -97,7 +97,7 @@
 							</template>
 					    </el-table-column>
 					    
-					    <el-table-column prop="address" label="部门" min-width="130" show-overflow-tooltip> </el-table-column>
+					    <el-table-column prop="address" label="部门" min-width="130"> </el-table-column>
 					    
 					    <el-table-column prop="tel" label="手机号" min-width="140"> </el-table-column>
 					    
@@ -122,7 +122,7 @@
 	 			<!--分页-->
 	 			<div class="grid-content">
 	 				<div class="bg-purple-left">
-	 					<el-checkbox v-model="tableAllCheck"></el-checkbox>
+	 					<el-checkbox v-model="tableAllCheck" @change="tableAllCheckFn(tableData3)"></el-checkbox>
 						<el-dropdown @command="handleCommand" placement="top">
 							<div class="el-input el-input--suffix">
 								<input type="text" value="批量操作" readonly="readonly" class="el-input__inner">
@@ -193,7 +193,7 @@
 	          	login: 'LYS',
 	          	uid: '普通员工 ',
 	          	name: '刘雨酥 ',
-	          	job: '北京全网数商科技股份有限公司高级开发工程师',
+	          	job: '北京全网数商科技股份有限公司武汉分公司技术部高级开发工程师兼开发经理/技术总监',
 	          	address: '基础研发部',
 	          	tel: '15802949593',
 	         	 zip: 200333,
@@ -207,7 +207,7 @@
 	          	uid: '管理人员 ',
 	          	name: '刘雨酥 ',
 	          	job: '开发工程师',
-	          	address: '北京全网数商科技股份有限公司基础研发部',
+	          	address: '基础研发部',
 	          	tel: '15802949593',
 	          	zip: 200333,
 	          	part:'研发人员',
@@ -352,6 +352,15 @@
 			// 列表批量操作2-批量导出
 		    handleCommand2(command) {
 				this.$message('click on item ' + command);
+			},
+
+			// 列表底部全选
+			tableAllCheckFn(rows){
+				if (rows) {
+		          rows.forEach(row => {
+		            this.$refs.multipleTable.toggleRowSelection(row, this.tableAllCheck)
+		          })
+		        }
 			}
 		},
 		mounted: function () {

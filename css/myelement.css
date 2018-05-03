@@ -100,6 +100,9 @@
 .el-table {
 	font-size: 13px;
 }
+.el-table td {
+	color: #888;
+}
 .el-table td, .el-table th {
 	height: 40px;
 	padding: 8px 0;
@@ -108,13 +111,13 @@
 	line-height: 1.42857143;
 }
 .z-tables .el-table td, .el-table th.is-leaf {
-	border-bottom-color: #DBDBDB;
+	border-bottom-color: #e5e5e5;
 }
 .z-tables .el-table th.is-leaf {
 	background-color: #FAFCFC;
 }
 .z-tables .el-table--border::after, .el-table--group::after, .el-table::before {
-	background-color: #DBDBDB;
+	background-color: #e5e5e5;
 }
 .z-tables .el-table__fixed-right::before, .el-table__fixed::before {
 	background-color: transparent;

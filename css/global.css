@@ -253,12 +253,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 
 /*列表页tooltip提示样式*/
 .table-tooltip.is-dark {
+    padding: 5px;
     border: 1px solid #cdcdcd;
     background: #fff;
-    box-shadow: 2px 2px 5px rgba(172,173,173,0.3);
+    box-shadow: 2px 2px 7px rgba(51,102,204,0.5);
     min-height: 30px;
     max-width: 450px;
     color: #666;
+    margin-top: 4px;
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-all;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 24px;
 }
 .table-tooltip.is-dark .popper__arrow {
     display: none;
