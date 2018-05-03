@@ -29,7 +29,7 @@ $(function(){
         var tab_id = $(this).attr("id");
         //如果该元素data-tab属性为true（即已经在右侧打开了相关的页面），则只是控制右侧tab和页面的显示隐藏切换
         if($(this).attr("data-tab")){
-            iframeTapShow(tab_id);
+            iframeTapShow(tab_id,true);
         }else{   //否则还没有打开右侧相关页面，则在右侧创建相关的tab选项和页面并选中显示
             var tab_text = $(this).text(),
                 tab_href = $(this).attr("href");
@@ -112,7 +112,7 @@ $(function(){
 * 切换打开的tab页面 js
 * parme: tabHhow_id [string] 要切换为显示的iframe对应的id
 */
-function iframeTapShow(tabHhow_id){
+function iframeTapShow(tabHhow_id,reload){
     var $chooseMenu = $("#main_menu ul li[data-id="+tabHhow_id+"]");
     // tab页签添加选中、同级其他移除选中
     $("#main_menu li").removeClass("active");
@@ -120,6 +120,9 @@ function iframeTapShow(tabHhow_id){
     $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]").addClass("active").siblings().removeClass("active");  //对应的iframe页面显示，其他页面隐藏
     // 当前选中项为更多下拉项
     set_dropattr();
+    // if (reload == true) {
+    //     $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]").find("iframe").reload();
+    // }
 }
 
 /*

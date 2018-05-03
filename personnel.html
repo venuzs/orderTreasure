@@ -123,7 +123,7 @@
 	 			<div class="grid-content">
 	 				<div class="bg-purple-left">
 	 					<el-checkbox v-model="tableAllCheck"></el-checkbox>
-						<el-dropdown @command="handleCommand">
+						<el-dropdown @command="handleCommand" placement="top">
 							<div class="el-input el-input--suffix">
 								<input type="text" value="批量操作" readonly="readonly" class="el-input__inner">
 								<span class="el-input__suffix">
@@ -139,7 +139,7 @@
 								<el-dropdown-item command="c">批量取消</el-dropdown-item>
 							</el-dropdown-menu>
 						</el-dropdown>
-						<el-dropdown @command="handleCommand2">
+						<el-dropdown @command="handleCommand2" placement="top">
 							<div class="el-input el-input--suffix">
 								<input type="text" value="批量导出" readonly="readonly" class="el-input__inner">
 								<span class="el-input__suffix">

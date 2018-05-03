@@ -163,7 +163,7 @@ td.el-table_2_column_15 .cell {
 	display: block;
 }
 .table-operate-td:hover .table-info {
-	display: none;
+	visibility: hidden;
 }
 
 /*分页*/
