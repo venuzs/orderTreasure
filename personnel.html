@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="css/myelement.css" />
 	<!-- 引入组件库 -->
 	<script src="js/element.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.nestable.js"></script>
 </head>
 <body>
 	<div id="app">
@@ -38,32 +40,82 @@
 
 			<div class="list-content">
 				<!--条件筛选-->
-				<div class="content_item_filter clearfix">
+				<div class="content_item_filter clearfix" v-bind:class="[hasfilterMore?'content_filter_more':'']">
 	 				<div class="input-select fl btn-radid_none">
-	 					<el-input placeholder="请输入内容" v-model="input4" class="minW40 z_input-holder" >
-							<!-- <el-button slot="append" icon="el-icon-search"></el-button> -->
-						</el-input>
+	 					<div class="filter-form filter-form-one clearfix">
+		 					<el-input placeholder="请输入内容" v-model="input4" class="minW40 z_input-holder" >
+								<!-- <el-button slot="append" icon="el-icon-search"></el-button> -->
+							</el-input>
 
-						<el-select v-model="valueId" clearable placeholder="身份" class="z_select-holder">
-							<el-option
-							  v-for="(item,index) in optionsId"
-							  :key="index"
-							  :label="item"
-							  :value="item">
-							</el-option>
-						</el-select>
+							<el-select v-model="valueId" clearable placeholder="身份" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsId"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
 
-						<el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
-							<el-option
-							  v-for="(item,index) in optionsState"
-							  :key="index"
-							  :label="item"
-							  :value="item">
-							</el-option>
-						</el-select>
+							<el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
 
-						<el-button type="primary">查询</el-button>
-						<el-button type="primary">清空</el-button>
+							<el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<el-select v-model="valueId" clearable placeholder="身份" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsId"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<el-select v-model="valueState" clearable placeholder="状态" @change="change" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+						</div>
+						<div class='filter-form filter-form-more clearfix' v-show="filterMore"></div>
+
+						<div class="filter-operate">
+							<div class="filter-more" @click="toggleMoreSearch" v-show="hasfilterMore"><i v-bind:class="[filterMore?'el-icon-arrow-up':'el-icon-arrow-down']"></i></div>
+
+							<el-tooltip class="item" content="查询" placement="bottom-start">
+						    	<el-button icon="el-icon-search"></el-button>
+						    </el-tooltip>
+							<el-tooltip class="item" content="清空" placement="bottom-start">
+						    	<el-button icon="el-icon-delete"></el-button>
+						    </el-tooltip>
+					    </div>
+						
+						<!-- <el-button type="primary">查询</el-button>
+						<el-button type="primary">清空</el-button> -->
 
 	 				</div>
 	 				<div class="filter-btn fr">
@@ -176,10 +228,9 @@
 	
 </body>
 	
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.nestable.js"></script>
+
 <script>
-	new Vue({
+	var vm = new Vue({
 		el: "#app",
 		data: {
 			input4: '',
@@ -188,6 +239,8 @@
 		    valueId: '',
 		    valueState: '',
 		    tableAllCheck: false,  // table 下方批量操作全选
+		    hasfilterMore: false,  // 列表是否拥有更多筛选条件
+		    filterMore: false,  // 列表更多筛选条件是否展示
 		    tableData3: [{
 	      		no: '1',
 	          	login: 'LYS',
@@ -361,14 +414,55 @@
 		            this.$refs.multipleTable.toggleRowSelection(row, this.tableAllCheck)
 		          })
 		        }
+			},
+
+			// 列表筛选项更多操作
+			toggleMoreSearch(){
+				this.filterMore = !this.filterMore;
 			}
 		},
 		mounted: function () {
+			var that = this;
+			tableMoreSearch(that);
 
+			window.onresize = () => {
+	            tableMoreSearch(that);
+	        }
+			
 		},
 		updated: function () {
 			
-		},
+		}
 	});
+
+	function tableMoreSearch(vm){
+		var that = vm;
+		var $searchForm = $(".content_item_filter .filter-form-one"),
+		 	$searchItem = $(".content_item_filter .filter-form-one > div"),
+		 	$searchMore = $(".filter-form-more > div"),
+		 	itemMax = 0,
+		 	itemWidth = 0,
+		 	singleWidth = 130;
+		// that.hasfilterMore = false;
+		$searchItem.each(function(index,obj){
+			itemWidth += $(obj).outerWidth(true);
+			if (itemWidth > $searchForm.width()) {
+				itemMax = index-1;
+				that.hasfilterMore = true;
+				console.log(that.hasfilterMore)
+				var $searchMoreItem = $(".content_item_filter .filter-form > div:gt("+itemMax+")");
+				$(".filter-form-more").prepend($searchMoreItem);
+				return false;
+			}
+		});
+		if(itemWidth < $searchForm.width()-singleWidth && $searchMore.length > 0){
+			itemMax = Math.floor(($searchForm.width()-itemWidth)/130);
+			console.log(itemMax)
+			$searchForm.append($(".filter-form-more > div:lt("+itemMax+")"));
+			if (itemMax >= $searchMore.length) {
+				that.hasfilterMore = false;
+			}
+		}
+	}
 </script>
 </html>

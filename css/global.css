@@ -252,7 +252,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 }
 
 /*列表页tooltip提示样式*/
-.table-tooltip.is-dark {
+.el-tooltip__popper.is-dark {
     padding: 5px;
     border: 1px solid #cdcdcd;
     background: #fff;

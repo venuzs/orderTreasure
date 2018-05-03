@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+/*element UI reset 样式*/
 .el-input {
 	font-size: 12px;
 }
@@ -38,11 +39,29 @@
 .el-popper[x-placement^=top] {
 	margin-bottom: 5px;
 }
+
+/*列表筛选样式*/
+.content_item_filter .input-select {
+	position: relative;
+	max-width: 83%;
+}
+.content_filter_more .input-select {
+	width: 83%;
+}
+.content_item_filter .filter-form {
+	margin-right: 110px;
+}
+.content_item_filter .filter-form > .el-input, .content_item_filter .filter-form > .el-select {
+	float: left;
+	width: 120px;
+	margin-right: 10px;
+	margin-top: 7px;
+	vertical-align: middle;
+}
 .content_item_filter .input-select .z_input-holder {
     width: 250px;
-    vertical-align: middle;
     box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
-  }
+}
 .content_item_filter .el-input-group__append, .el-input-group__prepend {
 	border-radius: 2px;
 }
@@ -58,14 +77,31 @@
 	font-size: 14px;
 	font-weight: bold;
 }
-.content_item_filter .el-select {
-	width: 120px;
-	margin-left: 7px;
-	vertical-align: middle;
-}
 .content_item_filter .el-button, .content_item_filter .el-button+.el-button {
 	margin-left: 7px; 
 	vertical-align: middle;
+	min-width: 30px;
+}
+.content_item_filter .filter-operate {
+	position: absolute;
+	right: 0;
+	top: 7px;
+}
+.content_item_filter .filter-more {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 30px;
+	width: 40px;
+	padding-left: 12px;
+	cursor: pointer;
+	color: #36c;
+	font-size: 16px;
+}
+.content_item_filter .filter-more i {
+	font-weight: bold;
+}
+.content_item_filter .filter-btn {
+	padding-top: 7px;
 }
 
 /*按钮*/
@@ -264,6 +300,9 @@ td.el-table_2_column_15 .cell {
 .el-checkbox__input.is-checked+.el-checkbox__label {
 	color: #222;
 }
+.el-checkbox__inner {
+	border-color: #ccc;
+}
 .el-checkbox__inner::after {
 	border-color: #3366CC;
 }
@@ -321,7 +360,7 @@ td.el-table_2_column_15 .cell {
 .el-select .el-input .el-select__caret {
 	position: relative;
 }
-.el-icon-arrow-up:before {
+.el-input .el-icon-arrow-up:before {
 	content: '';
 	position: absolute;
 	top: 50%;
