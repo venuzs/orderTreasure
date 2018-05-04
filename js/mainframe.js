@@ -68,31 +68,8 @@ $(function(){
         event.stopPropagation();
 
         var $target_li = $(this).parent();
-        var tab_id = $target_li.data("id");
-        var $menu_li = $(menuTabShowTargetbox);
 
-        if($target_li.is(".active")){  //点击删除时如果该标签为选中状态
-            var tabHhow_id = "";
-            if ($target_li.prev().length > 0) {
-                tabHhow_id = $target_li.prev().data("id");
-            }else if($target_li.next().length > 0){
-                tabHhow_id = $target_li.next().data("id");
-            }else{
-                tabHhow_id = $("#main_iframe #defaultFrame").data("id");
-            }
-            iframeTapShow(tabHhow_id);
-        };
-
-        // 如果点击的是下拉操作中的tab页签并且下拉页只有2项
-        if ($(this).parents(".dropdown_box").length > 0 && $target_li.siblings().length == 1) {
-            $target_li.siblings().appendTo($("#main_menu ul"));
-            $(this).parents(".dropdown_box").remove();
-        }
-
-        iframeTapHide(tab_id);
-
-        // 检查tab显示数量是否超出
-        reset_menudrop();
+        iframeClose($target_li);
     });
 
     // 下拉页签点击切换选中效果
@@ -114,15 +91,76 @@ $(function(){
 */
 function iframeTapShow(tabHhow_id,reload){
     var $chooseMenu = $("#main_menu ul li[data-id="+tabHhow_id+"]");
+    var $chooseIframeTab = $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]");
+    var $chooseIframe = $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]").find("iframe");
     // tab页签添加选中、同级其他移除选中
     $("#main_menu li").removeClass("active");
     $chooseMenu.addClass("active");
-    $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]").addClass("active").siblings().removeClass("active");  //对应的iframe页面显示，其他页面隐藏
+    $chooseIframeTab.addClass("active").siblings().removeClass("active");  //对应的iframe页面显示，其他页面隐藏
     // 当前选中项为更多下拉项
     set_dropattr();
-    // if (reload == true) {
-    //     $("#main_iframe .tab-pane[data-id="+tabHhow_id+"]").find("iframe").location.reload();
-    // }
+    // 刷新当前ifram页面
+    if (reload == true) {
+        $chooseIframe.attr('src', $chooseIframe.attr('src'));
+    }
+}
+
+/*
+* 刷新当前显示的iframe页面
+*/
+function iframeReload(){
+    var $chooseIframe = $("#main_iframe .tab-pane.active").find("iframe");
+    $chooseIframe.attr('src', $chooseIframe.attr('src'));
+}
+
+/*
+* 关闭当前显示的iframe页面
+* parme: target_li [obj] 要关闭的iframe对应的页签li
+*/
+function iframeClose(target_li){
+    if ($("#main_menu ul li").length == 0) {
+        return false;
+    }
+    if (target_li == null) {
+        var $target_li = $("#main_menu ul li:not(.dropdown_box).active");
+    }else{
+        var $target_li = target_li;
+    }
+    
+    var tab_id = $target_li.data("id");
+
+    if($target_li.is(".active")){  //点击删除时如果该标签为选中状态
+        var tabHhow_id = "";
+        if ($target_li.prev().length > 0) {
+            tabHhow_id = $target_li.prev().data("id");
+        }else if($target_li.next().length > 0){
+            tabHhow_id = $target_li.next().data("id");
+        }else{
+            tabHhow_id = $("#main_iframe #defaultFrame").data("id");
+        }
+        iframeTapShow(tabHhow_id);
+    };
+
+    // 如果点击的是下拉操作中的tab页签并且下拉页只有2项
+    if ($target_li.parents(".dropdown_box").length > 0 && $target_li.siblings().length == 1) {
+        $target_li.siblings().appendTo($("#main_menu ul"));
+        $target_li.parents(".dropdown_box").remove();
+    }
+
+    iframeTapHide(tab_id);
+
+    // 检查tab显示数量是否超出
+    reset_menudrop();
+}
+
+/*
+* 关闭全部iframe
+*/
+function iframeCloseAll(){
+    $("#main_menu ul").empty();
+    $("#main_iframe .tab-pane:not(#defaultFrame)").remove();
+    $("#defaultFrame").addClass("active");
+    $(menuTabShowTargetbox).find("a").removeAttr("data-tab");
 }
 
 /*
