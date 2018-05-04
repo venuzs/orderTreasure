@@ -377,6 +377,9 @@
 	background: #FFFFFF;
 	box-shadow: 0 1px 2px 0 rgba(165,167,168,0.30);
 }
+.main-content-body {
+	padding: 20px;
+}
 .z-tabs_header {
 	width: 100%;
 	border-bottom: 1px solid #EFEFEF;

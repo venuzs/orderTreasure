@@ -1,7 +1,7 @@
 
 *{box-sizing: border-box;}
 body{font:12px/1.5 "microsoft yahei",Arial, sans-serif;color:#697B8C;background-color:#f6f6f6;margin:0;padding:0;/*overflow-x: hidden;*/}
-a{color:#666;text-decoration:none;}
+a{color:#697B8C;text-decoration:none;}
 a:active,a:focus {text-decoration:none;color:#3366CC;}
 a:hover{text-decoration:none;color:#3366CC;}
 a:active,a:focus,input,select,textarea {outline:none;}

@@ -119,7 +119,16 @@
 
 	 				</div>
 	 				<div class="filter-btn fr">
-	 					<el-button type="primary">新增员工账号</el-button>
+	 					<!-- 单按钮新增 -->
+	 					<!-- <el-button type="primary">新增员工账号</el-button> -->
+	 					<!-- 含下拉新增 -->
+	 					<el-dropdown split-button type="primary" @click="handleClick">
+						  新增员工账号
+						  <el-dropdown-menu slot="dropdown">
+						    <el-dropdown-item>单个新增</el-dropdown-item>
+						    <el-dropdown-item>批量导入</el-dropdown-item>
+						  </el-dropdown-menu>
+						</el-dropdown>
 	 				</div>
 				</div>
 					
@@ -419,13 +428,18 @@
 			// 列表筛选项更多操作
 			toggleMoreSearch(){
 				this.filterMore = !this.filterMore;
-			}
+			},
+
+			// 列表“新增”操作 下拉按钮组按钮点击事件
+			handleClick() {
+		        alert('button click');
+		    }
 		},
 		mounted: function () {
 			var that = this;
 			tableMoreSearch(that);
 
-			window.onresize = () => {
+			window.onresize = function() {
 	            tableMoreSearch(that);
 	        }
 			

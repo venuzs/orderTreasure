@@ -15,212 +15,213 @@
 	</head>
 	<body>
 		<div id="app">
-			<div class="main-content" style="box-shadow: none;">
-				<div class="modify">
-					<!-- 面包屑导航 -->
-					<div class="clearfix">
-						<div class="breadcrumb">员工资料<span>&gt;</span>修改账号</div>
-					</div><!-- 面包屑导航 end -->
-				</div>
-				<div class="edit-warp edit-form">
-					<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-					  <el-form-item label="活动名称" prop="name">
-					    <el-input v-model="ruleForm.name"></el-input>
-					  </el-form-item>
-					  <el-form-item label="活动区域" prop="region">
-					    <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-					      <el-option label="区域一" value="shanghai"></el-option>
-					      <el-option label="区域二" value="beijing"></el-option>
-					    </el-select>
-					  </el-form-item>
-					  <el-form-item label="活动时间" required>
-					    <el-col :span="11">
-					      <el-form-item prop="date1">
-					        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-					      </el-form-item>
-					    </el-col>
-					    <el-col class="line" :span="2">-</el-col>
-					    <el-col :span="11">
-					      <el-form-item prop="date2">
-					        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-					      </el-form-item>
-					    </el-col>
-					  </el-form-item>
-					  <el-form-item label="即时配送" prop="delivery">
-					    <el-switch v-model="ruleForm.delivery"></el-switch>
-					  </el-form-item>
-					  <el-form-item label="活动性质" prop="type">
-					    <el-checkbox-group v-model="ruleForm.type">
-					      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-					      <el-checkbox label="地推活动" name="type"></el-checkbox>
-					      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-					      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-					    </el-checkbox-group>
-					  </el-form-item>
-					  <el-form-item label="特殊资源" prop="resource">
-					    <el-radio-group v-model="ruleForm.resource">
-					      <el-radio label="线上品牌商赞助"></el-radio>
-					      <el-radio label="线下场地免费"></el-radio>
-					    </el-radio-group>
-					  </el-form-item>
-					  <el-form-item label="活动形式" prop="desc">
-					    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-					  </el-form-item>
-					  <el-form-item>
-					    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-					    <el-button @click="resetForm('ruleForm')">重置</el-button>
-					  </el-form-item>
-					</el-form>
-				
-					<div class="company-content">
-						<h3>账号信息</h3>
-						<div class="form-grom">
-							<label class="bandlabel"><s>*</s>登录账号</label>
-							<div class="band-ipt">
-								<input class="myipt" v-model="inputC"></input>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel"><s>*</s>密码</label>
-							<div class="band-ipt">
-								<input class="myipt" placeholder="请输入密码" v-model="inputPSW"></input>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel">身份</label>
-							<div class="band-ipt">
-								<p class="ipt_p">司机</p>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel"><s>*</s>姓名</label>
-							<div class="band-ipt">
-								<input class="myipt" placeholder="请输入姓名" v-model="inputName"></input>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel">职位</label>
-							<div class="band-ipt">
-								<input class="myipt" placeholder="请输入职位"></input>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel">部门</label>
-							<div class="band-ipt">
-								<el-select v-model="trade" placeholder="请选择">
-								    <el-option
-								      v-for="item in options"
-								      :key="item"
-								      :label="item"
-								      :value="item">
-								    </el-option>
-								</el-select>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel">备注</label>
-							<div class="band-ipt">
-								<textarea class="myipt" placeholder="填写相关备注信息"></textarea>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel"><s>*</s>手机号</label>
-							<div class="band-ipt">
-								<input class="myipt" v-model="inputPhone" placeholder="请输入手机号码"></input>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel">邮箱</label>
-							<div class="band-ipt">
-								<input class="myipt" placeholder="请输入邮箱号"></input>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel">QQ</label>
-							<div class="band-ipt">
-								<input class="myipt" placeholder="请输入QQ号码"></input>
-							</div>
-						</div>
-					</div>
-					<div class="company-content">
-						<h3>权限范围</h3>
-						<div class="form-grom">
-							<el-popover
-							  ref="popoverqsu"
-							  placement="bottom-start"
-							  width="440"
-							  trigger="hover">
-							  <p class="z-jiao">数据权限：此账号可以看到那些客户的订单销售数据，资金数据，报表数据；比如：某个业务员人员，只能看到他负责地区的客户订单</p>
-							</el-popover>
-							
-							<label class="bandlabel has-pop"><i v-popover:popoverqsu class="el-icon-question"></i>数据权限</label>
-							<div class="band-ipt z_rodio">
-								<template>
-								  <el-radio v-model="radio" label="1">全部区域</el-radio>
-								  <el-radio v-model="radio" label="2">部分区域</el-radio>
-								</template>
-								<a href="javascript:;" class="z-customerArea" :class="{show: showChioceArea}" @click="showDailog">+选择客户区域范围</a>
-							</div>
-						</div>
-						<div class="form-grom">
-							<label class="bandlabel">角色权限</label>
-							<div class="band-ipt z-form-checkbox">
-								<div class="form-checkbox">
-									<el-checkbox-group v-model="checkList">
-									    <el-checkbox label="业务员"></el-checkbox>
-									    <el-checkbox label="仓库管理员"></el-checkbox>
-									    <el-checkbox label="财务管理员"></el-checkbox>
-									   	<el-checkbox label="订单管理员"></el-checkbox>
-									    <el-checkbox label="系统管理员"></el-checkbox>
-									</el-checkbox-group>
+			<div class="main-content">
+				<!-- 页面头部 -->
+				<div class="page-header">
+					<h1 class="page-title">修改账号</h1>
+					<div class="breadcrumb"><a href="##">首页</a><span>/</span>员工资料</div>
+				</div><!-- 页面头部 end -->
+
+				<div class="main-content-body">
+					<div class="edit-form">
+						<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+						  <el-form-item label="活动名称" prop="name">
+						    <el-input v-model="ruleForm.name"></el-input>
+						  </el-form-item>
+						  <el-form-item label="活动区域" prop="region">
+						    <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+						      <el-option label="区域一" value="shanghai"></el-option>
+						      <el-option label="区域二" value="beijing"></el-option>
+						    </el-select>
+						  </el-form-item>
+						  <el-form-item label="活动时间" required>
+						    <el-col :span="11">
+						      <el-form-item prop="date1">
+						        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+						      </el-form-item>
+						    </el-col>
+						    <el-col class="line" :span="2">-</el-col>
+						    <el-col :span="11">
+						      <el-form-item prop="date2">
+						        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+						      </el-form-item>
+						    </el-col>
+						  </el-form-item>
+						  <el-form-item label="即时配送" prop="delivery">
+						    <el-switch v-model="ruleForm.delivery"></el-switch>
+						  </el-form-item>
+						  <el-form-item label="活动性质" prop="type">
+						    <el-checkbox-group v-model="ruleForm.type">
+						      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+						      <el-checkbox label="地推活动" name="type"></el-checkbox>
+						      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+						      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+						    </el-checkbox-group>
+						  </el-form-item>
+						  <el-form-item label="特殊资源" prop="resource">
+						    <el-radio-group v-model="ruleForm.resource">
+						      <el-radio label="线上品牌商赞助"></el-radio>
+						      <el-radio label="线下场地免费"></el-radio>
+						    </el-radio-group>
+						  </el-form-item>
+						  <el-form-item label="活动形式" prop="desc">
+						    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+						  </el-form-item>
+						  <el-form-item>
+						    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+						    <el-button @click="resetForm('ruleForm')">重置</el-button>
+						  </el-form-item>
+						</el-form>
+					
+						<div class="company-content">
+							<h3>账号信息</h3>
+							<div class="form-grom">
+								<label class="bandlabel"><s>*</s>登录账号</label>
+								<div class="band-ipt">
+									<input class="myipt" v-model="inputC"></input>
 								</div>
-								<div class="z-box-info">
-									<p>注意请勾选此账号属于的【角色权限】，对应的【权限明显】即可选中；</p>
-									<p>如果您还未设置过【角色权限】，请先 <a href="javascript:;">设置角色</a>，比如：仓库管理员、财务管理员、业务管理员</p>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel"><s>*</s>密码</label>
+								<div class="band-ipt">
+									<input class="myipt" placeholder="请输入密码" v-model="inputPSW"></input>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel">身份</label>
+								<div class="band-ipt">
+									<p class="ipt_p">司机</p>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel"><s>*</s>姓名</label>
+								<div class="band-ipt">
+									<input class="myipt" placeholder="请输入姓名" v-model="inputName"></input>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel">职位</label>
+								<div class="band-ipt">
+									<input class="myipt" placeholder="请输入职位"></input>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel">部门</label>
+								<div class="band-ipt">
+									<el-select v-model="trade" placeholder="请选择">
+									    <el-option
+									      v-for="item in options"
+									      :key="item"
+									      :label="item"
+									      :value="item">
+									    </el-option>
+									</el-select>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel">备注</label>
+								<div class="band-ipt">
+									<textarea class="myipt" placeholder="填写相关备注信息"></textarea>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel"><s>*</s>手机号</label>
+								<div class="band-ipt">
+									<input class="myipt" v-model="inputPhone" placeholder="请输入手机号码"></input>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel">邮箱</label>
+								<div class="band-ipt">
+									<input class="myipt" placeholder="请输入邮箱号"></input>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel">QQ</label>
+								<div class="band-ipt">
+									<input class="myipt" placeholder="请输入QQ号码"></input>
 								</div>
 							</div>
 						</div>
-						<div class="form-grom">
-							<label class="bandlabel mtop8">权限明细</label>
-							<div class="band-ipt z-power-list">
-								<div class="z-yuan-item" v-for="(item,index) in list" :key="index">
-									<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{item.title}}</span>
-									<div class="z-yuan-content">
-										<ol>
-											<li v-for="(v,i) in item.subList" :key="i"><i class="el-icon-check" :class="{on: v.checked}"></i>{{v.value}}</li>
-										</ol>
+						<div class="company-content">
+							<h3>权限范围</h3>
+							<div class="form-grom">
+								<el-popover
+								  ref="popoverqsu"
+								  placement="bottom-start"
+								  width="440"
+								  trigger="hover">
+								  <p class="z-jiao">数据权限：此账号可以看到那些客户的订单销售数据，资金数据，报表数据；比如：某个业务员人员，只能看到他负责地区的客户订单</p>
+								</el-popover>
+								
+								<label class="bandlabel has-pop"><i v-popover:popoverqsu class="el-icon-question"></i>数据权限</label>
+								<div class="band-ipt z_rodio">
+									<template>
+									  <el-radio v-model="radio" label="1">全部区域</el-radio>
+									  <el-radio v-model="radio" label="2">部分区域</el-radio>
+									</template>
+									<a href="javascript:;" class="z-customerArea" :class="{show: showChioceArea}" @click="showDailog">+选择客户区域范围</a>
+								</div>
+							</div>
+							<div class="form-grom">
+								<label class="bandlabel">角色权限</label>
+								<div class="band-ipt z-form-checkbox">
+									<div class="form-checkbox">
+										<el-checkbox-group v-model="checkList">
+										    <el-checkbox label="业务员"></el-checkbox>
+										    <el-checkbox label="仓库管理员"></el-checkbox>
+										    <el-checkbox label="财务管理员"></el-checkbox>
+										   	<el-checkbox label="订单管理员"></el-checkbox>
+										    <el-checkbox label="系统管理员"></el-checkbox>
+										</el-checkbox-group>
+									</div>
+									<div class="z-box-info">
+										<p>注意请勾选此账号属于的【角色权限】，对应的【权限明显】即可选中；</p>
+										<p>如果您还未设置过【角色权限】，请先 <a href="javascript:;">设置角色</a>，比如：仓库管理员、财务管理员、业务管理员</p>
 									</div>
 								</div>
 							</div>
+							<div class="form-grom">
+								<label class="bandlabel mtop8">权限明细</label>
+								<div class="band-ipt z-power-list">
+									<div class="z-yuan-item" v-for="(item,index) in list" :key="index">
+										<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{item.title}}</span>
+										<div class="z-yuan-content">
+											<ol>
+												<li v-for="(v,i) in item.subList" :key="i"><i class="el-icon-check" :class="{on: v.checked}"></i>{{v.value}}</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
+							
+							<!--区域选择-->
+					        <div class="el-message-box__wrapper m_seniorscreen" :class="{show: dialogFormVisible}" v-show="dialogFormVisible" style="display: none;">
+					        	<div class="el-message-box">
+					        		<div class="el-message-box__header">
+					           	      <div class="el-message-box__title"><span>选择客户区域范围</span></div>
+					           	      <button type="button" @click="dislogHide" class="el-message-box__headerbtn"><i class="el-message-box__close el-icon-close"></i></button>
+					                </div>
+					                <div class="el-message-box__content">
+					            		<div class="v-form">
+											<el-checkbox-group v-model="areacheckList">
+											    <el-checkbox label="默认地区"></el-checkbox>
+											</el-checkbox-group>
+										</div>    
+					                </div>
+					                <div class="el-message-box__btns">
+					                	 <el-button @click="dislogHide" type="primary">确定</el-button>
+					                	 <el-button @click="dislogHide">取消</el-button>
+					                </div>
+					        	</div>
+					        </div>
 						</div>
-						<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
-						
-						<!--区域选择-->
-				        <div class="el-message-box__wrapper m_seniorscreen" :class="{show: dialogFormVisible}" v-show="dialogFormVisible" style="display: none;">
-				        	<div class="el-message-box">
-				        		<div class="el-message-box__header">
-				           	      <div class="el-message-box__title"><span>选择客户区域范围</span></div>
-				           	      <button type="button" @click="dislogHide" class="el-message-box__headerbtn"><i class="el-message-box__close el-icon-close"></i></button>
-				                </div>
-				                <div class="el-message-box__content">
-				            		<div class="v-form">
-										<el-checkbox-group v-model="areacheckList">
-										    <el-checkbox label="默认地区"></el-checkbox>
-										</el-checkbox-group>
-									</div>    
-				                </div>
-				                <div class="el-message-box__btns">
-				                	 <el-button @click="dislogHide" type="primary">确定</el-button>
-				                	 <el-button @click="dislogHide">取消</el-button>
-				                </div>
-				        	</div>
-				        </div>
+						<div class="edit-button z-yuan-butn">
+							<el-button type="primary">确定</el-button>
+							<el-button>取消</el-button>
+						</div>
 					</div>
-					<div class="edit-button z-yuan-butn">
-						<el-button type="primary">确定</el-button>
-						<el-button>取消</el-button>
-					</div>
-					
 				</div>	
 			</div>	
 		</div>	
@@ -264,7 +265,7 @@
 				areacheckList: ['默认地区'], //区域选择
 				dialogFormVisible: false, //弹框
 
-				// ele data
+				// form 表单数据
 				ruleForm: {
 		          name: '',
 		          region: '',
