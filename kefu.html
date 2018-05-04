@@ -166,40 +166,30 @@
 					</el-table>
 				</div>
 			</div>
-			<!--新增客服-->
-			<div class="v-modal" @click="dislogHide" v-show="dialogFormVisible" style="display: none;"></div>
-	        <div class="el-message-box__wrapper m_seniorscreen" :class="{show: dialogFormVisible}" v-show="dialogFormVisible" style="display: none;">
-	        	<div class="el-message-box">
-	        		<div class="el-message-box__header">
-	           	      <div class="el-message-box__title"><span>新增客服联系方式</span></div>
-	           	      <button type="button" @click="dislogHide" class="el-message-box__headerbtn"><i class="el-message-box__close el-icon-close"></i></button>
-	                </div>
-	                <div class="el-message-box__content">
-	            		<div class="v-form">
-							<label>类型</label>
-						    <el-select v-model="selectValue" placeholder="请选择" class="z_select-holder">
-						      <el-option  v-for="item in partOptions" :key="item.label" :label="item.label" :value="item.value"></el-option>
-						    </el-select>
-						</div>    
-						<div class="v-form">   
-							<label><s>*</s>名称</label>
-						    <el-input ></el-input>
-						</div> 	
-	            		<div class="v-form">   
-							<label><s>*</s>号码</label>
-						    <el-input ></el-input>
-						</div> 
-						<div class="v-form">   
-							<label><s>*</s>排序值</label>
-						    <el-input v-model="soltValue"></el-input>
-						</div>
-	                </div>
-	                <div class="el-message-box__btns">
-	                	 <el-button @click="dislogHide" type="primary">确定</el-button>
-	                	 <el-button @click="dislogHide">取消</el-button>
-	                </div>
-	        	</div>
-	        </div>
+			<!-- 新增客服模态框 -->
+			<el-dialog title="新增客服联系方式" :visible.sync="dialogFormVisible">
+				<el-form :model="ruleForm" :rules="rules" label-width="80px" class="demo-ruleForm">
+					<el-form-item label="类型">
+						<el-select v-model="ruleForm.selectValue" placeholder="请选择">
+					    	<el-option v-for="item in ruleForm.partOptions" :key="item.label" :label="item.label" :value="item.value"></el-option>
+					    </el-select>
+					</el-form-item>
+					<el-form-item label="名称" prop="name">
+						<el-input v-model="ruleForm.name"></el-input>
+					</el-form-item>
+					<el-form-item label="号码" prop="phone">
+						<el-input v-model="ruleForm.phone"></el-input>
+					</el-form-item>
+					<el-form-item label="排序值" prop="soltValue">
+						<el-input v-model="ruleForm.soltValue"></el-input>
+					</el-form-item>
+				</el-form>
+				<div slot="footer" class="dialog-footer">
+					<el-button type="primary">确 定</el-button>
+					<el-button @click="dialogFormVisible = false">取 消</el-button>
+				</div>
+			</el-dialog>
+	        <!-- 新增客服模态框 end -->
         </div>
 	</template>
 	
@@ -446,19 +436,39 @@
 				{no: 3, type: '个人QQ',name: '店小二',number: '546344534',sort: '3',isCreater: false},
 				{no: 4, type: '微信群',name: '店小二',number: '54634',sort: '4',isCreater: false},
 				],
-				dialogFormVisible: false, //新增客服
-				partOptions: [{
-		        	value: '选项1',
-	          		label: '个人	QQ'
-		        },{
-		        	value: '选项2',
-	          		label: '微信'
-		        },{
-		        	value: '选项3',
-	          		label: '电话'
-		        }],
-		         selectValue: '',
-		         soltValue: 500,
+				dialogFormVisible: false, //新增客服模态框是否显示
+
+		        // 新增客服模态框数据
+				ruleForm: {
+					// 账号信息
+					selectValue: '',
+					name: '',
+					phone: '',
+					soltValue: 500,
+					partOptions: [{
+			        	value: '选项1',
+		          		label: '个人	QQ'
+			        },{
+			        	value: '选项2',
+		          		label: '微信'
+			        },{
+			        	value: '选项3',
+		          		label: '电话'
+			        }]
+		        },
+		        // form 表单验证规则
+		        rules: {
+					name: [
+						{ required: true, message: '请输入名称', trigger: 'blur' },
+						{ min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+					],
+					phone: [
+						{ required: true, message: '请输入手机号', trigger: 'blur' }
+					],
+					soltValue: [
+						{ required: true, message: '请输入排序值', trigger: 'blur' }
+					]
+		        },
 			}
 		},
 		methods: {
