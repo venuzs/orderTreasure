@@ -24,6 +24,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	height: 100%;
 	overflow: hidden;
 }
+/*间距设置*/
+.mb_0 {
+    margin-bottom: 0 !important;
+}
 /*主色调*/
 .bg_c {
 	background-color: #36C8E6 !important;  /*主背景颜色*/

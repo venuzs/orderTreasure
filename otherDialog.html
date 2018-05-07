@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订货宝 让生意更美好！</title>
+	<script src="js/vue221.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="css/element.css">
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/myelement.css" />
+	<!-- 引入组件库 -->
+	<script src="js/element.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.nestable.js"></script>
+</head>
+<body>
+	<div style="padding:50px;">
+		<div id="format">
+			<el-button @click="dialogFormVisible = true">新增多规格</el-button>
+
+			<!-- 新增部门模态框 -->
+			<el-dialog title="新增商品多规格" :visible.sync="dialogFormVisible">
+				<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm el-input-95">
+					<el-form-item label="多规格名称" prop="name">
+						<el-input v-model="ruleForm.name"></el-input>
+					</el-form-item>
+					<el-form-item label="多规格编号" prop="phone">
+						<el-input v-model="ruleForm.phone"></el-input>
+						<el-popover
+						  ref="popoverb"
+						  placement="bottom"
+						  trigger="hover">
+						  <p class="z-jiao">1、请根据商品实际情况自定义多规格编号<br/>2、编号长度为1~8个字符长度<br/>3、不填则系统将进行默认生成</p>
+						</el-popover>
+						<i v-popover:popoverb class="el-icon-question"></i>
+					</el-form-item>
+					<el-form-item label="多规格值" class="mb_0">
+						<el-popover
+						  ref="popoverb2"
+						  placement="bottom"
+						  trigger="hover">
+						  <p class="z-jiao">子规格编号如果没有填写，由系统自动分配，已使用多规格不能删除或者修改编号</p>
+						</el-popover>
+						<i v-popover:popoverb2 class="el-icon-question"></i>
+					</el-form-item>
+					<div class="format_table">
+						<div class="z-tables">
+							<el-table ref="multipleTable" :data="tableData3" style="width: 100%;">
+			 					<el-table-column type="index" width="55"></el-table-column>
+
+			 					<el-table-column label="子规格名称" min-width="130">
+			 						<template slot-scope="scope">
+									    <el-input v-model="scope.row.name" placeholder="最多20个字"></el-input>
+									</template>
+			 					</el-table-column>
+
+							    <el-table-column label="子规格编号" min-width="130">
+							    	<template slot-scope="scope">
+									    <el-input v-model="scope.row.uid"></el-input>
+									</template>
+							    </el-table-column>
+							    
+							    <el-table-column label="操作" min-width="60">
+									<template slot-scope="scope">
+									    <el-button type="text" @click="removeFormat(scope.$index, scope.row)">删除</el-button>
+									</template>
+							    </el-table-column>
+							</el-table>
+						</div>
+						<el-button type="text" @click="addFormat">继续添加</el-button>
+					</div>
+				</el-form>
+				<div slot="footer" class="dialog-footer">
+					<el-button type="primary" @click="submitForm('ruleForm')">保 存</el-button>
+					<el-button @click="dialogFormVisible = false">取 消</el-button>
+				</div>
+			</el-dialog>
+	        <!-- 新增部门模态框 end -->
+
+		</div>
+	</div>
+	
+</body>
+	
+
+<script>
+	var vm = new Vue({
+		el: "#format",
+		data: {
+			dialogFormVisible: false,  // 新增模态框是否显示
+
+	        // 新增部门模态框数据
+			ruleForm: {
+				name: '',
+				phone: '',
+	        },
+	        // form 表单验证规则
+	        rules: {
+				name: [
+					{ required: true, message: '请输入多规格名称', trigger: 'blur' },
+					{ min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+				],
+				phone: [
+					{ min: 1, max: 8, message: '长度在 1 到 8 个字符', trigger: 'blur' }
+				]
+	        },
+	        // 多规格值表格数据内容
+	        tableData3: [
+	        	{
+	        		name: '',
+					uid: '',
+	        	},
+	        	{
+	        		name: '',
+					uid: '',
+	        	},
+	        ]
+		},
+		methods: {
+			// 提交表单
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+
+			// 删除多规格值方法
+			removeFormat(index, row) {
+				if (index !== -1) {
+					this.tableData3.splice(index, 1)
+				}
+		    },
+		    // 新增多规格值方法
+			addFormat() {
+				this.tableData3.push({
+					name: '',
+					uid: '',
+				});
+			}
+		},
+		mounted: function () {
+
+		},
+		updated: function () {
+			
+		}
+	});
+</script>
+</html>

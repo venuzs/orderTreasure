@@ -1482,3 +1482,12 @@
 	margin-left: 10px;
 }
 
+/*商品多规格模态框选择*/
+.format_table {
+	padding: 0 23px;
+	max-height: 300px;
+	overflow: auto;
+}
+.format_table > .el-button {
+	margin-top: 10px;
+}

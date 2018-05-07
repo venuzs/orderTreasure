@@ -79,7 +79,7 @@
 }
 .el-button--text {
     border: none;
-    color: #36C8E6 !important;
+    color: #3366CC !important;
     background: transparent;
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -458,4 +458,7 @@ td.el-table_2_column_15 .cell {
 /*模态框内表单*/
 .el-dialog .el-select {
 	width: 100%;
+}
+.el-input-95 .el-input {
+	width: 95%;
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}"/>
     <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" href="css/myelement.css" th:href="@{/css/myelement.css}"/>
-    <script src="js/vue221.js" th:src="@{/js/vue221.js}"></script>
+    <script src="js/vue221.js" th:src="@{/js/vue.js}"></script>
     <script src="js/element.js" th:src="@{/js/element.js}"></script>
 </head>
 <body>
@@ -38,15 +38,14 @@
                             <div v-for="firstMenu in menuTree" :key="firstMenu.uuid">
                                 <el-row>
                                     <el-col>
-                                        <el-checkbox :label="firstMenu.uuid"
-                                                     v-model="menuList[firstMenu.uuid].isCheck"
+                                        <el-checkbox v-model="menuList[firstMenu.uuid].isCheck"
                                                      :indeterminate="menuList[firstMenu.uuid].isIndeterminate"
                                                      @change="value => handleMenuChange(value, firstMenu)">{{firstMenu.name}}
                                         </el-checkbox>
                                     </el-col>
                                 </el-row>
                                 <el-row v-for="secondMenu in firstMenu.childrens" :key="secondMenu.uuid">
-                                    <template v-if="secondMenu.permissionList && secondMenu.permissionList.length > 0">
+                                    <template v-if="secondMenu.permissionList != null">
                                         <el-col :span="4" :offset="1">
                                             <el-checkbox :label="secondMenu.uuid"
                                                          v-model="menuList[secondMenu.uuid].isCheck"
@@ -91,7 +90,7 @@
                                                                  @change="value => handleMenuChange(value, firstMenu)">{{thirdMenu.name}}
                                                     </el-checkbox>
                                                 </el-col>
-                                                <template v-if="thirdMenu.permissionList">
+                                                <template v-if="thirdMenu.permissionList != null">
                                                     <div v-for="permission, index in thirdMenu.permissionList" :key="permission.uuid">
                                                         <template v-if="index == 0">
                                                             <el-col :span="4" :offset="1">
@@ -129,13 +128,14 @@
 </div>
 </body>
 <script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script src="json/menuTree.json"></script>
 
 <script th:inline="javascript">
     new Vue({
         el: "#app",
         data: {
             typeList: [{name: "平台角色", value: "1"}, {name: "会员角色", value: "2"}],
-            menuTree: [[${menuTree}]],
+            menuTree: menuTree,
             menuList: {},
             role: {
                 name: '',
@@ -152,7 +152,8 @@
             }
         },
         created: function () {
-            convertMenuTreeToList(this.menuTree);
+            let self = this;
+            convertMenuTreeToList(self.menuTree, self.menuList, self);
         },
         methods: {
             /*handleCheckPermissionChange: function (value, menu) {
@@ -169,11 +170,12 @@
                 this.role.permission[menu.uuid].isIndeterminate = false;
             },*/
             handleMenuChange(value, menu) {
-                changeParentMenu(menu, this.menuList, value, false);
-                changeChildrenMenu(menu, this.menuList, value, false)
+                let self = this;
+                changeParentMenu(menu, self.menuList, value, false, self);
+                changeChildrenMenu(menu, self.menuList, value, false, self)
             },
             handleSave: function () {
-                let self = this;
+                /*let self = this;
                 let permissionList = [];
                 for (let key in self.role.permission) {
                     permissionList = permissionList.concat(self.role.permission[key].permissionList)
@@ -213,7 +215,7 @@
                             }
                         });
                     }
-                });
+                });*/
             },
             handleCancel: function () {
                 window.location.href = "/system/permission/role/tolist";
@@ -221,31 +223,33 @@
         }
     });
 
-    function changeParentMenu(menu, menuList, isCheck, isIndeterminate) {
+    function changeParentMenu(menu, menuList, isCheck, isIndeterminate, self) {
         if (menu.parentId === "") {
-            menuList[menu.uuid] = {isCheck: isCheck, isIndeterminate: isIndeterminate, parentId: menu.parentId};
+            self.menuList[menu.uuid].isCheck = isCheck;
+            self.menuList[menu.uuid].isIndeterminate = isIndeterminate;
+            // self.$set(menuList, menu.uuid, {isCheck: isCheck, isIndeterminate: isIndeterminate, parentId: menu.parentId});
         } else {
             let patentMenu = menuList[menu.parentId];
-            changeParentMenu(patentMenu, menuList, isCheck, isIndeterminate)
+            changeParentMenu(patentMenu, menuList, isCheck, isIndeterminate, self)
         }
     }
 
-    function changeChildrenMenu(menu, menuList, isCheck, isIndeterminate) {
+    function changeChildrenMenu(menu, menuList, isCheck, isIndeterminate, self) {
         if (menu.childrens.length === 0) {
-            menuList[menu.uuid] = {isCheck: isCheck, isIndeterminate: isIndeterminate, parentId: menu.parentId};
+            self.$set(menuList, menu.uuid, {isCheck: isCheck, isIndeterminate: isIndeterminate, parentId: menu.parentId});
         } else {
             for (let childMenu of menu.childrens) {
-                changeChildrenMenu(childMenu, menuList, isCheck, isIndeterminate);
+                changeChildrenMenu(childMenu, menuList, isCheck, isIndeterminate, self);
             }
         }
     }
 
-    function convertMenuTreeToList(menuTree, menuList) {
+    function convertMenuTreeToList(menuTree, menuList, self) {
         for (let menu of menuTree) {
-            this.$set(this.role.permission, menu.uuid, {checkAll: checkAll, isIndeterminate: isIndeterminate, permissionList: permissionUuids});
-            menuList[menu.uuid] = {isCheck: false, isIndeterminate: false, parentId: menu.parentId};
+            self.$set(self.role.permission, menu.uuid, {isCheck: false, isIndeterminate: false, permissionList: []});
+            self.$set(menuList, [menu.uuid], {isCheck: false, isIndeterminate: false, parentId: menu.parentId});
             if (menu.childrens.length > 0) {
-                convertMenuTreeToList(menu.childrens);
+                convertMenuTreeToList(menu.childrens, menuList, self);
             }
         }
     }
