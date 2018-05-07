@@ -286,20 +286,26 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     border-radius: 4px;
     overflow: hidden;
     text-align: center;
+    cursor: pointer;
+}
+.upload-image-box .upload-button {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    color: #c0c4cc;
+    margin-top: -45px;
+    line-height: 30px;
+    text-align: center;
 }
 .upload-image-box .el-icon-upload {
-    position: absolute;
-    left: 50%;
-    top: 50%;
     display: block;
     font-size: 60px;
     line-height: 60px;
-    color: #c0c4cc;
-    margin: -30px 0 0 -30px;
+    margin: 0 auto;
 }
 .upload-image-box .upload-image {
     position: relative;
-    cursor: pointer;
 }
 .upload-image-box .upload-image, .upload-image-box .upload-image img {
     width: 100%;

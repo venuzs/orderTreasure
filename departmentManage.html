@@ -138,7 +138,10 @@
 							<!-- <span class="upload-operate">点击修改</span> -->
 							<span class="upload-operate upload-operate-delect" @click.stop="delectImage('uploadImage')">点击删除</span>
 						</div>
-						<i v-show="!uploadImage.imageUrl" class="el-icon-upload"></i>
+						<span v-show="!uploadImage.imageUrl" class="upload-button">
+							<i class="el-icon-upload"></i>
+							添加图片
+						</span>
 					</div>
 				</el-form-item>
 			</el-form>
