@@ -132,9 +132,13 @@
 					<el-input v-model="ruleForm.phone"></el-input>
 				</el-form-item>
 				<el-form-item label="部门图标">
-					<div class="upload-image-box">
-						<i class="el-icon-upload" v-show="!ruleForm.showimage"></i>
-						<div class="upload-image" v-show="ruleForm.showimage"><img :src="ruleForm.image"></div>
+					<div class="upload-image-box" @click="dialogImageVisible = true" style="width:150px;height:150px;">
+						<div v-show="uploadImage.imageUrl" class="upload-image">
+							<img :src="uploadImage.imageUrl">
+							<!-- <span class="upload-operate">点击修改</span> -->
+							<span class="upload-operate upload-operate-delect" @click.stop="delectImage('uploadImage')">点击删除</span>
+						</div>
+						<i v-show="!uploadImage.imageUrl" class="el-icon-upload"></i>
 					</div>
 				</el-form-item>
 			</el-form>
@@ -148,25 +152,14 @@
         <!-- 上传图片模态框 -->
 		<el-dialog title="上传文件" :visible.sync="dialogImageVisible">
 			<el-upload
-			  class="avatar-uploader"
-			  action="https://jsonplaceholder.typicode.com/posts/"
-			  :show-file-list="false"
-			  :on-success="handleAvatarSuccess"
-			  :before-upload="beforeAvatarUpload">
-			  <img v-if="imageUrl" :src="imageUrl" class="avatar">
-			  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-			</el-upload>
-			
-			<el-upload
-			  class="upload-demo"
 			  ref="upload"
 			  action="https://jsonplaceholder.typicode.com/posts/"
-			  :on-preview="handlePreview"
-			  :on-remove="handleRemove"
-			  :file-list="fileList"
-			  :auto-upload="false">
-			  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-			  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+			  :show-file-list="false"
+			  :on-change="handleChange"
+			  :file-list="uploadImage.fileList"
+			  :auto-upload="false"
+			  :before-upload="beforeAvatarUpload">
+			  <el-button size="medium">+&nbsp;点击选择图片</el-button>
 			  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 			</el-upload>
 			<div slot="footer" class="dialog-footer">
@@ -193,7 +186,6 @@
 				selectValue: '',
 				name: '',
 				phone: '',
-				image: ' ',
 				partOptions: [{
 		        	value: '选项1',
 	          		label: '产品部'
@@ -215,7 +207,10 @@
 	        },
 
 	        // 上传图片数据
-	        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+	        uploadImage: {
+	        	imageUrl: '',
+	        	fileList: []
+	        }
 		},
 		methods: {
 			dislogHide: function () {
@@ -233,13 +228,40 @@
 			// 提交新增部门表单
 			submitForm(formName) {
 				this.$refs[formName].validate((valid) => {
-				  if (valid) {
-				    alert('submit!');
-				  } else {
-				    console.log('error submit!!');
-				    return false;
-				  }
+					if (valid) {
+						// 图片手动上传到服务器
+						this.$refs.upload.submit();
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
 				});
+			},
+
+			// 图片上传前校验
+			beforeAvatarUpload(file) {
+				const isJPG = file.type === 'image/jpeg';
+				const isLt2M = file.size / 1024 / 1024 < 2;
+
+				if (!isJPG) {
+				  this.$message.error('上传头像图片只能是 JPG 格式!');
+				}
+				if (!isLt2M) {
+				  this.$message.error('上传头像图片大小不能超过 2MB!');
+				}
+				return isJPG && isLt2M;
+			},
+			// 图片状态变化监听,选择图片后执行的事件
+			handleChange(file, fileList) {
+				this.uploadImage.fileList = fileList.slice(-1);
+				this.uploadImage.imageUrl = URL.createObjectURL(file.raw);
+				this.dialogImageVisible = false;
+			},
+			// 删除图片事件
+			delectImage(fileName){
+				this[fileName].fileList = [];
+				this[fileName].imageUrl = '';
 			}
 		},
 		mounted: function () {

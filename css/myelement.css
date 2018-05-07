@@ -60,6 +60,10 @@
 	color: #222;
 	border-radius: 2px;
 }
+.el-button--medium {
+	font-size: 14px;
+	padding: 10px 12px;
+}
 .el-button+.el-button {
 	margin-left: 15px;
 }
