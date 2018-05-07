@@ -271,3 +271,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .table-tooltip.is-dark .popper__arrow {
     display: none;
 }
+
+/*上传图片组件样式*/
+.upload-image-box {
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    overflow: hidden;
+    text-align: center;
+}
+.upload-image-box .el-icon-upload {
+    display: block;
+    font-size: 60px;
+    line-height: 60px;
+    color: #c0c4cc;
+    margin: 45px auto 0;
+}
+.upload-image-box .upload-image, .upload-image-box .upload-image img {
+    width: 100%;
+    height: 100%;
+}

@@ -1217,8 +1217,8 @@
 .dd-collapsed .dd-list { display: none; }
 .dd-item,
 .dd-empty,
-.dd-placeholder { display: block; position: relative; margin: 0; padding: 0; min-height: 20px; font-size: 14px; line-height: 48px; }
-.dd-handle { display: block; height: 50px; line-height: 48px; margin-bottom: 10px; padding: 0 20px; color: #222; text-decoration: none; font-weight:normal; border: 1px solid #ddd;
+.dd-placeholder { display: block; position: relative; margin: 0; padding: 0; min-height: 20px; font-size: 14px; line-height: 40px; }
+.dd-handle { display: block; height: 42px; line-height: 40px; margin-bottom: 8px; padding: 0 20px; color: #222; text-decoration: none; font-weight:normal; border: 1px solid #ddd;
     background: #fff;
     -webkit-border-radius: 4px;
    border-radius: 4px;
@@ -1226,7 +1226,7 @@
 }
 .dd-handle:hover,
 .dd-handle.active { background: #E1E8F5; cursor: move;}
-.dd-handle::before {content: '';position: absolute;width: 8px;height: 8px;top: 20px;left: -21px;border-radius: 4px;font-size: 14px;
+.dd-handle::before {content: '';position: absolute;width: 8px;height: 8px;top: 15px;left: -21px;border-radius: 4px;font-size: 14px;
     text-align: center;
     line-height: 10px;
     background-color: #fff;
@@ -1240,7 +1240,7 @@
 .dd_option > button {color: #3366CC;border: none;background-color: transparent;outline: transparent;cursor: pointer;}
 .dd_option span {color: #3366CC;}
 .drag_tree {padding-left: 25px;border: 0; border-top: 1px solid #eee;border-bottom: 1px solid #eee;margin-top: 22px;}
-.dd-item > .dragbtn { position: absolute; color: #666; left:-24px; top: 18px; width: 14px; height: 14px; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 1px solid #D7DADB; background: #FFF; line-height: 10px; text-align: center; font-weight: normal; z-index: 99;}
+.dd-item > .dragbtn { position: absolute; color: #666; left:-24px; top: 14px; width: 14px; height: 14px; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 1px solid #D7DADB; background: #FFF; line-height: 10px; text-align: center; font-weight: normal; z-index: 99;}
 .dd-item > .dragbtn:before { display: block; content: '+'; position: absolute; width: 100%; font-size: 14px; text-align: center; text-indent: 0; }
 .dd-item > .dragbtn[data-action="collapse"]:before { content: '-'; font-size: 14px; }
 .dd-placeholder,
@@ -1252,13 +1252,14 @@
 .dd-item.on::before {content: '';position: absolute;top: 45px;bottom: -15px;left: -17px;width: 1px;border-left: 1px solid #ddd;}
 .dd-list .dd-item.on:last-of-type::before {display: none;}
 .department {
-	margin-top: 6px;
+	margin-top: 2px;
 	padding-left: 12px;
 }
 .department h2 {
 	float: left;
-	font-size: 24px;
+	font-size: 20px;
 	color: #222;
+	line-height: 24px;
 }
 .department a {
 	float: left;
@@ -1278,6 +1279,7 @@
 }
 
 .departes {
+	padding-top: 13px;
 	padding-bottom: 20px;
 	border-bottom: 1px solid #eee;
 	min-height: 350px;
@@ -1285,9 +1287,9 @@
 .departes a,
 .departes span {
 	display: inline-block;
-	height: 50px;
-	line-height: 48px;
-	font-size: 24px;
+	height: 40px;
+	line-height: 38px;
+	font-size: 18px;
 	color: #222;
 	padding: 0 30px;
 	margin-bottom: 20px;
@@ -1312,17 +1314,18 @@
 }
 .departes span input {
 	border: none;
-    font-size: 24px;
+    font-size: 18px;
     width: 120px;
+    line-height: 39px;
+    height: 39px;
+    vertical-align: top;
 }
 .departes span i {
 	color: #666;
 	margin-left: 16px;
-	font-size: 40px;
+	font-size: 30px;
 	font-weight: 300;
 	cursor: pointer;
-	position: relative;
-	top: 3px;
 }
 
 /*登录日志*/

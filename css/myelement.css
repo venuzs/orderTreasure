@@ -314,6 +314,11 @@ td.el-table_2_column_15 .cell {
 	box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
 }
 
+/*非列表头部*/
+.content_item_header {
+	padding-top: 13px;
+}
+
 /*多选框*/
 .edit-limit-info .el-checkbox {
 	width: 240px;

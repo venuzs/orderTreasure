@@ -168,7 +168,7 @@
 			</div>
 			<!-- 新增客服模态框 -->
 			<el-dialog title="新增客服联系方式" :visible.sync="dialogFormVisible">
-				<el-form :model="ruleForm" :rules="rules" label-width="80px" class="demo-ruleForm">
+				<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px" class="demo-ruleForm">
 					<el-form-item label="类型">
 						<el-select v-model="ruleForm.selectValue" placeholder="请选择">
 					    	<el-option v-for="item in ruleForm.partOptions" :key="item.label" :label="item.label" :value="item.value"></el-option>
@@ -185,7 +185,7 @@
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
-					<el-button type="primary">确 定</el-button>
+					<el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
 				</div>
 			</el-dialog>
@@ -489,6 +489,18 @@
 		    showDailog: function () {
 		      	this.dialogFormVisible = true;
 		    },
+
+		    // 提交新增客服表单
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+				  if (valid) {
+				    alert('submit!');
+				  } else {
+				    console.log('error submit!!');
+				    return false;
+				  }
+				});
+			}
 		},
 		mounted: function () {
 			//placeholder
