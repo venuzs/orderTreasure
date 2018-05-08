@@ -3,6 +3,10 @@
 /*element UI reset 样式*/
 .el-input {
 	font-size: 12px;
+	vertical-align: middle;
+}
+.input-w-90 .el-input {
+	width: 90%;
 }
 .el-input--suffix .el-input__inner {
 	padding-right: 25px;
@@ -59,6 +63,7 @@
 	padding: 8px 7px;
 	color: #222;
 	border-radius: 2px;
+	vertical-align: middle;
 }
 .el-button--medium {
 	font-size: 14px;
@@ -115,7 +120,7 @@
 	vertical-align: middle;
 }
 .content_item_filter .input-select .z_input-holder {
-    width: 250px;
+    width: 140px;
     box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
 }
 .content_item_filter .el-input-group__append, .el-input-group__prepend {

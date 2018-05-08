@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订货宝 让生意更美好！</title>
+	<script src="js/vue221.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="css/element.css">
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/myelement.css" />
+	<!-- 引入组件库 -->
+	<script src="js/element.js"></script>
+	<script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="main-content">
+			<!-- 页面头部 -->
+			<div class="page-header">
+				<h1 class="page-title">商品分类</h1>
+				<div class="z-pop_question">
+	  	 			<el-popover
+					  ref="popoverq"
+					  placement="bottom-start"
+					  width="400"
+					  trigger="hover">
+					  <p class="z-jiao">
+					  	1、设置商品分类的类目内容，最多支持5级的商品分类<br/>
+						2、客户通过商品分类快速查找商品<br/>
+						3、您也通过商品分类来管理商品，统计不同商品分类下的销售情况、所以请合理设置商品分类的类目内容
+						比如：（一级）：饮品 小食 （饮品的二级）：啤酒 饮料 牛奶
+					  	<a href="javascript:;">查看更多帮助</a>
+					  </p>
+					</el-popover>
+					
+					<i v-popover:popoverq class="el-icon-question"></i>
+	  	 		</div>
+				<div class="breadcrumb">首页<span>/</span>商品管理</div>
+			</div><!-- 页面头部 end -->
+
+			<div class="list-content">
+				<!--条件筛选-->
+				<div class="content_item_filter clearfix">
+	 				<div class="input-select fl btn-radid_none">
+	 					<div class="filter-form filter-form-one clearfix">
+		 					<el-input placeholder="请输入分类名称" v-model="input4" class="minW40 z_input-holder" >
+							</el-input>
+						</div>
+
+						<div class="filter-operate">
+							<el-tooltip class="item" content="查询" placement="bottom-start">
+						    	<el-button icon="el-icon-search"></el-button>
+						    </el-tooltip>
+							<el-tooltip class="item" content="清空" placement="bottom-start">
+						    	<el-button icon="el-icon-delete"></el-button>
+						    </el-tooltip>
+					    </div>
+	 				</div>
+				</div><!--条件筛选 end-->
+
+				<!-- 商品分类 -->
+				<div class="m-product-select op-select">
+		            <ul class="m-ct">
+		                <!-- 一级内容 -->
+		                <li class="m-classify sm-classify">
+		                    <h5 class="u-classify-name">
+		                        <el-checkbox>一级菜单</el-checkbox>
+		                    </h5>
+		                    <ul class="m-select-ct">
+		                        <li class="u-classify-list f-active">
+		                            <div class="y_name">
+		                                <el-checkbox>电视机</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>冰箱洗衣机</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>空调</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>厨卫电器</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                    </ul>
+		                    <a href="##" class="list-op-lt">添加</a>
+		                    <b class="list-op-rt" @click="showDailog">批量添加</b>
+		                </li><!-- 一级内容 end -->
+		                <!-- 二级内容 -->
+		                <li class="m-classify sm-classify">
+		                    <h5 class="u-classify-name">
+		                        <el-checkbox>二级分类</el-checkbox>
+		                    </h5>
+		                    <ul class="m-select-ct">
+		                        <li class="u-classify-list f-active">
+		                            <div class="y_name" title="平板电视">
+		                                <el-checkbox>平板电视</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>曲面电视</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                    </ul>
+		                    <a href="##" class="list-op-lt">添加</a>
+		                    <b class="list-op-rt" @click="showDailog">批量添加</b>
+		                </li><!-- 二级内容 end -->
+		                <!-- 三级内容 -->
+		                <li class="m-classify sm-classify">
+		                    <h5 class="u-classify-name">
+		                        <el-checkbox>三级分类</el-checkbox>
+		                    </h5>
+		                    <ul class="m-select-ct">
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>迷你音响</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list f-active">
+		                            <div class="y_name">
+		                                <el-checkbox>家庭影院</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                    </ul>
+		                    <a href="##" class="list-op-lt">添加</a>
+		                    <b class="list-op-rt" @click="showDailog">批量添加</b>
+		                </li><!-- 三级内容 end -->
+		                <!-- 四级内容 -->
+		                <li class="m-classify  md-classify">
+		                    <h5 class="u-classify-name">
+		                        <el-checkbox>四级分类</el-checkbox>
+		                    </h5>
+		                    <ul class="m-select-ct">
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>飞利浦</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>索尼</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>雅马哈</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>索尼</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>雅马哈</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>索尼</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                        <li class="u-classify-list">
+		                            <div class="y_name">
+		                                <el-checkbox>雅马哈</el-checkbox>
+		                            </div>
+		                            <span class="y_operate">
+		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+		                            </span>
+		                        </li>
+		                    </ul>
+		                    <a href="##" class="list-op-lt">添加</a>
+		                    <b class="list-op-rt" @click="showDailog">批量添加</b>
+		                </li><!-- 四级内容 end -->
+		            </ul>
+		        </div><!-- 商品分类 end -->
+				<!--批量操作-->
+	 			<div class="grid-content">
+	 				<div class="bg-purple-left">
+	 					<el-checkbox style="margin-left:28px"></el-checkbox>
+						<el-dropdown @command="handleCommand" placement="top">
+							<div class="el-input el-input--suffix">
+								<input type="text" value="批量操作" readonly="readonly" class="el-input__inner">
+								<span class="el-input__suffix">
+									<span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i></span>
+								</span>
+							</div>
+							<el-dropdown-menu slot="dropdown">
+								<el-dropdown-item command="a">批量转移</el-dropdown-item>
+								<el-dropdown-item command="b">批量删除</el-dropdown-item>
+							</el-dropdown-menu>
+						</el-dropdown>
+						<el-dropdown @command="handleCommand2" placement="top">
+							<div class="el-input el-input--suffix">
+								<input type="text" value="批量转移分类" readonly="readonly" class="el-input__inner">
+								<span class="el-input__suffix">
+									<span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i></span>
+								</span>
+							</div>
+							<el-dropdown-menu slot="dropdown">
+								<el-dropdown-item command="a">电视机</el-dropdown-item>
+								<el-dropdown-item command="b">冰箱洗衣机</el-dropdown-item>
+								<el-dropdown-item command="c">空调</el-dropdown-item>
+							</el-dropdown-menu>
+						</el-dropdown>
+	 				</div>
+				</div><!--批量操作 end-->
+
+			</div>
+		</div>
+
+		<!-- 批量添加分类模态框 -->
+		<el-dialog title="批量添加分类" :visible.sync="dialogFormVisible">
+			<el-form :model="ruleForm" ref="ruleForm" label-width="80px" class="demo-ruleForm input-w-90">
+				<el-form-item v-for="(item, index) in ruleForm.classbatch" label="分类名称" :key="item.key" :prop="'classbatch.' + index + '.name'" :rules="{required: true, message: '分类名称不能为空', trigger: 'blur'}">
+					<el-input v-model="item.name"></el-input><el-button @click.prevent="removeDomain(item)">删除</el-button>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="text" @click="addDomain">继续添加</el-button>
+				</el-form-item>
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
+				<el-button @click="dialogFormVisible = false">取 消</el-button>
+			</div>
+		</el-dialog>
+        <!-- 批量添加分类模态框 end -->
+
+	</div>
+	
+</body>
+	
+<script src="js/jquery.nicescroll.min.js"></script>
+<script>
+	new Vue({
+		el: "#app",
+		data: {
+			input4: '',
+			dialogFormVisible: false,
+			// 新增分类名称数据
+			ruleForm: {
+				classbatch: [
+					{ name:'' },
+					{ name:'' },
+					{ name:'' },
+					{ name:'' },
+					{ name:'' }
+				]
+			}
+		},
+		methods: {
+			// 批量添加分类模态框显示
+			showDailog: function () {
+				this.dialogFormVisible = true;
+			},
+			// 删除批量添加分类
+			removeDomain(item) {
+				var index = this.ruleForm.classbatch.indexOf(item)
+				if (index !== -1) {
+					this.ruleForm.classbatch.splice(index, 1)
+				}
+			},
+			// 新增批量添加分类
+			addDomain() {
+				this.ruleForm.classbatch.push({
+					value: '',
+					key: Date.now()
+				});
+			},
+			// 提交批量添加分类表单
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+			// 列表批量操作
+		    handleCommand(command) {
+				this.$message('click on item ' + command);
+			},
+			// 列表批量操作2-批量转移分类
+		    handleCommand2(command) {
+				this.$message('click on item ' + command);
+			},
+		},
+		mounted: function () {
+			// 调用美化滚动条插件
+            $(".m-select-ct").niceScroll({
+                cursorcolor:"#d8dee4",
+                cursorwidth:"6px",
+                cursorborder:"none",
+                cursorborderradius:"4px",
+                railpadding:{
+                    top: 0,
+                    right: 2, 
+                    left: 0, 
+                    bottom: 0
+                }
+            })
+		},
+		updated: function () {
+			
+		}
+	});
+</script>
+</html>
