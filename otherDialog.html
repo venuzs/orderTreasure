@@ -46,12 +46,14 @@
 					</el-form-item>
 					<div class="format_table">
 						<div class="z-tables">
-							<el-table ref="multipleTable" :data="tableData3" style="width: 100%;">
+							<el-table ref="multipleTable" :data="ruleForm.tableData3" style="width: 100%;">
 			 					<el-table-column type="index" width="55"></el-table-column>
 
 			 					<el-table-column label="子规格名称" min-width="130">
 			 						<template slot-scope="scope">
-									    <el-input v-model="scope.row.name" placeholder="最多20个字"></el-input>
+			 							<el-form-item :prop="'tableData3.' + scope.$index + '.name'" :rules="{required: true, message: '域名不能为空', trigger: 'blur'}" :inline-message="true" label-width="0" class="el-form-inline-bottom">
+									    	<el-input v-model="scope.row.name" placeholder="最多20个字"></el-input>
+									    </el-form-item>
 									</template>
 			 					</el-table-column>
 
@@ -94,6 +96,17 @@
 			ruleForm: {
 				name: '',
 				phone: '',
+				// 多规格值表格数据内容
+		        tableData3: [
+		        	{
+		        		name: '',
+						uid: '',
+		        	},
+		        	{
+		        		name: '',
+						uid: '',
+		        	},
+		        ]
 	        },
 	        // form 表单验证规则
 	        rules: {
@@ -104,18 +117,7 @@
 				phone: [
 					{ min: 1, max: 8, message: '长度在 1 到 8 个字符', trigger: 'blur' }
 				]
-	        },
-	        // 多规格值表格数据内容
-	        tableData3: [
-	        	{
-	        		name: '',
-					uid: '',
-	        	},
-	        	{
-	        		name: '',
-					uid: '',
-	        	},
-	        ]
+	        }
 		},
 		methods: {
 			// 提交表单

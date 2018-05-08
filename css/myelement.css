@@ -462,3 +462,15 @@ td.el-table_2_column_15 .cell {
 .el-input-95 .el-input {
 	width: 95%;
 }
+
+/*行内表单验证*/
+.el-form-inline-bottom {
+	margin-bottom: 0;
+}
+.el-form-inline-bottom .el-input {
+	display: block;
+}
+.el-form-inline-bottom .el-form-item__error--inline {
+	margin-left: 0;
+	display: block;
+}
