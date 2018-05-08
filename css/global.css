@@ -294,14 +294,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     left: 0;
     top: 50%;
     color: #c0c4cc;
-    margin-top: -45px;
-    line-height: 30px;
+    margin-top: -30px;
+    line-height: 20px;
     text-align: center;
+    font-size: 12px;
 }
 .upload-image-box .el-icon-upload {
     display: block;
-    font-size: 60px;
-    line-height: 60px;
+    font-size: 40px;
+    line-height: 40px;
     margin: 0 auto;
 }
 .upload-image-box .upload-image {
