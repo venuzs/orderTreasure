@@ -135,12 +135,12 @@
 			// 删除多规格值方法
 			removeFormat(index, row) {
 				if (index !== -1) {
-					this.tableData3.splice(index, 1)
+					this.ruleForm.tableData3.splice(index, 1)
 				}
 		    },
 		    // 新增多规格值方法
 			addFormat() {
-				this.tableData3.push({
+				this.ruleForm.tableData3.push({
 					name: '',
 					uid: '',
 				});

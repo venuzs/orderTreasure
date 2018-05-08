@@ -12,76 +12,117 @@
 </head>
 <body>
 <div id="app">
-    <div class="main-content">
-        <!-- 页面头部 -->
-        <div class="page-header">
-            <h1 class="page-title">新增角色</h1>
-            <div class="breadcrumb"><a href="##">首页</a><span>/</span>角色权限</div>
-        </div><!-- 页面头部 end -->
-        <div class="main-content-body">
-            <div class="edit-form">
-                <el-form ref="role-form" :model="role" :rules="rules" label-width="100px" class="demo-ruleForm">
-                    <el-form-item label="角色名称" prop="name">
-                        <el-input v-model="role.name" placeholder="请输入角色名称"></el-input>
-                    </el-form-item>
-                    <el-form-item label="角色类型" prop="type">
-                        <el-select v-model="role.type" placeholder="请选择角色类型">
-                            <el-option v-for="type in typeList" :key="type.value" :label="type.name" :value="type.value"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="权限明细" class="auth-form-item">
-                        <div v-for="firstMenu in menuTree" :key="firstMenu.uuid" class="edit-itemes">
-                            <div class="edit-limit">
-                                <el-checkbox v-model="menuList[firstMenu.uuid].isCheck"
-                                             :indeterminate="menuList[firstMenu.uuid].isIndeterminate"
-                                             @change="value => handleMenuChange(value, firstMenu)">{{firstMenu.name}}
-                                </el-checkbox>
-                            </div>
-                            <div class="o_f">
-                                <div class="clearfix" v-for="secondMenu in firstMenu.childrens" :key="secondMenu.uuid">
+    <div class="main-content" style="box-shadow: none;">
+        <div class="edit">
+            <transition name="fade" mode="out-in">
+                <section>
+                    <!-- 面包屑导航 -->
+                    <div class="clearfix">
+                        <div class="breadcrumb">角色权限<span>&gt;</span>新增角色</div>
+                    </div><!-- 面包屑导航 end -->
+                    <div class="edit-warp">
+                        <div class="edit-input">
+                            <el-form ref="role-form" :model="role" :rules="rules">
+                                <el-form-item label="角色名称" prop="name">
+                                    <el-input v-model="role.name" placeholder="请输入角色名称"></el-input>
+                                </el-form-item>
+                                <el-form-item label="角色类型" prop="type">
+                                    <el-select v-model="role.type" placeholder="请选择角色类型">
+                                        <el-option v-for="type in typeList" :key="type.value" :label="type.name" :value="type.value"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-form>
+                        </div>
+                        <div class="edit-content">
+                            <h2 v-cloak>权限明细</h2>
+                            <div v-for="firstMenu in menuTree" :key="firstMenu.uuid">
+                                <el-row>
+                                    <el-col>
+                                        <el-checkbox v-model="menuList[firstMenu.uuid].isCheck"
+                                                     :indeterminate="menuList[firstMenu.uuid].isIndeterminate"
+                                                     @change="value => handleMenuChange(value, firstMenu)">{{firstMenu.name}}
+                                        </el-checkbox>
+                                    </el-col>
+                                </el-row>
+                                <el-row v-for="secondMenu in firstMenu.childrens" :key="secondMenu.uuid">
                                     <template v-if="secondMenu.permissionList != null">
-                                        <div class="edit-limit-2-3">
+                                        <el-col :span="4" :offset="1">
                                             <el-checkbox :label="secondMenu.uuid"
                                                          v-model="menuList[secondMenu.uuid].isCheck"
                                                          :indeterminate="menuList[secondMenu.uuid].isIndeterminate"
                                                          @change="value => handleMenuChange(value, firstMenu)">{{secondMenu.name}}
                                             </el-checkbox>
-                                        </div>
-                                        <div class="edit-limit-info ml_280">
-                                            <el-checkbox v-for="permission, index in secondMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                        </el-col>
+                                        <div v-for="permission, index in secondMenu.permissionList" :key="permission.uuid">
+                                            <template v-if="index == 0">
+                                                <el-col :span="4" :offset="1">
+                                                    <el-checkbox :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                                </el-col>
+                                            </template>
+                                            <template v-else-if="index % 4 == 0">
+                                                <el-col :span="4" :offset="6">
+                                                    <el-checkbox :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                                </el-col>
+                                            </template>
+                                            <template v-else>
+                                                <el-col :span="4">
+                                                    <el-checkbox :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                                </el-col>
+                                            </template>
                                         </div>
                                     </template>
                                     <template v-else>
-                                        <div class="edit-limit-2">
-                                            <el-checkbox :label="secondMenu.uuid"
-                                                         v-model="menuList[secondMenu.uuid].isCheck"
-                                                         :indeterminate="menuList[secondMenu.uuid].isIndeterminate"
-                                                         @change="value => handleMenuChange(value, firstMenu)">{{secondMenu.name}}
-                                            </el-checkbox>
-                                        </div>
-                                        <div class="o_f" v-for="thirdMenu in secondMenu.childrens" :key="thirdMenu.uuid">
-                                            <div class="edit-limit-2">
-                                                <el-checkbox :label="thirdMenu.uuid"
-                                                             v-model="menuList[thirdMenu.uuid].isCheck"
-                                                             :indeterminate="menuList[thirdMenu.uuid].isIndeterminate"
-                                                             @change="value => handleMenuChange(value, firstMenu)">{{thirdMenu.name}}
+                                        <el-row>
+                                            <el-col :offset="1">
+                                                <el-checkbox :label="secondMenu.uuid"
+                                                             v-model="menuList[secondMenu.uuid].isCheck"
+                                                             :indeterminate="menuList[secondMenu.uuid].isIndeterminate"
+                                                             @change="value => handleMenuChange(value, firstMenu)">{{secondMenu.name}}
                                                 </el-checkbox>
-                                            </div>
-                                            <div v-if="thirdMenu.permissionList != null" class="edit-limit-info">
-                                                <el-checkbox v-for="permission, index in thirdMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
-                                            </div>
+                                            </el-col>
+                                        </el-row>
+                                        <div v-for="thirdMenu in secondMenu.childrens" :key="thirdMenu.uuid">
+                                            <el-row>
+                                                <el-col :span="4" :offset="2">
+                                                    <el-checkbox :label="thirdMenu.uuid"
+                                                                 v-model="menuList[thirdMenu.uuid].isCheck"
+                                                                 :indeterminate="menuList[thirdMenu.uuid].isIndeterminate"
+                                                                 @change="value => handleMenuChange(value, firstMenu)">{{thirdMenu.name}}
+                                                    </el-checkbox>
+                                                </el-col>
+                                                <template v-if="thirdMenu.permissionList != null">
+                                                    <div v-for="permission, index in thirdMenu.permissionList" :key="permission.uuid">
+                                                        <template v-if="index == 0">
+                                                            <el-col :span="4" :offset="1">
+                                                                <el-checkbox :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                                            </el-col>
+                                                        </template>
+                                                        <template v-else-if="index % 4 == 0">
+                                                            <el-col :span="4" :offset="7">
+                                                                <el-checkbox :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                                            </el-col>
+                                                        </template>
+                                                        <template v-else>
+                                                            <el-col :span="4">
+                                                                <el-checkbox :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                                            </el-col>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </el-row>
                                         </div>
                                     </template>
-                                </div>
+                                </el-row>
+                                </template>
                             </div>
                         </div>
-                    </el-form-item>
-                </el-form>
-                <div class="edit-button">
-                    <el-button type="primary" @click="handleSave" v-cloak>保存角色</el-button>
-                    <el-button @click="handleCancel" v-cloak>取消</el-button>
-                </div>
-            </div>
+                        <div class="edit-button">
+                            <el-button type="primary" @click="handleSave" v-cloak>保存角色</el-button>
+                            <el-button @click="handleCancel" v-cloak>取消</el-button>
+                        </div>
+                    </div>
+                </section>
+            </transition>
         </div>
     </div>
 </div>

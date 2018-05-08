@@ -17,6 +17,7 @@ input,select,textarea{outline: none;font-family:"microsoft YaHei" !important;}
 .fr{float:right;}
 .clearfix {zoom:1;clear:both;}
 .clearfix:after {content:".";display:block;height:0;visibility:hidden;clear:both;}
+.o_f { overflow: hidden; }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary{display:block; }
 

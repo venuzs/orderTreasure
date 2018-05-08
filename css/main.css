@@ -477,7 +477,7 @@
 	border-radius: 4px;
 }
 
-/*编辑页面*/
+/*编辑权限页面*/
 .edit,.modify {
 	background-color: #f6f6f6;
 }
@@ -505,13 +505,39 @@
 	padding: 20px 0;
 	font-weight: 600;
 }
+/*权限编辑页面*/
+.edit-itemes {
+	padding: 15px 0;
+	border-top: 1px solid #EFEFEF;
+	overflow: hidden;
+}
+.edit-itemes .el-checkbox {
+	padding: 5px 0;
+	line-height: 20px;
+}
+.edit-itemes .el-checkbox .el-checkbox__label {
+	font-size: 13px;
+}
+.auth-form-item .el-form-item__label {
+	padding-top: 16px;
+}
 .edit-limit {
 	float: left;
+	width: 140px;
+}
+.edit-limit-2-3 {
+	float: left;
+	width: 280px;
+}
+.edit-limit-2 {
+	float: left;
+	width: 140px;
 }
 .edit-limit-info {
-	margin-left: 80px;
-	margin-bottom: 20px;
-	border-bottom: 1px solid #EFEFEF;
+	margin-left: 140px;
+}
+.edit-limit-info.ml_280 {
+	margin-left: 280px;
 }
 .edit-itemes:last-of-type .edit-limit-info {
 	border-bottom: none;

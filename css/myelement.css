@@ -325,9 +325,8 @@ td.el-table_2_column_15 .cell {
 
 /*多选框*/
 .edit-limit-info .el-checkbox {
-	width: 240px;
+	width: 218px;
 	margin-left: 0;
-	margin-bottom: 20px;
 	color: #222;
 }
 .el-checkbox__input.is-checked+.el-checkbox__label {
@@ -366,7 +365,7 @@ td.el-table_2_column_15 .cell {
 .btn-radid_none .el-input--suffix {
 	box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);
 }
-.edit-limit-info .el-checkbox__inner,
+/*.edit-limit-info .el-checkbox__inner,
 .edit-limit .el-checkbox__inner{
 	width: 20px;
 	height: 20px;
@@ -377,7 +376,7 @@ td.el-table_2_column_15 .cell {
 	height: 10px;
 	left: 7px;
 	width: 5px;
-}
+}*/
 .z-tables .z-opt_btn .el-button {
 	min-width: auto;
 }
