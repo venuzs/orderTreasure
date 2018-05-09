@@ -59,16 +59,18 @@
                                                          @change="value => handleMenuChange(value, firstMenu)">{{secondMenu.name}}
                                             </el-checkbox>
                                         </div>
-                                        <div class="o_f" v-for="thirdMenu in secondMenu.childrens" :key="thirdMenu.uuid">
-                                            <div class="edit-limit-2">
-                                                <el-checkbox :label="thirdMenu.uuid"
-                                                             v-model="menuList[thirdMenu.uuid].isCheck"
-                                                             :indeterminate="menuList[thirdMenu.uuid].isIndeterminate"
-                                                             @change="value => handleMenuChange(value, firstMenu)">{{thirdMenu.name}}
-                                                </el-checkbox>
-                                            </div>
-                                            <div v-if="thirdMenu.permissionList != null" class="edit-limit-info">
-                                                <el-checkbox v-for="permission, index in thirdMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
+                                        <div class="o_f">
+                                        	<div class="clearfix" v-for="thirdMenu in secondMenu.childrens" :key="thirdMenu.uuid">
+	                                            <div class="edit-limit-2">
+	                                                <el-checkbox :label="thirdMenu.uuid"
+	                                                             v-model="menuList[thirdMenu.uuid].isCheck"
+	                                                             :indeterminate="menuList[thirdMenu.uuid].isIndeterminate"
+	                                                             @change="value => handleMenuChange(value, firstMenu)">{{thirdMenu.name}}
+	                                                </el-checkbox>
+	                                            </div>
+	                                            <div v-if="thirdMenu.permissionList != null" class="edit-limit-info">
+	                                                <el-checkbox v-for="permission, index in thirdMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
+	                                            </div>
                                             </div>
                                         </div>
                                     </template>
