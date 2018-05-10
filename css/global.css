@@ -328,3 +328,34 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .el-upload .el-button {
     box-shadow: rgb(241, 241, 241) 1px 1px 1px;
 }
+
+/*无数据提示模块*/
+.y_empty {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #b4bcc5;
+  overflow: hidden;
+  min-height: 200px;
+}
+.y_empty s {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  display: block;
+  width: 96px;
+  height: 67px;
+  margin-left: -48px;
+  background: url(../img/no_thing.png) center no-repeat;
+}
+.y_prev_bg s {
+  background-image: url(../img/prev_bg.png);
+}
+.y_empty p {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  margin-top: 15px;
+}

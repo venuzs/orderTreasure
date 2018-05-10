@@ -1607,6 +1607,9 @@
 .m-product-select .u-classify-list.f-active .y_operate {
 	display: block; 
 }
+.m-product-select .u-classify-list.f-active .y_operate a {
+	cursor: pointer;
+}
 .m-product-select .u-classify-list.f-active .y_operate i {
 	color: #fff; 
 }
