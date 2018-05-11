@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>富文本框表单</title>
+        <link rel="stylesheet" href="css/element.css" th:href="@{/css/element.css}">
+        <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}" />
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" href="css/myelement.css" th:href="@{/css/myelement.css}" />
+        <link rel="stylesheet" href="kindeditor/themes/default/default.css" th:href="@{/kindeditor/themes/default/default.css}" />
+        <link rel="stylesheet" href="kindeditor/themes/myeditor/myeditor.css" th:href="@{/kindeditor/themes/myeditor/myeditor.css}" />
+        <script src="js/vue221.js" th:src="@{/js/vue.js}"></script>
+        <script src="js/element.js" th:src="@{/js/element.js}"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="main-content" v-cloak>
+                <div class="main-content-body">
+                    <div class="edit-form">
+                        <el-form ref="notice-form" :model="form" :rules="rules" label-width="100px">
+                            <el-form-item prop="content" label="公告内容">
+                                <el-input type="textarea" v-model="form.content" id="form-editor"></el-input>
+                            </el-form-item>
+                            <div class="edit-button z-yuan-butn">
+                                <el-button type="primary" @click="saveHtmlText">保存</el-button>
+                            </div>
+                        </el-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script charset="utf-8" src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script charset="utf-8" src="kindeditor/kindeditor-min.js" th:src="@{/kindeditor/kindeditor-min.js}"></script>
+        <script charset="utf-8" src="kindeditor/lang/zh-CN.js" th:src="@{/kindeditor/lang/zh-CN.js}"></script>
+        <script th:inline="javascript">
+            let options = {
+                width: '600px',
+                height: '400px',
+                items: [
+                    'formatblock', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'strikethrough', 'lineheight', 'image', 'link', 'unlink', 'plainpaste', 'wordpaste', 'insertorderedlist',
+                    'insertunorderedlist', 'table', 'fullscreen'
+                ],
+                resizeType: 0,
+                themeType: 'myeditor',
+                uploadJson: '',
+                fileManagerJson: '',
+            };
+            KindEditor.ready(function(K) {
+                window.editor = K.create('#form-editor', options);
+            });
+            new Vue({
+                el: '#app',
+                data: {
+                    form: {
+                        content: ''
+                    },
+                    rules: {
+                        content: [
+                            {required: true, message: "请输入内容", trigger: 'blur'}
+                        ]
+                    }
+                },
+                methods: {
+                    saveHtmlText() {
+                        // 先同步，才能获取到值
+                        editor.sync();
+                        console.log($('#form-editor').val());
+                    }
+                }
+            });
+        </script>
+    </body>
+
+</html>
