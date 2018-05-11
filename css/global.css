@@ -44,6 +44,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	background-color: #fff;
     border-color: #3366cc !important;
 }
+.el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    background-color: #3366cc;
+}
 
 #mian{
 	margin-left: 220px;

@@ -65,54 +65,23 @@
 		                <!-- 一级内容 -->
 		                <li class="m-classify sm-classify">
 		                    <h5 class="u-classify-name">
-		                        <el-checkbox>一级菜单</el-checkbox>
+		                        <el-checkbox :indeterminate="isIndeterminate1" v-model="checkAll1" @change="CheckAllChangeClass1">一级菜单</el-checkbox>
 		                    </h5>
-		                    <ul class="m-select-ct">
-		                        <li class="u-classify-list f-active">
-		                            <div class="y_name">
-		                                <el-checkbox>电视机</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>冰箱洗衣机</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>空调</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>厨卫电器</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                    </ul>
+		                    <el-checkbox-group v-model="checkedClass1" @change="CheckedClassChange1">
+			                    <ul class="m-select-ct">
+			                        <li class="u-classify-list" v-bind:class="{ 'f-active': index==0 }" v-for="(item, index) in class1">
+			                            <div class="y_name">
+			                                <el-checkbox :label="item" :key="item.id">{{item.name}}</el-checkbox>
+			                            </div>
+			                            <span class="y_operate">
+			                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+			                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+			                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+			                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+			                            </span>
+			                        </li>
+			                    </ul>
+			                </el-checkbox-group>
 		                    <a href="##" class="list-op-lt">添加</a>
 		                    <b class="list-op-rt" @click="showDailog">批量添加</b>
 		                </li><!-- 一级内容 end -->
@@ -141,87 +110,23 @@
 		                <!-- 四级内容 -->
 		                <li class="m-classify  md-classify">
 		                    <h5 class="u-classify-name">
-		                        <el-checkbox>四级分类</el-checkbox>
+		                        <el-checkbox :indeterminate="isIndeterminate4" v-model="checkAll4" @change="CheckAllChangeClass4">四级分类</el-checkbox>
 		                    </h5>
-		                    <ul class="m-select-ct">
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>飞利浦</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>索尼</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>雅马哈</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>索尼</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>雅马哈</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>索尼</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                        <li class="u-classify-list">
-		                            <div class="y_name">
-		                                <el-checkbox>雅马哈</el-checkbox>
-		                            </div>
-		                            <span class="y_operate">
-		                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
-		                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
-		                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
-		                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
-		                            </span>
-		                        </li>
-		                    </ul>
+		                    <el-checkbox-group v-model="checkedClass4" @change="CheckedClassChange4">
+			                    <ul class="m-select-ct">
+			                        <li class="u-classify-list" v-for="(item, index) in class4">
+			                            <div class="y_name">
+			                                <el-checkbox :label="item" :key="item.id">{{item.name}}</el-checkbox>
+			                            </div>
+			                            <span class="y_operate">
+			                                <a href="#" title="编辑"><i class="el-icon-edit-outline"></i></a>
+			                                <a href="#" title="删除"><i class="el-icon-delete"></i></a>
+			                                <a href="#" title="上移"><i class="el-icon-arrow-up"></i></a>
+			                                <a href="#" title="下移"><i class="el-icon-arrow-down"></i></a>
+			                            </span>
+			                        </li>
+			                    </ul>
+		                   	</el-checkbox-group>
 		                    <a href="##" class="list-op-lt">添加</a>
 		                    <b class="list-op-rt" @click="showDailog">批量添加</b>
 		                </li><!-- 四级内容 end -->
@@ -230,7 +135,7 @@
 				<!--批量操作-->
 	 			<div class="grid-content">
 	 				<div class="bg-purple-left">
-	 					<el-checkbox style="margin-left:28px"></el-checkbox>
+	 					<el-checkbox style="margin-left:28px" @change="CheckAllChange"></el-checkbox>
 						<el-dropdown @command="handleCommand" placement="top">
 							<div class="el-input el-input--suffix">
 								<input type="text" value="批量操作" readonly="readonly" class="el-input__inner">
@@ -299,9 +204,67 @@
 					{ name:'' },
 					{ name:'' }
 				]
-			}
+			},
+			// 一级分类参数
+			checkAll1: false,  // 一级分类是否全部选中
+			isIndeterminate1: false,  // 一级分类是否部分选中
+			class1: [
+				{name:'电视机',id:'class1-1'},
+				{name:'冰箱洗衣机',id:'class1-2'},
+				{name:'空调',id:'class1-3'},
+				{name:'厨卫电器',id:'class1-4'}
+			],
+			checkedClass1: [],  // 存储一级分类已选数据
+			// 四级分类参数
+			checkAll4: false,  // 一级分类是否全部选中
+			isIndeterminate4: false,  // 一级分类是否部分选中
+			class4: [
+				{name:'飞利浦',id:'class4-1'},
+				{name:'索尼',id:'class4-2'},
+				{name:'雅马哈',id:'class4-3'},
+				{name:'飞利浦',id:'class4-4'},
+				{name:'索尼',id:'class4-5'},
+				{name:'雅马哈',id:'class4-6'},
+				{name:'飞利浦',id:'class4-7'},
+				{name:'索尼',id:'class4-8'},
+				{name:'雅马哈',id:'class4-9'}
+			],
+			checkedClass4: []  // 存储四级分类已选数据
 		},
 		methods: {
+			// 一级分类全选操作
+			CheckAllChangeClass1(val) {
+				this.checkedClass1 = val ? this.class1 : [];
+				this.isIndeterminate1 = false;
+			},
+			// 一级分类选中状态切换操作
+			CheckedClassChange1(value) {
+				let checkedCount = value.length;
+				this.checkAll1 = checkedCount === this.class1.length;
+				this.isIndeterminate1 = checkedCount > 0 && checkedCount < this.class1.length;
+			},
+			// 四级分类全选操作
+			CheckAllChangeClass4(val) {
+				this.checkedClass4 = val ? this.class4 : [];
+				this.isIndeterminate4 = false;
+			},
+			// 四级分类选中状态切换操作
+			CheckedClassChange4(value) {
+				let checkedCount = value.length;
+				this.checkAll4 = checkedCount === this.class4.length;
+				this.isIndeterminate4 = checkedCount > 0 && checkedCount < this.class4.length;
+			},
+
+			// 底部批量操作全选
+			CheckAllChange(val) {
+				this.checkAll1 = val ? true : false;
+				this.isIndeterminate1 = false;
+				this.checkedClass1 = val ? this.class1 : [];
+				this.checkAll4 = val ? true : false;
+				this.isIndeterminate4 = false;
+				this.checkedClass4 = val ? this.class4 : [];
+			},
+
 			// 批量添加分类模态框显示
 			showDailog: function () {
 				this.dialogFormVisible = true;
@@ -334,6 +297,7 @@
 			// 列表批量操作
 		    handleCommand(command) {
 				this.$message('click on item ' + command);
+				console.log(this.checkedClass1,this.checkedClass4);
 			},
 			// 列表批量操作2-批量转移分类
 		    handleCommand2(command) {
