@@ -341,6 +341,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
   color: #b4bcc5;
   overflow: hidden;
   min-height: 200px;
+  font-size: 12px;
 }
 .y_empty s {
   position: absolute;

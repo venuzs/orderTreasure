@@ -20,7 +20,7 @@
 			<el-button @click="dialogFormVisible = true">新增多规格</el-button>
 
 			<!-- 新增部门模态框 -->
-			<el-dialog title="新增商品多规格" :visible.sync="dialogFormVisible">
+			<el-dialog title="新增商品多规格" :visible.sync="dialogFormVisible" @open="open">
 				<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm el-input-95">
 					<el-form-item label="多规格名称" prop="name">
 						<el-input v-model="ruleForm.name"></el-input>
@@ -144,6 +144,15 @@
 					name: '',
 					uid: '',
 				});
+			},
+			// 模态框打开回调
+			open() {
+				var that = this;
+				this.$nextTick(function () {
+		    		// DOM 更新了
+		    		console.log(that.$refs.ruleForm)
+			  	})
+				
 			}
 		},
 		mounted: function () {
