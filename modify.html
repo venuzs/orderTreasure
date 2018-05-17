@@ -66,20 +66,24 @@
 							</el-form-item>
 
 							<h3 class="edit-form-title">权限范围</h3>
-							<el-form-item label="数据权限">
+							<el-form-item>
+								<template slot="label">
+									<el-popover
+									  ref="popoverqsu"
+									  placement="bottom-start"
+									  width="440"
+									  trigger="hover">
+									  <p class="z-jiao">数据权限：此账号可以看到那些客户的订单销售数据，资金数据，报表数据；比如：某个业务员人员，只能看到他负责地区的客户订单</p>
+									</el-popover>
+									<i v-popover:popoverqsu class="el-icon-question"></i>
+								    数据权限
+								</template>
 								<el-radio-group v-model="ruleForm.authData">
 									<el-radio :label="1">全部区域</el-radio>
 									<el-radio :label="2">部分区域</el-radio>
 									<a href="javascript:;" class="z-customerArea" :class="{show: showChioceArea}" @click="showDailog">+选择客户区域范围</a>
 								</el-radio-group>
-								<el-popover
-								  ref="popoverqsu"
-								  placement="bottom-start"
-								  width="440"
-								  trigger="hover">
-								  <p class="z-jiao">数据权限：此账号可以看到那些客户的订单销售数据，资金数据，报表数据；比如：某个业务员人员，只能看到他负责地区的客户订单</p>
-								</el-popover>
-								<i v-popover:popoverqsu class="el-icon-question"></i>
+								
 							</el-form-item>
 							<el-form-item label="角色权限" prop="authRole">
 								<el-checkbox-group v-model="ruleForm.authRole">
