@@ -1480,13 +1480,16 @@
 	font-size: 14px;
 	line-height: 40px;
 	height: 40px;
-	width: 80px;
+	width: 120px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 .z-yuan-item .z-yuan-content {
-	padding-left: 80px;
+	padding-left: 150px;
+}
+.z-yuan-item .z-yuan-content2 {
+	padding-left: 270px;
 }
 .z-yuan-item ol {
 	overflow: hidden;
@@ -1494,7 +1497,7 @@
 }
 .z-yuan-item ol li {
 	float: left;
-	width: 240px;
+	width: 200px;
 	font-size: 14px;
 	line-height: 40px;
 }

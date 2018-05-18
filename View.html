@@ -32,7 +32,41 @@
                   <el-col :span="8"><div class="view-item">供应商：</div></el-col>
                 </el-row>
             </div>
-            <div class="view-title"><h2 class="title_h">单据信息</h2></div>
+            <div class="view-title"><h2 class="title_h">普通字段信息</h2></div>
+            <table class="table-view">
+                <tr>
+                    <th width="15%">商品分类</th>
+                    <td width="35%">电视</td>
+                    <th width="15%">商品编号</th>
+                    <td width="35%">100005</td>
+                </tr>
+                <tr>
+                    <th>小条形码</th>
+                    <td></td>
+                    <th>大条形码</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>所属仓库</th>
+                    <td>默认仓库</td>
+                    <th>订购限制</th>
+                    <td>正常</td>
+                </tr>
+                <tr>
+                    <th>备注</th>
+                    <td colspan="3">等级价（不同客户类型指定价格）等级价（不同客户类型指定价格）</td>
+                </tr>
+            </table>
+            <div class="view-title"><h2 class="title_h">操作日志</h2></div>
+            <el-table :data="table_log" style="width: 100%;" class="table-log">
+                <el-table-column prop="time" label="操作时间" min-width="130"></el-table-column>
+                
+                <el-table-column prop="name" label="操作人员" min-width="110"></el-table-column> 
+                
+                <el-table-column prop="type" label="操作类型" min-width="130"> </el-table-column>
+                
+                <el-table-column prop="log" label="操作日志" min-width="140"> </el-table-column>
+            </el-table>
         </div>
     </div>
 </div>
@@ -43,7 +77,20 @@
     new Vue({
         el: "#app",
         data: {
-            
+            table_log: [
+                {
+                    time: "2017-09-20 18:30:23",
+                    name: "张三",
+                    type: "入库审核",
+                    log: "入库审核为已通过"
+                },
+                {
+                    time: "2017-09-20 18:30:23",
+                    name: "张三",
+                    type: "入库审核",
+                    log: "入库审核为已通过"
+                }
+            ]
         },
     });
 </script>

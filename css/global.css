@@ -29,6 +29,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .mb_0 {
     margin-bottom: 0 !important;
 }
+.no-pd-t {
+    padding-top: 0 !important;
+}
 /*主色调*/
 .bg_c {
 	background-color: #36C8E6 !important;  /*主背景颜色*/
@@ -375,7 +378,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     padding: 5px 0;
 }
 .view-title {
-    margin-top: 15px;
+    margin-top: 25px;
     margin-bottom: 10px;
 }
 .view-title .title_h {
@@ -383,3 +386,32 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     line-height: 1.5;
     font-weight: bold;
 }
+.main-content-body :first-child.view-title {
+    margin-top: 5px;
+}
+.table-view,.table-log {
+    width: 100%;
+    border: 1px solid #eee;
+    font-size: 13px;
+    border-collapse: collapse;
+}
+.table-view th {
+    background: #FAFBFD;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+.table-view td {
+    padding: 10px 20px;
+    border-top: 1px solid #eee;
+}
+.table-log th {
+    background: #FAFBFD;
+}
+.table-log th .cell, .table-log td .cell {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.table-log tr:nth-child(even) {
+    background: #FAFBFD;
+}
+

@@ -103,44 +103,31 @@
 							</el-form-item>
 							<el-form-item label="权限明细" class="authinfo-item">
 								<div class="band-ipt z-power-list">
-									<div class="z-yuan-item" v-for="firstMenu in menuTree" :key="firstMenu.uuid" >
-										<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{firstMenu.name}}</span>
+									<div class="z-yuan-item" v-for="firstMenu in list" :key="firstMenu.uuid" >
+										<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: firstMenu.state==1}"></i>{{firstMenu.name}}</span>
 										<div class="o_f">
 											<div class="clearfix" v-for="secondMenu in firstMenu.childrens" :key="secondMenu.uuid">
 												<template v-if="secondMenu.permissionList != null">
-			                                        <span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{secondMenu.name}}</span>
-			                                        <div class="edit-limit-info ml_280">
-			                                            <el-checkbox v-for="permission, index in secondMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
-			                                        </div>
+			                                        <span class="z-yuan-tit"><i class="el-icon-check" :class="{on: secondMenu.state==1}"></i>{{secondMenu.name}}</span>
+			                                        <div class="z-yuan-content z-yuan-content2">
+														<ol>
+															<li v-for="permission in secondMenu.permissionList" :key="permission.uuid"><i class="el-icon-check" :class="{on: permission.state=='1'}"></i>{{permission.name}}</li>
+														</ol>
+													</div>
 			                                    </template>
 			                                    <template v-else>
-			                                        <div class="edit-limit-2">
-			                                            <el-checkbox :label="secondMenu.uuid"
-			                                                         v-model="menuList[secondMenu.uuid].isCheck"
-			                                                         :indeterminate="menuList[secondMenu.uuid].isIndeterminate"
-			                                                         @change="value => handleMenuChange(value, firstMenu)">{{secondMenu.name}}
-			                                            </el-checkbox>
-			                                        </div>
+			                                    	<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: secondMenu.state==1}"></i>{{secondMenu.name}}</span>
 			                                        <div class="o_f">
 			                                        	<div class="clearfix" v-for="thirdMenu in secondMenu.childrens" :key="thirdMenu.uuid">
-				                                            <div class="edit-limit-2">
-				                                                <el-checkbox :label="thirdMenu.uuid"
-				                                                             v-model="menuList[thirdMenu.uuid].isCheck"
-				                                                             :indeterminate="menuList[thirdMenu.uuid].isIndeterminate"
-				                                                             @change="value => handleMenuChange(value, firstMenu)">{{thirdMenu.name}}
-				                                                </el-checkbox>
-				                                            </div>
-				                                            <div v-if="thirdMenu.permissionList != null" class="edit-limit-info">
-				                                                <el-checkbox v-for="permission, index in thirdMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
-				                                            </div>
+				                                            <span class="z-yuan-tit"><i class="el-icon-check" :class="{on: thirdMenu.state==1}"></i>{{thirdMenu.name}}</span>
+				                                            <div v-if="thirdMenu.permissionList != null" class="z-yuan-content">
+																<ol>
+																	<li v-for="permission in thirdMenu.permissionList" :key="permission.uuid"><i class="el-icon-check" :class="{on: permission.state=='1'}"></i>{{permission.name}}</li>
+																</ol>
+															</div>
 			                                            </div>
 			                                        </div>
 			                                    </template>
-												<div class="z-yuan-content">
-													<ol>
-														<li v-for="(v,i) in item.subList" :key="i"><i class="el-icon-check" :class="{on: v.checked}"></i>{{v.value}}</li>
-													</ol>
-												</div>
 											</div>
 										</div>
 									</div>
@@ -177,7 +164,7 @@
 
 	</body>
 	<script src="js/jquery.min.js"></script>
-	<script src="json/menuTree.json"></script>
+	<script src="json/menuTree2.json"></script>
 	<script>
 		new Vue({
 			el: "#app",
