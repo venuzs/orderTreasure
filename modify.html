@@ -64,6 +64,9 @@
 							<el-form-item label="QQ">
 								<el-input v-model="ruleForm.contqq"></el-input>
 							</el-form-item>
+							<el-form-item label="日期">
+								<el-date-picker v-model="ruleForm.data" type="date" placeholder="选择日期"></el-date-picker>
+							</el-form-item>
 
 							<h3 class="edit-form-title">权限范围</h3>
 							<el-form-item>
@@ -100,12 +103,45 @@
 							</el-form-item>
 							<el-form-item label="权限明细" class="authinfo-item">
 								<div class="band-ipt z-power-list">
-									<div class="z-yuan-item" v-for="(item,index) in list" :key="index">
-										<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{item.title}}</span>
-										<div class="z-yuan-content">
-											<ol>
-												<li v-for="(v,i) in item.subList" :key="i"><i class="el-icon-check" :class="{on: v.checked}"></i>{{v.value}}</li>
-											</ol>
+									<div class="z-yuan-item" v-for="firstMenu in menuTree" :key="firstMenu.uuid" >
+										<span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{firstMenu.name}}</span>
+										<div class="o_f">
+											<div class="clearfix" v-for="secondMenu in firstMenu.childrens" :key="secondMenu.uuid">
+												<template v-if="secondMenu.permissionList != null">
+			                                        <span class="z-yuan-tit"><i class="el-icon-check" :class="{on: item.checked}"></i>{{secondMenu.name}}</span>
+			                                        <div class="edit-limit-info ml_280">
+			                                            <el-checkbox v-for="permission, index in secondMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
+			                                        </div>
+			                                    </template>
+			                                    <template v-else>
+			                                        <div class="edit-limit-2">
+			                                            <el-checkbox :label="secondMenu.uuid"
+			                                                         v-model="menuList[secondMenu.uuid].isCheck"
+			                                                         :indeterminate="menuList[secondMenu.uuid].isIndeterminate"
+			                                                         @change="value => handleMenuChange(value, firstMenu)">{{secondMenu.name}}
+			                                            </el-checkbox>
+			                                        </div>
+			                                        <div class="o_f">
+			                                        	<div class="clearfix" v-for="thirdMenu in secondMenu.childrens" :key="thirdMenu.uuid">
+				                                            <div class="edit-limit-2">
+				                                                <el-checkbox :label="thirdMenu.uuid"
+				                                                             v-model="menuList[thirdMenu.uuid].isCheck"
+				                                                             :indeterminate="menuList[thirdMenu.uuid].isIndeterminate"
+				                                                             @change="value => handleMenuChange(value, firstMenu)">{{thirdMenu.name}}
+				                                                </el-checkbox>
+				                                            </div>
+				                                            <div v-if="thirdMenu.permissionList != null" class="edit-limit-info">
+				                                                <el-checkbox v-for="permission, index in thirdMenu.permissionList" :key="permission.uuid" :label="permission.uuid">{{permission.name}}</el-checkbox>
+				                                            </div>
+			                                            </div>
+			                                        </div>
+			                                    </template>
+												<div class="z-yuan-content">
+													<ol>
+														<li v-for="(v,i) in item.subList" :key="i"><i class="el-icon-check" :class="{on: v.checked}"></i>{{v.value}}</li>
+													</ol>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -141,6 +177,7 @@
 
 	</body>
 	<script src="js/jquery.min.js"></script>
+	<script src="json/menuTree.json"></script>
 	<script>
 		new Vue({
 			el: "#app",
@@ -158,6 +195,7 @@
 					phone: '',
 					email: '',
 					contqq: '',
+					data: '',
 					// 权限范围
 					authData: 1,
 					authRole: []
@@ -183,29 +221,30 @@
 		        },
 
 		        // 权限明细
-				list: [
-					{
-						'checked': true,
-						'title': '订单',
-						'subList': [{'checked': true,'value':'查看订单'},{'checked': true,'value':'代客户下单'},{'checked': false,'value':'审核订单'},{'checked': true,'value':'撤销订单审核通过'},{'checked': true,'value':'修改订单'},
-									{'checked': true,'value':'订单核准（发货后仍可修改订单）'},{'checked': true,'value':'查看出库/发货单'},{'checked': false,'value':'确认审核出库/发货'},{'checked': false,'value':'确认审核收货'},{'checked': false,'value':'查看订单付款'}]
-					},
-					{
-						'checked': true,
-						'title': '商品',
-						'subList': [{'checked': true,'value':'查看全部商品'},{'checked': true,'value':'管理与编辑商品'},{'checked': false,'value':'经营范围屏蔽'},{'checked': true,'value':'管理商品分组'}]
-					},
-					{
-						'checked': true,
-						'title': '营销',
-						'subList': [{'checked': true,'value':'首页广告位与商品'},{'checked': true,'value':'公告管理'},{'checked': false,'value':'查看促销'},{'checked': true,'value':'新增与编辑促销'},{'checked': true,'value':'订单红包'},{'checked': false,'value':'红包充值'},{'checked': true,'value':'优惠券'},{'checked': true,'value':'微信'}]
-					},
-					{
-						'checked': true,
-						'title': '报表',
-						'subList': [{'checked': true,'value':'运营分析'},{'checked': true,'value':'商品运营报表'},{'checked': false,'value':'订单报表'},{'checked': true,'value':'地区订单报表'},{'checked': true,'value':'客户订单报表'},{'checked': false,'value':'业务员订单报表'},{'checked': true,'value':'商品销售报表'},{'checked': true,'value':'客户商品报表'},{'checked': true,'value':'资金报表'},{'checked': true,'value':'商品销售毛利统计表'}]
-					},
-				],
+				list: menuTree,
+				// [
+				// 	{
+				// 		'checked': true,
+				// 		'title': '订单',
+				// 		'subList': [{'checked': true,'value':'查看订单'},{'checked': true,'value':'代客户下单'},{'checked': false,'value':'审核订单'},{'checked': true,'value':'撤销订单审核通过'},{'checked': true,'value':'修改订单'},
+				// 					{'checked': true,'value':'订单核准（发货后仍可修改订单）'},{'checked': true,'value':'查看出库/发货单'},{'checked': false,'value':'确认审核出库/发货'},{'checked': false,'value':'确认审核收货'},{'checked': false,'value':'查看订单付款'}]
+				// 	},
+				// 	{
+				// 		'checked': true,
+				// 		'title': '商品',
+				// 		'subList': [{'checked': true,'value':'查看全部商品'},{'checked': true,'value':'管理与编辑商品'},{'checked': false,'value':'经营范围屏蔽'},{'checked': true,'value':'管理商品分组'}]
+				// 	},
+				// 	{
+				// 		'checked': true,
+				// 		'title': '营销',
+				// 		'subList': [{'checked': true,'value':'首页广告位与商品'},{'checked': true,'value':'公告管理'},{'checked': false,'value':'查看促销'},{'checked': true,'value':'新增与编辑促销'},{'checked': true,'value':'订单红包'},{'checked': false,'value':'红包充值'},{'checked': true,'value':'优惠券'},{'checked': true,'value':'微信'}]
+				// 	},
+				// 	{
+				// 		'checked': true,
+				// 		'title': '报表',
+				// 		'subList': [{'checked': true,'value':'运营分析'},{'checked': true,'value':'商品运营报表'},{'checked': false,'value':'订单报表'},{'checked': true,'value':'地区订单报表'},{'checked': true,'value':'客户订单报表'},{'checked': false,'value':'业务员订单报表'},{'checked': true,'value':'商品销售报表'},{'checked': true,'value':'客户商品报表'},{'checked': true,'value':'资金报表'},{'checked': true,'value':'商品销售毛利统计表'}]
+				// 	},
+				// ],
 
 		        dialogFormVisible: false, // 模态框是否显示
 		        // 模态框表单

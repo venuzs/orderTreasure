@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订货宝 让生意更美好！</title>
+    <link rel="stylesheet" href="css/element.css" th:href="@{/css/element.css}">
+    <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}"/>
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="css/myelement.css" th:href="@{/css/myelement.css}"/>
+    <script src="js/vue221.js" th:src="@{/js/vue.js}"></script>
+    <script src="js/element.js" th:src="@{/js/element.js}"></script>
+</head>
+<body>
+<div id="app">
+    <div class="main-content">
+        <!-- 页面头部 -->
+        <div class="page-header">
+            <h1 class="page-title">查看页面</h1>
+            <div class="breadcrumb"><a href="##">首页</a><span>/</span>入库单</div>
+        </div><!-- 页面头部 end -->
+        <div class="main-content-body">
+            <div class="view-title"><h2 class="title_h">单据信息</h2></div>
+            <div class="view-order">
+                <el-row :gutter="20">
+                  <el-col :span="8"><div class="view-item">入库单号：RK.20171205.0002</div></el-col>
+                  <el-col :span="8"><div class="view-item">入库时间：2017-12-05 15:07</div></el-col>
+                  <el-col :span="8"><div class="view-item">关联订单：</div></el-col>
+                  <el-col :span="8"><div class="view-item">审核状态：已审核</div></el-col>
+                  <el-col :span="8"><div class="view-item">入库仓库：默认仓库</div></el-col>
+                  <el-col :span="8"><div class="view-item">入库类型：采购入库</div></el-col>
+                  <el-col :span="8"><div class="view-item">经办人：13437104</div></el-col>
+                  <el-col :span="8"><div class="view-item">供应商：</div></el-col>
+                </el-row>
+            </div>
+            <div class="view-title"><h2 class="title_h">单据信息</h2></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+
+<script th:inline="javascript">
+    new Vue({
+        el: "#app",
+        data: {
+            
+        },
+    });
+</script>
+</html>

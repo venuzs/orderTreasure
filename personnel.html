@@ -134,7 +134,7 @@
 					
 				<!--主体表格-->
 				<div class="z-tables">
-	 				<el-table ref="multipleTable" :data="tableData3" style="width: 100%;">
+	 				<el-table ref="multipleTable" :data="tableData3" @selection-change="handleSelectionChange" style="width: 100%;">
 	 					<el-table-column type="selection" width="55"></el-table-column>
 	 					<el-table-column fixed  prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
 	 					
@@ -250,6 +250,7 @@
 		    tableAllCheck: false,  // table 下方批量操作全选
 		    hasfilterMore: false,  // 列表是否拥有更多筛选条件
 		    filterMore: false,  // 列表更多筛选条件是否展示
+		    multipleSelection: [],  // 表格复选框选中项
 		    tableData3: [{
 	      		no: '1',
 	          	login: 'LYS',
@@ -398,6 +399,11 @@
 		        console.log("当前页: "+ val);
 		    },
 
+		    // 表格选中项变化事件
+		    handleSelectionChange(val) {
+		        this.multipleSelection = val;
+		    },
+
 		    // 列表单列操作-编辑
 			handleEdit(index, row) {
 				console.log(index, row);
@@ -410,6 +416,7 @@
 		    // 列表批量操作
 		    handleCommand(command) {
 				this.$message('click on item ' + command);
+				console.log(this.multipleSelection)
 			},
 			// 列表批量操作2-批量导出
 		    handleCommand2(command) {
