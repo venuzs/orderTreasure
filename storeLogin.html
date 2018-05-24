@@ -31,13 +31,14 @@
 	  	  	 			<a class="yzm-img" href="##"><img src="img/yanzm.png"></a>
 		  	  	 	</div>
 		  	  	 	<div class="store-remind" >
-		  	  	 		<label class="store-prompt fl" v-bind:class="{ 'active': checked }">
+		  	  	 		<div class="store-error fl" v-show="logining">{{rules2.message}}</div>
+		  	  	 		<a class="fr" href="##">忘记密码?</a>
+		  	  	 		<label class="store-prompt fr" v-bind:class="{ 'active': checked }">
 		  	  	 			<input type="checkbox" v-model="checked">
 							<s></s>记住我
 					    </label>
-		  	  	 		<a class="fr" href="##">忘记密码?</a>
 		  	  	 	</div>
-		  	  	 	<div class="store-error" v-show="logining">{{rules2.message}}</div>
+		  	  	 	
 		  	  	 	<div class="store-btn">
 		  	  	 		<a href="javascript:;" @click="handleSubmit2" :loading="logining">登录</a>
 		  	  	 	</div>
