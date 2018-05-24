@@ -1,0 +1,140 @@
+@charset "utf-8";
+/*商户登录页*/
+.store-login input::-webkit-input-placeholder {
+    color: #CCCCCC;
+}
+
+.store-login input::-moz-placeholder {
+    color: #CCCCCC;
+}
+
+.store-login input:-moz-placeholder {
+    color: #CCCCCC;
+}
+
+.store-login input:-ms-input-placeholder {
+    color: #CCCCCC;
+}
+
+.store-login {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 100%;
+    background: url(../img/store/store_login_bg.png) center no-repeat;
+}
+.login-box {
+	position: fixed;
+	width: 460px;
+	padding: 0 50px 70px;
+	background: #fff;
+	left: 50%;
+	top: 50%;
+	margin: -250px 0 0 -230px;
+}
+.login_logo {
+	height: 40px;
+	margin-top: 30px;
+	margin-bottom: 37px;
+	text-align: center;
+}
+.login_logo img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.store-login-form .form-item {
+	position: relative;
+    overflow: hidden;
+    zoom: 1;
+    margin-bottom: 20px;
+}
+
+.store-login-form .form-item .form_control {
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    padding: 13px 0 13px 50px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    background-position: 13px center;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    transition: border .3s;
+}
+.store-login-form .form-item .form_control:focus {
+	border-color: #E40537;
+}
+.store-login-form .user .form_control {
+	background-image: url(../img/store/store-user.png);
+}
+.store-login-form .password .form_control {
+	background-image: url(../img/store/store-password.png);
+}
+.store-login-form .yzm .form_control {
+	background-image: url(../img/store/store-yzm.png);
+}
+.store-login-form .form-item .yzm-img {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	height: 30px;
+	text-align: right;
+}
+.store-login-form .form-item .yzm-img img {
+	max-width: 100%;
+	max-height: 100%;
+}
+.store-remind {
+	line-height: 20px;
+	font-size: 14px;
+    overflow: hidden;
+    zoom: 1;
+}
+.store-prompt {
+	cursor: pointer;
+	position: relative;
+}
+.store-prompt s {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin: -2px 10px 0 0;
+    border: 1px solid #ddd;
+}
+.store-prompt.active s {
+	border-color: #E40537;
+	background: url(../img/store/store-check.png) center no-repeat;
+}
+.store-prompt input {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+.store-login-form .store-btn {
+    margin-top: 40px;
+}
+.store-login-form .store-btn a {
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    background: #E40537;
+    border-radius: 4px;
+    transition: background .3s;
+}
+.store-login-form .store-btn a:hover {
+	background-color: #c71636;
+}
+.store-error {
+	color: #E40537;
+	margin-top: 20px;
+}

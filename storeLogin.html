@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<script src="js/vue-router231.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<div class="store-login" :model="ruleForm2" :rules="rules2" ref="ruleForm2">
+		  	  <div class="login-box">
+		  	  	 <h1 class="login_logo" title="全网数商商户系统"><img src="img/store/logo2.png"></h1>
+		  	  	 <div class="store-login-form">
+		  	  	 	<div class="form-item user">
+	  	  	 			<input type="text"  v-model="ruleForm2.account" placeholder="请输入账号"  class="form_control">
+		  	  	 	</div>
+		  	  	 	<div class="form-item password">
+		  	  	 		<input type="password" v-model="ruleForm2.checkPass" placeholder="请输入密码"  class="form_control">
+		  	  	 	</div>
+		  	  	 	<div class="form-item yzm">
+	  	  	 			<input type="text" placeholder="请输入验证码"  class="form_control">
+	  	  	 			<a class="yzm-img" href="##"><img src="img/yanzm.png"></a>
+		  	  	 	</div>
+		  	  	 	<div class="store-remind" >
+		  	  	 		<label class="store-prompt fl" v-bind:class="{ 'active': checked }">
+		  	  	 			<input type="checkbox" v-model="checked">
+							<s></s>记住我
+					    </label>
+		  	  	 		<a class="fr" href="##">忘记密码?</a>
+		  	  	 	</div>
+		  	  	 	<div class="store-error" v-show="logining">{{rules2.message}}</div>
+		  	  	 	<div class="store-btn">
+		  	  	 		<a href="javascript:;" @click="handleSubmit2" :loading="logining">登录</a>
+		  	  	 	</div>
+		  	  	 </div>
+		  	  </div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		
+		new Vue({
+			el: "#app",
+			data: {
+		        logining: true,
+		        ruleForm2: {
+		          account: 'admin',
+		          checkPass: ''
+		        },
+		        rules2: {
+		         message: '验证码不能为空',
+		        },
+		        checked: false
+		    },
+		    created () {
+		  	
+		  
+		   },
+		    methods: {
+		      handleSubmit2: function (ev) {
+	        	var _this = this;
+	            if(this.ruleForm2.account == ""){
+	            	this.logining = true;
+	            	this.rules2.message = "用户名不能为空"
+	            }else if(this.ruleForm2.checkPass == ""){
+	            	this.logining = true;
+	            	this.rules2.message = "密码不能为空"
+	            }else{
+		            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+		            var data ={
+		            	msg:123,
+		            	code:200,
+		            	user:"mmm",
+		            }
+		              this.logining = false;
+		              //NProgress.done();
+//		              let { msg, code, user } = data;
+						var code = data.code, msg = data.msg, user = data.user;
+		              if (code !== 200) {
+		                this.$message({
+		                  message: msg,
+		                  type: 'error'
+		                });
+		              } else {
+		                sessionStorage.setItem('user', JSON.stringify(user));
+		                // window.location.href="base.html";
+		              }
+	              }
+		        }
+		    }
+		});
+	</script>
+</html>
