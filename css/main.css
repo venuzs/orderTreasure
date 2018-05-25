@@ -571,16 +571,15 @@
 		background:linear-gradient(135deg,rgba(97,145,242,1),rgba(51,102,204,1));
 	}
 	.m-width{
-		width: 1010px;
-		height: 400px;
+		width: 910px;
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		margin: -200px 0 0 -505px;
+		margin: -170px 0 0 -455px;
 	}
 	
 	.m-width .fl{
-		margin-top: 36px;
+		margin-top: 20px;
 		width: 400px;
 		height: 328px;
 	}
@@ -588,10 +587,9 @@
 		max-width: 100%;
 	}
 	.login-form{
-		padding: 45px 50px;
+		padding: 35px 25px;
 		float: right;
-		width: 500px;
-		height: 400px;
+		width: 360px;
 		background: #fff;
 		border-radius:4px ;
 	}
@@ -603,32 +601,32 @@
 	}
 	.form_input{
 		float: left;
-		width: 320px;
+		width: 230px;
 	}
 	.login-form .form_input .form_control{
 		width: 100%;
-		height: 45px;
-		font-size: 18px;
+		height: 40px;
+		font-size: 14px;
 		padding: 0 12px;
-	
 		border: 1px solid #ccc;
 	}
 	.form_label{
 		width: 80px;
 		float: left;
-		line-height: 45px;
-		font-size: 18px;
+		line-height: 40px;
+		font-size: 14px;
+		font-weight: bold;
 		color: #222;
 		text-align: left;
 	}
 	
 	.login-form .m-yzm .form_control{
-		width: 220px;
+		width: 130px;
 		float: left;
 		
 	}
 	.login-form .m-yzm a{
-		margin: 4px 0 0;
+		margin: 2px 0 0;
 		float: right;
 		width: 86px;
 		overflow: hidden;
@@ -640,7 +638,6 @@
 	.m-prompt{
 		line-height: 20px;
 		height: 20px;
-		font-size: 14px;
 		color: #ff6666;
     }
 	.m-prompt s{
@@ -661,10 +658,10 @@
 	.login-form .user .form_input s{
 		cursor: pointer; 
 		position: absolute;
-		right: 20px;
+		right: 15px;
 		width: 16px;
 		height: 16px;
-		top: 15px;
+		top: 12px;
 		background: url(../img/clear.png) no-repeat;
 	}
 	
@@ -677,7 +674,6 @@
 	}
 	.m-remind a{
 		color: #666;
-		font-size: 14px;
 		float: right;
 	}
 	.login-form .m-btn{
@@ -686,9 +682,9 @@
 	.login-form .m-btn a{
 		display: block;
 		width: 100%;
-		height: 50px;
-		line-height: 50px;
-		font-size: 20px;
+		height: 45px;
+		line-height: 45px;
+		font-size: 16px;
 		color: #fff;
 		text-align: center;
 		background:linear-gradient(135deg,rgba(51,102,204,1),rgba(95,80,230,1));
