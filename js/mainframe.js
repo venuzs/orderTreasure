@@ -10,8 +10,8 @@
 */
 
 var dropdownActiceId = ""; // 定义全局变量：下拉菜单选中项ID
-var menuTabShowTargetbox = ".leftBar .secend-item",   // 触发菜单显示的a标签容器
-    menuTabShowTarget = ".leftBar .secend-item a";    // 触发菜单显示的a标签
+var menuTabShowTargetbox = ".leftBar .secend-item,.leftBar .navi-item.onle-menu",   // 触发菜单显示的a标签容器
+    menuTabShowTarget = ".leftBar .secend-item a,.leftBar .navi-item.onle-menu > a";    // 触发菜单显示的a标签
 
 $(function(){
     /*
@@ -31,8 +31,12 @@ $(function(){
         if($(this).attr("data-tab")){
             iframeTapShow(tab_id,true);
         }else{   //否则还没有打开右侧相关页面，则在右侧创建相关的tab选项和页面并选中显示
-            var tab_text = $(this).text(),
-                tab_href = $(this).attr("href");
+            if ($(this).children(".nav-item-title").length > 0) {
+                var tab_text = $(this).children(".nav-item-title").text();
+            }else{
+                var tab_text = $(this).text();
+            }
+            var tab_href = $(this).attr("href");
 
             // 如果当前页无tab下拉页签
             if ($("#main_menu ul > .dropdown_box").length == 0) {

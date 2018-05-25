@@ -19,6 +19,9 @@
 	width: 100%;
 	height: 100%;
 }
+.aside-wrap {
+	font-size: 14px;
+}
 .aside-wrap .navi-item{
 	position: relative;
     display: block;
@@ -29,7 +32,6 @@
 	position: relative;
     display: block;
     font-weight: 400;
-    font-size: 14px;
 	color: #CFD6E6;
 	border-left: 3px solid #1D2840;
 	padding-left: 46px;
@@ -73,14 +75,20 @@
 	border-bottom-color: transparent;
 	
 }
+.aside-wrap .onle-menu.active> a::before {
+	display: none;
+}
 .aside-wrap .navi-item.active .secend-item  {
 	display: block;
 }
 .bottom-menu {
 	position: absolute;
+	width: 100%;
 	bottom: 20px;
 	left: 0;
+	font-size: 12px;
 }
+
 .bottom-item {
 	width: 100px;
 	height: 50px;
@@ -337,14 +345,14 @@
 	top: -2px;
 }
 .wrap-header-right-menu > a.z-wo {
-	width: 35px;
+	/*width: 35px;*/
 	padding-right: 0;
 }
 .wrap-header-right-menu > a.z-wo > span {
 	font-size: 14px;
 	margin-left: 10px;
 	display: inline-block;
-	width: 45px;
+	/*width: 45px;*/
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -364,6 +372,7 @@
 /*主体*/
 #main_iframe {
 	height: 100%;
+	padding: 70px 20px 20px 120px;
 }
 #main_iframe .tab-pane {
 	height: 100%;
@@ -374,7 +383,6 @@
 }
 .main-content {
 	min-width: 1100px;
-	margin: 70px 20px 20px 120px;
 	background: #FFFFFF;
 	box-shadow: 0 1px 2px 0 rgba(165,167,168,0.30);
 }
@@ -601,7 +609,7 @@
 	}
 	.form_input{
 		float: left;
-		width: 230px;
+		width: 250px;
 	}
 	.login-form .form_input .form_control{
 		width: 100%;
@@ -611,17 +619,17 @@
 		border: 1px solid #ccc;
 	}
 	.form_label{
-		width: 80px;
+		width: 60px;
 		float: left;
 		line-height: 40px;
 		font-size: 14px;
 		font-weight: bold;
-		color: #222;
+		color: #666;
 		text-align: left;
 	}
 	
 	.login-form .m-yzm .form_control{
-		width: 130px;
+		width: 150px;
 		float: left;
 		
 	}

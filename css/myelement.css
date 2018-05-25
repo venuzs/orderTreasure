@@ -222,11 +222,6 @@ td.el-table_2_column_15 .cell {
 	text-align: right;
 	display: none;
 }
-.table-operate .el-button {
-	min-width: 48px;
-	margin-left: 10px;
-	padding: 6px 7px;
-}
 .table-operate-td:hover .table-operate {
 	display: block;
 }
@@ -234,12 +229,19 @@ td.el-table_2_column_15 .cell {
 	visibility: hidden;
 }
 
-	/*文本按钮*/
+	/*表格内普通按钮、文本按钮*/
+.z-tables .el-button {
+	min-width: 48px;
+	padding: 6px 7px;
+}
+.z-tables .el-button+.el-button {
+	margin-left: 10px;
+}
 .z-tables .el-button--text {
 	padding-left: 0;
 	padding-right: 0;
 	min-width: 0;
-	margin-left: 0;
+	margin-left: 0 !important;
 }
 .z-tables .el-button--text span {
 	color: #3366CC;
@@ -465,11 +467,21 @@ td.el-table_2_column_15 .cell {
 }
 .edit-button {
 	margin: 0;
-	padding: 30px 0;
+	padding: 15px;
 	border-top: 1px solid #eee;
+	background: #fff;
 }
 .edit-button .el-button {
 	min-width: 90px;
+}
+.edit-button-fixed {
+	height: 60px;
+}
+.edit-button-fixed .edit-button {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	right: 0;
 }
 
 /*模态框内表单*/
