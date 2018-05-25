@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订货宝 让生意更美好！</title>
+    <link rel="stylesheet" href="css/element.css" th:href="@{/css/element.css}">
+    <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}"/>
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="css/myelement.css" th:href="@{/css/myelement.css}"/>
+    <script src="js/vue221.js" th:src="@{/js/vue.js}"></script>
+    <script src="js/element.js" th:src="@{/js/element.js}"></script>
+</head>
+<body>
+<div id="app">
+    <div class="main-content" style="background:#f8f8f8;">
+        <div class="main-content-body">
+            <div class="seeting-box">
+                <h2 class="seeting-title">商城设置</h2>
+                <ul class="seeting-list clearfix">
+                    <li>
+                        <a href="##">
+                            <i class="y_icon icon1"></i>
+                            <div class="y_info">
+                                <h3>LOGO设置</h3>
+                                <p>更改商城前后台展示的LOGO</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <i class="y_icon icon2"></i>
+                            <div class="y_info">
+                                <h3>商城设置</h3>
+                                <p>修改商城设置的基础信息</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+
+<script th:inline="javascript">
+    new Vue({
+        el: "#app",
+        data: {
+            // seeting: [
+            //     {
+            //         name: "商城设置",
+            //         id: "",
+            //         children: [
+            //             {
+            //                 name: "LOGO设置",
+            //                 describe: "更改商城前后台展示的LOGO"
+            //             },
+            //             {
+            //                 name: "商城设置",
+            //                 describe: "修改商城设置的基础信息"
+            //             }
+            //         ]
+            //     }
+            // ]
+        },
+    });
+</script>
+</html>

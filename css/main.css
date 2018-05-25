@@ -1681,3 +1681,57 @@
 .m-product-select .u-classify-name .el-checkbox__label {
 	font-size: 16px;
 }
+
+/*系统设置界面*/
+.seeting-title {
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	color: #666;
+}
+.seeting-list li {
+	float: left;
+	width: 290px;
+}
+.seeting-list li a {
+	display: block;
+	height: 100px;
+    padding: 20px;
+    margin: 0 15px 15px 0;
+    background-color: #fff;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 3px #f0f0f0;
+    box-shadow: 1px 1px 3px #f0f0f0;
+    cursor: pointer;
+}
+.seeting-list li a:hover {
+	background-color: #ecf5ff;
+}
+.seeting-list li .y_icon {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	background-image: url(../img/seeting.png);
+	background-repeat: no-repeat;
+}
+.seeting-list li .icon1 {
+	background-position: -72px 4px;
+}
+.seeting-list li .icon2 {
+	background-position: 0px 10px;
+}
+.seeting-list li .y_info {
+	overflow: hidden;
+}
+.seeting-list li .y_info h3 {
+	line-height: 22px;
+	font-size: 13px;
+}
+.seeting-list li .y_info p {
+	line-height: 18px;
+	color: #999;
+	font-size: 12px;
+}
