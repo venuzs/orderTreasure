@@ -32,6 +32,26 @@
 							<el-form-item label="密码" prop="password">
 								<el-input v-model="ruleForm.password"></el-input>
 							</el-form-item>
+							<el-form-item label="网址">
+								<el-input placeholder="请输入内容" v-model="ruleForm.http">
+									<template slot="prepend">Http://</template>
+								</el-input>
+							</el-form-item>
+							<el-form-item label="网址">
+								<el-input placeholder="请输入内容" v-model="ruleForm.http2">
+									<template slot="append">.com</template>
+								</el-input>
+							</el-form-item>
+							<el-form-item label="网址">
+								<el-input placeholder="请输入内容" v-model="ruleForm.selectbox" class="input-with-select">
+									<el-select v-model="ruleForm.select" slot="prepend" placeholder="请选择" style="width:85px">
+										<el-option label="餐厅名" value="1"></el-option>
+										<el-option label="订单号" value="2"></el-option>
+										<el-option label="用户电话" value="3"></el-option>
+									</el-select>
+									<el-button slot="append" icon="el-icon-search"></el-button>
+								</el-input>
+							</el-form-item>
 							<el-form-item label="身份">
 								<el-radio-group v-model="ruleForm.Identity">
 									<el-radio :label="1">内勤</el-radio>
@@ -176,6 +196,10 @@
 					// 账号信息
 					account: '',
 					password: '',
+					http: '',
+					http2: '',
+					selectbox: '',
+					select: '',
 					Identity: 1,
 					name: '',
 					position: '',

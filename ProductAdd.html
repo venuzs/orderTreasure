@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<script src="js/vue-router231.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="kindeditor/themes/default/default.css" th:href="@{/kindeditor/themes/default/default.css}" />
+        <link rel="stylesheet" href="kindeditor/themes/myeditor/myeditor.css" th:href="@{/kindeditor/themes/myeditor/myeditor.css}" />
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="main-content">
+				<!-- 页面头部 -->
+				<div class="page-header">
+					<h1 class="page-title">新增商品</h1>
+					<div class="breadcrumb"><a href="##">首页</a><span>/</span><a href="##">商品管理</a><span>/</span><a href="##">商品列表</a></div>
+				</div><!-- 页面头部 end -->
+
+				<!-- 商品tab切换 -->
+				<div class="z-tabs">
+					<div class="z-tabs_header">
+			 			<router-link class="z-tabs_item router-link-active" to="/basic">
+			 				<span class="item_span">基础</span>
+			 			</router-link>
+			 			<router-link class="z-tabs_item" to="/basic2">
+			 				<span class="item_span">图片与商品详情</span>
+			 			</router-link>
+			 			<router-link class="z-tabs_item" to="/basic3">
+			 				<span class="item_span">库存预警</span>
+			 				<div class="z-pop_question">
+				  	 			<el-popover
+									  ref="popoverqs"
+									  placement="bottom-start"
+									  width="440"
+									  trigger="hover">
+									  <p class="z-jiao">
+									  	库存下限：当此商品的库存低于库存下限时，会被醒目地展示出来。<br/>
+										库存上限：当此商品的库存高于安全库存时，会被醒目地展示出来。<br/>
+										安全库存：当此商品的库存低于安全库存时，会被醒目地展示出来。<br/>
+										设置数值大小要求：库存下限《安全库存《库存上限<br/>
+										注意：设置0或者不设置，即不启用此功能 <a href="##">查看更多帮助</a>
+									  </p>
+									</el-popover>
+									
+									<i v-popover:popoverqs class="el-icon-question"></i>
+				  	 		</div>
+			 			</router-link>
+			 			<router-link class="z-tabs_item" to="/basic4">
+			 				<span class="item_span">关联商品</span>
+			 			</router-link>
+			 			<router-link class="z-tabs_item" to="/basic5">
+			 				<span class="item_span">经营屏蔽</span>
+			 			</router-link>
+			 		</div>
+				</div><!-- 商品tab切换 end -->
+
+				<div class="main-content-body">
+					<template id="basic">
+						<div class="edit-form">
+							<el-form :model="basicForm" :rules="basicRules" ref="basicForm" label-width="120px" class="demo-ruleForm">
+								<h3 class="edit-form-title">基础</h3>
+								<el-row>
+									<el-col :span="12">
+										<el-form-item label="商品名称" prop="name">
+											<el-input v-model="basicForm.name" placeholder="最多50个字"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="商品编号" prop="uuid">
+											<el-input v-model="basicForm.uuid"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="商品分类" prop="class">
+											<el-select v-model="basicForm.class">
+												<el-option label="默认分类" value="1"></el-option>
+												<el-option label="电视" value="2"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="所属仓库" prop="ware">
+											<el-select v-model="basicForm.ware">
+												<el-option label="默认仓库" value="1"></el-option>
+												<el-option label="北京仓库" value="2"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="上下架">
+											<el-radio-group v-model="basicForm.salesTate">
+												<el-radio :label="1">上架</el-radio>
+												<el-radio :label="2">下架</el-radio>
+											</el-radio-group>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="排序值" prop="sort">
+											<el-input v-model="basicForm.sort"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="商品品牌">
+											<el-select v-model="basicForm.brand" placeholder="请选择品牌">
+												<el-option label="华为" value="1"></el-option>
+												<el-option label="苹果" value="2"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="关键字">
+											<el-input v-model="basicForm.key"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="库位号">
+											<el-input v-model="basicForm.seatNo"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="12">
+										<el-form-item label="供应商">
+											<el-select v-model="basicForm.store" placeholder="请选择供应商">
+												<el-option label="九牧" value="1"></el-option>
+												<el-option label="TCL" value="2"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="24">
+										<el-form-item label="商品型号">
+											<el-input placeholder="请输入型号规格" v-model="basicForm.spec"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="24">
+										<el-form-item label="商品标签">
+											<el-checkbox-group v-model="basicForm.label">
+												<el-checkbox label="新品" name="type"></el-checkbox>
+												<el-checkbox label="推荐" name="type"></el-checkbox>
+												<el-checkbox label="热销" name="type"></el-checkbox>
+												<el-checkbox label="赠品" name="type"></el-checkbox>
+											</el-checkbox-group>
+										</el-form-item>
+									</el-col>
+								</el-row>
+
+
+								<h3 class="edit-form-title">自定义字段</h3>
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="扩展字段1">
+											<el-input v-model="basicForm.extendStr1"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="扩展字段2">
+											<el-input v-model="basicForm.extendStr2"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="扩展字段3">
+											<el-input v-model="basicForm.extendStr3"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="扩展字段4">
+											<el-input v-model="basicForm.extendStr4"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="扩展字段5">
+											<el-input v-model="basicForm.extendStr5"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="扩展字段6">
+											<el-input v-model="basicForm.extendStr6"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+
+								<h3 class="edit-form-title">
+									价格
+									<el-popover
+									  ref="popoverqsu"
+									  placement="bottom-start"
+									  width="440"
+									  trigger="hover">
+									  <p class="z-jiao">对于一个客户，优先执行指定价，其次等级价，最后统一订货价</p>
+									</el-popover>
+									<i v-popover:popoverqsu class="el-icon-question"></i>
+								</h3>
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="订货价" prop="price1">
+											<el-input v-model="basicForm.price1" placeholder="如：30"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="市场价" prop="price2">
+											<el-input v-model="basicForm.price2" placeholder="如：40"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="参考进货价" prop="price3">
+											<el-input v-model="basicForm.price3" placeholder="如：20"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+
+								<div style="width: 600px;margin-left: 58px;">
+									<div class="clearfix">
+										<div class="fl">
+											等级价
+										</div>
+										<div class="fr">
+											<el-button>自动计算订货价</el-button>
+										</div>
+									</div>
+									<div class="z-tables">
+										<el-table ref="multipleTable" :data="basicForm.tableData3">
+						 					<el-table-column label="客户类型" min-width="130">
+						 						<template slot-scope="scope">
+						 							{{scope.row.name}} {{scope.$index}}
+												</template>
+						 					</el-table-column>
+
+										    <el-table-column label="等级折扣" min-width="130" prop="percent"></el-table-column>
+										    
+										    <el-table-column label="订货价" min-width="60">
+												<template slot-scope="scope">
+												    <el-input v-model="scope.row.price"></el-input>
+												</template>
+										    </el-table-column>
+										</el-table>
+									</div>
+								</div>
+								
+
+								<div class="edit-button-fixed">
+									<div class="edit-button z-yuan-butn">
+										<el-button type="primary" @click="submitForm('basicForm')">确定</el-button>
+										<el-button>取消</el-button>
+									</div>
+								</div>
+							</el-form>
+						</div>
+					</template>
+					<template id="basic2"></template>
+					<template id="basic3"></template>
+					<template id="basic4"></template>
+					<template id="basic5"></template>
+				</div>	
+			</div>
+		</div>
+
+		
+
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script charset="utf-8" src="kindeditor/kindeditor-min.js" th:src="@{/kindeditor/kindeditor-min.js}"></script>
+    <script charset="utf-8" src="kindeditor/lang/zh-CN.js" th:src="@{/kindeditor/lang/zh-CN.js}"></script>
+	<script>
+		var router = new VueRouter({
+			routes: [
+				{path: '/',component: basic},
+				{path: '/basic',component: basic},
+				{path: '/basic2',component: basic2},
+				{path: '/basic3',component: basic3},
+				{path: '/basic4',component: basic4},
+				{path: '/basic5',component: basic5}
+			]
+		});
+
+		// let options = {
+  //           width: '800px',
+  //           height: '300px',
+  //           items: [
+  //               'formatblock', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+  //               'strikethrough', 'lineheight', 'image', 'link', 'unlink', 'plainpaste', 'wordpaste', 'insertorderedlist',
+  //               'insertunorderedlist', 'table', 'fullscreen'
+  //           ],
+  //           resizeType: 0,
+  //           themeType: 'myeditor',
+  //           uploadJson: '',
+  //           fileManagerJson: '',
+  //       };
+  //       KindEditor.ready(function(K) {
+  //           window.editor = K.create('#form-editor', options);
+  //       });
+		new Vue({
+			el: "#app",
+			router: router,
+			data: {
+				// form 表单数据
+				basicForm: {
+					// 基础信息
+					name: '',
+					uuid: '10011',
+					class: '1',
+					ware: '1',
+					salesTate: 1,
+					sort: '500',
+					brand: '',
+					key: '',
+					seatNo: '',
+					store: '',
+					spec: '',
+					label: [],
+					// 扩展字段
+					extendStr1: '',
+					extendStr2: '',
+					extendStr3: '',
+					extendStr4: '',
+					extendStr5: '',
+					// 价格
+					price1: '',
+					price2: '',
+					price3: '',
+					// 等级价格表
+			        tableData3: [
+			        	{
+			        		name: '默认类型',
+							percent: '100%',
+							price: ''
+			        	},
+			        	{
+			        		name: '采购',
+							percent: '100%',
+							price: ''
+			        	},
+			        ]
+		        },
+		        // form 表单验证规则
+		        basicRules: {
+					name: [
+						{ required: true, message: '商品名称不能为空', trigger: 'blur' },
+						{ max: 50, message: '长度最多50个字符', trigger: 'blur' }
+					],
+					uuid: [
+						{ required: true, message: '商品编号不能为空', trigger: 'blur' }
+					],
+					class: [
+						{ required: true, message: '商品分类不能为空', trigger: 'change' }
+					],
+					ware: [
+						{ required: true, message: '所属仓库不能为空', trigger: 'change' }
+					],
+					sort: [
+						{ required: true, message: '排序值不能为空', trigger: 'blur' }
+					],
+					price1: [
+						{ required: true, message: '订货价不能为空', trigger: 'blur' }
+					],
+					price2: [
+						{ required: true, message: '市场价不能为空', trigger: 'blur' }
+					],
+					price3: [
+						{ required: true, message: '参考订货价不能为空', trigger: 'blur' }
+					],
+		        }
+			},
+			computed: {
+				
+			},
+			methods: {
+				// 提交表单
+			    submitForm(formName) {
+					this.$refs[formName].validate((valid) => {
+					  if (valid) {
+					  	// 先同步，才能获取到值
+                        editor.sync();
+                        console.log($('#form-editor').val());
+
+					    alert('submit!');
+					  } else {
+					    console.log('error submit!!');
+					    return false;
+					  }
+					});
+				},
+				// 重置表单
+				resetForm(formName) {
+					this.$refs[formName].resetFields();
+				}
+			},
+			watch: {
+				"$route": function (news, old) {
+					
+					if(news.fullPath != '/kefu') {
+						this.isInit = false;
+					}else {
+						this.isInit = true;
+					}
+				}
+			},
+		});
+	</script>
+</html>

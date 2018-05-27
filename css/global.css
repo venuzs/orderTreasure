@@ -29,6 +29,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .mb_0 {
     margin-bottom: 0 !important;
 }
+.mb_10 {
+    margin-bottom: 10px !important;
+}
+.mb_20 {
+    margin-bottom: 20px !important;
+}
+.mb_30 {
+    margin-bottom: 30px !important;
+}
 .no-pd-t {
     padding-top: 0 !important;
 }

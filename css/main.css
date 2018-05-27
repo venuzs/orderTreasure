@@ -391,7 +391,7 @@
 }
 .z-tabs_header {
 	width: 100%;
-	border-bottom: 1px solid #EFEFEF;
+	border-bottom: 1px solid #CFDADD;
 	overflow: hidden;
 	zoom: 1;
 	position: relative;
@@ -1743,4 +1743,35 @@
 	line-height: 18px;
 	color: #999;
 	font-size: 12px;
+}
+
+
+/*系统设置-LOGO设置*/
+.logoseeting-list {
+	padding: 40px 0;
+	overflow: hidden;
+}
+.logoseeting-list li {
+	float: left;
+	margin-right: 40px;
+}
+.logoseeting-list li h2 {
+	font-size: 14px;
+	font-weight: bold;
+	padding-bottom: 15px;
+}
+.logoseeting-list .upload-image-box.noImage {
+	border: 1px dashed #3366cc;
+}
+.logoseeting-list .upload-image-box .upload-button {
+	color: #36c;
+	font-size: 14px;
+	margin-top: -50px;
+}
+.logoseeting-list .upload-image-box .upload-icon {
+	display: block;
+	width: 75px;
+	height: 57px;
+	margin: 0 auto 20px;
+	background: url(../img/upload.png) no-repeat;
 }

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<script src="js/vue-router231.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="kindeditor/themes/default/default.css" th:href="@{/kindeditor/themes/default/default.css}" />
+        <link rel="stylesheet" href="kindeditor/themes/myeditor/myeditor.css" th:href="@{/kindeditor/themes/myeditor/myeditor.css}" />
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="main-content">
+				<!-- 页面头部 -->
+				<div class="page-header">
+					<h1 class="page-title">商城设置</h1>
+					<div class="breadcrumb"><a href="##">首页</a><span>/</span>系统设置</div>
+				</div><!-- 页面头部 end -->
+
+				<div class="main-content-body">
+					<div class="view-order mb_20">
+		               <div class="view-item">
+		                   设置商城的基础信息，常用运营参数
+		               </div>
+		            </div>
+					<div class="edit-form">
+						<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+							<h3 class="edit-form-title">基础信息</h3>
+							<el-form-item label="登录账号" prop="account">
+								<el-input v-model="ruleForm.account" placeholder="只能包括英文字母、数字，支持 Email"></el-input>
+							</el-form-item>
+							<el-form-item label="密码" prop="password">
+								<el-input v-model="ruleForm.password"></el-input>
+							</el-form-item>
+							<el-form-item label="网址">
+								<el-input placeholder="请输入内容" v-model="ruleForm.http">
+									<template slot="prepend">Http://</template>
+								</el-input>
+							</el-form-item>
+							<el-form-item label="网址">
+								<el-input placeholder="请输入内容" v-model="ruleForm.http2">
+									<template slot="append">.com</template>
+								</el-input>
+							</el-form-item>
+							<el-form-item label="网址">
+								<el-input placeholder="请输入内容" v-model="ruleForm.selectbox" class="input-with-select">
+									<el-select v-model="ruleForm.select" slot="prepend" placeholder="请选择" style="width:85px">
+										<el-option label="餐厅名" value="1"></el-option>
+										<el-option label="订单号" value="2"></el-option>
+										<el-option label="用户电话" value="3"></el-option>
+									</el-select>
+									<el-button slot="append" icon="el-icon-search"></el-button>
+								</el-input>
+							</el-form-item>
+							<el-form-item label="身份">
+								<el-radio-group v-model="ruleForm.Identity">
+									<el-radio :label="1">内勤</el-radio>
+									<el-radio :label="2">业务员</el-radio>
+									<el-radio :label="3">老板</el-radio>
+									<el-radio :label="4">司机</el-radio>
+								</el-radio-group>
+							</el-form-item>
+							<el-form-item label="部门">
+								<el-select v-model="ruleForm.department" placeholder="请选择部门">
+									<el-option label="产品部" value="shanghai"></el-option>
+									<el-option label="设计部" value="beijing"></el-option>
+								</el-select>
+							</el-form-item>
+							<el-form-item label="备注">
+								<el-input type="textarea" v-model="ruleForm.desc" placeholder="填写相关备注信息" :rows="3"></el-input>
+							</el-form-item>
+							<el-form-item label="日期">
+								<el-date-picker v-model="ruleForm.time" type="date" placeholder="选择日期"></el-date-picker>
+							</el-form-item>
+							<el-form-item label="公告内容">
+                                <el-input type="textarea" v-model="ruleForm.content" id="form-editor"></el-input>
+                            </el-form-item>
+
+							<h3 class="edit-form-title">运营参数</h3>
+							<el-form-item>
+								<template slot="label">
+									<el-popover
+									  ref="popoverqsu"
+									  placement="bottom-start"
+									  width="440"
+									  trigger="hover">
+									  <p class="z-jiao">数据权限：此账号可以看到那些客户的订单销售数据，资金数据，报表数据；比如：某个业务员人员，只能看到他负责地区的客户订单</p>
+									</el-popover>
+									<i v-popover:popoverqsu class="el-icon-question"></i>
+								    数据权限
+								</template>
+								<el-radio-group v-model="ruleForm.authData">
+									<el-radio :label="1">全部区域</el-radio>
+									<el-radio :label="2">部分区域</el-radio>
+								</el-radio-group>
+							</el-form-item>
+							<el-form-item label="角色权限" prop="authRole">
+								<el-checkbox-group v-model="ruleForm.authRole">
+									<el-checkbox label="业务员" name="type"></el-checkbox>
+									<el-checkbox label="仓库管理员" name="type"></el-checkbox>
+									<el-checkbox label="财务管理员" name="type"></el-checkbox>
+									<el-checkbox label="订单管理员" name="type"></el-checkbox>
+									<el-checkbox label="系统管理员" name="type"></el-checkbox>
+								</el-checkbox-group>
+								<div class="z-box-info">
+									<p>注意请勾选此账号属于的【角色权限】，对应的【权限明显】即可选中；</p>
+									<p>如果您还未设置过【角色权限】，请先 <a href="javascript:;">设置角色</a>，比如：仓库管理员、财务管理员、业务管理员</p>
+								</div>
+							</el-form-item>
+							
+
+							<div class="edit-button-fixed">
+								<div class="edit-button z-yuan-butn">
+									<el-button type="primary" @click="submitForm('ruleForm')">确定</el-button>
+									<el-button>取消</el-button>
+								</div>
+							</div>
+						</el-form>
+
+					</div>
+				</div>	
+			</div>
+		</div>
+
+		
+
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script charset="utf-8" src="kindeditor/kindeditor-min.js" th:src="@{/kindeditor/kindeditor-min.js}"></script>
+    <script charset="utf-8" src="kindeditor/lang/zh-CN.js" th:src="@{/kindeditor/lang/zh-CN.js}"></script>
+	<script>
+		let options = {
+            width: '800px',
+            height: '300px',
+            items: [
+                'formatblock', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'strikethrough', 'lineheight', 'image', 'link', 'unlink', 'plainpaste', 'wordpaste', 'insertorderedlist',
+                'insertunorderedlist', 'table', 'fullscreen'
+            ],
+            resizeType: 0,
+            themeType: 'myeditor',
+            uploadJson: '',
+            fileManagerJson: '',
+        };
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#form-editor', options);
+        });
+		new Vue({
+			el: "#app",
+			data: {
+				// form 表单数据
+				ruleForm: {
+					// 账号信息
+					account: '',
+					password: '',
+					http: '',
+					http2: '',
+					selectbox: '',
+					select: '',
+					Identity: 1,
+					department: '',
+					desc: '',
+					time: '',
+					content: '',
+					// 权限范围
+					authData: 1,
+					authRole: []
+		        },
+		        // form 表单验证规则
+		        rules: {
+					account: [
+						{ required: true, message: '请输入登录账号', trigger: 'blur' },
+						{ min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+					],
+					password: [
+						{ required: true, message: '请输入密码', trigger: 'blur' }
+					],
+					authRole: [
+						{ type: 'array', required: true, message: '请至少选择一个角色权限', trigger: 'change' }
+					]
+		        }
+			},
+			computed: {
+				
+			},
+			methods: {
+				// 提交表单
+			    submitForm(formName) {
+					this.$refs[formName].validate((valid) => {
+					  if (valid) {
+					  	// 先同步，才能获取到值
+                        editor.sync();
+                        console.log($('#form-editor').val());
+
+					    alert('submit!');
+					  } else {
+					    console.log('error submit!!');
+					    return false;
+					  }
+					});
+				},
+				// 重置表单
+				resetForm(formName) {
+					this.$refs[formName].resetFields();
+				}
+			}
+		});
+	</script>
+</html>

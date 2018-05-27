@@ -1,4 +1,6 @@
 @charset "utf-8";
+/*引入第三方扩展字体图标*/
+@import "iconfont.css";
 
 /*element UI reset 样式*/
 .el-input {
@@ -60,7 +62,7 @@
 /*按钮*/
 .el-button {
 	font-size: 12px;
-	padding: 8px 7px;
+	padding: 9px 7px;
 	color: #222;
 	border-radius: 2px;
 	vertical-align: middle;
@@ -88,6 +90,9 @@
     background: transparent;
     padding-left: 0 !important;
     padding-right: 0 !important;
+}
+.el-input-group__append .el-button, .el-input-group__append .el-select, .el-input-group__prepend .el-button, .el-input-group__prepend .el-select {
+	margin: -10px -15px;
 }
 /*popover样式*/
 .el-popover {
@@ -222,10 +227,10 @@ td.el-table_2_column_15 .cell {
 	text-align: right;
 	display: none;
 }
-.table-operate-td:hover .table-operate {
+.el-table tr.hover-row .table-operate {
 	display: block;
 }
-.table-operate-td:hover .table-info {
+.el-table tr.hover-row .table-info {
 	visibility: hidden;
 }
 
@@ -446,12 +451,16 @@ td.el-table_2_column_15 .cell {
 *表单样式
 *
 */
+.edit-form {
+	max-width: 1150px;
+}
 .edit-form-title {
     font-size: 16px;
     line-height: 20px;
     color: #666;
     font-weight: 600;
     margin: 0 25px 15px;
+    padding-top: 10px;
 }
 .el-form-item__label {
 	font-size: 13px;
@@ -462,8 +471,9 @@ td.el-table_2_column_15 .cell {
 	line-height: 30px;
 }
 /*新增、编辑页表单样式*/
-.edit-form .el-input__inner, .edit-form .el-textarea__inner {
+.edit-form .el-form-item__content > .el-input, .edit-form .el-form-item__content > .el-select, .edit-form .el-form-item__content > .el-textarea {
 	width: 400px;
+	max-width: 100%;
 }
 .edit-button {
 	margin: 0;

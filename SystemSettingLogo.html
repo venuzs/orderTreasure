@@ -15,60 +15,69 @@
     <div class="main-content">
         <!-- 页面头部 -->
         <div class="page-header">
-            <h1 class="page-title">查看页面</h1>
-            <div class="breadcrumb"><a href="##">首页</a><span>/</span>入库单</div>
+            <h1 class="page-title">LOGO设置</h1>
+            <div class="breadcrumb"><a href="##">首页</a><span>/</span>系统设置</div>
         </div><!-- 页面头部 end -->
         <div class="main-content-body">
-            <div class="view-title"><h2 class="title_h">单据信息</h2></div>
             <div class="view-order">
-                <el-row :gutter="20">
-                  <el-col :span="8"><div class="view-item">入库单号：RK.20171205.0002</div></el-col>
-                  <el-col :span="8"><div class="view-item">入库时间：2017-12-05 15:07</div></el-col>
-                  <el-col :span="8"><div class="view-item">关联订单：</div></el-col>
-                  <el-col :span="8"><div class="view-item">审核状态：已审核</div></el-col>
-                  <el-col :span="8"><div class="view-item">入库仓库：默认仓库</div></el-col>
-                  <el-col :span="8"><div class="view-item">入库类型：采购入库</div></el-col>
-                  <el-col :span="8"><div class="view-item">经办人：13437104</div></el-col>
-                  <el-col :span="8"><div class="view-item">供应商：</div></el-col>
-                </el-row>
+               <div class="view-item">
+                   设置商城前后台展示的LOGO图片，分为正方形LOGO和长方形LOGO，图片为jpg\png格式，大小不超过500K：
+               </div>
             </div>
-            <div class="view-title"><h2 class="title_h">普通字段信息</h2></div>
-            <table class="table-view">
-                <tr>
-                    <th width="15%">商品分类</th>
-                    <td width="35%">电视</td>
-                    <th width="15%">商品编号</th>
-                    <td width="35%">100005</td>
-                </tr>
-                <tr>
-                    <th>小条形码</th>
-                    <td></td>
-                    <th>大条形码</th>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>所属仓库</th>
-                    <td>默认仓库</td>
-                    <th>订购限制</th>
-                    <td>正常</td>
-                </tr>
-                <tr>
-                    <th>备注</th>
-                    <td colspan="3">等级价（不同客户类型指定价格）等级价（不同客户类型指定价格）</td>
-                </tr>
-            </table>
-            <div class="view-title"><h2 class="title_h">操作日志</h2></div>
-            <el-table :data="table_log" style="width: 100%;" class="table-log">
-                <el-table-column prop="time" label="操作时间" min-width="130"></el-table-column>
-                
-                <el-table-column prop="name" label="操作人员" min-width="110"></el-table-column> 
-                
-                <el-table-column prop="type" label="操作类型" min-width="130"> </el-table-column>
-                
-                <el-table-column prop="log" label="操作日志" min-width="140"> </el-table-column>
-            </el-table>
+            <ul class="logoseeting-list">
+                <li>
+                    <h2>正方形LOGO</h2>
+                    <div class="upload-image-box" v-bind:class="{ noImage: !uploadImage.imageUrl }" @click="showDialogImage($event)" data-image="uploadImage" style="width:250px;height:250px;">
+                        <div v-show="uploadImage.imageUrl" class="upload-image">
+                            <img :src="uploadImage.imageUrl">
+                            <!-- <span class="upload-operate">点击修改</span> -->
+                            <span class="upload-operate upload-operate-delect" @click.stop="delectImage('uploadImage')">点击删除</span>
+                        </div>
+                        <span v-show="!uploadImage.imageUrl" class="upload-button">
+                            <i class="upload-icon"></i>
+                            上传正方形LOGO
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <h2>长方形LOGO</h2>
+                    <div class="upload-image-box" v-bind:class="{ noImage: !uploadImage2.imageUrl }" @click="showDialogImage($event)" data-image="uploadImage2" style="width:250px;height:250px;">
+                        <div v-show="uploadImage2.imageUrl" class="upload-image">
+                            <img :src="uploadImage2.imageUrl">
+                            <!-- <span class="upload-operate">点击修改</span> -->
+                            <span class="upload-operate upload-operate-delect" @click.stop="delectImage('uploadImage2')">点击删除</span>
+                        </div>
+                        <span v-show="!uploadImage2.imageUrl" class="upload-button">
+                            <i class="upload-icon"></i>
+                            上传长方形LOGO
+                        </span>
+                    </div>
+                </li>
+            </ul>
+            <div class="edit-button z-yuan-butn">
+                <el-button type="primary">确定</el-button>
+                <el-button>取消</el-button>
+            </div>
         </div>
     </div>
+
+    <!-- 上传图片模态框 -->
+    <el-dialog title="上传文件" :visible.sync="dialogImageVisible">
+        <el-upload
+          ref="upload"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-change="handleChange"
+          :auto-upload="false"
+          :before-upload="beforeAvatarUpload">
+          <el-button size="medium">+&nbsp;点击选择图片</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogImageVisible = false">取 消</el-button>
+        </div>
+    </el-dialog>
+    <!-- 上传图片模态框 end -->
 </div>
 </body>
 <script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
@@ -77,21 +86,49 @@
     new Vue({
         el: "#app",
         data: {
-            table_log: [
-                {
-                    time: "2017-09-20 18:30:23",
-                    name: "张三",
-                    type: "入库审核",
-                    log: "入库审核为已通过"
-                },
-                {
-                    time: "2017-09-20 18:30:23",
-                    name: "张三",
-                    type: "入库审核",
-                    log: "入库审核为已通过"
-                }
-            ]
+            dialogImageVisible: false,  // 上传图片模态框是否显示
+            // 上传正方形图片数据
+            uploadImage: {
+                imageUrl: '',
+                fileList: []
+            },
+            // 上传长方形图片数据
+            uploadImage2: {
+                imageUrl: '',
+                fileList: []
+            }
         },
+        methods: {
+            // 显示图片上传模态框
+            showDialogImage(e){
+                this.dialogImageVisible = true;
+                this.dialogImage = e.currentTarget.dataset.image;
+            },
+            // 图片上传前校验
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                  this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                  this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
+            },
+            // 图片状态变化监听,选择图片后执行的事件
+            handleChange(file, fileList) {
+                this[this.dialogImage].fileList = fileList.slice(-1);
+                this[this.dialogImage].imageUrl = URL.createObjectURL(file.raw);
+                this.dialogImageVisible = false;
+            },
+            // 删除图片事件
+            delectImage(fileName){
+                this[fileName].fileList = [];
+                this[fileName].imageUrl = '';
+            }
+        }
     });
 </script>
 </html>
