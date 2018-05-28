@@ -184,6 +184,9 @@
 .el-table .cell {
 	line-height: 1.42857143;
 }
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+	background: #ecf5ff
+}
 .z-tables .el-table td, .el-table th.is-leaf {
 	border-bottom-color: #e5e5e5;
 }
