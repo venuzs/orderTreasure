@@ -25,6 +25,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	height: 100%;
 	overflow: hidden;
 }
+.cur_pointer {
+    cursor: pointer;
+}
 /*间距设置*/
 .mb_0 {
     margin-bottom: 0 !important;
@@ -38,6 +41,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .mb_30 {
     margin-bottom: 30px !important;
 }
+.ml_10 {
+    margin-left: 10px !important;
+}
+.ml_20 {
+    margin-left: 20px !important;
+}
+.ml_30 {
+    margin-left: 30px !important;
+}
 .no-pd-t {
     padding-top: 0 !important;
 }
@@ -50,6 +62,29 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 }
 .fc_999 {
 	color: #999;
+}
+/*字体大小*/
+.f_12 {
+    font-size: 12px;
+}
+.f_13 {
+    font-size: 13px;
+}
+.f_14 {
+    font-size: 14px;
+}
+.f_16 {
+    font-size: 16px;
+}
+.f_20 {
+    font-size: 20px;
+}
+/*行高*/
+.l_20 {
+    line-height: 20px;
+}
+.l_30 {
+    line-height: 30px;
 }
 /*多选框覆盖*/
 .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{

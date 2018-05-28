@@ -105,6 +105,12 @@
 .el-popper[x-placement^=top] {
 	margin-bottom: 5px;
 }
+.popover_hover .el-icon-question {
+	visibility: hidden;
+}
+.popover_hover:hover .el-icon-question {
+	visibility: visible;
+}
 
 /*列表筛选样式*/
 .content_item_filter .input-select {
@@ -113,6 +119,9 @@
 }
 .content_filter_more .input-select {
 	width: 83%;
+}
+.el-dialog .content_item_filter .input-select {
+	max-width: 100%;
 }
 .content_item_filter .filter-form {
 	margin-right: 110px;
@@ -322,6 +331,7 @@ td.el-table_2_column_15 .cell {
 .el-pagination .el-select .el-input {
 	width: auto;
 	margin: 0;
+	max-width: 80px;
 }
 .el-pagination .el-select .el-input .el-input__inner {
 	border: none;
@@ -478,6 +488,9 @@ td.el-table_2_column_15 .cell {
 	width: 400px;
 	max-width: 100%;
 }
+.edit-form .el-form-item__content > .el-input-group {
+	width: 100%;
+}
 .edit-button {
 	margin: 0;
 	padding: 15px;
@@ -496,6 +509,21 @@ td.el-table_2_column_15 .cell {
 	bottom: 0;
 	right: 0;
 	z-index: 99;
+}
+.edit-form .el-radio {
+	position: relative;
+	padding-right: 20px
+}
+.edit-form .el-radio+.el-radio {
+	margin-left: 10px;
+}
+.edit-form .el-radio .el-icon-question {
+	position: absolute;
+	right: 0;
+	visibility: hidden;
+}
+.edit-form .el-radio:hover .el-icon-question {
+	visibility: visible;
 }
 
 /*模态框内表单*/

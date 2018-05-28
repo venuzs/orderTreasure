@@ -185,6 +185,80 @@
 									</el-col>
 								</el-row>
 
+
+								<h3 class="edit-form-title">单位</h3>
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="小单位">
+											<el-select v-model="basicForm.brand" placeholder="请选择单位">
+												<el-option label="个" value="1"></el-option>
+												<el-option label="件" value="2"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="条形码">
+											<el-input v-model="basicForm.extendStr2"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="小单位重量(kg)">
+											<el-input v-model="basicForm.extendStr3"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="大单位">
+											<el-select v-model="basicForm.brand" placeholder="请选择单位">
+												<el-option label="个" value="1"></el-option>
+												<el-option label="件" value="2"></el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="条形码">
+											<el-input v-model="basicForm.extendStr5"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="换算关系">
+											<el-input v-model="basicForm.extendStr2"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="起订量">
+											<el-input placeholder="请输入内容" v-model="basicForm.extendStr3" class="input-with-select">
+												<el-select v-model="basicForm.brand" slot="append" style="width:85px">
+													<el-option label="小单位" value="1"></el-option>
+													<el-option label="大单位" value="2"></el-option>
+												</el-select>
+											</el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="订货限制">
+											<el-radio-group v-model="basicForm.salesTate">
+												<el-radio :label="1">正常
+													<el-popover
+													  ref="popoverqsu2"
+													  placement="bottom-start"
+													  width="440"
+													  trigger="hover">
+													  <p class="z-jiao">选择正常，当商品可售库存>0时，客户可以下单订货</p>
+													</el-popover>
+													<i v-popover:popoverqsu2 class="el-icon-question"></i>
+												</el-radio>
+												<el-radio :label="2">预售</el-radio>
+												<el-radio :label="3">停售</el-radio>
+											</el-radio-group>
+										</el-form-item>
+									</el-col>
+								</el-row>
+
+
 								<h3 class="edit-form-title">
 									价格
 									<el-popover
@@ -214,31 +288,144 @@
 									</el-col>
 								</el-row>
 
-								<div style="width: 600px;margin-left: 58px;">
-									<div class="clearfix">
-										<div class="fl">
-											等级价
+								
+								<div style="margin-left: 58px;">
+									<div class="popover_hover switch_title">
+										<el-switch v-model="basicForm.switch1"></el-switch>
+										此商品有多种规格 
+										<a href="##" class="fz_c">管理多规格</a>
+										<el-popover
+										  ref="popoverqsu3"
+										  placement="bottom-start"
+										  width="440"
+										  trigger="hover">
+										  <p class="z-jiao">当商品有2种以上的规格的时候（如：颜色：黑、白、黄）请使用此功能  <a href="##">查看更多帮助</a></p>
+										</el-popover>
+										<i v-popover:popoverqsu3 class="el-icon-question"></i>
+									</div>
+									<div v-show="!basicForm.switch1">
+										<div class="mb_20" style="width: 600px;">
+											<div class="clearfix">
+												<div class="fl l_30 f_13">
+													等级价<span class="f_12 fc_999">（不同客户类型指定价格）</span>
+												</div>
+												<div class="fr">
+													<el-button>自动计算订货价</el-button>
+												</div>
+											</div>
+											<div class="z-tables">
+												<el-table :data="basicForm.tableData3">
+								 					<el-table-column label="客户类型" min-width="130">
+								 						<template slot-scope="scope">
+								 							{{scope.row.name}}
+								 							<el-tag v-if="scope.$index==0" size="mini">默认</el-tag>
+														</template>
+								 					</el-table-column>
+
+												    <el-table-column label="等级折扣" min-width="130" prop="percent"></el-table-column>
+												    
+												    <el-table-column label="订货价" min-width="60">
+														<template slot-scope="scope">
+														    <el-input v-model="scope.row.price"></el-input>
+														</template>
+												    </el-table-column>
+												</el-table>
+											</div>
 										</div>
-										<div class="fr">
-											<el-button>自动计算订货价</el-button>
+										<div class="clearfix l_30 f_13">
+											指定价<span class="f_12 fc_999">（指定某个客户定价）</span>
+											<el-button class="ml_10" @click="dialogFormVisible = true">+ 选择客户</el-button>
+										</div>
+										<div class="z-tables">
+											<el-table :data="basicForm.tableData4">
+							 					<el-table-column label="客户姓名" prop="name"></el-table-column>
+
+											    <el-table-column label="客户编号" prop="uuid"></el-table-column>
+
+											    <el-table-column label="客户类型" prop="type"></el-table-column>
+
+											    <el-table-column label="客户地区" prop="area"></el-table-column>
+											    
+											    <el-table-column label="订货价">
+													<template slot-scope="scope">
+													    <el-input v-model="scope.row.price"></el-input>
+													</template>
+											    </el-table-column>
+
+											    <el-table-column label="操作">
+													<template slot-scope="scope">
+														<i class="el-icon-delete cur_pointer"></i>
+													</template>
+											    </el-table-column>
+											</el-table>
 										</div>
 									</div>
-									<div class="z-tables">
-										<el-table ref="multipleTable" :data="basicForm.tableData3">
-						 					<el-table-column label="客户类型" min-width="130">
-						 						<template slot-scope="scope">
-						 							{{scope.row.name}} {{scope.$index}}
-												</template>
-						 					</el-table-column>
+									<div  v-show="basicForm.switch1">
+										<div class="multi-box mb_20">
+											<div class="multi-header">
+												<div class="fl">
+													<el-select v-model="basicForm.brand" placeholder="请选择多规格">
+														<el-option label="尺寸" value="1"></el-option>
+														<el-option label="颜色" value="2"></el-option>
+													</el-select>
+												</div>
+												<a class="fr f_20" href="##"><i class="el-icon-close"></i></a>
+											</div>
+											<div class="multi-content">
+												<ul class="option-list clearfix">
+													<li>S<i class="el-icon-close"></i></li>
+													<li>L<i class="el-icon-close"></i></li>
+													<li>M<i class="el-icon-close"></i></li>
+												</ul>
+												<a href="##" class="fz_c">+添加多规格值</a>
+											</div>
 
-										    <el-table-column label="等级折扣" min-width="130" prop="percent"></el-table-column>
-										    
-										    <el-table-column label="订货价" min-width="60">
-												<template slot-scope="scope">
-												    <el-input v-model="scope.row.price"></el-input>
-												</template>
-										    </el-table-column>
-										</el-table>
+											<div class="multi-header">
+												<div class="fl">
+													<el-select v-model="basicForm.brand" placeholder="请选择多规格">
+														<el-option label="尺寸" value="1"></el-option>
+														<el-option label="颜色" value="2"></el-option>
+													</el-select>
+												</div>
+												<a class="fr f_20" href="##"><i class="el-icon-close"></i></a>
+											</div>
+											<div class="multi-content">
+											</div>
+										</div>
+
+										<div class="popover_hover switch_title">
+											<el-switch v-model="basicForm.switch2"></el-switch>
+											多种规格价格不同 
+											<a href="##" class="fz_c ml_20">+设置所有规格的等级价</a>
+											<a href="##" class="fz_c ml_20">+设置所有规格的指定价</a>
+										</div>
+										<div class="z-tables">
+											<el-table :data="basicForm.tableData6">
+												<el-table-column label="序号" type="index"></el-table-column>
+
+							 					<el-table-column label="尺寸" prop="size"></el-table-column>
+
+											    <el-table-column label="颜色" prop="color"></el-table-column>
+
+											    <el-table-column label="规格编号">
+											    	<template slot-scope="scope">
+													    <el-input v-model="scope.row.spec"></el-input>
+													</template>
+											    </el-table-column>
+											    
+											    <el-table-column label="条形码">
+													<template slot-scope="scope">
+													    <el-input v-model="scope.row.code"></el-input>
+													</template>
+											    </el-table-column>
+
+											    <el-table-column label="操作">
+													<template slot-scope="scope">
+														<i class="el-icon-delete cur_pointer"></i>
+													</template>
+											    </el-table-column>
+											</el-table>
+										</div>
 									</div>
 								</div>
 								
@@ -258,6 +445,96 @@
 					<template id="basic5"></template>
 				</div>	
 			</div>
+
+			<!-- 新增部门模态框 -->
+			<el-dialog title="选择客户" :visible.sync="dialogFormVisible" width="900px">
+				<!--条件筛选-->
+				<div class="content_item_filter clearfix">
+	 				<div class="input-select fl btn-radid_none">
+	 					<div class="filter-form filter-form-one clearfix">
+		 					<el-input placeholder="名称/手机号/联系人/编号/备注" v-model="basicForm.addpartinput" class="minW40 z_input-holder" ></el-input>
+
+							<el-select v-model="basicForm.valueState" clearable placeholder="客户类型" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in basicForm.optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<el-select v-model="basicForm.valueState" clearable placeholder="归属地区" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in basicForm.optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<el-select v-model="basicForm.valueState" clearable placeholder="账号状态" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in basicForm.optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+						</div>
+
+						<div class="filter-operate">
+							<el-tooltip class="item" content="查询" placement="bottom-start">
+						    	<el-button icon="el-icon-search"></el-button>
+						    </el-tooltip>
+							<el-tooltip class="item" content="清空" placement="bottom-start">
+						    	<el-button icon="el-extend-clean"></el-button>
+						    </el-tooltip>
+					    </div>
+						
+	 				</div>
+				</div>
+					
+				<!--主体表格-->
+				<div class="z-tables">
+	 				<el-table :data="basicForm.tableData5" style="width: 100%;">
+	 					<el-table-column type="selection" width="55"></el-table-column>
+	 					
+					    <el-table-column label="客户名称">
+					    	<template scope="scope">
+						       <span>{{scope.row.name}}</span>
+						       <el-tag type="info" size="mini" v-if="!scope.row.active">待激活</el-tag>
+					      	</template>
+					    </el-table-column>
+					    
+					    <el-table-column prop="uuid" label="客户编号"></el-table-column>
+					    
+					    <el-table-column prop="type" label="客户类型"></el-table-column> 
+					    
+					    <el-table-column prop="area" label="客户地区"></el-table-column>
+					    
+					</el-table>
+	 			</div>
+	 			
+	 			<!--分页-->
+	 			<div class="grid-content">
+		 			<div class="bg-purple-light">
+					    <el-pagination
+	 					  :current-page="1"
+					      :page-sizes="[5, 10, 20, 30]"
+					      :page-size="5"
+					       layout="total, sizes, prev, pager, next"
+					      :total="100">
+					    </el-pagination>
+				  	</div>
+				</div>
+
+				<div slot="footer" class="dialog-footer">
+					<el-button type="primary">提 交</el-button>
+					<el-button @click="dialogFormVisible = false">提交并关闭</el-button>
+				</div>
+			</el-dialog>
+	        <!-- 新增部门模态框 end -->
+
 		</div>
 
 		
@@ -298,6 +575,7 @@
 			el: "#app",
 			router: router,
 			data: {
+				dialogFormVisible: false,
 				// form 表单数据
 				basicForm: {
 					// 基础信息
@@ -323,6 +601,9 @@
 					price1: '',
 					price2: '',
 					price3: '',
+					// 商品是否多规格
+					switch1: false,
+					switch2: false,
 					// 等级价格表
 			        tableData3: [
 			        	{
@@ -335,7 +616,59 @@
 							percent: '100%',
 							price: ''
 			        	},
-			        ]
+			        ],
+			        // 客户指定价格表
+			        tableData4: [
+			        	{
+			        		name: 'aaaa',
+							uuid: '1112',
+							type: '默认类型',
+							area: '默认地区',
+							price: '',
+			        	},
+			        	{
+			        		name: 'bbbbb',
+							uuid: '21sda',
+							type: '默认类型',
+							area: '默认地区',
+							price: '',
+			        	},
+			        ],
+			        // 选择客户模态框内容
+			        addpartinput: '',
+			        valueState: '',
+			        optionsState: ['全部','默认类型'],
+			        tableData5: [
+			        	{
+			        		name: 'aaaa',
+							uuid: '1112',
+							type: '默认类型',
+							area: '默认地区',
+							active: false,
+			        	},
+			        	{
+			        		name: 'bbbbb',
+							uuid: '21sda',
+							type: '默认类型',
+							area: '默认地区',
+							active: true,
+			        	},
+			        ],
+			        // 多种规格价格相同表
+			        tableData6: [
+			        	{
+			        		size: 'S',
+							color: '红色',
+							spec: '',
+							code: '',
+			        	},
+			        	{
+			        		size: 'S',
+							color: '黄色',
+							spec: '',
+							code: '',
+			        	},
+			        ],
 		        },
 		        // form 表单验证规则
 		        basicRules: {
@@ -388,6 +721,10 @@
 				// 重置表单
 				resetForm(formName) {
 					this.$refs[formName].resetFields();
+				},
+				// 删除行数据
+				handleDelete(index, row) {
+					console.log(index, row);
 				}
 			},
 			watch: {
