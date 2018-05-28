@@ -227,10 +227,10 @@ td.el-table_2_column_15 .cell {
 	text-align: right;
 	display: none;
 }
-.el-table tr.hover-row .table-operate {
+.el-table tr.hover-row .table-operate,.el-table tr:hover .table-operate {
 	display: block;
 }
-.el-table tr.hover-row .table-info {
+.el-table tr.hover-row .table-info,.el-table tr:hover .table-info {
 	visibility: hidden;
 }
 

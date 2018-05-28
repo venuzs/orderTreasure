@@ -47,7 +47,7 @@
 								<!-- <el-button slot="append" icon="el-icon-search"></el-button> -->
 							</el-input>
 
-							<el-select v-model="valueId" clearable placeholder="身份" class="z_select-holder">
+							<el-select v-model="valueId" clearable filterable default-first-option placeholder="身份" class="z_select-holder">
 								<el-option
 								  v-for="(item,index) in optionsId"
 								  :key="index"
@@ -136,9 +136,9 @@
 				<div class="z-tables">
 	 				<el-table ref="multipleTable" :data="tableData3" @selection-change="handleSelectionChange" style="width: 100%;">
 	 					<el-table-column type="selection" width="55"></el-table-column>
-	 					<el-table-column fixed  prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
+	 					<el-table-column prop="no" label="" min-width="60" class-name="z-opt_btn"></el-table-column>
 	 					
-					    <el-table-column fixed  label="登录账号" min-width="140">
+					    <el-table-column label="登录账号" min-width="140">
 					    	<template scope="scope">
 						       <span>{{scope.row.login}}</span>
 						       <label class="z-creater" v-if="scope.row.isCreater">创建者</label>
@@ -166,12 +166,12 @@
 					    
 					    <el-table-column prop="jion" label="邀请码" min-width="140"> </el-table-column>
 					    
-					    <el-table-column fixed="right" label="备注" min-width="140" class-name="table-operate-td">
+					    <el-table-column label="备注" min-width="140" class-name="table-operate-td">
 							<template slot-scope="scope">
 								<div class="table-info">{{ scope.row.remarks }}</div>
 								<div class="table-operate">
 									<el-button type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-							        <el-button type="primary" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+							        <el-button type="primary" @click="handleDelete(scope.$index, scope.row)">删除</el-butto
 								</div>
 							</template>
 					    </el-table-column>
@@ -243,7 +243,7 @@
 		el: "#app",
 		data: {
 			input4: '',
-		    optionsId: ['普通员工','管理人员'], //select下拉选项
+		    optionsId: ['普通员工','管理人员','普通员工','管理人员','普通员工','管理人员','普通员工','管理人员'], //select下拉选项
 		    optionsState: ['启用','激活'],
 		    valueId: '',
 		    valueState: '',
