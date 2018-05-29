@@ -668,41 +668,77 @@
 
 					<!-- 图片与商品详情 -->
 					<div class="tab-pane" id="productPic">
-						<div class="title_pt_25">
-							<h3 class="edit-form-title">商品图片<small>（最多可添加24张图片，建议图片尺寸800*800px，大小≤6MB，支持JPG、PNG、JPEG）</small></h3>
-							<ol class="clearfix ml_50 productPicList">
-								<li v-for="(item,index) in uploadImage" class="upload-image-box" style="width:150px;height:150px;">
-									<div class="upload-image">
-										<img :src="item.url">
-										<span class="upload-operate">
-											<i class="el-icon-arrow-left" title="左移"></i>
-											<i class="el-icon-arrow-right" title="右移"></i>
-											<i class="el-icon-delete" title="删除"></i>
+						<div class="edit-form title_pt_25">
+							<el-form label-width="120px" class="demo-ruleForm">
+								<h3 class="edit-form-title">商品图片<small>（最多可添加24张图片，建议图片尺寸800*800px，大小≤6MB，支持JPG、PNG、JPEG）</small></h3>
+								<ol class="clearfix ml_50 productPicList">
+									<li v-for="(item,index) in uploadImage" class="upload-image-box" style="width:150px;height:150px;">
+										<div class="upload-image">
+											<img :src="item.url">
+											<span class="upload-operate">
+												<i class="el-icon-arrow-left" title="左移"></i>
+												<i class="el-icon-arrow-right" title="右移"></i>
+												<i class="el-icon-delete" title="删除"></i>
+											</span>
+											<span v-if="index==0" class="upload-operate upload-operate2 show">封面图片</span>
+											<span v-else class="upload-operate upload-operate2 cur_pointer">设为封面</span>
+										</div>
+									</li>
+									<li class="upload-image-box" @click="dialogImageVisible = true" style="width:150px;height:150px;">
+										<span class="upload-button">
+											<i class="el-icon-upload"></i>
+											添加图片
 										</span>
-										<span v-if="index==0" class="upload-operate upload-operate2 show">封面图片</span>
-										<span v-else class="upload-operate upload-operate2 cur_pointer">设为封面</span>
-									</div>
-								</li>
-								<li class="upload-image-box" @click="dialogImageVisible = true" style="width:150px;height:150px;">
-									<span class="upload-button">
-										<i class="el-icon-upload"></i>
-										添加图片
-									</span>
-								</li>
-							</ol>
+									</li>
+								</ol>
 
-							<h3 class="edit-form-title">商品图文描述</h3>
-							<div class="ml_50">
-								<el-input type="textarea" v-model="content" id="form-editor"></el-input>
-							</div>
+								<h3 class="edit-form-title">规格参数</h3>
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="品牌">
+											<el-input v-model="content"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="重量">
+											<el-input v-model="content"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="内存">
+											<el-input v-model="content"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="生产日期">
+											<el-input v-model="content"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="保质期">
+											<el-input v-model="content"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="厂家">
+											<el-input v-model="content"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
 
-							<div class="edit-button-fixed">
-								<div class="edit-button z-yuan-butn">
-									<el-button type="primary">保存回到列表页</el-button>
-									<el-button type="primary">保存并继续新增</el-button>
-									<el-button>返回</el-button>
+								<h3 class="edit-form-title">商品图文描述</h3>
+								<div class="ml_50">
+									<el-input type="textarea" v-model="content" id="form-editor"></el-input>
 								</div>
-							</div>
+
+								<div class="edit-button-fixed">
+									<div class="edit-button z-yuan-butn">
+										<el-button type="primary">保存回到列表页</el-button>
+										<el-button type="primary">保存并继续新增</el-button>
+										<el-button>返回</el-button>
+									</div>
+								</div>
+							</el-form>
 						</div>
 
 						<!-- 上传图片模态框 -->
