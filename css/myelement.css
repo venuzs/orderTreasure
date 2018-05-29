@@ -62,7 +62,7 @@
 /*按钮*/
 .el-button {
 	font-size: 12px;
-	padding: 9px 7px;
+	padding: 8px 7px;
 	color: #222;
 	border-radius: 2px;
 	vertical-align: middle;
@@ -475,6 +475,14 @@ td.el-table_2_column_15 .cell {
     margin: 0 25px 15px;
     padding-top: 10px;
 }
+.edit-form-title small {
+	color: #999;
+	font-weight: normal;
+	font-size: 14px;
+}
+.title_pt_25 .edit-form-title {
+	padding-top: 25px;
+}
 .el-form-item__label {
 	font-size: 13px;
 	line-height: 30px;
@@ -487,6 +495,7 @@ td.el-table_2_column_15 .cell {
 .edit-form .el-form-item__content > .el-input, .edit-form .el-form-item__content > .el-select, .edit-form .el-form-item__content > .el-textarea {
 	width: 400px;
 	max-width: 100%;
+	vertical-align: top;
 }
 .edit-form .el-form-item__content > .el-input-group {
 	width: 100%;
@@ -544,4 +553,10 @@ td.el-table_2_column_15 .cell {
 .el-form-inline-bottom .el-form-item__error--inline {
 	margin-left: 0;
 	display: block;
+}
+
+/*含表格的模态框*/
+.table-dialog .el-dialog__body {
+	padding-top: 10px;
+	padding-bottom: 20px;
 }

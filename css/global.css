@@ -16,7 +16,7 @@ input,select,textarea{outline: none;font-family:"microsoft YaHei" !important;}
 .fl{float:left;text-align: left;}
 .fr{float:right;}
 .clearfix {zoom:1;}
-.clearfix:after {content:".";display:block;height:0;visibility:hidden;clear:both;}
+.clearfix:after {content:".";display:block;height:0;visibility:hidden;clear:both;overflow: hidden;}
 .o_f { overflow: hidden; }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary{display:block; }
@@ -27,6 +27,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 }
 .cur_pointer {
     cursor: pointer;
+}
+.p_relative {
+    position: relative;
+}
+.b_05 {
+    border: 1px solid rgba(0,0,0,.05);
 }
 /*间距设置*/
 .mb_0 {
@@ -49,6 +55,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 }
 .ml_30 {
     margin-left: 30px !important;
+}
+.ml_50 {
+    margin-left: 50px !important;
 }
 .no-pd-t {
     padding-top: 0 !important;
@@ -459,3 +468,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     background: #FAFBFD;
 }
 
+
+/*tab 切换*/
+.tab-content .tab-pane  {
+    display: none;
+}
+.tab-content .tab-pane.active  {
+    display: block;
+}

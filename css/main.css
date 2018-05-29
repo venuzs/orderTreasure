@@ -1833,3 +1833,48 @@
 .option-list li .el-icon-close:hover {
 	font-weight: bold;
 }
+	/*规格属性选择、新增*/
+.option-select-box {
+	position: absolute;
+	left: 0;
+	top: 35px;
+	width: 620px;
+    box-shadow: 0 1px 5px #ddd;
+    border-radius: 2px;
+    background: #FFF;
+    z-index: 9;
+    display: none;
+}
+.option-content {
+	padding: 15px;
+}
+.option-footer {
+	padding: 15px;
+	border-top: 1px solid #f1f1f1;
+}
+.option-footer .el-button {
+	min-width: 90px;
+}
+.option-checkbox {
+	max-height: 150px;
+	overflow: auto;
+	line-height: 30px;
+	margin-bottom: 5px;
+}
+.option-checkbox .option-checkall {
+	float: left;
+	width: 70px;
+}
+.option-checkbox .el-checkbox-group {
+	float: left;
+	width: 510px;
+	overflow: hidden;
+}
+.option-checkbox .el-checkbox-group .el-checkbox {
+	min-width: 80px;
+	margin-right: 10px;
+	margin-left: 0;
+}
+.add-option-box .el-input {
+	width: 540px;
+}

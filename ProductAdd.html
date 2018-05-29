@@ -27,13 +27,13 @@
 				<!-- 商品tab切换 -->
 				<div class="z-tabs">
 					<div class="z-tabs_header">
-			 			<router-link class="z-tabs_item router-link-active" to="/basic">
+			 			<div class="z-tabs_item router-link-active">
 			 				<span class="item_span">基础</span>
-			 			</router-link>
-			 			<router-link class="z-tabs_item" to="/basic2">
+			 			</div>
+			 			<div class="z-tabs_item">
 			 				<span class="item_span">图片与商品详情</span>
-			 			</router-link>
-			 			<router-link class="z-tabs_item" to="/basic3">
+			 			</div>
+			 			<div class="z-tabs_item">
 			 				<span class="item_span">库存预警</span>
 			 				<div class="z-pop_question">
 				  	 			<el-popover
@@ -52,19 +52,20 @@
 									
 									<i v-popover:popoverqs class="el-icon-question"></i>
 				  	 		</div>
-			 			</router-link>
-			 			<router-link class="z-tabs_item" to="/basic4">
+			 			</div>
+			 			<div class="z-tabs_item">
 			 				<span class="item_span">关联商品</span>
-			 			</router-link>
-			 			<router-link class="z-tabs_item" to="/basic5">
+			 			</div>
+			 			<div class="z-tabs_item">
 			 				<span class="item_span">经营屏蔽</span>
-			 			</router-link>
+			 			</div>
 			 		</div>
 				</div><!-- 商品tab切换 end -->
 
-				<div class="main-content-body">
-					<template id="basic">
-						<div class="edit-form">
+				<div class="main-content-body no-pd-t tab-content">
+					<!-- 商品基础信息 -->
+					<div class="tab-pane active" id="productBasic">
+						<div class="edit-form title_pt_25">
 							<el-form :model="basicForm" :rules="basicRules" ref="basicForm" label-width="120px" class="demo-ruleForm">
 								<h3 class="edit-form-title">基础</h3>
 								<el-row>
@@ -360,46 +361,69 @@
 											</el-table>
 										</div>
 									</div>
-									<div  v-show="basicForm.switch1">
-										<div class="multi-box mb_20">
-											<div class="multi-header">
-												<div class="fl">
-													<el-select v-model="basicForm.brand" placeholder="请选择多规格">
-														<el-option label="尺寸" value="1"></el-option>
-														<el-option label="颜色" value="2"></el-option>
-													</el-select>
+									<div v-show="basicForm.switch1">
+										<div class="b_05 mb_20">
+											<div class="multi-box">
+												<div class="multi-header">
+													<div class="fl p_relative">
+														<el-select v-model="basicForm.brand" placeholder="请选择多规格" @change="optionchange" data-index="0">
+															<el-option label="尺寸" value="1"></el-option>
+															<el-option label="颜色" value="2"></el-option>
+														</el-select>
+														<div class="option-select-box">
+															<div class="option-content">
+																<div class="option-checkbox clearfix">
+																	<div class="option-checkall">
+																		<el-checkbox v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+																	</div>
+																	<el-checkbox-group v-model="checkedCities">
+																		<el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+																	</el-checkbox-group>
+																</div>
+																<div class="add-option-box">
+																	<el-input v-model="addoption" placeholder="输入添加子规格名称，使用空格可一次添加多个"></el-input>
+																	<el-button type="primary">新增</el-button>
+																</div>
+															</div>
+															<div class="option-footer">
+																<el-button type="primary">确定</el-button>
+																<el-button @click='hideoption' data-index="0">取消</el-button>
+															</div>
+														</div>
+													</div>
+													<a class="fr f_20" href="##"><i class="el-icon-close"></i></a>
 												</div>
-												<a class="fr f_20" href="##"><i class="el-icon-close"></i></a>
-											</div>
-											<div class="multi-content">
-												<ul class="option-list clearfix">
-													<li>S<i class="el-icon-close"></i></li>
-													<li>L<i class="el-icon-close"></i></li>
-													<li>M<i class="el-icon-close"></i></li>
-												</ul>
-												<a href="##" class="fz_c">+添加多规格值</a>
-											</div>
-
-											<div class="multi-header">
-												<div class="fl">
-													<el-select v-model="basicForm.brand" placeholder="请选择多规格">
-														<el-option label="尺寸" value="1"></el-option>
-														<el-option label="颜色" value="2"></el-option>
-													</el-select>
+												<div class="multi-content">
+													<ul class="option-list clearfix">
+														<li>S<i class="el-icon-close"></i></li>
+														<li>L<i class="el-icon-close"></i></li>
+														<li>M<i class="el-icon-close"></i></li>
+													</ul>
+													<a href="##" class="fz_c add_moreoption" @click='showoption' data-index="0">+添加多规格值</a>
 												</div>
-												<a class="fr f_20" href="##"><i class="el-icon-close"></i></a>
 											</div>
-											<div class="multi-content">
+											<div class="multi-box">
+												<div class="multi-header">
+													<div class="fl">
+														<el-select v-model="basicForm.brand" placeholder="请选择多规格">
+															<el-option label="尺寸" value="1"></el-option>
+															<el-option label="颜色" value="2"></el-option>
+														</el-select>
+													</div>
+													<a class="fr f_20" href="##"><i class="el-icon-close"></i></a>
+												</div>
+												<div class="multi-content">
+												</div>
 											</div>
 										</div>
 
-										<div class="popover_hover switch_title">
+										<div class="switch_title">
 											<el-switch v-model="basicForm.switch2"></el-switch>
 											多种规格价格不同 
-											<a href="##" class="fz_c ml_20">+设置所有规格的等级价</a>
-											<a href="##" class="fz_c ml_20">+设置所有规格的指定价</a>
+											<a href="##" class="fz_c ml_20" v-show="!basicForm.switch2" @click="dialog2FormVisible = true">+设置所有规格的等级价</a>
+											<a href="##" class="fz_c ml_20" v-show="!basicForm.switch2" @click="dialog3FormVisible = true">+设置所有规格的指定价</a>
 										</div>
-										<div class="z-tables">
+										<div class="z-tables" v-show="!basicForm.switch2">
 											<el-table :data="basicForm.tableData6">
 												<el-table-column label="序号" type="index"></el-table-column>
 
@@ -426,114 +450,283 @@
 											    </el-table-column>
 											</el-table>
 										</div>
+										<div class="z-tables" v-show="basicForm.switch2">
+											<el-table :data="basicForm.tableData6">
+												<el-table-column label="序号" type="index"></el-table-column>
+
+							 					<el-table-column label="尺寸" prop="size"></el-table-column>
+
+											    <el-table-column label="颜色" prop="color"></el-table-column>
+
+											    <el-table-column label="规格编号">
+											    	<template slot-scope="scope">
+													    <el-input v-model="scope.row.spec"></el-input>
+													</template>
+											    </el-table-column>
+											    
+											    <el-table-column label="条形码">
+													<template slot-scope="scope">
+													    <el-input v-model="scope.row.code"></el-input>
+													</template>
+											    </el-table-column>
+
+											    <el-table-column label="订货价">
+													<template slot-scope="scope">
+													    <el-input v-model="scope.row.code"></el-input>
+													</template>
+											    </el-table-column>
+
+											    <el-table-column label="市场价">
+													<template slot-scope="scope">
+													    <el-input v-model="scope.row.code"></el-input>
+													</template>
+											    </el-table-column>
+
+											    <el-table-column label="参考订货价">
+													<template slot-scope="scope">
+													    <el-input v-model="scope.row.code"></el-input>
+													</template>
+											    </el-table-column>
+
+											    <el-table-column label="等级价" prop="color"></el-table-column>
+
+											    <el-table-column label="指定价" prop="color"></el-table-column>
+
+											    <el-table-column label="操作">
+													<template slot-scope="scope">
+														<i class="el-icon-delete cur_pointer"></i>
+													</template>
+											    </el-table-column>
+											</el-table>
+										</div>
 									</div>
 								</div>
 								
 
 								<div class="edit-button-fixed">
 									<div class="edit-button z-yuan-butn">
-										<el-button type="primary" @click="submitForm('basicForm')">确定</el-button>
-										<el-button>取消</el-button>
+										<el-button type="primary" @click="submitForm('basicForm')">保存回到列表页</el-button>
+										<el-button type="primary" @click="submitForm('basicForm')">保存并继续新增</el-button>
+										<el-button>返回</el-button>
 									</div>
 								</div>
 							</el-form>
 						</div>
-					</template>
-					<template id="basic2"></template>
-					<template id="basic3"></template>
-					<template id="basic4"></template>
-					<template id="basic5"></template>
-				</div>	
-			</div>
 
-			<!-- 新增部门模态框 -->
-			<el-dialog title="选择客户" :visible.sync="dialogFormVisible" width="900px">
-				<!--条件筛选-->
-				<div class="content_item_filter clearfix">
-	 				<div class="input-select fl btn-radid_none">
-	 					<div class="filter-form filter-form-one clearfix">
-		 					<el-input placeholder="名称/手机号/联系人/编号/备注" v-model="basicForm.addpartinput" class="minW40 z_input-holder" ></el-input>
+						<!-- 指定价选择客户模态框 -->
+						<el-dialog title="选择客户" :visible.sync="dialogFormVisible" class="table-dialog" width="900px">
+							<!--条件筛选-->
+							<div class="content_item_filter clearfix">
+				 				<div class="input-select fl btn-radid_none">
+				 					<div class="filter-form filter-form-one clearfix">
+					 					<el-input placeholder="名称/手机号/联系人/编号/备注" v-model="basicForm.addpartinput" class="minW40 z_input-holder" ></el-input>
 
-							<el-select v-model="basicForm.valueState" clearable placeholder="客户类型" class="z_select-holder">
-								<el-option
-								  v-for="(item,index) in basicForm.optionsState"
-								  :key="index"
-								  :label="item"
-								  :value="item">
-								</el-option>
-							</el-select>
+										<el-select v-model="basicForm.valueState" clearable placeholder="客户类型" class="z_select-holder">
+											<el-option
+											  v-for="(item,index) in basicForm.optionsState"
+											  :key="index"
+											  :label="item"
+											  :value="item">
+											</el-option>
+										</el-select>
 
-							<el-select v-model="basicForm.valueState" clearable placeholder="归属地区" class="z_select-holder">
-								<el-option
-								  v-for="(item,index) in basicForm.optionsState"
-								  :key="index"
-								  :label="item"
-								  :value="item">
-								</el-option>
-							</el-select>
+										<el-select v-model="basicForm.valueState" clearable placeholder="归属地区" class="z_select-holder">
+											<el-option
+											  v-for="(item,index) in basicForm.optionsState"
+											  :key="index"
+											  :label="item"
+											  :value="item">
+											</el-option>
+										</el-select>
 
-							<el-select v-model="basicForm.valueState" clearable placeholder="账号状态" class="z_select-holder">
-								<el-option
-								  v-for="(item,index) in basicForm.optionsState"
-								  :key="index"
-								  :label="item"
-								  :value="item">
-								</el-option>
-							</el-select>
+										<el-select v-model="basicForm.valueState" clearable placeholder="账号状态" class="z_select-holder">
+											<el-option
+											  v-for="(item,index) in basicForm.optionsState"
+											  :key="index"
+											  :label="item"
+											  :value="item">
+											</el-option>
+										</el-select>
+									</div>
+
+									<div class="filter-operate">
+										<el-tooltip class="item" content="查询" placement="bottom-start">
+									    	<el-button icon="el-icon-search"></el-button>
+									    </el-tooltip>
+										<el-tooltip class="item" content="清空" placement="bottom-start">
+									    	<el-button icon="el-extend-clean"></el-button>
+									    </el-tooltip>
+								    </div>
+									
+				 				</div>
+							</div>
+								
+							<!--主体表格-->
+							<div class="z-tables">
+				 				<el-table :data="basicForm.tableData5" style="width: 100%;">
+				 					<el-table-column type="selection" width="55"></el-table-column>
+				 					
+								    <el-table-column label="客户名称">
+								    	<template scope="scope">
+									       <span>{{scope.row.name}}</span>
+									       <el-tag type="info" size="mini" v-if="!scope.row.active">待激活</el-tag>
+								      	</template>
+								    </el-table-column>
+								    
+								    <el-table-column prop="uuid" label="客户编号"></el-table-column>
+								    
+								    <el-table-column prop="type" label="客户类型"></el-table-column> 
+								    
+								    <el-table-column prop="area" label="客户地区"></el-table-column>
+								    
+								</el-table>
+				 			</div>
+				 			
+				 			<!--分页-->
+				 			<div class="grid-content">
+					 			<div class="bg-purple-light">
+								    <el-pagination
+				 					  :current-page="1"
+								      :page-sizes="[5, 10, 20, 30]"
+								      :page-size="5"
+								       layout="total, sizes, prev, pager, next"
+								      :total="100">
+								    </el-pagination>
+							  	</div>
+							</div>
+
+							<div slot="footer" class="dialog-footer">
+								<el-button type="primary">提 交</el-button>
+								<el-button @click="dialogFormVisible = false">提交并关闭</el-button>
+							</div>
+						</el-dialog>
+				        <!-- 指定价选择客户模态框 end -->
+
+				        <!-- 设置规格等级价模态框 -->
+						<el-dialog title="等级价（不同客户类型定价）" :visible.sync="dialog2FormVisible" class="table-dialog">
+							<div class="clearfix">
+								<div class="fr">
+									<el-button>自动计算订货价</el-button>
+								</div>
+							</div>
+							<div class="z-tables">
+								<el-table :data="basicForm.tableData3">
+				 					<el-table-column label="客户类型" min-width="130">
+				 						<template slot-scope="scope">
+				 							{{scope.row.name}}
+				 							<el-tag v-if="scope.$index==0" size="mini">默认</el-tag>
+										</template>
+				 					</el-table-column>
+
+								    <el-table-column label="等级折扣" min-width="130" prop="percent"></el-table-column>
+								    
+								    <el-table-column label="订货价" min-width="60">
+										<template slot-scope="scope">
+										    <el-input v-model="scope.row.price"></el-input>
+										</template>
+								    </el-table-column>
+								</el-table>
+							</div>
+							<div slot="footer" class="dialog-footer">
+								<el-button type="primary">确 定</el-button>
+								<el-button @click="dialog2FormVisible = false">取 消</el-button>
+							</div>
+						</el-dialog>
+				        <!-- 设置规格等级价模态框 end -->
+
+				        <!-- 设置规格指定价模态框 -->
+						<el-dialog title="指定价（指定某个客户定价）" :visible.sync="dialog3FormVisible" class="table-dialog" width="900px">
+							<div class="clearfix l_30 f_13">
+								请选择客户：
+								<el-button class="ml_10" @click="dialogFormVisible = true">+ 选择客户</el-button>
+							</div>
+							<div class="z-tables">
+								<el-table :data="basicForm.tableData4">
+				 					<el-table-column label="客户姓名" prop="name"></el-table-column>
+
+								    <el-table-column label="客户编号" prop="uuid"></el-table-column>
+
+								    <el-table-column label="客户类型" prop="type"></el-table-column>
+
+								    <el-table-column label="客户地区" prop="area"></el-table-column>
+								    
+								    <el-table-column label="订货价">
+										<template slot-scope="scope">
+										    <el-input v-model="scope.row.price"></el-input>
+										</template>
+								    </el-table-column>
+
+								    <el-table-column label="操作">
+										<template slot-scope="scope">
+											<i class="el-icon-delete cur_pointer"></i>
+										</template>
+								    </el-table-column>
+								</el-table>
+							</div>
+							<div slot="footer" class="dialog-footer">
+								<el-button type="primary">确 定</el-button>
+								<el-button @click="dialog3FormVisible = false">取 消</el-button>
+							</div>
+						</el-dialog>
+				        <!-- 设置规格指定价模态框 end -->
+					</div>
+					<!-- 商品基础信息 end -->
+
+					<!-- 图片与商品详情 -->
+					<div class="tab-pane" id="productPic">
+						<div class="title_pt_25">
+							<h3 class="edit-form-title">商品图片<small>（最多可添加24张图片，建议图片尺寸800*800px，大小≤6MB，支持JPG、PNG、JPEG）</small></h3>
+							<ol class="clearfix ml_50">
+								<li v-for="item in uploadImage.fileList" class="upload-image-box" style="width:150px;height:150px;">
+									<div class="upload-image">
+										<img :src="item.url">
+										<!-- <span class="upload-operate">点击修改</span> -->
+										<span class="upload-operate upload-operate-delect" @click.stop="delectImage('uploadImage')">点击删除</span>
+									</div>
+								</li>
+								<li class="upload-image-box" @click="dialogImageVisible = true" style="width:150px;height:150px;">
+									<span class="upload-button">
+										<i class="el-icon-upload"></i>
+										添加图片
+									</span>
+								</li>
+							</ol>
 						</div>
 
-						<div class="filter-operate">
-							<el-tooltip class="item" content="查询" placement="bottom-start">
-						    	<el-button icon="el-icon-search"></el-button>
-						    </el-tooltip>
-							<el-tooltip class="item" content="清空" placement="bottom-start">
-						    	<el-button icon="el-extend-clean"></el-button>
-						    </el-tooltip>
-					    </div>
-						
-	 				</div>
-				</div>
-					
-				<!--主体表格-->
-				<div class="z-tables">
-	 				<el-table :data="basicForm.tableData5" style="width: 100%;">
-	 					<el-table-column type="selection" width="55"></el-table-column>
-	 					
-					    <el-table-column label="客户名称">
-					    	<template scope="scope">
-						       <span>{{scope.row.name}}</span>
-						       <el-tag type="info" size="mini" v-if="!scope.row.active">待激活</el-tag>
-					      	</template>
-					    </el-table-column>
-					    
-					    <el-table-column prop="uuid" label="客户编号"></el-table-column>
-					    
-					    <el-table-column prop="type" label="客户类型"></el-table-column> 
-					    
-					    <el-table-column prop="area" label="客户地区"></el-table-column>
-					    
-					</el-table>
-	 			</div>
-	 			
-	 			<!--分页-->
-	 			<div class="grid-content">
-		 			<div class="bg-purple-light">
-					    <el-pagination
-	 					  :current-page="1"
-					      :page-sizes="[5, 10, 20, 30]"
-					      :page-size="5"
-					       layout="total, sizes, prev, pager, next"
-					      :total="100">
-					    </el-pagination>
-				  	</div>
-				</div>
+						<!-- 上传图片模态框 -->
+						<el-dialog title="上传文件" :visible.sync="dialogImageVisible">
+							<el-upload
+							  ref="upload"
+							  action="https://jsonplaceholder.typicode.com/posts/"
+							  :show-file-list="false"
+							  :on-change="handleChange"
+							  :file-list="uploadImage.fileList"
+							  :auto-upload="false"
+							  :before-upload="beforeAvatarUpload">
+							  <el-button size="medium">+&nbsp;点击选择图片</el-button>
+							  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+							</el-upload>
+							<div slot="footer" class="dialog-footer">
+								<el-button @click="dialogImageVisible = false">取 消</el-button>
+							</div>
+						</el-dialog>
+				        <!-- 上传图片模态框 end -->
+					</div>
+					<!-- 图片与商品详情 end -->
 
-				<div slot="footer" class="dialog-footer">
-					<el-button type="primary">提 交</el-button>
-					<el-button @click="dialogFormVisible = false">提交并关闭</el-button>
-				</div>
-			</el-dialog>
-	        <!-- 新增部门模态框 end -->
+					<!-- 库存预警 -->
+					<div class="tab-pane" id="productStock"></div>
+					<!-- 库存预警 end -->
+
+					<!-- 关联商品 -->
+					<div class="tab-pane" id="productRelation"></div>
+					<!-- 关联商品 end -->
+
+					<!-- 经营屏蔽 -->
+					<div class="tab-pane" id="productManage"></div>
+					<!-- 经营屏蔽 end -->
+				</div>	
+			</div>
 
 		</div>
 
@@ -544,17 +737,6 @@
 	<script charset="utf-8" src="kindeditor/kindeditor-min.js" th:src="@{/kindeditor/kindeditor-min.js}"></script>
     <script charset="utf-8" src="kindeditor/lang/zh-CN.js" th:src="@{/kindeditor/lang/zh-CN.js}"></script>
 	<script>
-		var router = new VueRouter({
-			routes: [
-				{path: '/',component: basic},
-				{path: '/basic',component: basic},
-				{path: '/basic2',component: basic2},
-				{path: '/basic3',component: basic3},
-				{path: '/basic4',component: basic4},
-				{path: '/basic5',component: basic5}
-			]
-		});
-
 		// let options = {
   //           width: '800px',
   //           height: '300px',
@@ -571,11 +753,14 @@
   //       KindEditor.ready(function(K) {
   //           window.editor = K.create('#form-editor', options);
   //       });
+
+  		// 商品基础信息数据
 		new Vue({
-			el: "#app",
-			router: router,
+			el: "#productBasic",
 			data: {
 				dialogFormVisible: false,
+				dialog2FormVisible: false,
+				dialog3FormVisible: false,
 				// form 表单数据
 				basicForm: {
 					// 基础信息
@@ -668,8 +853,13 @@
 							spec: '',
 							code: '',
 			        	},
-			        ],
+			        ]
 		        },
+		        // 规格属性数据
+		        checkAll: false,
+		        checkedCities: [],
+		        cities:['S', 'M', 'L', 'XL'],
+		        addoption: '',
 		        // form 表单验证规则
 		        basicRules: {
 					name: [
@@ -703,6 +893,26 @@
 				
 			},
 			methods: {
+				// 规格属性全选
+				handleCheckAllChange(val) {
+					this.checkedCities = val ? cityOptions : [];
+					this.isIndeterminate = false;
+				},
+				// 切换规格属性值
+				optionchange(val){
+					console.log(val)
+					showoption(0);
+				},
+				// 显示多规格属性
+				showoption(e){
+					var index = e.currentTarget.dataset.index;
+					showoption(index);
+				},
+				// 隐藏多规格属性
+				hideoption(e){
+					var index = e.currentTarget.dataset.index;
+					hideoption(index);
+				},
 				// 提交表单
 			    submitForm(formName) {
 					this.$refs[formName].validate((valid) => {
@@ -726,17 +936,63 @@
 				handleDelete(index, row) {
 					console.log(index, row);
 				}
-			},
-			watch: {
-				"$route": function (news, old) {
-					
-					if(news.fullPath != '/kefu') {
-						this.isInit = false;
-					}else {
-						this.isInit = true;
-					}
-				}
-			},
+			}
 		});
+
+
+		new Vue({
+			el: "#productPic",
+			data: {
+				// 上传图片模态框
+				dialogImageVisible: false,
+				// 上传图片数据
+		        uploadImage: {
+		        	imageUrl: '',
+		        	fileList: []
+		        }
+			},
+			methods: {
+				// 图片上传前校验
+				beforeAvatarUpload(file) {
+					const isJPG = file.type === 'image/jpeg';
+					const isLt2M = file.size / 1024 / 1024 < 2;
+
+					if (!isJPG) {
+					  this.$message.error('上传头像图片只能是 JPG 格式!');
+					}
+					if (!isLt2M) {
+					  this.$message.error('上传头像图片大小不能超过 2MB!');
+					}
+					return isJPG && isLt2M;
+				},
+				// 图片状态变化监听,选择图片后执行的事件
+				handleChange(file, fileList) {
+					this.uploadImage.fileList = fileList.slice(-1);
+					this.uploadImage.imageUrl = URL.createObjectURL(file.raw);
+					this.dialogImageVisible = false;
+				},
+				// 删除图片事件
+				delectImage(fileName){
+					this[fileName].fileList = [];
+					this[fileName].imageUrl = '';
+				}
+			}
+		})
+
+		// 多规格弹出框显示事件
+		function showoption(index){
+			$(".multi-box:eq("+index+")").find(".option-select-box").slideDown().end().siblings().find(".option-select-box").slideUp();
+		}
+
+		// 多规格弹出框隐藏事件
+		function hideoption(index){
+			$(".multi-box:eq("+index+")").find(".option-select-box").slideUp();
+		}
+
+		// 商品新增tab切换
+		$(".z-tabs_header .z-tabs_item").click(function(){
+			$(this).addClass("router-link-active").siblings().removeClass("router-link-active");
+			$(".tab-content .tab-pane").eq($(this).index()).addClass("active").siblings().removeClass("active");
+		})
 	</script>
 </html>
