@@ -25,7 +25,7 @@
 				</div><!-- 页面头部 end -->
 
 				<!-- 商品tab切换 -->
-				<div class="z-tabs">
+				<div class="z-tabs" id="tabs">
 					<div class="z-tabs_header">
 			 			<div class="z-tabs_item router-link-active">
 			 				<span class="item_span">基础</span>
@@ -37,27 +37,21 @@
 			 				<span class="item_span">库存预警</span>
 			 				<div class="z-pop_question">
 				  	 			<el-popover
-									  ref="popoverqs"
-									  placement="bottom-start"
-									  width="440"
-									  trigger="hover">
-									  <p class="z-jiao">
-									  	库存下限：当此商品的库存低于库存下限时，会被醒目地展示出来。<br/>
-										库存上限：当此商品的库存高于安全库存时，会被醒目地展示出来。<br/>
-										安全库存：当此商品的库存低于安全库存时，会被醒目地展示出来。<br/>
-										设置数值大小要求：库存下限《安全库存《库存上限<br/>
-										注意：设置0或者不设置，即不启用此功能 <a href="##">查看更多帮助</a>
-									  </p>
-									</el-popover>
-									
-									<i v-popover:popoverqs class="el-icon-question"></i>
+								  ref="popoverqs"
+								  placement="bottom-start"
+								  width="440"
+								  trigger="hover">
+								  <p class="z-jiao">
+								  	库存下限：当此商品的库存低于库存下限时，会被醒目地展示出来。<br/>
+									库存上限：当此商品的库存高于安全库存时，会被醒目地展示出来。<br/>
+									安全库存：当此商品的库存低于安全库存时，会被醒目地展示出来。<br/>
+									设置数值大小要求：库存下限《安全库存《库存上限<br/>
+									注意：设置0或者不设置，即不启用此功能 <a href="##">查看更多帮助</a>
+								  </p>
+								</el-popover>
+								
+								<i v-popover:popoverqs class="el-icon-question"></i>
 				  	 		</div>
-			 			</div>
-			 			<div class="z-tabs_item">
-			 				<span class="item_span">关联商品</span>
-			 			</div>
-			 			<div class="z-tabs_item">
-			 				<span class="item_span">经营屏蔽</span>
 			 			</div>
 			 		</div>
 				</div><!-- 商品tab切换 end -->
@@ -676,12 +670,17 @@
 					<div class="tab-pane" id="productPic">
 						<div class="title_pt_25">
 							<h3 class="edit-form-title">商品图片<small>（最多可添加24张图片，建议图片尺寸800*800px，大小≤6MB，支持JPG、PNG、JPEG）</small></h3>
-							<ol class="clearfix ml_50">
-								<li v-for="item in uploadImage.fileList" class="upload-image-box" style="width:150px;height:150px;">
+							<ol class="clearfix ml_50 productPicList">
+								<li v-for="(item,index) in uploadImage" class="upload-image-box" style="width:150px;height:150px;">
 									<div class="upload-image">
 										<img :src="item.url">
-										<!-- <span class="upload-operate">点击修改</span> -->
-										<span class="upload-operate upload-operate-delect" @click.stop="delectImage('uploadImage')">点击删除</span>
+										<span class="upload-operate">
+											<i class="el-icon-arrow-left" title="左移"></i>
+											<i class="el-icon-arrow-right" title="右移"></i>
+											<i class="el-icon-delete" title="删除"></i>
+										</span>
+										<span v-if="index==0" class="upload-operate upload-operate2 show">封面图片</span>
+										<span v-else class="upload-operate upload-operate2 cur_pointer">设为封面</span>
 									</div>
 								</li>
 								<li class="upload-image-box" @click="dialogImageVisible = true" style="width:150px;height:150px;">
@@ -691,6 +690,19 @@
 									</span>
 								</li>
 							</ol>
+
+							<h3 class="edit-form-title">商品图文描述</h3>
+							<div class="ml_50">
+								<el-input type="textarea" v-model="content" id="form-editor"></el-input>
+							</div>
+
+							<div class="edit-button-fixed">
+								<div class="edit-button z-yuan-butn">
+									<el-button type="primary">保存回到列表页</el-button>
+									<el-button type="primary">保存并继续新增</el-button>
+									<el-button>返回</el-button>
+								</div>
+							</div>
 						</div>
 
 						<!-- 上传图片模态框 -->
@@ -700,7 +712,7 @@
 							  action="https://jsonplaceholder.typicode.com/posts/"
 							  :show-file-list="false"
 							  :on-change="handleChange"
-							  :file-list="uploadImage.fileList"
+							  :file-list="uploadImage"
 							  :auto-upload="false"
 							  :before-upload="beforeAvatarUpload">
 							  <el-button size="medium">+&nbsp;点击选择图片</el-button>
@@ -715,16 +727,39 @@
 					<!-- 图片与商品详情 end -->
 
 					<!-- 库存预警 -->
-					<div class="tab-pane" id="productStock"></div>
+					<div class="tab-pane" id="productStock">
+						<div class="edit-form title_pt_25">
+							<el-form :model="basicForm" label-width="120px" class="demo-ruleForm">
+								<h3 class="edit-form-title">库存预警</h3>
+								<el-row>
+									<el-col :span="8">
+										<el-form-item label="库存下限">
+											<el-input v-model="basicForm.name"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="安全库存">
+											<el-input v-model="basicForm.name"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :span="8">
+										<el-form-item label="库存上限">
+											<el-input v-model="basicForm.name"></el-input>
+										</el-form-item>
+									</el-col>
+								</el-row>
+
+								<div class="edit-button-fixed">
+									<div class="edit-button z-yuan-butn">
+										<el-button type="primary">保存回到列表页</el-button>
+										<el-button type="primary">保存并继续新增</el-button>
+										<el-button>返回</el-button>
+									</div>
+								</div>
+							</el-form>
+						</div>
+					</div>
 					<!-- 库存预警 end -->
-
-					<!-- 关联商品 -->
-					<div class="tab-pane" id="productRelation"></div>
-					<!-- 关联商品 end -->
-
-					<!-- 经营屏蔽 -->
-					<div class="tab-pane" id="productManage"></div>
-					<!-- 经营屏蔽 end -->
 				</div>	
 			</div>
 
@@ -737,22 +772,30 @@
 	<script charset="utf-8" src="kindeditor/kindeditor-min.js" th:src="@{/kindeditor/kindeditor-min.js}"></script>
     <script charset="utf-8" src="kindeditor/lang/zh-CN.js" th:src="@{/kindeditor/lang/zh-CN.js}"></script>
 	<script>
-		// let options = {
-  //           width: '800px',
-  //           height: '300px',
-  //           items: [
-  //               'formatblock', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-  //               'strikethrough', 'lineheight', 'image', 'link', 'unlink', 'plainpaste', 'wordpaste', 'insertorderedlist',
-  //               'insertunorderedlist', 'table', 'fullscreen'
-  //           ],
-  //           resizeType: 0,
-  //           themeType: 'myeditor',
-  //           uploadJson: '',
-  //           fileManagerJson: '',
-  //       };
-  //       KindEditor.ready(function(K) {
-  //           window.editor = K.create('#form-editor', options);
-  //       });
+		let options = {
+            width: '800px',
+            height: '300px',
+            items: [
+                'formatblock', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'strikethrough', 'lineheight', 'image', 'link', 'unlink', 'plainpaste', 'wordpaste', 'insertorderedlist',
+                'insertunorderedlist', 'table', 'fullscreen'
+            ],
+            resizeType: 0,
+            themeType: 'myeditor',
+            uploadJson: '',
+            fileManagerJson: '',
+        };
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#form-editor', options);
+        });
+
+        // tab切换
+		new Vue({
+			el: "#tabs",
+			data: {
+				
+			}
+		})
 
   		// 商品基础信息数据
 		new Vue({
@@ -939,17 +982,15 @@
 			}
 		});
 
-
+		// 图片与商品详情
 		new Vue({
 			el: "#productPic",
 			data: {
 				// 上传图片模态框
 				dialogImageVisible: false,
 				// 上传图片数据
-		        uploadImage: {
-		        	imageUrl: '',
-		        	fileList: []
-		        }
+		        uploadImage: [],
+		        content: ''
 			},
 			methods: {
 				// 图片上传前校验
@@ -967,14 +1008,23 @@
 				},
 				// 图片状态变化监听,选择图片后执行的事件
 				handleChange(file, fileList) {
-					this.uploadImage.fileList = fileList.slice(-1);
-					this.uploadImage.imageUrl = URL.createObjectURL(file.raw);
+					this.uploadImage = fileList;
 					this.dialogImageVisible = false;
 				},
 				// 删除图片事件
-				delectImage(fileName){
-					this[fileName].fileList = [];
-					this[fileName].imageUrl = '';
+				delectImage(index){
+					console.log(index)
+					this.uploadImage.splice(index,1);
+				}
+			}
+		});
+
+		// 库存预警
+		new Vue({
+			el: "#productStock",
+			data: {
+				basicForm: {
+					name: ''
 				}
 			}
 		})

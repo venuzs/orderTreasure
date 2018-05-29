@@ -344,7 +344,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     background: #fff;
     border: 1px solid #dcdfe6;
     border-radius: 4px;
-    overflow: hidden;
     text-align: center;
     cursor: pointer;
 }

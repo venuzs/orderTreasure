@@ -1878,3 +1878,24 @@
 .add-option-box .el-input {
 	width: 540px;
 }
+	/*图片信息*/
+.productPicList li {
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 30px;
+	cursor: default;
+}
+.productPicList .upload-operate {
+	display: none;
+}
+.productPicList li:hover .upload-operate,.productPicList .upload-operate.show {
+	display: block;
+}
+.productPicList li:hover .upload-image .upload-operate2 {
+	bottom: -30px;
+}
+.productPicList .upload-operate i {
+	margin: 0 5px;
+	font-size: 14px;
+	cursor: pointer;
+}
