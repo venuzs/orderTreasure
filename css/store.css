@@ -71,6 +71,9 @@
 .store-login-form .password .form_control {
 	background-image: url(../img/store/store-password.png);
 }
+.store-login-form .vendor .form_control {
+    background-image: url(../img/store/store-vendor.png);
+}
 .store-login-form .yzm .form_control {
 	background-image: url(../img/store/store-yzm.png);
 }
