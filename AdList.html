@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订货宝 让生意更美好！</title>
+    <link rel="stylesheet" href="css/element.css" th:href="@{/css/element.css}">
+    <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}"/>
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="css/myelement.css" th:href="@{/css/myelement.css}"/>
+    <script src="js/vue221.js" th:src="@{/js/vue.js}"></script>
+    <script src="js/element.js" th:src="@{/js/element.js}"></script>
+</head>
+<body>
+<div id="app">
+    <div class="main-content">
+        <!-- 页面头部 -->
+        <div class="page-header">
+            <h1 class="page-title">广告管理</h1>
+            <div class="breadcrumb"><a href="##">首页</a><span>/</span>系统管理</div>
+        </div><!-- 页面头部 end -->
+        <div class="main-content-body">
+            <div class="adlist_title">
+                <el-button type="primary">新增广告位</el-button>
+                <span class="fc_999">（建议图片大小：408px * 196px）</span>
+            </div>
+            <ul class="ad_list clearfix">
+                <li v-for="(value,index) in ad_list">
+                    <h2 class="ad_name">广告位</h2>
+                    <div class="ad_image">
+                        <img :src="value.imgurl">
+                        <div class="ad_operate">
+                            <a href="##" @click="dialogImgVisible = true">修改</a>
+                            <a href="##">清空</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="edit-button-fixed">
+                <div class="edit-button">
+                    <el-button type="primary" @click="handleSave">确定</el-button>
+                    <el-button @click="handleCancel">取消</el-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改广告位模态框 -->
+    <el-dialog title="广告位配置" :visible.sync="dialogImgVisible" width="1060px">
+        <ol class="clearfix productPicList">
+            <li v-for="(item,index) in uploadImage" class="fl">
+                <div class="upload-image-box" style="width:320px;height:180px;">
+                    <div class="upload-image">
+                        <img :src="item.url">
+                        <span class="upload-operate cur_pointer">删除图片</span>
+                    </div>
+                </div>
+                <div class="ad_seeting">
+                    链接：
+                    <el-select v-model="item.department">
+                        <el-option label="公告详情" value="1"></el-option>
+                        <el-option label="商品详情" value="2"></el-option>
+                        <el-option label="促销活动" value="3"></el-option>
+                        <el-option label="外部链接" value="4"></el-option>
+                    </el-select>
+                    <el-input v-model="item.content">
+                        <template slot="append">
+                            <el-button @click="setlink" data-index="index" :data-value="item.department">...</el-button>
+                        </template>
+                    </el-input>
+                </div>
+            </li>
+            <li class="upload-image-box cur_pointer" @click="dialogImageVisible = true" style="width:180px;height:180px;">
+                <span class="upload-button">
+                    <i class="el-icon-upload"></i>
+                    添加图片
+                </span>
+            </li>
+        </ol>
+    </el-dialog>
+    <!-- 修改广告位模态框 end -->
+
+    <!-- 上传图片模态框 -->
+    <el-dialog title="上传文件" :visible.sync="dialogImageVisible">
+        <el-upload
+          ref="upload"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-change="handleChange"
+          :file-list="uploadImage"
+          :auto-upload="false"
+          :before-upload="beforeAvatarUpload">
+          <el-button size="medium">+&nbsp;点击选择图片</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogImageVisible = false">取 消</el-button>
+        </div>
+    </el-dialog>
+    <!-- 上传图片模态框 end -->
+
+    <!-- 配置广告链接模态框 -->
+    <el-dialog title="选择公告" :visible.sync="dialogNoticeVisible" class="table-dialog" width="900px">
+        <!--条件筛选-->
+        <div class="content_item_filter clearfix">
+            <div class="input-select fl btn-radid_none">
+                <div class="filter-form filter-form-one clearfix">
+                    <el-input placeholder="搜索公告名称" v-model="basicForm.addpartinput" class="minW40 z_input-holder" ></el-input>
+
+                    <el-select v-model="basicForm.valueState" clearable placeholder="公告类型" class="z_select-holder">
+                        <el-option
+                          v-for="(item,index) in basicForm.optionsState"
+                          :key="index"
+                          :label="item"
+                          :value="item">
+                        </el-option>
+                    </el-select>
+                </div>
+
+                <div class="filter-operate">
+                    <el-tooltip class="item" content="查询" placement="bottom-start">
+                        <el-button icon="el-icon-search"></el-button>
+                    </el-tooltip>
+                    <el-tooltip class="item" content="清空" placement="bottom-start">
+                        <el-button icon="el-extend-clean"></el-button>
+                    </el-tooltip>
+                </div>
+                
+            </div>
+        </div>
+            
+        <!--主体表格-->
+        <div class="z-tables">
+            <el-table :data="basicForm.tableData5" style="width: 100%;">
+                <el-table-column type="index" label=" " width="55"></el-table-column>
+                
+                <el-table-column prop="name" label="标题"></el-table-column>
+                
+                <el-table-column prop="type" label="公告类型"></el-table-column> 
+                
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button type="text" @click="handleEdit(scope.$index, scope.row)">选择</el-button>
+                    </template>
+                </el-table-column>
+                
+            </el-table>
+        </div>
+        
+        <!--分页-->
+        <div class="grid-content">
+            <div class="bg-purple-light">
+                <el-pagination
+                  :current-page="1"
+                  :page-sizes="[5, 10, 20, 30]"
+                  :page-size="5"
+                   layout="total, sizes, prev, pager, next"
+                  :total="100">
+                </el-pagination>
+            </div>
+        </div>
+    </el-dialog>
+    <!-- 配置广告链接模态框 end -->
+</div>
+</body>
+<script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+
+<script th:inline="javascript">
+    new Vue({
+        el: "#app",
+        data: {
+            ruleForm: {
+                department: 1,
+                http: ""
+            },
+            // 广告列表数据
+            ad_list: [
+                {
+                    imgurl: "img/demo/banner1.png"
+                },
+                {
+                    imgurl: 'img/demo/banner.png'
+                }
+            ],
+            // 选择客户模态框内容
+            basicForm: {
+                addpartinput: '',
+                valueState: '',
+                optionsState: ['全部','默认类型'],
+                tableData5: [
+                    {
+                        name: 'aaaa',
+                        type: '默认类型'
+                    },
+                    {
+                        name: 'bbbbb',
+                        type: '默认类型'
+                    },
+                ],
+            },
+            // 上传图片数据
+            uploadImage: [
+                {   
+                    url: "img/demo/banner1.png",
+                    department: '1',
+                    content: ''
+                }
+            ],
+            dialogImgVisible: false, // 修改广告位图片模态框
+            dialogImageVisible: false,  // 上传图片模态框
+            dialogNoticeVisible: false, // 公告类型模态框
+            dialogProductVisible: false, // 商品类型模态框
+            dialogSaleVisible: false, // 促销活动类型模态框
+        },
+        created: function () {
+
+        },
+        methods: {
+            // 点击弹出广告链接配置模态框
+            setlink: function (e) {
+                // 设置当前弹出模态框对应的是哪一个广告
+                this.linkSetIndex = e.currentTarget.dataset.index;
+                // 判断当前选择的链接类型
+                var linkvalue = e.currentTarget.dataset.value;
+                switch(linkvalue){
+                    // 公告类型
+                    case "1":
+                    this.dialogNoticeVisible=true;
+                    break;
+                    // 商品类型
+                    case "2":
+                    this.dialogProductVisible=true;
+                    break;
+                    // 促销活动类型
+                    case "3":
+                    this.dialogSaleVisible=true;
+                    break;
+                    // 链接类型
+                    case "4":
+                    this.$message({
+                      message: '链接类型直接在文本框中输入外部链接',
+                      type: 'info',
+                      duration: 2000,
+                    });
+                    break;
+                }
+            },
+            // 图片上传前校验
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                  this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                  this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
+            },
+            // 图片状态变化监听,选择图片后执行的事件
+            handleChange(file, fileList) {
+                var file = file;
+                file.department = '1'
+                file.content = ''
+                this.uploadImage.push(file);
+                console.log(this.uploadImage)
+                this.dialogImageVisible = false;
+            },
+            // 删除图片事件
+            delectImage(index){
+                console.log(index)
+                this.uploadImage.splice(index,1);
+            },
+            // 列表单列操作-选择
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleSave: function () {
+               
+            },
+            handleCancel: function () {
+              
+            }
+        }
+    });
+</script>
+</html>

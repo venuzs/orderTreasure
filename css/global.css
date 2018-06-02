@@ -26,7 +26,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	overflow: hidden;
 }
 .cur_pointer {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 .p_relative {
     position: relative;

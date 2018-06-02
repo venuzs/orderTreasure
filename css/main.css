@@ -1899,3 +1899,67 @@
 	font-size: 14px;
 	cursor: pointer;
 }
+
+
+/*广告管理页面*/
+.adlist_title {
+	border-bottom: 1px solid #dee5e7;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+.ad_list li {
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+.ad_list li .ad_name {
+	font-size: 18px;
+	margin: 10px 0;
+}
+.ad_list li .ad_image {
+	position: relative;
+	width: 408px;
+	height: 196px;
+	padding: 5px;
+	text-align: center;
+	border: 1px solid rgba(0,0,0,.05)
+}
+.ad_list li .ad_image img {
+	width: 100%;
+	height: 100%;
+}
+.ad_list li .ad_operate {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	display: none;
+}
+.ad_list li:hover .ad_operate {
+	display: block;
+}
+.ad_list li .ad_operate a {
+	float: left;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    line-height: 30px;
+    background: rgba(0,0,0,.5);
+    border-radius: 4px;
+    color: #fff;
+    transition: background .3s;
+}
+.ad_list li .ad_operate a:hover {
+    background: rgba(0,0,0,.8);
+}
+.ad_seeting {
+	line-height: 30px;
+	padding-top: 10px;
+}
+.ad_seeting > .el-select {
+	width: 100px !important;
+	vertical-align: middle;
+}
+.ad_seeting > .el-input-group {
+	width: 160px;
+}
