@@ -19,6 +19,8 @@
 		<div id="format">
 			<el-button @click="dialogFormVisible = true">新增多规格</el-button>
 
+			<el-button @click="dialogClassVisible = true">选择商品分类</el-button>
+
 			<!-- 新增部门模态框 -->
 			<el-dialog title="新增商品多规格" :visible.sync="dialogFormVisible" @open="open">
 				<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm el-input-95">
@@ -80,6 +82,66 @@
 			</el-dialog>
 	        <!-- 新增部门模态框 end -->
 
+	        <!-- 分类选择模态框 -->
+			<el-dialog title="选择商品分类" :visible.sync="dialogClassVisible" @open="open" width='1000px'>
+				<!-- 商品分类 -->
+				<div class="m-product-select op-select no-operate">
+		            <ul class="m-ct">
+		                <!-- 一级内容 -->
+		                <li class="m-classify sm-classify">
+		                    <h5 class="u-classify-name">
+		                        一级分类
+		                    </h5>
+		                    <ul class="m-select-ct">
+		                        <li class="u-classify-list" v-bind:class="{ 'f-active': index==0 }" v-for="(item, index) in class1">
+		                            <div class="y_name">
+		                                {{item.name}}
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </li><!-- 一级内容 end -->
+		                <!-- 二级内容 -->
+		                <li class="m-classify sm-classify">
+		                    <h5 class="u-classify-name">
+		                        二级分类
+		                    </h5>
+		                    <ul class="m-select-ct">
+		                        <div class="y_empty y_prev_bg"><s></s><p>请选择上级菜单</p></div>
+		                    </ul>
+		                </li><!-- 二级内容 end -->
+		                <!-- 三级内容 -->
+		                <li class="m-classify sm-classify">
+		                    <h5 class="u-classify-name">
+		                        三级分类
+		                    </h5>
+		                    <ul class="m-select-ct">
+		                        <div class="y_empty"><s></s><p>无数据</p></div>
+		                    </ul>
+		                </li><!-- 三级内容 end -->
+		                <!-- 四级内容 -->
+		                <li class="m-classify  md-classify">
+		                    <h5 class="u-classify-name">
+		                        <el-checkbox :indeterminate="isIndeterminate4" v-model="checkAll4" @change="CheckAllChangeClass4">四级分类</el-checkbox>
+		                    </h5>
+		                    <el-checkbox-group v-model="checkedClass4" @change="CheckedClassChange4">
+			                    <ul class="m-select-ct">
+			                        <li class="u-classify-list" v-for="(item, index) in class4">
+			                            <div class="y_name">
+			                                <el-checkbox :label="item" :key="item.id">{{item.name}}</el-checkbox>
+			                            </div>
+			                        </li>
+			                    </ul>
+		                   	</el-checkbox-group>
+		                </li><!-- 四级内容 end -->
+		            </ul>
+		        </div><!-- 商品分类 end -->
+				<div slot="footer" class="dialog-footer">
+					<el-button type="primary">保 存</el-button>
+					<el-button @click="dialogClassVisible = false">取 消</el-button>
+				</div>
+			</el-dialog>
+	        <!-- 分类选择模态框 end -->
+
 		</div>
 	</div>
 	
@@ -90,6 +152,9 @@
 	var vm = new Vue({
 		el: "#format",
 		data: {
+			//
+			// 多规格新增数据
+			//
 			dialogFormVisible: false,  // 新增模态框是否显示
 
 	        // 新增部门模态框数据
@@ -117,9 +182,38 @@
 				phone: [
 					{ min: 1, max: 8, message: '长度在 1 到 8 个字符', trigger: 'blur' }
 				]
-	        }
+	        },
+
+	        //
+	        // 分类选择数据
+	        //
+	        dialogClassVisible: false,  // 商品分类模态框是否显示
+	        checkAll4: false,  // 分类是否全部选中
+	        isIndeterminate4: false,  // 分类是否部分选中
+	        checkedClass4: [],  // 存储分类已选数据
+	        class1: [
+				{name:'电视机',id:'class1-1'},
+				{name:'冰箱洗衣机',id:'class1-2'},
+				{name:'空调',id:'class1-3'},
+				{name:'厨卫电器',id:'class1-4'}
+			],
+			class4: [
+				{name:'飞利浦',id:'class4-1'},
+				{name:'索尼',id:'class4-2'},
+				{name:'雅马哈',id:'class4-3'},
+				{name:'飞利浦',id:'class4-4'},
+				{name:'索尼',id:'class4-5'},
+				{name:'雅马哈',id:'class4-6'},
+				{name:'飞利浦',id:'class4-7'},
+				{name:'索尼',id:'class4-8'},
+				{name:'雅马哈',id:'class4-9'}
+			]
 		},
 		methods: {
+			// 
+			// 多规格新增方法
+			//
+
 			// 提交表单
 			submitForm(formName) {
 				this.$refs[formName].validate((valid) => {
@@ -153,7 +247,22 @@
 		    		console.log(that.$refs.ruleForm)
 			  	})
 				
-			}
+			},
+
+			//
+			// 分类选择方法
+			//
+			// 分类全选操作
+			CheckAllChangeClass4(val) {
+				this.checkedClass4 = val ? this.class4 : [];
+				this.isIndeterminate4 = false;
+			},
+			// 分类选中状态切换操作
+			CheckedClassChange4(value) {
+				let checkedCount = value.length;
+				this.checkAll4 = checkedCount === this.class4.length;
+				this.isIndeterminate4 = checkedCount > 0 && checkedCount < this.class4.length;
+			},
 		},
 		mounted: function () {
 
