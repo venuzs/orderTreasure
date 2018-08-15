@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订货宝 让生意更美好！</title>
+    <link rel="stylesheet" href="css/element.css" th:href="@{/css/element.css}">
+    <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}"/>
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="css/myelement.css" th:href="@{/css/myelement.css}"/>
+    <script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="js/vue221.js" th:src="@{/js/vue.js}"></script>
+    <script src="js/element.js" th:src="@{/js/element.js}"></script>
+
+    <!-- 装修页面样式 -->
+    <link rel="stylesheet" href="decorate/css/amazeui.swiper.min.css"/>
+    <link rel="stylesheet" href="decorate/css/global.css"/>
+    <link rel="stylesheet" href="decorate/css/shop.css"/>
+    <script src="decorate/js/amazeui.swiper.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="main-content">
+        <!-- 页面头部 -->
+        <div class="page-header">
+            <h1 class="page-title">装修管理</h1>
+            <div class="breadcrumb"><a href="##">首页</a><span>/</span>系统管理</div>
+        </div><!-- 页面头部 end -->
+        <div class="main-content-body">
+            
+        	<!-- 搭建框架 -->
+        	<section class="decorate-wrapper">
+        		<div class="decorate-content">
+        			<div class="decorate-header"></div>
+        			<div class="decorate-item">
+        				<div class="decorate-dragger">
+        					<div class="design-handle">
+        						<header class="common-header">
+							        <div class="top_fixed">
+							            <h1 class="top_title">标题</h1>
+							        </div>
+							    </header>
+        					</div>
+        					<div class="design-close">
+        						<i class="el-icon-error"></i>
+        					</div>
+        					<div class="design-add add-top">
+        						<span class="add-btn">
+        							<i class="el-icon-plus"></i>
+        						</span>
+        					</div>
+        					<div class="design-add add-bottom">
+	        					<span class="add-btn">
+	        						<i class="el-icon-plus"></i>
+	        					</span>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="decorate-item">
+        				<div class="decorate-dragger">
+        					<div class="design-handle">
+        						<!-- 首页滚动广告  -->
+							    <section class="store-swiper">
+							        <div class="swiper-container store-banner">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide">
+												<a href="javascript:void(0)">
+													<img src="decorate/images/demo/banner_1.jpg">
+												</a>
+											</div>
+							                <div class="swiper-slide">
+							                    <a href="javascript:void(0)">
+							                        <img src="decorate/images/demo/banner_2.jpg">
+							                    </a>
+							                </div>
+							                <div class="swiper-slide">
+							                    <a href="javascript:void(0)">
+							                        <img src="decorate/images/demo/banner_3.jpg">
+							                    </a>
+							                </div>
+										</div>
+							            <!-- Add Pagination -->
+							            <div class="y_qhdiv swiper-pagination"></div>
+							        </div>
+							        <!--首页广告 end-->
+							    </section>
+							    <!-- 首页滚动广告 end  -->
+        					</div>
+        					<div class="design-close">
+        						<i class="el-icon-error"></i>
+        					</div>
+        					<div class="design-add add-top">
+        						<span class="add-btn">
+        							<i class="el-icon-plus"></i>
+        						</span>
+        					</div>
+        					<div class="design-add add-bottom">
+	        					<span class="add-btn">
+	        						<i class="el-icon-plus"></i>
+	        					</span>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="decorate-item">
+        				<div class="decorate-dragger">
+        					<div class="design-handle">
+        						<!-- 店铺导航 -->
+							    <nav class="store-nav">
+									<a href="##">
+							            <s><img src="decorate/images/nav_1.png"></s>
+							            生活用品
+							        </a>
+							        <a href="##">
+							            <s><img src="decorate/images/nav_2.png"></s>
+							            材米油盐
+							        </a>
+							        <a href="##">
+							            <s><img src="decorate/images/nav_3.png"></s>
+							            冰镇饮料
+							        </a>
+							        <a href="##">
+							            <s><img src="decorate/images/nav_4.png"></s>
+							            可口零食
+							        </a>
+									<a href="##">
+							            <s><img src="decorate/images/nav_5.png"></s>
+							           香烟美酒
+							        </a>
+							    </nav><!-- 店铺导航 end -->
+        					</div>
+        					<div class="design-close">
+        						<i class="el-icon-error"></i>
+        					</div>
+        					<div class="design-add add-top">
+        						<span class="add-btn">
+        							<i class="el-icon-plus"></i>
+        						</span>
+        					</div>
+        					<div class="design-add add-bottom">
+	        					<span class="add-btn">
+	        						<i class="el-icon-plus"></i>
+	        					</span>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="decorate-item">
+        				<div class="decorate-dragger">
+        					<div class="design-handle">
+        						<h2 class="index-title">
+						            <span>推荐商品</span>
+						        </h2>
+        					</div>
+        					<div class="design-close">
+        						<i class="el-icon-error"></i>
+        					</div>
+        					<div class="design-add add-top">
+        						<span class="add-btn">
+        							<i class="el-icon-plus"></i>
+        						</span>
+        					</div>
+        					<div class="design-add add-bottom">
+	        					<span class="add-btn">
+	        						<i class="el-icon-plus"></i>
+	        					</span>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="decorate-item">
+        				<div class="decorate-dragger">
+        					<div class="design-handle">
+        						<ul class="product-list clearfix">
+						            <li>
+						                <a href="##">
+						                    <div class="pic">
+						                    	<img src="decorate/images/demo/pic_220_1.jpg"/>
+							                </div>
+						                    <h3 class="name">舒适达 速效抗敏 牙膏 120g</h3>
+						                    <span class="price"><span class="make">￥</span>17.00</span>
+						                </a>
+						            </li>
+									<li>
+						                <a href="##">
+						                    <div class="pic">
+						                        <img src="decorate/images/demo/pic_220_2.jpg"/>
+						                    </div>
+						                    <h3 class="name">高露洁（Colgate） 适齿炭牙刷 软毛 4支 （炫彩刷柄 软毛深洁）</h3>
+						                    <span class="price"><span class="make">￥</span>9.90</span>
+						                    <del class="del"><span class="make">￥</span>17.00</del>
+						                </a>
+						            </li>
+						            <li>
+						                <a href="##">
+						                    <div class="pic">
+						                        <img src="decorate/images/demo/pic_220_3.jpg"/>
+						                    </div>
+						                    <h3 class="name">福临门 食用油 花生原香食用调和油5L 中粮出品</h3>
+						                    <span class="price"><span class="make">￥</span>49.00</span>
+						                </a>
+						            </li>
+						            <li>
+						                <a href="##">
+						                    <div class="pic">
+						                        <img src="decorate/images/demo/pic_220_4.jpg"/>
+						                    </div>
+						                    <h3 class="name">帮宝适（Pampers）超薄干爽 婴儿纸尿裤 干爽绿帮 小号S164片【4-8kg】尿不湿</h3>
+						                    <span class="price"><span class="make">￥</span>149.00</span>
+						                    <del class="del"><span class="make">￥</span>158.00</del>
+						                </a>
+						            </li>
+									<li>
+						                <a href="##">
+						                    <div class="pic">
+						                        <img src="decorate/images/demo/pic_220_5.jpg"/>
+						                    </div>
+						                    <h3 class="name">百岁山矿泉水570ml*24瓶 整箱</h3>
+						                    <span class="price"><span class="make">￥</span>49.00</span>
+						                </a>
+						            </li>
+						            <li>
+						                <a href="##">
+						                    <div class="pic">
+						                        <img src="decorate/images/demo/pic_220_6.jpg"/>
+						                    </div>
+						                    <h3 class="name">维达(Vinda) 手帕纸 超韧4层纸巾*36包(无香)</h3>
+						                    <span class="price"><span class="make">￥</span>19.90</span>
+						                    <del class="del"><span class="make">￥</span>25.00</del>
+						                </a>
+						            </li>
+						        </ul>
+        					</div>
+        					<div class="design-close">
+        						<i class="el-icon-error"></i>
+        					</div>
+        					<div class="design-add add-top">
+        						<span class="add-btn">
+        							<i class="el-icon-plus"></i>
+        						</span>
+        					</div>
+        					<div class="design-add add-bottom">
+	        					<span class="add-btn">
+	        						<i class="el-icon-plus"></i>
+	        					</span>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="decorate-item">
+        				<div class="decorate-dragger">
+        					<div class="design-handle">
+        						
+        					</div>
+        					<div class="design-close"></div>
+        					<div class="design-add add-top"></div>
+        					<div class="design-add add-bottom"></div>
+        				</div>
+        			</div>
+        		</div>
+        	</section>
+        	<!-- 搭建框架 end -->
+
+            <div class="edit-button-fixed">
+                <div class="edit-button">
+                    <el-button type="primary">确定</el-button>
+                    <el-button>取消</el-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+</body>
+
+<script th:inline="javascript">
+    new Vue({
+        el: "#app",
+        created: function() {
+        	//首页轮播
+            var swiper = new Swiper('.store-banner', {
+              pagination: '.y_qhdiv',
+              autoplay: 3000,//可选选项，自动滑动
+              paginationClickable: true,
+              observer: true
+            });
+        }
+    });
+</script>
+</html>

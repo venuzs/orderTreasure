@@ -1969,3 +1969,105 @@
 .ad_seeting > .el-input-group {
 	width: 160px;
 }
+
+
+/*装修页面样式*/
+.decorate-wrapper {
+	width: 815px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+.decorate-content {
+	width: 372px;
+	min-height: 500px;
+	border: 1px solid #ddd;
+	background: #fff;
+}
+.decorate-content .decorate-header {
+	width: 100%;
+	height: 28px;
+	background: url(../decorate/img/header_bg.png) left top no-repeat;
+	background-size: 100% 100%;
+}
+.decorate-dragger {
+	position: relative;
+}
+.decorate-dragger .design-close {
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	cursor: pointer;
+	z-index: 52;
+	display: none;
+}
+.decorate-dragger .design-close i {
+	font-size: 20px;
+	line-height: 20px;
+	background: #fff;
+	color: #999;
+	border-radius: 50%;
+}
+.decorate-dragger .design-close:hover i {
+	color: #666;
+}
+.decorate-dragger .design-add {
+	position: absolute;
+	left: 0;
+	height: 0;
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #36c;
+	z-index: 51;
+	display: none;
+}
+.decorate-dragger .design-add:before,.decorate-dragger .design-add:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-top: -3px;
+	width: 4px;
+	height: 4px;
+	background: #fff;
+	border: 1px solid #36c;
+	border-radius: 50%;
+}
+.decorate-dragger .design-add:after {
+	left: auto;
+	right: 0;
+}
+.decorate-dragger .design-add .add-btn {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	margin-left: -9px;
+	margin-top: -9px;
+	width: 18px;
+	height: 18px;
+	background: #36c;
+	color: #fff;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+}
+.decorate-dragger .design-add.add-top {
+	top: 0;
+}
+.decorate-dragger .design-add.add-bottom {
+	bottom: 0;
+}
+.decorate-dragger:hover:before,.decorate-dragger.active:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	border: 1px dashed #3366cc;
+	z-index: 50;
+	cursor: pointer;
+}
+.decorate-dragger:hover .design-close,.decorate-dragger:hover .design-add {
+	display: block;
+}
