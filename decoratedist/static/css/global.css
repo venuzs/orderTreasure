@@ -1,0 +1,282 @@
+@charset "UTF-8";
+/*
+ *
+ * 全局变量
+ *
+ *
+ * */
+
+/*vue加载闪现问题解决*/
+[v-cloak] {
+    display: none;
+}
+
+html,body {
+    min-height: 100%;
+    height: 100%;
+}
+body {
+    font-family: 'Arial', 'microsoft yahei';
+    color: #222;
+    line-height: 1.5;
+    font-size: .525rem !important;
+    word-break: break-all;
+    background-color: #f6f6f6;
+    margin: 0px auto;
+    padding: 0px;
+    min-height: 100%;
+    position: relative;
+    min-width: 300px;
+    /*max-width: 640px;*/
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+form,
+ul,
+li,
+ol,
+dl,
+dt,
+dd,
+input,
+button,
+textarea,
+form {
+    margin: 0px;
+    padding: 0px;
+    font-size: .525rem;
+    font-weight: normal;
+}
+
+dt,
+dd {
+    line-height: inherit;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: #fe5478;
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+ul,
+ol,
+dl {
+    list-style: none;
+}
+
+img {
+    border: none;
+    vertical-align: top;
+    max-width: 100%;
+}
+
+input,
+button,
+select,
+textarea {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    min-height: auto;
+}
+textarea {
+    resize: none
+}
+.page {
+  width: 100%;
+  height: 100%;
+}
+.image img {
+  width: 100%;
+  height: 100%;
+}
+.price {
+  color: #F24130;
+}
+
+/*文本不换行  */
+.text_elli {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*文本对齐  */
+.t-l {
+  text-align: left
+}
+.t-c {
+  text-align: center
+}
+.t-r {
+  text-align: right
+}
+
+.bg_fff {
+  background: #fff;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.p_relative {
+  position: relative;
+}
+.border_bottom {
+    border-bottom: 1px solid #eee;
+}
+
+/*常用内外边距  */
+.pull-m-l-20 {
+  margin-left: .5rem;
+}
+.pull-m-r-20 {
+  margin-right: .5rem;
+}
+.pull-m-r-30 {
+  margin-right: .75rem;
+}
+.pull-m-t-10 {
+  margin-top: .25rem;
+}
+.pull-m-t-20 {
+  margin-top: .5rem;
+}
+.pull-m-t-30 {
+  margin-top: .75rem;
+}
+.pull-m-t-40 {
+  margin-top: 1rem;
+}
+.pull-p-b-24 {
+  padding-bottom: .6rem;
+}
+.pull-p-l-20 {
+  padding-left: .5rem;
+}
+.pull-p-l-40 {
+  padding-left: 1rem;
+}
+.pull-p-r-20 {
+  padding-right: .5rem;
+}
+
+
+/*常用字体大小  */
+.fz16 {
+  font-size: .35rem;
+}
+.fz20 {
+  font-size: .425rem;
+}
+.fz22 {
+  font-size: .5rem;
+}
+.fz26 {
+  font-size: .55rem;
+}
+.fz28 {
+  font-size: .6rem;
+}
+.fz30 {
+  font-size: .65rem;
+}
+.fz34 {
+  font-size: .725rem;
+}
+.fz40 {
+  font-size: .85rem;
+}
+.fz48 {
+  font-size: 1rem;
+}
+.fz60 {
+  font-size: 1.3rem;
+}
+.line-through {
+  text-decoration: line-through;
+}
+
+/*常用字体颜色值  */
+.color_F7CB19 {
+    color: #fe5478;
+}
+.color_main {
+    color: #fe5478;
+}
+.color_red {
+    color: #F24130;
+}
+.color_222 {
+    color: #222;
+}
+.color_999 {
+    color: #999;
+}
+.color_666 {
+    color: #666;
+}
+
+/*文本框无内容样式  */
+.input-placeholder,.textarea-placeholder {
+  color: #ccc;
+  opacity: .7;
+}
+::-webkit-input-placeholder{color:#ccc;}
+:-moz-placeholder{color:#ccc;}
+::-moz-placeholder{color:#ccc;}
+:-ms-input-placeholder{color:#ccc;}
+
+/* 定义浏览器滚动条样式 */
+::-webkit-scrollbar {
+  width: 1px;
+  height: 4px;
+  background-color: #F5F5F5;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+    height: 0;
+    overflow: hidden;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.del{
+    text-decoration:line-through;
+    color: #999;
+}
+.icon{
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
