@@ -2071,3 +2071,139 @@
 .decorate-dragger:hover .design-close,.decorate-dragger:hover .design-add {
 	display: block;
 }
+
+/*图片库页面样式*/
+.pic-search {
+	float: right;
+	width: auto;
+}
+.pic-search .el-input__inner {
+	width: 100px;
+	transition: all .3s;
+}
+.pic-search .el-input__inner:focus {
+	width: 210px;
+}
+.picture-group {
+	float: left;
+	width: 200px;
+	background: #f8f8f8;
+	padding-top: 8px;
+	min-height: 350px;
+}
+.group-list {
+	margin-bottom: 20px;
+}
+.group-list li {
+	padding: 0 15px;
+	line-height: 30px;
+	cursor: pointer;
+	color: #222;
+}
+.group-list li .size {
+	float: right;
+	color: #999;
+}
+.group-list li.active {
+	background: #fff;
+}
+.group-btn {
+	text-align: center;
+}
+.picture-main {
+	margin-left: 220px;
+	overflow: hidden;
+}
+.picture-title {
+	line-height: 40px;
+	border-bottom: 1px solid #e5e5e5;
+}
+.picture-title .name {
+	font-size: 16px;
+	color: #222;
+}
+.picture-title .fz_c {
+	margin-left: 8px;
+	cursor: pointer;
+}
+.picture-list {
+	margin: 0 -10px;
+}
+.picture-list li {
+	float: left;
+	padding: 10px;
+	width: 155px;
+	box-sizing: border-box;
+}
+.picture-list li .pic {
+	display: table-cell;
+	vertical-align: middle;
+	width: 135px;
+	height: 135px;
+	text-align: center;
+}
+.picture-list li .pic img {
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
+}
+.picture-list li .name {
+	padding-top: 5px;
+}
+.picture-list li .el-checkbox {
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.picture-list li .el-checkbox__label {
+	padding-left: 7px;
+	font-size: 12px;
+}
+.picture-list li .operate {
+	margin-top: 3px;
+	font-size: 12px;
+}
+.picture-list li .operate .operate-btn {
+	color: #36c;
+	cursor: pointer;
+}
+.picture-list li .operate .operate-btn:hover {
+	color: #0546c7;
+}
+.picture-list li .operate .split {
+	margin: 0 4px;
+	color: #bbb;
+}
+.el-popover.popover-modal {
+	padding: 15px 20px 10px;
+	min-width: 280px;
+	font-size: 12px;
+}
+.el-popover.popover-modal .title {
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+.el-popover.popover-modal .content {
+	margin-bottom: 10px;
+	color: #999;
+}
+.el-popover.popover-edit {
+	min-width: 200px;
+}
+.pic-page .bg-purple-left .el-checkbox {
+	margin: 0 10px 0 0;
+}
+.pic-page .el-checkbox__label {
+	font-size: 12px;
+	padding-left: 7px;
+}
+.pictureup-list {
+	margin: 0 -10px;
+}
+.pictureup-list li {
+	margin: 0 10px 20px;
+}
+.pictureup-list > .upload-image-box {
+	float: left;
+}

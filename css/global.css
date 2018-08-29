@@ -69,6 +69,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .fz_c {
 	color: #3366CC; /*字体颜色*/
 }
+.fz_c:hover {
+    color: #0546c7;
+}
 .fc_999 {
 	color: #999;
 }

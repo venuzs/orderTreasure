@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订货宝 让生意更美好！</title>
+    <link rel="stylesheet" href="css/element.css" th:href="@{/css/element.css}">
+    <link rel="stylesheet" href="css/global.css" th:href="@{/css/global.css}"/>
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="css/myelement.css" th:href="@{/css/myelement.css}"/>
+    <script src="js/vue221.js" th:src="@{/js/vue.js}"></script>
+    <script src="js/element.js" th:src="@{/js/element.js}"></script>
+</head>
+<body>
+<div id="app">
+    <div class="main-content">
+        <!-- 页面头部 -->
+        <div class="page-header">
+            <h1 class="page-title">图片库</h1>
+            <div class="breadcrumb"><a href="##">首页</a><span>/</span>系统</div>
+        </div><!-- 页面头部 end -->
+        <!-- 页面主内容 -->
+        <div class="main-content-body">
+            <div class="clearfix mb_20">
+                <el-button class="fl" type="primary" @click="dialogUploadVisible = true">上传图片</el-button>
+                <el-input class="pic-search" placeholder="搜索" prefix-icon="el-icon-search" v-model="searchValue"></el-input>
+            </div>
+            <div class="picture-content clearfix">
+                <!-- 图片分组 -->
+                <div class="picture-group">
+                    <ul class="group-list">
+                        <li class="active"><span class="size">6</span>未分组</li>
+                        <li><span class="size">0</span>商品</li>
+                        <li><span class="size">2</span>广告</li>
+                    </ul>
+                    <div class="group-btn">
+                        <el-popover placement="bottom" width="160" v-model="visible" popper-class="popover-modal popover-edit">
+                            <h3 class="title">添加分组</h3>
+                            <p class="content"><el-input placeholder="不超过6个字" v-model="groupName"></el-input></p>
+                            <div style="text-align: right;">
+                                <el-button size="mini" type="text" @click="visible = false">取消</el-button>
+                                <el-button type="primary" size="mini" @click="visible = false">确定</el-button>
+                            </div>
+                            <el-button slot="reference" icon="el-icon-plus">添加分组</el-button>
+                        </el-popover>
+                    </div>
+                </div><!-- 图片分组 end -->
+                <!-- 图片列表 -->
+                <div class="picture-main">
+                    <div class="picture-title">
+                        <span class="name">商品</span>
+                        <el-popover placement="bottom" width="160" v-model="visible2" popper-class="popover-modal popover-edit">
+                            <h3 class="title">编辑名称</h3>
+                            <p class="content"><el-input placeholder="不超过6个字" v-model="editGroupName"></el-input></p>
+                            <div style="text-align: right;">
+                                <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
+                                <el-button type="primary" size="mini" @click="visible2 = false">确定</el-button>
+                            </div>
+                            <span slot="reference" class="fz_c">重命名</span>
+                        </el-popover>
+                        
+                        <el-popover placement="bottom" width="160" v-model="visible3" popper-class="popover-modal">
+                            <h3 class="title">确定删除分组？</h3>
+                            <p class="content">仅删除分组，不删除图片，组内图片将自动归入未分组</p>
+                            <div style="text-align: right;">
+                                <el-button size="mini" type="text" @click="visible3 = false">取消</el-button>
+                                <el-button type="primary" size="mini" @click="visible3 = false">确定</el-button>
+                            </div>
+                            <span slot="reference" class="fz_c">删除分组</span>
+                        </el-popover>
+                    </div>
+                    <el-checkbox-group v-model="checkList">
+                        <ul class="picture-list clearfix">
+                            <li v-for="(item,index) in pictureList">
+                                <div class="pic"><img :src="item.url"></div>
+                                <div class="name"><el-checkbox :label="item.id">{{item.name}}</el-checkbox></div>
+                                <div class="operate">
+                                    <el-popover placement="bottom" width="160" v-model="item.editvisible" popper-class="popover-modal popover-edit">
+                                        <h3 class="title">修改名称</h3>
+                                        <p class="content"><el-input placeholder="不超过6个字" v-model="editPicName"></el-input></p>
+                                        <div style="text-align: right;">
+                                            <el-button size="mini" type="text" @click="item.editvisible = false">取消</el-button>
+                                            <el-button type="primary" size="mini" @click="item.editvisible = false">确定</el-button>
+                                        </div>
+                                        <span slot="reference" class="operate-btn" @click='editPictureName(item.name)'>改名</span>
+                                    </el-popover>
+                                    <span class="split">|</span>
+                                    <el-popover placement="bottom" width="160" v-model="item.linkvisible" popper-class="popover-modal">
+                                        <div class="content">
+                                            <el-input v-model="item.link" readonly ref="piclinkinput">
+                                                <template slot="append">
+                                                    <el-button @click="copylink(index)">复制</el-button>
+                                                </template>
+                                            </el-input>
+                                        </div>
+                                        <span slot="reference" class="operate-btn">链接</span>
+                                    </el-popover>
+                                    <span class="split">|</span>
+                                    <el-popover placement="bottom" width="160" v-model="item.delectvisible" popper-class="popover-modal">
+                                        <h3 class="title">确定删除图片？</h3>
+                                        <p class="content">若删除，不会对目前已使用该图片的相关业务造成影响。</p>
+                                        <div style="text-align: right;">
+                                            <el-button size="mini" type="text" @click="item.delectvisible = false">取消</el-button>
+                                            <el-button type="primary" size="mini" @click="item.delectvisible = false">确定</el-button>
+                                        </div>
+                                        <span slot="reference" class="operate-btn">删除</span>
+                                    </el-popover>
+                                </div>
+                            </li>
+                        </ul>
+                    </el-checkbox-group>
+                    <!--分页-->
+                    <div class="grid-content pic-page">
+                        <div class="bg-purple-left">
+                            <el-checkbox v-model="picAllCheck" @change="picAllCheckFn">全选</el-checkbox>
+                            <el-popover v-show="checkList.length > 0" placement="bottom" width="160" v-model="visible4" popper-class="popover-modal">
+                                <h3 class="title">确定删除图片？</h3>
+                                <p class="content">若删除，不会对目前已使用该图片的相关业务造成影响。</p>
+                                <div style="text-align: right;">
+                                    <el-button size="mini" type="text" @click="visible4 = false">取消</el-button>
+                                    <el-button type="primary" size="mini" @click="visible4 = false">确定</el-button>
+                                </div>
+                                <el-button slot="reference">批量删除</el-button>
+                            </el-popover>
+                            <el-button v-show="checkList.length === 0" @click="picAllDelectFn">批量删除</el-button>
+                        </div>
+                        <div class="bg-purple-light">
+                            <el-pagination
+                                :current-page="currentPage"
+                              :page-sizes="[5, 10, 20, 30]"
+                              :page-size="5"
+                               layout="total, sizes, prev, pager, next"
+                              :total="100">
+                            </el-pagination>
+                        </div>
+                    </div>
+                </div><!-- 图片列表 end -->
+            </div>
+
+            <!-- 上传图片模态框 -->
+            <el-dialog title="上传图片" :visible.sync="dialogUploadVisible" width="860px">
+                <ol class="clearfix pictureup-list">
+                    <li v-for="(item,index) in uploadImage" class="fl">
+                        <div class="upload-image-box" style="width:100px;height:100px;">
+                            <div class="upload-image">
+                                <img :src="item.url">
+                                <span class="upload-operate cur_pointer">删除图片</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="upload-image-box cur_pointer" @click="dialogImageVisible = true" style="width:100px;height:100px;">
+                        <span class="upload-button">
+                            <i class="el-icon-upload"></i>
+                            添加图片
+                        </span>
+                    </li>
+                </ol>
+                <div slot="footer" class="dialog-footer">
+                    <el-button type="primary">确 认</el-button>
+                    <el-button @click="dialogUploadVisible = false">取 消</el-button>
+                </div>
+            </el-dialog>
+            <!-- 上传图片模态框 end -->
+
+            <!-- 上传图片模态框 -->
+            <el-dialog title="上传文件" :visible.sync="dialogImageVisible">
+                <el-upload
+                  ref="upload"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :show-file-list="false"
+                  :on-change="handleChange"
+                  :file-list="uploadImage"
+                  :auto-upload="false"
+                  multiple
+                  :before-upload="beforeAvatarUpload">
+                  <el-button size="medium">+&nbsp;点击选择图片</el-button>
+                  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                </el-upload>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogImageVisible = false">取 消</el-button>
+                </div>
+            </el-dialog>
+            <!-- 上传图片模态框 end -->
+
+        </div><!-- 页面主内容 end -->
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+
+<script th:inline="javascript">
+    new Vue({
+        el: "#app",
+        data: {
+            dialogUploadVisible: false, // 上传图片模态框是否显示
+            dialogImageVisible: false,  // 上传图片弹出模态框
+            visible: false, // 添加分组提示框
+            visible2: false, // 分组重命名提示框
+            visible3: false, // 删除分组提示框
+            visible4: false, // 批量删除图片提示框
+            searchValue: '',  // 搜索框内容
+            groupName: '',  // 添加分组的分组名称
+            editGroupName: '商品',  // 编辑分组的分组名称
+            editPicName: '',  // 图片改名的名称
+            checkList: [],  // 图片复选内容
+            picAllCheck: false,  // 列表下方批量操作全选
+            currentPage: 1, //当前页码数
+            // 图片列表
+            pictureList: [
+                {
+                    id: '000001',
+                    url: 'img/insetpic.png',
+                    name: '首页BANNER广告图1',
+                    link: 'https://img.rysk.cn/upload_files/2015/05/26/500becbb55adb3a4ee4b93738c502dd7.jpg',
+                    editvisible: false,  // 修改图片名称提示
+                    linkvisible: false,  // 复制图片链接提示
+                    delectvisible: false,  // 删除图片提示
+                },
+                {
+                    id: '000002',
+                    url: 'img/insetpic.png',
+                    name: '列表BANNER广告图1',
+                    link: 'https://img.yzcdn.cn/upload_files/2015/05/26/500becbb55adb3a4ee4b93738c502dd7.jpg',
+                    editvisible: false,  // 修改图片名称提示
+                    linkvisible: false,  // 复制图片链接提示
+                    delectvisible: false,  // 删除图片提示
+                }
+            ],
+            // 上传图片数据
+            uploadImage: [
+                {   
+                    url: "img/insetpic.png"
+                }
+            ]
+        },
+        computed: {
+            // 当前可选图片组
+            checkgroup: function() {
+                var list = []
+                this.pictureList.forEach(function(item){
+                    list.push(item.id)
+                })
+                return list;
+            }
+        },
+        methods: {
+            // 修改图片名称事件
+            editPictureName: function(name) {
+                this.editPicName = name
+                console.log(name)
+            },
+            // 复制图片链接
+            copylink: function(index) {
+                var Url = this.$refs.piclinkinput[index];
+                Url.select(); // 选择对象  
+                document.execCommand("Copy"); // 执行浏览器复制命令
+                this.$message({
+                  message: '复制成功',
+                  type: 'success'
+                });
+            },
+            // 图片全选
+            picAllCheckFn(val){
+                this.checkList = val ? this.checkgroup : [];
+            },
+            // 无数据时批量删除操作
+            picAllDelectFn() {
+                if (this.checkList.length === 0) {
+                    this.$message({
+                      message: '请选择图片',
+                      type: 'warning'
+                    });
+                }
+            },
+
+            // 图片状态变化监听,选择图片后执行的事件
+            handleChange(file, fileList) {
+                var file = file;
+                file.department = '1'
+                file.content = ''
+                this.uploadImage.push(file);
+                console.log(this.uploadImage)
+                this.dialogImageVisible = false;
+            },
+            // 图片上传前校验
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                  this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                  this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
+            },
+        }
+    });
+</script>
+</html>
