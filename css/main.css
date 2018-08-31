@@ -2207,3 +2207,90 @@
 .pictureup-list > .upload-image-box {
 	float: left;
 }
+
+/*运费模板页面*/
+.freightForm {
+	margin-left: 20px;
+}
+.freightForm .switch_title {
+	line-height: 30px;
+}
+.freightForm .el-form-item {
+	margin-bottom: 15px;
+}
+.freight-tip-title {
+	margin-bottom: 10px;
+	color: #666;
+	font-size: 13px;
+}
+.freight-opeare i {
+	font-size: 16px;
+	cursor: pointer;
+	margin-right: 5px;
+}
+.free-trem {
+	width: 200px;
+	white-space: nowrap;
+}
+.freight-info-list {
+	padding: 20px;
+	border-top: 1px solid #eee;
+}
+.freight-info-title {
+	font-size: 16px;
+    line-height: 20px;
+    color: #666;
+    margin: 0 0 15px;
+}
+.freight-info-list dl {
+	padding-left: 10px;
+	padding-bottom: 10px;
+	font-size: 14px;
+	color: #999;
+}
+.freight-info-list dl dt {
+	color: #58666e;
+    font-size: 15px;
+    font-weight: bold;
+}
+.freight-info-list dl dd {
+	padding-left: 24px;
+	margin: 5px 0;
+}
+.selectarea-dialog .el-dialog__body {
+	padding: 10px 20px;
+}
+.selectarea-dialog .check-all {
+	padding: 7px 0;
+}
+.selectarea-dialog .el-checkbox__label {
+	padding-left: 5px;
+}
+.selectarea-list {
+	max-height: 430px;
+	overflow: auto;
+}
+.selectarea-list dl {
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+.selectarea-list .area-toggle {
+	display: inline-block;
+	font-size: 12px;
+	width: 15px;
+	cursor: pointer;
+}
+.selectarea-list dd {
+	display: none;
+	padding: 10px 0 0 35px;
+}
+.selectarea-list dd .el-checkbox {
+	margin-left: 0;
+	margin-right: 20px;
+}
+.freight-area {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	cursor: pointer;
+}

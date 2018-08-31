@@ -431,6 +431,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 }
 .view-order .view-item {
     padding: 5px 0;
+    line-height: 22px;
 }
 .view-title {
     margin-top: 25px;

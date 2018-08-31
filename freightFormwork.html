@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订货宝 让生意更美好！</title>
+		<script src="js/vue221.js"></script>
+		<script src="js/vue-router231.js"></script>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/element.css">
+		<link rel="stylesheet" href="kindeditor/themes/default/default.css" th:href="@{/kindeditor/themes/default/default.css}" />
+        <link rel="stylesheet" href="kindeditor/themes/myeditor/myeditor.css" th:href="@{/kindeditor/themes/myeditor/myeditor.css}" />
+		<link rel="stylesheet" href="css/global.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/myelement.css" />
+		<!-- 引入组件库 -->
+		<script src="js/element.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="main-content">
+				<!-- 页面头部 -->
+				<div class="page-header">
+					<h1 class="page-title">运费模板</h1>
+					<div class="breadcrumb"><a href="##">首页</a><span>/</span>系统设置</div>
+				</div><!-- 页面头部 end -->
+
+				<div class="main-content-body">
+					<div class="view-order mb_30">
+		               <div class="view-item">
+		                   1、通过设置运费模板，根据订单商品重量，自动计算订单运费。应用于需要由客户承担运费的业务场景。<br/>
+						   2、当客户选择配送方式时，会按配送方式关联的运费模板自动计算运费。每个配送方式只能关联一个运费模板。
+		               </div>
+		            </div>
+					<div class="edit-form">
+						<el-form :model="ruleForm" ref="ruleForm" label-width="0" class="demo-ruleForm freightForm">
+							<!-- <h3 class="edit-form-title">运营参数</h3> -->
+							<div class="switch_title">
+								<el-switch v-model="ruleForm.switch"></el-switch>
+								启用运费模板
+							</div>
+							<el-form-item>
+								配送方式：快递
+							</el-form-item>
+							<el-form-item>
+								计价方式：
+								<el-radio-group v-model="ruleForm.authData">
+									<el-radio :label="1">按件数<span class="fc_999">（按小单位计费，如需按大单位计费，请考虑换算关系后设置计件数量）</span></el-radio>
+									<el-radio :label="2">按重量(kg)<span class="fc_999">（未设置重量的商品将不进行运费计算）</span></el-radio>
+								</el-radio-group>
+							</el-form-item>
+							<el-form-item>
+								<div class="switch_title">
+									运费模板管理
+									<el-popover
+									  ref="popoverqsu3"
+									  placement="bottom-start"
+									  width="1040"
+									  trigger="hover">
+									  <div class="z-jiao"><p class="freight-tip-title">模板设置示例</p><img src="img/demo/freight-tip.png"></div>
+									</el-popover>
+									<i v-popover:popoverqsu3 class="el-icon-question"></i>
+								</div>
+								<div class="z-tables">
+									<el-table :data="ruleForm.tableData">
+										<el-table-column label=" " type="index"></el-table-column>
+
+					 					<el-table-column label="操作">
+					 						<template slot-scope="scope">
+					 							<div class="freight-opeare">
+										    		<i class="el-icon-circle-plus-outline" @click="addfreight"></i>
+										    		<i v-show="scope.row.area !== 'default'" class="el-icon-remove-outline" @click="delectfreight(scope.$index)"></i>
+									    		</div>
+											</template>
+					 					</el-table-column>
+
+									    <el-table-column label="地区范围">
+									    	<template slot-scope="scope">
+									    		<span v-if="scope.row.area === 'default'">默认</span>
+									    		<span class="freight-area" v-else-if="scope.row.area === ''" @click="selectArea">选择地区</span>
+											    <span class="freight-area" v-else @click="selectArea">{{scope.row.area}}</span>
+											</template>
+									    </el-table-column>
+
+									    <el-table-column label="首件">
+									    	<template slot-scope="scope">
+											    <el-input v-model="scope.row.firstNum"></el-input>
+											</template>
+									    </el-table-column>
+									    
+									    <el-table-column label="首件费率（元）">
+											<template slot-scope="scope">
+											    <el-input v-model="scope.row.firstPrice"></el-input>
+											</template>
+									    </el-table-column>
+
+									    <el-table-column label="续件">
+											<template slot-scope="scope">
+												<el-input v-model="scope.row.nextNum"></el-input>
+											</template>
+									    </el-table-column>
+
+									    <el-table-column label="续件费率（元）">
+											<template slot-scope="scope">
+											    <el-input v-model="scope.row.nextPrice"></el-input>
+											</template>
+									    </el-table-column>
+
+									    <el-table-column label="免费条件" width="220">
+											<template slot-scope="scope">
+												订单金额>=
+											    <el-input v-model="scope.row.freeTrem" placeholder="为空时不免运费" style="width:120px"></el-input>
+											</template>
+									    </el-table-column>
+									</el-table>
+								</div>
+								<div class="z-box-info">
+									<p>同一地区，不能出现在同一配送方式中的两个及以上的模板中。允许出现在不同配送方式的模板中。</p>
+								</div>
+							</el-form-item>
+							<div class="edit-button z-yuan-butn" style="padding-left:0">
+								<el-button type="primary">保存</el-button>
+								<el-button>返回</el-button>
+							</div>
+						</el-form>
+					</div>
+				</div>
+				<!-- 常用模板说明 -->
+				<div class="freight-info-list">
+					<h3 class="freight-info-title">常用运费模板场景说明：</h3>
+					<dl>
+						<dt>1、全部地区统一运费</dt>
+						<dd>设置默认全部地区的首件数量和费用，以及续件，续件费率。不设置指定地区运费规则。</dd>
+					</dl>
+					<dl>
+						<dt>2、默认地区通用运费，特殊地区特殊运费</dt>
+						<dd>添加指定地区运费规则，设置指定地区的运费模板。如设置西藏，新疆等偏远地区，采用当地的运费标准。</dd>
+					</dl>
+					<dl>
+						<dt>3、满足条件免运费</dt>
+						<dd>在运费规则中，设置免运费订单金额。如订单金额满500，就免运费。可以对全部地区设置，也可以对指定地区设置不同的免运费标准。在订货前端会提示，引导客户增加订货量。</dd>
+					</dl>
+					<dl>
+						<dt>4、部分地区收取运费，部分地区免运费</dt>
+						<dd>类似电商常用的江浙沪免运费，对就近区域提供免运费服务，超过区域范围设置相应运费规则。通过设置不同地区的免运费规则。方法有两种：1）设置首件、续件费率为0；2）设置免运费金额为0。</dd>
+					</dl>
+					<dl>
+						<dt>5、按商品大单位计算运费</dt>
+						<dd>在首件和续件数量上乘以商品单位关系，即可实现大单位计算运费。由于不同商品大小单位的关系不一致，所以这种场景仅适合单一商品销售企业。建议统一采用小单位设置运费。</dd>
+					</dl>
+					<dl>
+						<dt>6、按每件商品（数量或重量）累计计费</dt>
+						<dd>设置首件运费为0，只设置续件费率。</dd>
+					</dl>
+					<dl>
+						<dt>7、按订单每单收取固定运费</dt>
+						<dd>只设置首件费用，设置续件费率为0。</dd>
+					</dl>
+					<dl>
+						<dt>8、灵活议价的运费</dt>
+						<dd>不启用运费模板，在业务员开单或审单时，录入运费。</dd>
+					</dl>
+					<dl>
+						<dt>9、快递和物流货运采用独立计费标准</dt>
+						<dd>分别设置快递运费模板和物流货运运费模板，当配送方式选择快递或货运时，系统自动根据对应模板计算运费。</dd>
+					</dl>
+				</div><!-- 常用模板说明 end -->
+
+				<!-- 选择地区模态框 -->
+				<el-dialog title="选择地区" :visible.sync="dialogAreaVisible" class="selectarea-dialog" width="900px">
+					<div class="check-all"><el-checkbox v-model="picAllCheck" @change="picAllCheckFn">全选</el-checkbox></div>
+					<div class="selectarea-list">
+						<dl>
+							<dt>
+								<span class="area-toggle el-icon-plus"></span>
+								<el-checkbox>上海市</el-checkbox>
+							</dt>
+							<dd>
+								<el-checkbox-group>
+									<el-checkbox label="1">市辖区</el-checkbox>
+									<el-checkbox label="1">县</el-checkbox>
+								</el-checkbox-group>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<span class="area-toggle el-icon-plus"></span>
+								<el-checkbox>江苏省</el-checkbox>
+							</dt>
+							<dd>
+								<el-checkbox-group>
+									<el-checkbox label="3">南京市</el-checkbox>
+									<el-checkbox label="4">无锡市</el-checkbox>
+									<el-checkbox label="5">徐州市</el-checkbox>
+									<el-checkbox label="6">常州市</el-checkbox>
+									<el-checkbox label="7">苏州市</el-checkbox>
+									<el-checkbox label="8">南通市</el-checkbox>
+									<el-checkbox label="9">连云港市</el-checkbox>
+									<el-checkbox label="10">淮安市</el-checkbox>
+									<el-checkbox label="11">盐城市</el-checkbox>
+									<el-checkbox label="12">扬州市</el-checkbox>
+									<el-checkbox label="13">镇江市</el-checkbox>
+									<el-checkbox label="14">泰州市</el-checkbox>
+									<el-checkbox label="15">宿迁市</el-checkbox>
+								</el-checkbox-group>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<span class="area-toggle el-icon-plus"></span>
+								<el-checkbox>上海市</el-checkbox>
+							</dt>
+							<dd>
+								<el-checkbox-group>
+									<el-checkbox label="1">市辖区</el-checkbox>
+									<el-checkbox label="1">县</el-checkbox>
+								</el-checkbox-group>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<span class="area-toggle el-icon-plus"></span>
+								<el-checkbox>江苏省</el-checkbox>
+							</dt>
+							<dd>
+								<el-checkbox-group>
+									<el-checkbox label="3">南京市</el-checkbox>
+									<el-checkbox label="4">无锡市</el-checkbox>
+									<el-checkbox label="5">徐州市</el-checkbox>
+									<el-checkbox label="6">常州市</el-checkbox>
+									<el-checkbox label="7">苏州市</el-checkbox>
+									<el-checkbox label="8">南通市</el-checkbox>
+									<el-checkbox label="9">连云港市</el-checkbox>
+									<el-checkbox label="10">淮安市</el-checkbox>
+									<el-checkbox label="11">盐城市</el-checkbox>
+									<el-checkbox label="12">扬州市</el-checkbox>
+									<el-checkbox label="13">镇江市</el-checkbox>
+									<el-checkbox label="14">泰州市</el-checkbox>
+									<el-checkbox label="15">宿迁市</el-checkbox>
+								</el-checkbox-group>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<span class="area-toggle el-icon-plus"></span>
+								<el-checkbox>上海市</el-checkbox>
+							</dt>
+							<dd>
+								<el-checkbox-group>
+									<el-checkbox label="1">市辖区</el-checkbox>
+									<el-checkbox label="1">县</el-checkbox>
+								</el-checkbox-group>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<span class="area-toggle el-icon-plus"></span>
+								<el-checkbox>江苏省</el-checkbox>
+							</dt>
+							<dd>
+								<el-checkbox-group>
+									<el-checkbox label="3">南京市</el-checkbox>
+									<el-checkbox label="4">无锡市</el-checkbox>
+									<el-checkbox label="5">徐州市</el-checkbox>
+									<el-checkbox label="6">常州市</el-checkbox>
+									<el-checkbox label="7">苏州市</el-checkbox>
+									<el-checkbox label="8">南通市</el-checkbox>
+									<el-checkbox label="9">连云港市</el-checkbox>
+									<el-checkbox label="10">淮安市</el-checkbox>
+									<el-checkbox label="11">盐城市</el-checkbox>
+									<el-checkbox label="12">扬州市</el-checkbox>
+									<el-checkbox label="13">镇江市</el-checkbox>
+									<el-checkbox label="14">泰州市</el-checkbox>
+									<el-checkbox label="15">宿迁市</el-checkbox>
+								</el-checkbox-group>
+							</dd>
+						</dl>
+					</div>
+					<div slot="footer" class="dialog-footer">
+						<el-button type="primary">保 存</el-button>
+						<el-button @click="dialogAreaVisible = false">取 消</el-button>
+					</div>
+				</el-dialog>
+		        <!-- 选择地区模态框 end -->
+			</div>
+		</div>
+
+		
+	<script src="js/jquery.min.js"></script>
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				// form 表单数据
+				ruleForm: {
+					switch: false,
+					authData: 1,
+					tableData: [
+			        	{
+			        		area: 'default',
+							firstNum: '1',
+							firstPrice: '0.00',
+							nextNum: '1',
+							nextPrice: '0.00',
+							freeTrem: ''
+			        	},
+			        	{
+			        		area: '',
+							firstNum: '1',
+							firstPrice: '0.00',
+							nextNum: '1',
+							nextPrice: '0.00',
+							freeTrem: ''
+			        	},
+			        ]
+		        },
+		        dialogAreaVisible: false,  // 选择地区模态框是否显示
+		        picAllCheck: false,  // 选择地区批量操作全选
+			},
+			methods: {
+				// 表格添加列
+				addfreight: function() {
+					var list = {
+			        		area: '',
+							firstNum: '1',
+							firstPrice: '0.00',
+							nextNum: '1',
+							nextPrice: '0.00',
+							freeTrem: ''
+			        	};
+			        this.ruleForm.tableData.push(list)
+				},
+				// 表格删除列
+				delectfreight: function(index) {
+					this.ruleForm.tableData.splice(index, 1)
+				},
+				// 选择地区
+				selectArea: function() {
+					this.dialogAreaVisible = true
+				},
+				// 选择地区全选
+	            picAllCheckFn(val){
+	                
+	            }
+			}
+		});
+
+		$(function(){
+			// 市切换显示、隐藏
+			$(document).on("click",".area-toggle",function(){
+				$(this).toggleClass("el-icon-plus el-icon-minus")
+				$(this).parents("dl").find("dd").toggle()
+			})
+		})
+	</script>
+	</body>
+</html>
