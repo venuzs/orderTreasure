@@ -72,6 +72,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .fz_c:hover {
     color: #0546c7;
 }
+.fc_red {
+    color: #F5655C;
+}
+.fc_333 {
+    color: #333;
+}
 .fc_999 {
 	color: #999;
 }

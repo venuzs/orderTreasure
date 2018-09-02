@@ -133,6 +133,9 @@
 	margin-top: 7px;
 	vertical-align: middle;
 }
+.content_item_filter .el-date-editor.el-input {
+	width: 135px;
+}
 .content_item_filter .input-select .z_input-holder {
     width: 240px;
     box-shadow: 0px 1px 2px 0px rgba(172,173,173,0.3);

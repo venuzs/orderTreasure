@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订货宝 让生意更美好！</title>
+	<script src="js/vue221.js"></script>
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="css/element.css">
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/myelement.css" />
+	<!-- 引入组件库 -->
+	<script src="js/element.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.nestable.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="main-content">
+			<!-- 页面头部 -->
+			<div class="page-header">
+				<h1 class="page-title">订单管理</h1>
+				<div class="z-pop_question">
+	  	 			<el-popover
+					  ref="popoverq"
+					  placement="bottom-start"
+					  width="400"
+					  trigger="hover">
+					  <p class="z-jiao">角色权限：每个角色可以设置不同的后台功能权限，比如：
+							业务员角色，仓库管理员角色，财务角色。然后账号关联
+							某个角色，就拥有该角色下的所有功能权限。
+					  </p>
+					</el-popover>
+					
+					<i v-popover:popoverq class="el-icon-question"></i>
+	  	 		</div>
+				<div class="breadcrumb">首页<span>/</span>订单<span>/</span>订单列表</div>
+			</div><!-- 页面头部 end -->
+
+			<div class="list-content">
+				<!-- tab切换 -->
+				<div class="z-tabs mb_10">
+					<div class="z-tabs_header">
+			 			<a class="z-tabs_item router-link-active" href="##">
+			 				<span class="item_span">所有订单</span>
+			 			</a>
+			 			<a class="z-tabs_item" href="##">
+			 				<span class="item_span">待支付</span>
+			 			</a>
+			 			<a class="z-tabs_item" href="##">
+			 				<span class="item_span">待发货</span>
+			 			</a>
+			 			<a class="z-tabs_item" href="##">
+			 				<span class="item_span">待收货</span>
+			 			</a>
+			 		</div>
+				</div><!-- tab切换 end -->
+				<!--条件筛选-->
+				<div class="content_item_filter clearfix" v-bind:class="hasfilterMore?'content_filter_more':''">
+	 				<div class="input-select fl btn-radid_none">
+	 					<div class="filter-form filter-form-one clearfix">
+		 					<el-input placeholder="订单号/商品名称/买家名称/买家手机号" v-model="input4" class="minW40 z_input-holder" >
+							</el-input>
+
+							<el-select v-model="valueId" clearable filterable default-first-option placeholder="订单来源" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsId"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<el-select v-model="valueState" clearable placeholder="订单状态" @change="change" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<el-select v-model="valueState" clearable placeholder="订单类型" @change="change" class="z_select-holder">
+								<el-option
+								  v-for="(item,index) in optionsState"
+								  :key="index"
+								  :label="item"
+								  :value="item">
+								</el-option>
+							</el-select>
+
+							<div class="data-picker clearfix">  
+								<el-date-picker
+								    v-model="bValue"
+								    type="date"
+								    placeholder="支付时间">
+								</el-date-picker>
+								<div class="center-line"></div>
+								<el-date-picker
+								    v-model="eValue"
+								    type="date"
+								    placeholder="截至日期">
+								</el-date-picker>
+							</div>
+							
+						</div>
+						<div class='filter-form filter-form-more clearfix' v-show="filterMore"></div>
+
+						<div class="filter-operate">
+							<div class="filter-more" @click="toggleMoreSearch" v-show="hasfilterMore"><i v-bind:class="[filterMore?'el-icon-arrow-up':'el-icon-arrow-down']"></i></div>
+
+							<el-tooltip class="item" content="查询" placement="bottom-start">
+						    	<el-button icon="el-icon-search"></el-button>
+						    </el-tooltip>
+							<el-tooltip class="item" content="清空" placement="bottom-start">
+						    	<el-button icon="el-extend-clean"></el-button>
+						    </el-tooltip>
+					    </div>
+	 				</div>
+				</div>
+					
+				<!--主体表格-->
+				<div class="z-tables">
+					<div class="el-table">
+						<table class="el-table__header order-table" cellpadding="0" cellspacing="0" border="0" style="width:100%">
+							<thead>
+								<tr>
+									<th class="is-leaf z-opt_btn" width="45%"><div class="cell">订单详情</div></th>
+									<th class="is-leaf z-opt_btn" width="10%"><div class="cell">收货人</div></th>
+									<th class="is-leaf z-opt_btn" width="15%"><div class="cell">实付金额</div></th>
+									<th class="is-leaf z-opt_btn" width="15%"><div class="cell">订单状态</div></th>
+									<th class="is-leaf z-opt_btn" width="15%"><div class="cell">订单操作</div></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="5" class="order-title">
+										<span class="item">2018-08-29 17:00:00   </span>
+										<span class="item">订单号：   2018082911101</span>
+										<el-tooltip class="item" effect="dark" content="订单来源：移动端" popper-class="order-source-tip" placement="left-start">
+									    	<span class="source phone"></span>
+									    </el-tooltip>
+									</td>
+								</tr>
+								<tr>
+									<td class="order-product-td">
+										<ul class="order-product-list">
+											<li>
+												<div class="pic"><img src="img/erweima.png"></div>
+												<div class="info">
+													<div class="name">
+														<h3>金融港家乡炒菜馆金牌番茄炒蛋</h3>
+														<p class="desc">
+															<label>微辣</label>
+														</p>
+														<p class="sales">大鸭蛋一枚</p>
+													</div>
+													<div class="price">
+														<del>￥12.00</del>
+														<p class="fc_333">￥7.00</p>
+													</div>
+													<div class="length">1</div>
+												</div>
+											</li>
+											<li>
+												<div class="pic"><img src="img/erweima.png"></div>
+												<div class="info">
+													<div class="name">
+														<h3>金融港家乡炒菜馆金牌番茄炒蛋</h3>
+														<p class="desc">
+															<label>微辣</label>
+														</p>
+														<p class="sales">大鸭蛋一枚</p>
+													</div>
+													<div class="price">
+														<del>￥12.00</del>
+														<p class="fc_333">￥7.00</p>
+													</div>
+													<div class="length">1</div>
+												</div>
+											</li>
+										</ul>
+									</td>
+									<td>
+										<el-popover placement="bottom" width="180" popper-class="popover-normal" trigger="hover">
+				                            <h3 class="title">小强</h3>
+				                            <p class="content">湖北省武汉市江夏区光谷麦郡103号<br/>13100613241</p>
+				                            <span slot="reference" class="order-user">小强</span>
+				                        </el-popover>
+									</td>
+									<td>
+										<p class="fc_red f_14"><strong>￥27</strong></p>
+										（含运费：￥0.00）
+									</td>
+									<td>
+										<p class="fz_c">等待买家付款</p>
+										<p><a href="#" class="order-btn">订单详情</a></p>
+									</td>
+									<td>
+										<p><a href="#" class="order-btn">取消交易</a></p>
+										<p><a href="#" class="order-btn">修改价格</a></p>
+										<p><a href="#" class="order-btn">修改备注</a></p>
+										<p><a href="#" class="order-btn">修改收货地址</a></p>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="5">
+										<div class="order-promotion">
+											满100减10优惠券
+										</div>
+									</td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td colspan="5" class="order-title">
+										<span class="item">2018-08-29 17:00:00   </span>
+										<span class="item">订单号：   2018082911101</span>
+										<el-tooltip class="item" effect="dark" content="订单来源：PC端" popper-class="order-source-tip" placement="left-start">
+									    	<span class="source"></span>
+									    </el-tooltip>
+									</td>
+								</tr>
+								<tr>
+									<td class="order-product-td">
+										<ul class="order-product-list">
+											<li>
+												<div class="pic"><img src="img/erweima.png"></div>
+												<div class="info">
+													<div class="name">
+														<h3>金融港家乡炒菜馆金牌番茄炒蛋</h3>
+														<p class="desc">
+															<label>微辣</label>
+														</p>
+														<p class="sales">大鸭蛋一枚</p>
+													</div>
+													<div class="price">
+														<del>￥12.00</del>
+														<p class="fc_333">￥7.00</p>
+													</div>
+													<div class="length">1</div>
+												</div>
+											</li>
+										</ul>
+									</td>
+									<td>
+										<el-popover placement="bottom" width="180" popper-class="popover-normal" trigger="hover">
+				                            <h3 class="title">小强</h3>
+				                            <p class="content">湖北省武汉市江夏区光谷麦郡103号<br/>13100613241</p>
+				                            <span slot="reference" class="order-user">小强</span>
+				                        </el-popover>
+									</td>
+									<td>
+										<p class="fc_red f_14"><strong>￥27</strong></p>
+										（含运费：￥0.00）
+									</td>
+									<td>
+										<p class="fz_c">待发货</p>
+										<p><a href="#" class="order-btn">查看售后</a></p>
+										<p><a href="#" class="order-btn">订单详情</a></p>
+									</td>
+									<td>
+										<p><a href="#" class="order-btn">发货</a></p>
+										<p><a href="#" class="order-btn">修改备注</a></p>
+										<p><a href="#" class="order-btn">修改收货地址</a></p>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="5">
+										<div class="order-promotion">
+											满100减10优惠券
+										</div>
+									</td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td colspan="5" class="order-title">
+										<span class="item">2018-08-29 17:00:00   </span>
+										<span class="item">订单号：   2018082911101</span>
+										<el-tooltip class="item" effect="dark" content="订单来源：移动端" popper-class="order-source-tip" placement="left-start">
+									    	<span class="source phone"></span>
+									    </el-tooltip>
+									</td>
+								</tr>
+								<tr>
+									<td class="order-product-td">
+										<ul class="order-product-list">
+											<li>
+												<div class="pic"><img src="img/erweima.png"></div>
+												<div class="info">
+													<div class="name">
+														<h3>金融港家乡炒菜馆金牌番茄炒蛋</h3>
+													</div>
+													<div class="price">
+														<del>￥12.00</del>
+														<p class="fc_333">￥7.00</p>
+													</div>
+													<div class="length">1</div>
+												</div>
+											</li>
+										</ul>
+									</td>
+									<td>
+										<el-popover placement="bottom" width="180" popper-class="popover-normal" trigger="hover">
+				                            <h3 class="title">小强</h3>
+				                            <p class="content">湖北省武汉市江夏区光谷麦郡103号<br/>13100613241</p>
+				                            <span slot="reference" class="order-user">小强</span>
+				                        </el-popover>
+									</td>
+									<td>
+										<p class="fc_red f_14"><strong>￥27</strong></p>
+										（含运费：￥0.00）
+									</td>
+									<td>
+										<p class="fz_c">待收货</p>
+										<el-popover placement="bottom" width="280" popper-class="popover-normal" trigger="hover">
+				                            <h3 class="logistics-title"><span>普通快递</span><span>运单号</span>10029102</h3>
+				                            <ul class="logistics-list">
+				                            	<li>武汉市 麦郡菜鸟驿站已签收  <span>2018-10-28 09:00:21</span></li>
+				                            	<li>订单已配送至 江夏区 中转站  <span>2018-10-28 09:00:21</span></li>
+				                            </ul>
+				                            <p slot="reference"><span class="order-btn order-btn-logistics">跟踪</span></p>
+				                        </el-popover>
+										<p><a href="#" class="order-btn">订单详情</a></p>
+									</td>
+									<td>
+										<p><a href="#" class="order-btn">修改备注</a></p>
+									</td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td colspan="5" class="order-title">
+										<span class="item">2018-08-29 17:00:00   </span>
+										<span class="item">订单号：   2018082911101</span>
+										<el-tooltip class="item" effect="dark" content="订单来源：移动端" popper-class="order-source-tip" placement="left-start">
+									    	<span class="source phone"></span>
+									    </el-tooltip>
+									</td>
+								</tr>
+								<tr>
+									<td class="order-product-td">
+										<ul class="order-product-list">
+											<li>
+												<div class="pic"><img src="img/erweima.png"></div>
+												<div class="info">
+													<div class="name">
+														<h3>金融港家乡炒菜馆金牌番茄炒蛋</h3>
+													</div>
+													<div class="price">
+														<del>￥12.00</del>
+														<p class="fc_333">￥7.00</p>
+													</div>
+													<div class="length">1</div>
+												</div>
+											</li>
+										</ul>
+									</td>
+									<td>
+										<el-popover placement="bottom" width="180" popper-class="popover-normal" trigger="hover">
+				                            <h3 class="title">小强</h3>
+				                            <p class="content">湖北省武汉市江夏区光谷麦郡103号<br/>13100613241</p>
+				                            <span slot="reference" class="order-user">小强</span>
+				                        </el-popover>
+									</td>
+									<td>
+										<p class="fc_red f_14"><strong>￥27</strong></p>
+										（含运费：￥0.00）
+									</td>
+									<td>
+										<p class="fz_c">交易成功</p>
+										<p><a href="#" class="order-btn">订单详情</a></p>
+									</td>
+									<td>
+										<p><a href="#" class="order-btn">查看评价</a></p>
+										<p><a href="#" class="order-btn">修改备注</a></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+	 			</div>
+	 			
+	 			<!--分页-->
+	 			<div class="grid-content">
+		 			<div class="bg-purple-light">
+					    <el-pagination
+	 						 :current-page="currentPage4"
+					      :page-sizes="[5, 10, 20, 30]"
+					      :page-size="5"
+					       layout="total, sizes, prev, pager, next"
+					      :total="100">
+					    </el-pagination>
+				  	</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	
+</body>
+	
+
+<script>
+	var vm = new Vue({
+		el: "#app",
+		data: {
+			input4: '',
+		    optionsId: ['PC','WAP','小程序'], //select下拉选项
+		    optionsState: ['待支付','待发货','已发货','交易成功','交易取消'],
+		    valueId: '',
+		    valueState: '',
+		    hasfilterMore: false,  // 列表是否拥有更多筛选条件
+		    filterMore: false,  // 列表更多筛选条件是否展示
+		    bValue: '', //开始、结束日期
+	        eValue: '',
+
+		    tableData: [{
+	      		no: '1',
+	          	login: 'LYS',
+	          	uid: '普通员工 ',
+	          	name: '刘雨酥 ',
+	          	job: '北京全网数商科技股份有限公司武汉分公司技术部高级开发工程师兼开发经理/技术总监',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	         	 zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: true
+	        	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}, {
+	        	no: '2',
+	          	login: 'LYS',
+	          	uid: '管理人员 ',
+	          	name: '刘雨酥 ',
+	          	job: '开发工程师',
+	          	address: '基础研发部',
+	          	tel: '15802949593',
+	          	zip: 200333,
+	          	part:'研发人员',
+	          	jion: 'YQM2453',
+	          	remarks: '—',
+	          	isCreater: false
+	          	}
+	        ],
+	        
+	        currentPage4: 4, //当前页码数
+		},
+		methods: {
+			// 列表筛选项 下拉操作
+			change: function (ele) {
+		  		console.log(this.valueState);
+		  	},
+			// 列表筛选项更多操作
+			toggleMoreSearch(){
+				this.filterMore = !this.filterMore;
+			},
+		},
+		mounted: function () {
+			var that = this;
+			tableMoreSearch(that);
+
+			window.onresize = function() {
+	            tableMoreSearch(that);
+	        }
+			
+		},
+		updated: function () {
+			
+		}
+	});
+
+	function tableMoreSearch(vm){
+		var that = vm;
+		var $searchForm = $(".content_item_filter .filter-form-one"),
+		 	$searchItem = $(".content_item_filter .filter-form-one > div"),
+		 	$searchMore = $(".filter-form-more > div"),
+		 	itemMax = 0,
+		 	itemWidth = 0,
+		 	singleWidth = 130;
+		// that.hasfilterMore = false;
+		$searchItem.each(function(index,obj){
+			itemWidth += $(obj).outerWidth(true);
+			if (itemWidth > $searchForm.width()) {
+				itemMax = index-1;
+				that.hasfilterMore = true;
+				console.log(that.hasfilterMore)
+				var $searchMoreItem = $(".content_item_filter .filter-form > div:gt("+itemMax+")");
+				$(".filter-form-more").prepend($searchMoreItem);
+				return false;
+			}
+		});
+		if(itemWidth < $searchForm.width()-singleWidth && $searchMore.length > 0){
+			itemMax = Math.floor(($searchForm.width()-itemWidth)/130);
+			console.log(itemMax)
+			$searchForm.append($(".filter-form-more > div:lt("+itemMax+")"));
+			if (itemMax >= $searchMore.length) {
+				that.hasfilterMore = false;
+			}
+		}
+	}
+</script>
+</html>
